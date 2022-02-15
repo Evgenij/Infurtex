@@ -1,0 +1,193 @@
+@import "variables";
+@import "elements/main";
+
+body{
+    transition: .3s;
+    line-height: 1.6em;
+    background: $background;
+    font-family: Inter, sans-serif;
+}
+
+.logo-block {
+    padding: 30px 0 0 40px;
+}
+
+.background-lines{
+    background: url('/storage/images/backgrounds/background-lines.png');
+    width: 800px;
+    background-size: cover;
+    z-index: 1;
+}
+
+.section{
+    &__buttons{
+        width: 800px;
+        z-index: 10;
+
+        .section__panel{
+            width: 600px;
+            border-radius: 15px 0 0 15px;
+            padding: 60px 40px;
+
+            * {
+                color:white;
+            }
+
+            &.auth{
+                background: linear-gradient(86.22deg, #319BDF 3.1%, #14B8A6 96.9%);
+            }
+            &.reg-moderator{
+                background: #339FE3;
+                padding: 30px 100px;
+            }
+            &.reg-respondent{
+                background: #14B8A6;
+                padding: 30px 100px;
+            }
+            &.rec-pass{
+                background: $black;
+                padding: 30px 100px;
+            }
+        }
+    }
+
+    .list-possibility{
+        margin-top: 30px;
+
+        &__item{
+            margin-bottom: 14px;
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__form {
+
+        &.auth {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+            url('/storage/images/backgrounds/background.png');
+        }
+        &.reg-moderator{
+            background: linear-gradient(0deg, rgba(51, 159, 227, 0.3), rgba(51, 159, 227, 0.3)),
+            url('/storage/images/backgrounds/back_reg-resp.png');
+        }
+        &.reg-respondent{
+            background: linear-gradient(0deg, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.3)),
+            url('/storage/images/backgrounds/back_reg-moder.png');
+        }
+        &.rec-pass{
+            background: linear-gradient(0deg, rgba(36, 41, 53, 0.4), rgba(36, 41, 53, 0.4)),
+            url('/storage/images/backgrounds/back_rec-pass.png');
+        }
+        background-size: cover;
+
+        .section__panel{
+            width: 420px;
+            background:white;
+            border-radius: 0 15px 15px 0;
+        }
+    }
+
+    &__panel {
+        height: 530px;
+        padding: 40px;
+    }
+
+    .buttons-panel{
+        &__header{
+            h3{
+                font-size: 18px;
+            }
+        }
+        &__footer{
+            .title {
+                font-size: 16px;
+                margin-bottom: 22px;
+            }
+        }
+    }
+
+    .footer-buttons__item{
+        padding: 14px 18px;
+        background-color: rgba($color: #fff, $alpha: 0.15);
+        border-radius: 10px;
+
+        *{
+            cursor: pointer;
+        }
+
+        &:hover{
+            background-color: rgba($color: #fff, $alpha: 0.25);
+        }
+
+        .header-wrapp{
+            height: 70px;
+
+
+            h4{
+                font-size: 16px;
+            }
+        }
+
+        p{
+            font-size: 14px;
+        }
+
+        &:first-child{
+            margin-right: 20px;
+        }
+    }
+}
+
+.block-form{
+    color: $black;
+
+    .form{
+        &__row{
+            margin-bottom: 40px;
+
+            &:first-child{
+                margin-bottom: 20px;
+            }
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+
+        .row{
+            &__item{
+                margin-bottom: 12px;
+
+                &:last-child{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+.input-message-box{
+    span{
+        font-size: 12px;
+    }
+    .success{
+        color: $success;
+    }
+    .error{
+        color: $error;
+    }
+    .danger{
+        color: $danger;
+    }
+    .warning{
+        color: $warning;
+    }
+    i{
+        margin-right: 2px;
+    }
+}
+
+
+

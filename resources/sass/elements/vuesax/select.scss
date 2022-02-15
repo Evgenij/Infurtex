@@ -1,0 +1,36 @@
+.vs-select{
+    width: 100% !important;
+    max-width: none;
+
+    &-content{
+        width: 100%;
+        max-width: none !important;
+    }
+
+    &__chips{
+        width: 100%;
+        padding: 7px 28px 7px 10px !important;
+    }
+
+    &__chips__input{
+        font-size: 14px;
+    }
+
+    &__input{
+        font-size: 14px;
+    }
+    &__label{
+        font-size: 0.9rem !important;
+        top: 9px !important;
+        left: 13px !important;
+    }
+
+    &__label--label{
+        top: 5px !important;
+        left: 20px !important;
+    }
+
+    &__option{
+        font-size: 14px;
+    }
+}

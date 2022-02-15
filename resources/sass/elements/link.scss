@@ -1,0 +1,38 @@
+@import "resources/sass/variables";
+
+.link{
+    font-size: 14px;
+    color: $gray-500;
+    padding: 2px 0 0 0;
+    width: max-content;
+
+    &.link-white{
+        color: white;
+        &:hover{
+            color: inherit;
+            text-decoration: underline;
+        }
+    }
+
+    &.link-blue{
+        color: $link;
+
+        &:hover{
+            color: $link;
+            text-decoration: underline;
+        }
+    }
+
+    &:hover{
+        color: $gray-700;
+        text-decoration: underline;
+    }
+
+    &.size-14{
+        font-size: 14px;
+    }
+
+    &.size-16{
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,30 @@
+$black: #222A30;
+$gradient: linear-gradient(50.84deg, #2383F4 0%, #248FF2 0.01%, #07D3CA 100%);
+$background: #F5F7F8;
+$primary: #1ac4b6;
+//$primary: #18C3D4;
+$link: #5894DA;
+$success: #52c41a;
+$warning: #ffbf00; // warning state color
+$danger: #F17E2A;
+$error: #ef4550; // error state color
+
+//gray
+$gray-50: #F5F7F8;
+$gray-100: #EEEFEF;
+$gray-200: #E2E4E6;
+$gray-300: #CED3D6;
+$gray-400: #B3BBC2;
+$gray-500: #AAB2B9;
+$gray-600: #919B9F;
+$gray-700: #777F83;
+$gray-800: #585F63;
+$gray-900: #41484D;
+
+@mixin default-shadow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+@mixin big-shadow {
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+}
