@@ -94,7 +94,6 @@
             activeUserMenu: false,
         }),
         props: {
-            notifications: Array,
             userMenu: Array,
             links: Array
         }

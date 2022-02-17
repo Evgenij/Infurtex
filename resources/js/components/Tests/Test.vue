@@ -7,7 +7,7 @@
                        :class="{
                     'bxs-directions text-green-600': type === 1,
                     'bxs-stopwatch text-slate-600': type === 2,
-                    'bxs-bolt-circle text-yellow-600': type === 3,
+                    'bxs-pointer text-yellow-600': type === 3,
                     'bxs-show text-teal-600': type === 4,
                     'bxs-heart text-red-600': type === 5,
                 }"></i>
@@ -84,7 +84,7 @@
                     <i v-if="status.code === 0" class="bx bx-git-branch mr-1 text-lg"></i>
                     <i v-else-if="status.code === 1" class="bx bx-slider-alt mr-1 text-lg"></i>
                     <i v-else-if="status.code === 2" class="bx bx-meteor mr-1 text-lg"></i>
-                    <i v-else-if="status.scode === 3" class="bx bx-check-circle mr-1 text-lg"></i>
+                    <i v-else-if="status.code === 3" class="bx bx-check-circle mr-1 text-lg"></i>
                     <i v-else-if="status.code === 4" class="bx bx-pause-circle mr-1 text-lg"></i>
                     <i v-else class="bx bx-archive mr-1 text-lg"></i>
                     {{status.name}}
@@ -123,97 +123,37 @@
                                 <i class="bx bx-archive text-lg mr-1"></i> Архивировать
                             </div>
                             <hr class="my-1">
-                            <vs-tooltip left shadow not-hover
-                                        v-model="activeTooltipDelete"
-                                        class="tooltip-menu__item flex items-center w-full">
-                                <div class="content-tooltip__item text-red-400 cursor-pointer flex items-center p-2
+                            <div class="content-tooltip__item text-red-400 cursor-pointer flex items-center p-2
                             hover:bg-red-100 hover:text-red-600 rounded-lg w-full"
-                                     @mouseup="menuActive=!menuActive"
-                                     @click="deleteTest">
+                                     @click="modalDeleteTeam = !modalDeleteTeam"
+                                    @mouseup="menuActive=!menuActive">
                                     <i class="bx bx-trash text-lg mr-1"></i> Удалить
-                                </div>
-                                <template #tooltip>
-                                    <div class="content-tooltip p-2" @mouseenter="cancelDeleteTest"
-                                         @mouseleave="hideTooltipMenu">
-                                        <h4 class="center font-bold">
-                                            Вы действительно хотите удалить тест?
-                                        </h4>
-                                        <p class="text-slate-600 my-2">
-                                            Вся статистика и данные теста будут безвозвратно удалены
-                                        </p>
-                                        <footer class="flex">
-                                            <vs-button @click="activeTooltipDelete=false" @mouseup="hideTooltipMenu" danger
-                                                       block>
-                                                Удалить
-                                            </vs-button>
-                                            <vs-button @click="activeTooltipDelete=false" @mouseup="hideTooltipMenu" flat
-                                                       dark block>
-                                                Отменить
-                                            </vs-button>
-                                        </footer>
-                                    </div>
-                                </template>
-                            </vs-tooltip>
+                            </div>
                         </div>
                     </template>
                 </vs-tooltip>
-<!--                <div-->
-<!--                    class="relative info__status w-max text-slate-500 font-medium bg-slate-100 text-sm p-2 px-3 hover:bg-slate-200 cursor-pointer rounded-lg flex items-center"-->
-<!--                    @click="showTooltipMenu">-->
-<!--                    <i class="bx bx-dots-vertical-rounded text-base"></i>-->
-<!--                    <div-->
-<!--                        class="absolute transition right-0 info__menu overflow-hidden flex flex-col items-start tooltip-menu bg-white border-1 border-slate-200 rounded-lg hidden"-->
-<!--                        ref="tooltip" @mouseleave="hideTooltipMenu">-->
-<!--                        <div class="tooltip-menu__item flex items-center p-2 px-3 hover:bg-slate-50 w-full"-->
-<!--                             @click.stop="hideTooltipMenu">-->
-<!--                            <i class="bx bx-play-circle mr-2 text-lg text-slate-400"></i>Просмотреть-->
-<!--                        </div>-->
-<!--                        <div class="tooltip-menu__item flex items-center p-2 px-3 hover:bg-slate-50 w-full"-->
-<!--                             @click="editName" @click.stop="hideTooltipMenu">-->
-<!--                            <i class="bx bx-rename mr-2 text-lg text-slate-400"></i>Переименовать-->
-<!--                        </div>-->
-<!--                        <div class="tooltip-menu__item flex items-center p-2 px-3 hover:bg-slate-50 w-full"-->
-<!--                             @click.stop="hideTooltipMenu">-->
-<!--                            <i class="bx bx-edit mr-2 text-lg text-slate-400"></i>Изменить-->
-<!--                        </div>-->
-<!--                        <div class="tooltip-menu__item flex items-center p-2 px-3 hover:bg-slate-50 w-full"-->
-<!--                             @click="toArchive" @click.stop="hideTooltipMenu">-->
-<!--                            <i class="bx bx-archive mr-2 text-lg text-slate-400"></i>Архивировать-->
-<!--                        </div>-->
-<!--                        <vs-tooltip left shadow not-hover-->
-<!--                                    v-model="activeTooltipDelete"-->
-<!--                                    class="tooltip-menu__item flex items-center w-full">-->
-<!--                            <div-->
-<!--                                class="flex items-center p-2 px-3 hover:bg-red-50 hover:text-red-500 text-red-400 w-full"-->
-<!--                                @mousedown="deleteTest" @click="activeTooltipDelete =! activeTooltipDelete">-->
-<!--                                <i class="bx bx-trash mr-2 text-lg text-red-400"></i>Удалить-->
-<!--                            </div>-->
-<!--                            <template #tooltip>-->
-<!--                                <div class="content-tooltip p-2" @mouseenter="cancelDeleteTest"-->
-<!--                                     @mouseleave="hideTooltipMenu">-->
-<!--                                    <h4 class="center font-bold">-->
-<!--                                        Вы действительно хотите удалить тест?-->
-<!--                                    </h4>-->
-<!--                                    <p class="text-slate-600 my-2">-->
-<!--                                        Вся статистика и данные теста будут безвозвратно удалены-->
-<!--                                    </p>-->
-<!--                                    <footer class="flex">-->
-<!--                                        <vs-button @click="activeTooltipDelete=false" @mouseup="hideTooltipMenu" danger-->
-<!--                                                   block>-->
-<!--                                            Удалить-->
-<!--                                        </vs-button>-->
-<!--                                        <vs-button @click="activeTooltipDelete=false" @mouseup="hideTooltipMenu" flat-->
-<!--                                                   dark block>-->
-<!--                                            Отменить-->
-<!--                                        </vs-button>-->
-<!--                                    </footer>-->
-<!--                                </div>-->
-<!--                            </template>-->
-<!--                        </vs-tooltip>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
+        <vs-dialog blur v-model="modalDeleteTeam">
+            <template #header>
+                <h4 class="header font-bold w-full flex flex-col py-2">
+                    Вы действительно хотите удалить тест?
+                </h4>
+            </template>
+            <div class="con-content data-team flex flex-col mb-5">
+                Вся статистика и данные теста будут безвозвратно удалены
+            </div>
+            <template #footer>
+                <footer class="footer flex justify-end">
+                    <vs-button @click="activeTooltipDelete=false" @mouseup="modalDeleteTeam = !modalDeleteTeam" flat dark block>
+                        Отменить
+                    </vs-button>
+                    <vs-button @click="activeTooltipDelete=false" @mouseup="modalDeleteTeam = !modalDeleteTeam" danger block>
+                        Удалить
+                    </vs-button>
+                </footer>
+            </template>
+        </vs-dialog>
     </div>
 </template>
 
@@ -243,7 +183,7 @@
                 project_name: '',
                 visibleTooltipMenu: false,
                 editingName: false,
-                activeTooltipDelete: false,
+                modalDeleteTeam: false,
                 deletingTest: false
             }
         },
@@ -275,10 +215,8 @@
             showTooltipMenu() {
                 this.$refs.tooltip.classList.remove('hidden')
             },
-            hideTooltipMenu() {
-                if (this.deletingTest != true) {
-                    this.$refs.tooltip.classList.add('hidden')
-                }
+            closeDeleteTooltip(){
+                this.activeTooltipDelete = false
             },
             editName() {
                 this.editingName = true;
@@ -296,13 +234,7 @@
             },
             toArchive() {
                 this.status.code = 5
-            },
-            deleteTest() {
-                this.deletingTest = true;
-            },
-            cancelDeleteTest() {
-                this.deletingTest = false;
-            },
+            }
         },
         mounted: function () {
             if (this.statusTest  ===  0) {

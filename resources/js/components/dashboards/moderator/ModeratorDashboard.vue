@@ -1,6 +1,6 @@
 <template>
     <div class="root relative">
-        <app-header :notifications="notifications" :user-menu="menuLinks" :links="links"></app-header>
+        <app-header :user-menu="menuLinks" :links="links"></app-header>
         <div class="content mx-auto">
             <router-view></router-view>
         </div>
@@ -13,14 +13,6 @@
         name: "ModeratorDashboard",
         components: {AppHeader},
         data: ()=>({
-            notifications: [
-                {
-                    count: 0
-                },
-                {
-                    count: 2
-                }
-            ],
             links: [
                 { name: 'Тесты', to: {name: 'ModeratorTests'}},
                 { name: 'Команды', to: {name: 'ModeratorTeams'}}
@@ -48,7 +40,4 @@
 </script>
 
 <style lang="scss" scoped>
-    .content {
-        width: 1040px;
-    }
 </style>

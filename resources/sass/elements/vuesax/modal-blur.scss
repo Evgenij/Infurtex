@@ -3,4 +3,14 @@
 }
 .vs-dialog-content.blur {
     filter: none !important;
+
+    .vs-dialog{
+        &__header{
+            padding-bottom: 0;
+        }
+        &__content{
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
 }

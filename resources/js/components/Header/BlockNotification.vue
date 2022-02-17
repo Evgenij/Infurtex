@@ -1,23 +1,22 @@
 <template>
-    <div class="block-notification">
+    <div class="block-notification rounded-full text-white font-medium ml-2 leading-none"
+         :class="{'bg-red-500': color === 'red', 'bg-teal-500': color === 'primary'}">
         <slot></slot>
     </div>
 </template>
 
 <script>
     export default {
-        name: "block-notification"
+        name: "block-notification",
+        props: {
+            color: String
+        }
     }
 </script>
 
 <style lang="scss" scoped>
-    @import './resources/sass/variables';
-
     .block-notification{
-        padding: 3px 8px;
-        margin-left: 10px;
-        background: $primary;
-        color: white;
-        border-radius: 4px;
+        padding: 4px 6px;
+        font-size: 12px;
     }
 </style>
