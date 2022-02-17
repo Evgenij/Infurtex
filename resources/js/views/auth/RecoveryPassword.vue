@@ -14,38 +14,21 @@
         </div>
         <div class="background-lines absolute h-full">
         </div>
+
         <div class="section__buttons flex items-center justify-end">
-            <div class="section__panel auth buttons-panel flex flex-col justify-between">
-                <div class="buttons-panel__header header flex justify-center flex-col w-full">
-                    <h2 class="text-4xl font-bold text-center mb-10">Привет!</h2>
-                    <h3 class="text-1xl font-normal text-center">Впервые в системе?<br>Давайте сделаем первый шаг!</h3>
-                </div>
-                <div class="buttons-panel__footer">
-                    <p class="title w-full text-center font-semibold text">Какова ваша цель?</p>
-                    <div class="footer-buttons flex flex-row">
-                        <router-link :to="{name: 'reg-moderator'}" class="footer-buttons__item w-full">
-                            <div class="header-wrapp w-full h-full flex justify-center items-center">
-                                <h4 class="font-bold">Создавать тесты</h4>
-                            </div>
-                            <p class="text-center">стать модератором</p>
-                        </router-link>
-                        <router-link :to="{name: 'reg-respondent'}" class="footer-buttons__item w-full">
-                            <div class="header-wrapp w-full h-full flex justify-center items-center">
-                                <h4 class="font-bold">Тестировать дизайн</h4>
-                            </div>
-                            <p class="text-center">стать респондентом</p>
-                        </router-link>
-                    </div>
+            <div class="section__panel rec-pass buttons-panel flex flex-col justify-center">
+                <div class="buttons-panel__header header flex justify-center flex-col w-full h-full">
+                    <h2 class="text-4xl font-bold text-center">Восстановление доступа</h2>
                 </div>
             </div>
-
         </div>
-        <div class="section__form auth flex items-center flex-grow">
+
+        <div class="section__form rec-pass flex items-center flex-grow">
             <div class="section__panel block-form flex flex-col justify-center items-center">
                 <form class="block-form__form form w-full flex flex-col">
                     <div class="form__row">
-                        <h1 class="header font-bold text-3xl">
-                            Авторизация
+                        <h1 class="font-normal text-base">
+                            Введите email и вам будет отправлено письмо для восстановления доступа к аккаунту
                         </h1>
                     </div>
                     <div class="form__row row flex flex-col">
@@ -60,27 +43,18 @@
                                 Некорректный формат email
                             </template>
                         </vs-input>
-                        <vs-input primary type="password" class="w-full row__item" v-model="password" placeholder="пароль">
-                            <template #icon>
-                                <i class='bx bx-lock'></i>
-                            </template>
-                        </vs-input>
-                        <div class="remember_me flex justify-between px-2.5">
-                            <vs-checkbox v-model="remember_me">
-                                Запомнить меня
-                            </vs-checkbox>
-                            <router-link :to="{name: 'rec-password'}" class="link">
-                                Забыл пароль
-                            </router-link>
-                        </div>
                     </div>
-                    <div class="form__row flex flex-col">
-                        <router-link :to="{name: 'dashboard'}">
-                            <vs-button
-                                size="large"
-                                class="button">
-                                Войти в систему
-                            </vs-button>
+                    <div class="form__row flex flex-col items-center">
+                        <vs-button
+                            size="large"
+                            :active="active == 1"
+                            @click="active != active"
+                            class="button w-full"
+                        >
+                            Восстановить доступ
+                        </vs-button>
+                        <router-link to="/" class="link mt-1">
+                            войти в систему
                         </router-link>
                     </div>
                 </form>
@@ -91,17 +65,53 @@
 
 <script>
     export default {
-        name: "authorization",
+        name: "recovery-password",
         data:() => ({
+            active: 0,
+            username: '',
             email: '',
             password: '',
-            remember_me: false,
-            option: true
+            hasVisiblePassword: false
         }),
         computed: {
             validEmail() {
                 return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)
             },
+            getProgress() {
+                let progress = 0
+
+                // at least one number
+
+                if (/\d/.test(this.password)) {
+                    progress += 20
+                }
+
+                // at least one capital letter
+
+                if (/(.*[A-Z].*)/.test(this.password)) {
+                    progress += 20
+                }
+
+                // at menons a lowercase
+
+                if (/(.*[a-z].*)/.test(this.password)) {
+                    progress += 20
+                }
+
+                // more than 5 digits
+
+                if (this.password.length >= 6) {
+                    progress += 20
+                }
+
+                // at least one special character
+
+                if (/[^A-Za-z0-9]/.test(this.password)) {
+                    progress += 20
+                }
+
+                return progress
+            }
         }
     }
 </script>

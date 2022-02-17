@@ -15,7 +15,7 @@
     <title>Infurtex</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="min-h-screen">
         <router-view></router-view>
     </div>
     <script src="{{asset('js/app.js')}}"></script>

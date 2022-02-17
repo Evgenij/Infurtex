@@ -5,11 +5,12 @@
     color: $gray-500;
     padding: 2px 0 0 0;
     width: max-content;
+    transition: .3s;
 
     &.link-white{
         color: white;
         &:hover{
-            color: inherit;
+            color: white;
             text-decoration: underline;
         }
     }

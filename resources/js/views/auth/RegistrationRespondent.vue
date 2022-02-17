@@ -14,41 +14,43 @@
         </div>
         <div class="background-lines absolute h-full">
         </div>
+
         <div class="section__buttons flex items-center justify-end">
-            <div class="section__panel auth buttons-panel flex flex-col justify-between">
-                <div class="buttons-panel__header header flex justify-center flex-col w-full">
-                    <h2 class="text-4xl font-bold text-center mb-10">Привет!</h2>
-                    <h3 class="text-1xl font-normal text-center">Впервые в системе?<br>Давайте сделаем первый шаг!</h3>
-                </div>
-                <div class="buttons-panel__footer">
-                    <p class="title w-full text-center font-semibold text">Какова ваша цель?</p>
-                    <div class="footer-buttons flex flex-row">
-                        <router-link :to="{name: 'reg-moderator'}" class="footer-buttons__item w-full">
-                            <div class="header-wrapp w-full h-full flex justify-center items-center">
-                                <h4 class="font-bold">Создавать тесты</h4>
-                            </div>
-                            <p class="text-center">стать модератором</p>
-                        </router-link>
-                        <router-link :to="{name: 'reg-respondent'}" class="footer-buttons__item w-full">
-                            <div class="header-wrapp w-full h-full flex justify-center items-center">
-                                <h4 class="font-bold">Тестировать дизайн</h4>
-                            </div>
-                            <p class="text-center">стать респондентом</p>
-                        </router-link>
+            <div class="section__panel reg-respondent buttons-panel flex flex-col justify-center items-center">
+                <div class="buttons-panel__header header flex justify-center flex-col w-full h-full">
+                    <h2 class="text-4xl font-bold text-center mb-12">Вы - респондент</h2>
+                    <h4 class="text-base font-normal text-center">Став респондентом вам откроется возможность</h4>
+                    <div class="list-possibility flex flex-col items-start">
+                        <div class="list-possibility__item flex items-center">
+                            <i class="bx bx-check-double bx-sm pr-2"></i>
+                            <p class="w-full">Проходить дизайн-тесты именитых компаний</p>
+                        </div>
+                        <div class="list-possibility__item flex items-center">
+                            <i class="bx bx-check-double bx-sm pr-2"></i>
+                            <p class="w-full">Внести свой вклад в развитие информационных компаний и их продуктов</p>
+                        </div>
                     </div>
                 </div>
+                <router-link :to="{name: 'reg-moderator'}" class="link link-white min-w-max text-center">
+                    стать модератором
+                </router-link>
             </div>
-
         </div>
-        <div class="section__form auth flex items-center flex-grow">
+
+        <div class="section__form reg-respondent flex items-center flex-grow">
             <div class="section__panel block-form flex flex-col justify-center items-center">
                 <form class="block-form__form form w-full flex flex-col">
                     <div class="form__row">
                         <h1 class="header font-bold text-3xl">
-                            Авторизация
+                            Регистрация
                         </h1>
                     </div>
                     <div class="form__row row flex flex-col">
+                        <vs-input primary class="w-full row__item" v-model="username" placeholder="имя">
+                            <template #icon>
+                                <i class='bx bx-user'></i>
+                            </template>
+                        </vs-input>
                         <vs-input primary class="w-full row__item" v-model="email" placeholder="email">
                             <template #icon>
                                 <i class='bx bx-at'></i>
@@ -60,27 +62,43 @@
                                 Некорректный формат email
                             </template>
                         </vs-input>
-                        <vs-input primary type="password" class="w-full row__item" v-model="password" placeholder="пароль">
+                        <vs-input
+                            type="password"
+                            v-model="password"
+                            placeholder="пароль"
+                            :progress="getProgress"
+                            :visiblePassword="hasVisiblePassword"
+                            @click-icon="hasVisiblePassword = !hasVisiblePassword"
+                            class="w-full row__item">
                             <template #icon>
-                                <i class='bx bx-lock'></i>
+                                <i v-if="!hasVisiblePassword" class='bx bx-show-alt'></i>
+                                <i v-else class='bx bx-hide'></i>
+                            </template>
+                            <template v-if="getProgress == 0" #message-danger>
+                            </template>
+                            <template v-else-if="getProgress <= 20" #message-danger>
+                                Слабый пароль
+                            </template>
+                            <template v-else-if="getProgress <= 60" #message-warn>
+                                Пароль средней сложности
+                            </template>
+                            <template v-else-if="getProgress <= 80" #message-success>
+                                Пароль высокой сложности
+                            </template>
+                            <template v-else-if="getProgress >= 100" #message-success>
+                                Надежность пароля максимальна
                             </template>
                         </vs-input>
-                        <div class="remember_me flex justify-between px-2.5">
-                            <vs-checkbox v-model="remember_me">
-                                Запомнить меня
-                            </vs-checkbox>
-                            <router-link :to="{name: 'rec-password'}" class="link">
-                                Забыл пароль
-                            </router-link>
-                        </div>
                     </div>
-                    <div class="form__row flex flex-col">
-                        <router-link :to="{name: 'dashboard'}">
-                            <vs-button
-                                size="large"
-                                class="button">
-                                Войти в систему
-                            </vs-button>
+                    <div class="form__row flex flex-col items-center">
+                        <vs-button
+                            size="large"
+                            class="button w-full"
+                        >
+                            Зарегистрироваться
+                        </vs-button>
+                        <router-link :to="{name: 'auth'}" class="link mt-1">
+                            войти в систему
                         </router-link>
                     </div>
                 </form>
@@ -91,17 +109,53 @@
 
 <script>
     export default {
-        name: "authorization",
+        name: "registration-respondent",
         data:() => ({
+            active: 0,
+            username: '',
             email: '',
             password: '',
-            remember_me: false,
-            option: true
+            hasVisiblePassword: false
         }),
         computed: {
             validEmail() {
                 return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)
             },
+            getProgress() {
+                let progress = 0
+
+                // at least one number
+
+                if (/\d/.test(this.password)) {
+                    progress += 20
+                }
+
+                // at least one capital letter
+
+                if (/(.*[A-Z].*)/.test(this.password)) {
+                    progress += 20
+                }
+
+                // at menons a lowercase
+
+                if (/(.*[a-z].*)/.test(this.password)) {
+                    progress += 20
+                }
+
+                // more than 5 digits
+
+                if (this.password.length >= 6) {
+                    progress += 20
+                }
+
+                // at least one special character
+
+                if (/[^A-Za-z0-9]/.test(this.password)) {
+                    progress += 20
+                }
+
+                return progress
+            }
         }
     }
 </script>

@@ -2,10 +2,25 @@
 @import "elements/main";
 
 body{
-    transition: .3s;
     line-height: 1.6em;
     background: $background;
     font-family: Inter, sans-serif;
+
+    * {
+        transition: .3s;
+    }
+}
+
+i{
+    font-size: 1.1rem;
+
+    &.left{
+        margin-right: 3px;
+    }
+
+    &.right{
+        margin-left: 3px;
+    }
 }
 
 .logo-block {
@@ -110,6 +125,7 @@ body{
     }
 
     .footer-buttons__item{
+        transition: .3s;
         padding: 14px 18px;
         background-color: rgba($color: #fff, $alpha: 0.15);
         border-radius: 10px;
@@ -149,7 +165,7 @@ body{
             margin-bottom: 40px;
 
             &:first-child{
-                margin-bottom: 20px;
+                margin-bottom: 30px;
             }
             &:last-child{
                 margin-bottom: 0;

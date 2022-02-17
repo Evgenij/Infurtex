@@ -45,6 +45,7 @@ Vue.use(
             dark:'rgb(100,100,103)'
         },
     })
+Vue.use(vcdonut.default)
 
 Vue.mixin({
     methods:{
