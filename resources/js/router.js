@@ -18,10 +18,11 @@ import ModeratorTests from "./components/dashboards/moderator/Tests";
 import ModeratorTeams from "./components/dashboards/moderator/Teams";
 
 import RespondentDashboard from "./components/dashboards/respondent/RespondentDashboard";
-import RespondentTests from "./components/dashboards/respondent/Tests/ListTests";
-
+import RespondentTests from "./components/dashboards/respondent/Tests/Tests";
+import RespondentData from "./components/dashboards/respondent/AdditionalData";
 
 import userRole from "./enums";
+
 
 Vue.use(VueRouter)
 
@@ -92,7 +93,12 @@ const routes = [
                         name: 'RespondentTests',
                         component: RespondentTests
                     },
-                ]
+                    {
+                        path: '/respondent/add_data',
+                        name: 'RespondentData',
+                        component: RespondentData
+                    },
+                ],
             },
         ]
     },

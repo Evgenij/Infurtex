@@ -34,18 +34,30 @@
                 </template>
             </vs-select>
         </div>
-        <div class="list-tests">
-            <transition-group
-                v-bind:css="false"
-                v-on:before-enter="beforeEnter"
-                v-on:enter="enter"
-                v-on:leave="leave"
-                name="staggered-fade">
-            <test v-for="(test, index) in filteredTests"
-                  :name="test.name" :type="test.type" :time="test.time"
-                  :cost="test.cost" :owner-name="test.nameOwner" :owner-type="test.typeOwner"
-                  :date="test.date" :category="test.category" :key="test.id"></test>
-            </transition-group>
+        <div v-if="$store.state.user.filledData" class="list-tests">
+            <div v-if="filteredTests.length !== 0" class="list-tests">
+                <transition-group
+                    v-bind:css="false"
+                    v-on:before-enter="beforeEnter"
+                    v-on:enter="enter"
+                    v-on:leave="leave"
+                    name="staggered-fade">
+                    <test v-for="(test, index) in filteredTests"
+                          :name="test.name" :type="test.type" :time="test.time"
+                          :cost="test.cost" :owner-name="test.nameOwner" :owner-type="test.typeOwner"
+                          :date="test.date" :category="test.category" :key="test.id"></test>
+                </transition-group>
+            </div>
+            <div class="empty-tests text-center text-gray-500 h-full py-44" v-else>
+                Тестов не найдено...
+            </div>
+        </div>
+        <div class="skeleton-list-tests">
+            <div class="bg-slate-200 rounded-lg mb-3 p-6"></div>
+            <div class="bg-slate-200 rounded-lg mb-3 p-6"></div>
+            <div class="bg-slate-200 rounded-lg mb-3 p-6"></div>
+            <div class="bg-slate-200 rounded-lg mb-3 p-6"></div>
+            <div class="bg-slate-200 rounded-lg mb-3 p-6"></div>
         </div>
     </section>
 </template>
@@ -61,7 +73,7 @@
         data: () => ({
             tests: [],
             ownerTests: 'all',
-            dateTests: '2022-02-17',
+            dateTests: new Date().toLocaleDateString().split('.').reverse().join('-'),
             duration: 1,
             durationTests: [
                 {val: 1, label: 'до 1 мин'},
@@ -100,7 +112,6 @@
             },
             filterByTime(arrayTests){
                 let time = this.duration
-                console.log(time)
                 return arrayTests.filter(function(item) {
                     return item.time <= time
                 })
@@ -113,7 +124,6 @@
             },
             filterByOwner(arrayTests){
                 let owner = this.ownerTests
-                console.log(owner)
                 if (owner === 'all'){
                     return arrayTests
                 }
@@ -125,7 +135,7 @@
                 el.style.opacity = 0
             },
             enter: function (el, done) {
-                var delay = 0
+                let delay = 0
                 setTimeout(function () {
                     Velocity(
                         el,
@@ -135,7 +145,7 @@
                 }, delay)
             },
             leave: function (el, done) {
-                var delay = 0
+                let delay = 0
                 setTimeout(function () {
                     Velocity(
                         el,

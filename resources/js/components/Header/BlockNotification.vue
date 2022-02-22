@@ -17,6 +17,6 @@
 <style lang="scss" scoped>
     .block-notification{
         padding: 4px 6px;
-        font-size: 12px;
+        font-size: 11px;
     }
 </style>
