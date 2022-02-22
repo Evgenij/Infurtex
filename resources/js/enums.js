@@ -23,4 +23,11 @@ const typeTest = {
     Like: 5,
 }
 
-export default { userRole, durationTests, ownerTest, typeTest}
+const categoryTest = {
+    Active: 'active',
+    New: 'new',
+    Favorite: 'favorite',
+    Finished: 'finished',
+}
+
+export default { userRole, durationTests, ownerTest, typeTest, categoryTest}

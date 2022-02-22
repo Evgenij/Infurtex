@@ -18,7 +18,7 @@ import ModeratorTests from "./components/dashboards/moderator/Tests";
 import ModeratorTeams from "./components/dashboards/moderator/Teams";
 
 import RespondentDashboard from "./components/dashboards/respondent/RespondentDashboard";
-import RespondentTests from "./components/dashboards/respondent/Tests";
+import RespondentTests from "./components/dashboards/respondent/Tests/ListTests";
 
 
 import userRole from "./enums";
@@ -120,10 +120,10 @@ router.beforeEach((to, from, next) => {
             to.name === 'dashboard')){
         console.log("enter to route")
         if(store.state.user.role === userRole.Moderator){
-            console.log("enter to moder")
+            console.log("enter to moderator")
             next({name: 'moderator'})
         } else {
-            console.log("enter to resp")
+            console.log("enter to respondent")
             next({name: 'respondent'})
         }
     } else {

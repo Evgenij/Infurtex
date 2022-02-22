@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import ListTests from "../../../components/Tests/ListTests";
+    import ListTests from "./Tests/ListTests";
     import tests from "../../../mocks/tests";
 
     export default {

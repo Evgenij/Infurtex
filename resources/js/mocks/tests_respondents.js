@@ -1,5 +1,6 @@
 import owner from '../enums.js'
 import type from '../enums.js'
+import category from '../enums.js'
 
 const name = ["Лучшая упаковка для Playstation", "Макет приложения", "Навигация по сайту", "Аналог крема Loreal'"]
 const ownerType = [
@@ -17,7 +18,7 @@ const ownerType = [
 ]
 
 const typeTest = [type.typeTest.FirstClick, type.typeTest.FiveSeconds, type.typeTest.Like, type.typeTest.Navigation, type.typeTest.OverallImpression]
-const stateTest = ['new', 'active', 'favorite', 'finished']
+const categoryTest = [category.categoryTest.New, category.categoryTest.Active, category.categoryTest.Favorite, category.categoryTest.Finished]
 
 function getRandValue(arr) {
     return arr[Math.floor(Math.random() * arr.length)]
@@ -38,7 +39,7 @@ for(let i = 0; i<150; i++){
         nameOwner: getRandValue(ownerType).name,
         type: getRandValue(typeTest),
         date: new Date().toLocaleDateString(),
-        state: getRandValue(stateTest)
+        category: getRandValue(categoryTest)
     })
 }
 
