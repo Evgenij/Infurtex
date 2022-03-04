@@ -12,6 +12,7 @@
                 </p>
             </div>
         </form>
+        
         <!--SUCCESS-->
         <div v-if="isSuccess">
             <h2>Uploaded {{ userPhoto.length }} file(s) successfully.</h2>
