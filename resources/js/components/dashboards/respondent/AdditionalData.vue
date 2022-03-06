@@ -21,8 +21,8 @@
                             label="Страна"
                             class="w-full"
                         >
-                            <template v-for="country in this.getListCountries">
-                                <vs-option :label="country.name_ru" :value="country.name_ru">
+                            <template v-for="(country, index) in this.getListCountries">
+                                <vs-option :label="country.name_ru" :value="index+1">
                                     {{country.name_ru}} <span class="text-slate-400">&nbsp;{{country.iso_code2}}&nbsp;</span>
                                 </vs-option>
                             </template>
@@ -112,7 +112,21 @@
                             </template>
                         </vs-select>
                     </div>
-                    <div class="cell">4</div>
+                    <div class="cell">
+                        <vs-select
+                            filter
+                            placeholder="Название индустрии"
+                            v-model="workArea"
+                            label="Название проф.индустрии"
+                            class="w-full"
+                        >
+                            <template v-for="workArea in this.getListWorkAreas">
+                                <vs-option :label="workArea.name" :value="workArea.id">
+                                    {{workArea.name}}
+                                </vs-option>
+                            </template>
+                        </vs-select>
+                    </div>
                     <div class="cell col-span-2"></div>
                 </div>
                 <hr>
@@ -157,12 +171,13 @@
             educations: [],
             statusEmp: '',
             industry: '',
-
+            workArea: ''
         }),
         methods: {
             activate(index) {
                 this.active = index;
             },
+
         },
         computed: {
             getListCountries() {
@@ -178,10 +193,25 @@
                 return listStatusEmp
             },
             getListIndustries() {
-                console.log(listIndustries)
                 return listIndustries
             },
+            getListWorkAreas(industry){
+                // listIndustries.forEach((item)=>{
+                //     console.log(item.name, item.workAreas)
+                // })
+
+                let workAreas = listIndustries.filter((item)=>{
+                    //console.log(item)
+                    return  item.id === industry ? [] : item.workAreas
+                })
+
+            }
         },
+        watch:{
+            industry(val){
+                this.getListWorkAreas(val)
+            }
+        }
     }
 </script>
 
