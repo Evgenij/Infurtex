@@ -1,14 +1,14 @@
 <template>
-    <div class="content pt-5">
+    <div class="content">
         <div class="tabs bg-white p-6 rounded-lg w-4/5 mx-auto" id="tabs">
             <div class="tabs-triggers flex space-x-2 w-full font-medium">
                 <div class="tabs-trigger w-full p-4 px-5 pl-3 rounded-lg"
-                     v-for="(item, index) in categories"
-                     :class="[index === active ? 'tabs-trigger--active' : '']">
-                    <span class="step-block p-2 px-3 rounded mr-3">{{index+1}} шаг</span>{{categories[index]}}
+                     v-for="(item, index) in tabs"
+                     :class="[index+1 === activeTab ? 'tabs-trigger--active' : '']">
+                    <span class="step-block p-2 px-3 rounded mr-3">{{index+1}} шаг</span>{{tabs[index]}}
                 </div>
             </div>
-            <div class="tabs-content pt-5 flex flex-col space-y-8" v-if="active === 0">
+            <div class="tabs-content pt-5 flex flex-col space-y-8" v-if="activeTab === 1">
                 <div class="grid grid-cols-2 gap-5">
                     <div class="col">
                         <file-loader></file-loader>
@@ -57,13 +57,13 @@
                 </div>
                 <hr>
                 <div class="navigation-buttons flex items-center justify-center">
-                    <vs-button class="w-max" primary @click="activate(1)">
+                    <vs-button class="w-max" primary @click="activate(2)">
                         Дальше
                         <i class="bx bx-chevrons-right text-lg right"></i>
                     </vs-button>
                 </div>
             </div>
-            <div class="tabs-content pt-5 flex flex-col space-y-8" v-if="active === 1">
+            <div class="tabs-content pt-5 flex flex-col space-y-8" v-if="activeTab === 2">
                 <div class="grid gap-3 gap-y-8 grid-cols-2 pt-6">
                     <div class="cell">
                         <vs-select
@@ -120,22 +120,35 @@
                             label="Название проф.индустрии"
                             class="w-full"
                         >
-                            <template v-for="workArea in this.getListWorkAreas">
-                                <vs-option :label="workArea.name" :value="workArea.id">
+                            <template v-for="workArea in this.listWorkAreas">
+                                <vs-option :label="workArea.name" :value="workArea.id" :key="workArea.id">
                                     {{workArea.name}}
                                 </vs-option>
                             </template>
                         </vs-select>
                     </div>
-                    <div class="cell col-span-2"></div>
+                    <div class="cell">
+                        <vs-select
+                            placeholder="Ваша техническая подготовка"
+                            v-model="techPrep"
+                            label="Техническая подготовка"
+                            class="w-full"
+                        >
+                            <template v-for="techPrep in this.getListTechPrep">
+                                <vs-option :label="techPrep.name" :value="techPrep.id" :key="techPrep.id">
+                                    {{techPrep.name}}
+                                </vs-option>
+                            </template>
+                        </vs-select>
+                    </div>
                 </div>
                 <hr>
                 <div class="navigation-buttons flex space-x-2 items-center justify-center">
-                    <vs-button class="w-max" flat dark @click="activate(0)">
+                    <vs-button class="w-max" flat dark @click="activate(1)">
                         <i class="bx bx-chevrons-left text-lg left"></i>
                         Назад
                     </vs-button>
-                    <vs-button class="w-max" success @click="activate(1)">
+                    <vs-button class="w-max" success @click="activate(2)">
                         Завершить
                         <i class="bx bx-check text-lg right"></i>
                     </vs-button>
@@ -148,10 +161,11 @@
 <script>
     import FileLoader from "../../FileLoader/FileLoader";
     import listCountries from "../../../mocks/countries"
-    import listYears from "../../../mocks/listYears"
-    import listEducations from "../../../mocks/educations"
-    import listStatusEmp from "../../../mocks/statusEmp"
-    import listIndustries from "../../../mocks/industries"
+    import listYears from "../../../mocks/usersCriteries/listYears"
+    import listEducations from "../../../mocks/usersCriteries/educations"
+    import listStatusEmp from "../../../mocks/usersCriteries/statusEmp"
+    import listIndustries from "../../../mocks/usersCriteries/industries"
+    import listTechPrep from "../../../mocks/usersCriteries/techPrep"
 
     export default {
         name: "AdditionalData",
@@ -159,8 +173,8 @@
             FileLoader
         },
         data: ()=>({
-            active: 1,
-            categories: [
+            activeTab: 1,
+            tabs: [
                 "Личные данные",
                 "Профессиональные данные",
             ],
@@ -171,13 +185,20 @@
             educations: [],
             statusEmp: '',
             industry: '',
-            workArea: ''
+            listWorkAreas: [],
+            workArea: '',
+            techPrep: ''
         }),
         methods: {
             activate(index) {
-                this.active = index;
+                this.activeTab = index;
             },
-
+            getWorkAreas(){
+                this.listWorkAreas.length = 0
+                this.workArea = 0
+                this.listWorkAreas = listIndustries.find(item => item.id === this.industry).workAreas
+                return this.listWorkAreas
+            }
         },
         computed: {
             getListCountries() {
@@ -195,22 +216,14 @@
             getListIndustries() {
                 return listIndustries
             },
-            getListWorkAreas(industry){
-                // listIndustries.forEach((item)=>{
-                //     console.log(item.name, item.workAreas)
-                // })
-
-                let workAreas = listIndustries.filter((item)=>{
-                    //console.log(item)
-                    return  item.id === industry ? [] : item.workAreas
-                })
-
+            getListTechPrep(){
+                return listTechPrep
             }
         },
-        watch:{
-            industry(val){
-                this.getListWorkAreas(val)
-            }
+        watch: {
+            industry(){
+                this.getWorkAreas()
+            },
         }
     }
 </script>

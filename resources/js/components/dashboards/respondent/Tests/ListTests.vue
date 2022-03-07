@@ -52,7 +52,7 @@
                 Тестов не найдено...
             </div>
         </div>
-        <div class="skeleton-list-tests">
+        <div v-else class="skeleton-list-tests">
             <div class="bg-slate-200 rounded-lg mb-3 p-6"></div>
             <div class="bg-slate-200 rounded-lg mb-3 p-6"></div>
             <div class="bg-slate-200 rounded-lg mb-3 p-6"></div>

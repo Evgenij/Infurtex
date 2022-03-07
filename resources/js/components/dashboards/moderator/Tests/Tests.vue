@@ -3,12 +3,14 @@
 </template>
 
 <script>
-    import ListTests from "./Tests/ListTests";
-    import tests from "../../../mocks/tests";
+    import ListTests from "./ListTests";
+    import tests from "../../../../mocks/tests";
 
     export default {
         name: "moderator-tests",
-        components: {ListTests},
+        components: {
+            ListTests
+        },
         data:() => ({
             notifications: [
                 {
@@ -24,6 +26,6 @@
 </script>
 
 <style lang="scss">
-    @import '../../../../sass/variables';
+    @import '../../../../../sass/variables';
 
 </style>

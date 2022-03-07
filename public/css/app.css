@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .vs-navbar-content {
   position: -webkit-sticky !important;
   position: sticky !important;
@@ -135,6 +136,20 @@ body {
 body * {
   transition: 0.3s;
 }
+body::-webkit-scrollbar {
+  width: 6px;
+  /* ширина scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: #F5F7F8;
+  /* цвет дорожки */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #CED3D6;
+  /* цвет плашки */
+  border-radius: 20px;
+  /* закругления плашки */
+}
 
 i {
   font-size: 1.1rem;
@@ -155,7 +170,7 @@ i.right {
 }
 
 .background-lines {
-  background: url("/storage/images/backgrounds/background-lines.png");
+  background: url("/store/images/backgrounds/background-lines.png");
   width: 800px;
   background-size: cover;
   z-index: 1;
@@ -201,16 +216,16 @@ i.right {
   background-size: cover;
 }
 .section__form.auth {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/storage/images/backgrounds/background.png");
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/store/images/backgrounds/background.png");
 }
 .section__form.reg-moderator {
-  background: linear-gradient(0deg, rgba(51, 159, 227, 0.3), rgba(51, 159, 227, 0.3)), url("/storage/images/backgrounds/back_reg-resp.png");
+  background: linear-gradient(0deg, rgba(51, 159, 227, 0.3), rgba(51, 159, 227, 0.3)), url("/store/images/backgrounds/back_reg-resp.png");
 }
 .section__form.reg-respondent {
-  background: linear-gradient(0deg, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.3)), url("/storage/images/backgrounds/back_reg-moder.png");
+  background: linear-gradient(0deg, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.3)), url("/store/images/backgrounds/back_reg-moder.png");
 }
 .section__form.rec-pass {
-  background: linear-gradient(0deg, rgba(36, 41, 53, 0.4), rgba(36, 41, 53, 0.4)), url("/storage/images/backgrounds/back_rec-pass.png");
+  background: linear-gradient(0deg, rgba(36, 41, 53, 0.4), rgba(36, 41, 53, 0.4)), url("/store/images/backgrounds/back_rec-pass.png");
 }
 .section__form .section__panel {
   width: 420px;
@@ -749,9 +764,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     max-width: 1536px;
   }
 }
-.invisible {
-  visibility: hidden;
-}
 .fixed {
   position: fixed;
 }
@@ -777,6 +789,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .left-4 {
   left: 1rem;
 }
+.left-0 {
+  left: 0px;
+}
+.bottom-0 {
+  bottom: 0px;
+}
 .top-48 {
   top: 12rem;
 }
@@ -800,9 +818,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .z-0 {
   z-index: 0;
-}
-.col-span-2 {
-  grid-column: span 2 / span 2;
 }
 .m-0 {
   margin: 0px;
@@ -986,11 +1001,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-.cursor-help {
-  cursor: help;
-}
 .cursor-pointer {
   cursor: pointer;
+}
+.cursor-help {
+  cursor: help;
 }
 .cursor-not-allowed {
   cursor: not-allowed;
@@ -1185,6 +1200,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(100 116 139 / var(--tw-bg-opacity));
 }
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .p-6 {
   padding: 1.5rem;
 }
@@ -1193,6 +1212,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .p-0 {
   padding: 0px;
+}
+.p-10 {
+  padding: 2.5rem;
 }
 .p-2 {
   padding: 0.5rem;
@@ -1205,9 +1227,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .p-4 {
   padding: 1rem;
-}
-.p-10 {
-  padding: 2.5rem;
 }
 .py-4 {
   padding-top: 1rem;
@@ -1336,6 +1355,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 .font-semibold {
   font-weight: 600;
@@ -1481,6 +1504,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.opacity-0 {
+  opacity: 0;
+}
 .opacity-60 {
   opacity: 0.6;
 }
@@ -1524,13 +1550,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-translate-y: -0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-.hover\:bg-teal-500:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(20 184 166 / var(--tw-bg-opacity));
-}
 .hover\:bg-gray-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+.hover\:bg-teal-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(20 184 166 / var(--tw-bg-opacity));
 }
 .hover\:bg-slate-100:hover {
   --tw-bg-opacity: 1;

@@ -1,5 +1,5 @@
 <template>
-    <div class="list-tests pt-5">
+    <div class="list-tests">
         <div class="sticky top-20 content__header flex justify-between items-center p-4 mb-5 bg-white rounded-lg">
             <vs-input v-model="searchTest" placeholder="Поиск тестов" class="w-full mr-3">
                 <template #icon>
@@ -47,10 +47,12 @@
                     Архивирован
                 </vs-option>
             </vs-select>
-            <vs-button class="min-w-max">
-                <i class="bx bx-plus text-base mr-1"></i>
-                Создать тест
-            </vs-button>
+            <router-link :to="{name: 'ModeratorAddingTest'}">
+                <vs-button class="min-w-max">
+                    <i class="bx bx-plus text-base mr-1"></i>
+                    Создать тест
+                </vs-button>
+            </router-link>
         </div>
 
         <div ref="content" class="list-tests relative h-full"

@@ -335,9 +335,9 @@
 </template>
 
 <script>
-    import RangeSlider from "../RangeSlider";
-    import {getCountUniqueData, getNameIndustryById, getListObjects, formattingNumber} from "../../utilities/utilities";
-    import Mode from '../../enums'
+    import RangeSlider from "../../../RangeSlider";
+    import {getCountUniqueData, getNameIndustryById, getListObjects, formattingNumber} from "../../../../utilities/utilities";
+    import Mode from '../../../../enums'
 
     export default {
         name: "AddTeam",
@@ -724,7 +724,7 @@
 
 <style lang="scss" scoped>
 
-    @import './resources/sass/variables';
+    @import '../../../../../sass/variables';
 
     td, th{
         padding-right: 16px;

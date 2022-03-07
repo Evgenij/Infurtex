@@ -14,15 +14,15 @@ import DashboardLayout from "./components/layouts/DashboardLayout";
 import AuthLayout from "./components/layouts/AuthLayout";
 
 import ModeratorDashboard from "./components/dashboards/moderator/ModeratorDashboard";
-import ModeratorTests from "./components/dashboards/moderator/Tests";
-import ModeratorTeams from "./components/dashboards/moderator/Teams";
+import ModeratorTests from "./components/dashboards/moderator/Tests/Tests";
+import ModeratorTeams from "./components/dashboards/moderator/Teams/Teams";
+import ModeratorAddingTest from "./components/dashboards/moderator/Tests/AddTest.vue"
 
 import RespondentDashboard from "./components/dashboards/respondent/RespondentDashboard";
 import RespondentTests from "./components/dashboards/respondent/Tests/Tests";
 import RespondentData from "./components/dashboards/respondent/AdditionalData";
 
 import userRole from "./enums";
-
 
 Vue.use(VueRouter)
 
@@ -80,6 +80,11 @@ const routes = [
                         name: 'ModeratorTeams',
                         component: ModeratorTeams
                     },
+                    {
+                        path: '/moderator/add_test',
+                        name: 'ModeratorAddingTest',
+                        component: ModeratorAddingTest
+                    },
                 ]
             },
             {
@@ -124,30 +129,19 @@ router.beforeEach((to, from, next) => {
             to.name === 'rec-password' ||
             to.name === 'login' ||
             to.name === 'dashboard')){
-        console.log("enter to route")
-        if(store.state.user.role === userRole.Moderator){
+        console.log("enter to route as: ", store.state.user.role)
+        if(store.state.user.role === userRole.userRole.Moderator){
             console.log("enter to moderator")
             next({name: 'moderator'})
-        } else {
+        } else if (store.state.user.role === userRole.userRole.Respondent) {
             console.log("enter to respondent")
             next({name: 'respondent'})
+        } else {
+            next()
         }
     } else {
         next()
     }
-    // } else if (store.state.user.token !== null){
-    //     console.log("1")
-    //     console.log(store.state.user.role)
-    //     next({name: 'dashboard'})
-    //     // if(store.state.user.role === userRole.Moderator){
-    //     //     next({name:'ModeratorTests'})
-    //     // } else {
-    //     //     next({name:'respondent'})
-    //     // }
-    // }
-    // else {
-    //     next()
-    // }
 })
 
 export default router

@@ -1,5 +1,5 @@
 <template>
-    <div class="root pt-5">
+    <div class="root">
         <div class="sticky top-20 content__header flex justify-between items-center p-4 mb-5 bg-white rounded-lg">
             <vs-input v-model="searchTeam" primary placeholder="Поиск команд" class="w-full mr-3">
                 <template #icon>
@@ -71,9 +71,9 @@
 </template>
 
 <script>
-    import ListTeams from "../../../components/Teams/ListTeams";
-    import AddTeam from "../../../components/Teams/AddTeam";
-    import dataUsers from "../../../mocks/teams/dataUsers"
+    import ListTeams from "./ListTeams";
+    import AddTeam from "./AddTeam";
+    import dataUsers from "../../../../mocks/teams/dataUsers"
 
     export default {
         name: "moderator-teams",
@@ -301,7 +301,7 @@
 </script>
 
 <style lang="scss">
-    @import '../../../../sass/variables';
+    @import '../../../../../sass/variables';
 
     .content{
         width: 1040px;
@@ -319,7 +319,7 @@
     }
 
     .coverage-respondents{
-        background: url('/storage/images/map.png') no-repeat center;
+        background: url('/store/images/map.png') no-repeat center;
         height: 300px;
         background-size: contain;
 

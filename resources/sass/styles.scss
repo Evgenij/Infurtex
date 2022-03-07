@@ -9,7 +9,21 @@ body{
     * {
         transition: .3s;
     }
+
+    &::-webkit-scrollbar {
+        width: 6px;               /* ширина scrollbar */
+    }
+    &::-webkit-scrollbar-track {
+        background: $gray-50;        /* цвет дорожки */
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $gray-300;    /* цвет плашки */
+        border-radius: 20px;       /* закругления плашки */
+        //border: 3px solid orange;  /* padding вокруг плашки */
+    }
 }
+
+
 
 i{
     font-size: 1.1rem;
@@ -32,7 +46,7 @@ i{
 }
 
 .background-lines{
-    background: url('/storage/images/backgrounds/background-lines.png');
+    background: url('/store/images/backgrounds/background-lines.png');
     width: 800px;
     background-size: cover;
     z-index: 1;
@@ -86,19 +100,19 @@ i{
 
         &.auth {
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-            url('/storage/images/backgrounds/background.png');
+            url('/store/images/backgrounds/background.png');
         }
         &.reg-moderator{
             background: linear-gradient(0deg, rgba(51, 159, 227, 0.3), rgba(51, 159, 227, 0.3)),
-            url('/storage/images/backgrounds/back_reg-resp.png');
+            url('/store/images/backgrounds/back_reg-resp.png');
         }
         &.reg-respondent{
             background: linear-gradient(0deg, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.3)),
-            url('/storage/images/backgrounds/back_reg-moder.png');
+            url('/store/images/backgrounds/back_reg-moder.png');
         }
         &.rec-pass{
             background: linear-gradient(0deg, rgba(36, 41, 53, 0.4), rgba(36, 41, 53, 0.4)),
-            url('/storage/images/backgrounds/back_rec-pass.png');
+            url('/store/images/backgrounds/back_rec-pass.png');
         }
         background-size: cover;
 

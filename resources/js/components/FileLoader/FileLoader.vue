@@ -1,32 +1,29 @@
 <template>
     <div class="file-loader">
         <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
-            <div class="dropbox">
-                <input type="file" :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
-                       accept="image/*" class="input-file">
-                <p v-if="isInitial">
-                    Drag your file(s) here to begin<br> or click to browse
+            <div class="relative p-10 dropbox bg-gray-100 rounded-2xl flex items-center justify-center hover:bg-gray-200">
+                <input type="file" :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files)"
+                       accept="image/*" class="absolute top-0 left-0 w-full h-full opacity-0 input-file cursor-pointer">
+                <p class="text-center" v-if="isInitial">
+                    Перетащите файл или <br>нажмите для загрузки
                 </p>
                 <p v-if="isSaving">
-                    Uploading {{ fileCount }} files...
+                    Загрузка изображения...
                 </p>
             </div>
         </form>
-        
+
         <!--SUCCESS-->
-        <div v-if="isSuccess">
-            <h2>Uploaded {{ userPhoto.length }} file(s) successfully.</h2>
-            <p>
-                <a href="javascript:void(0)" @click="reset()">Upload again</a>
-            </p>
-            <div class="img-wrapp">
-                <img v-for="item in userPhoto" :src="item.url" class="img-responsive img-thumbnail" :alt="item.originalName">
+        <div v-if="isSuccess" class="relative bg-gray-100 rounded-2xl flex justify-center items-center p-6">
+            <div class="button-reset flex items-center justify-center w-full absolute bottom-0 p-2">
+                <vs-button shadow @click="reset()">
+                    <i class="bx bx-reset text-lg left"></i>
+                    Изменить
+                </vs-button>
             </div>
-<!--            <ul class="list-unstyled">-->
-<!--                <li v-for="item in uploadedFiles">-->
-<!--                    -->
-<!--                </li>-->
-<!--            </ul>-->
+            <div class="img-wrapp rounded-full overflow-hidden">
+                <img class="h-full w-full object-cover" v-for="item in userPhoto" :src="item.url"  :alt="item.originalName">
+            </div>
         </div>
         <!--FAILED-->
         <div v-if="isFailed">
@@ -117,33 +114,11 @@
     }
 </script>
 
-<style lang="scss">
-    .dropbox {
-        outline: 2px dashed grey; /* the dash box */
-        outline-offset: -10px;
-        background: lightcyan;
-        color: dimgray;
-        padding: 10px 10px;
-        min-height: 200px; /* minimum height */
-        position: relative;
-        cursor: pointer;
+<style lang="scss" scoped>
+
+    .img-wrapp{
+        width: 250px;
+        height: 250px;
     }
 
-    .input-file {
-        opacity: 0; /* invisible but it's there! */
-        width: 100%;
-        height: 200px;
-        position: absolute;
-        cursor: pointer;
-    }
-
-    .dropbox:hover {
-        background: lightblue; /* when mouse over to the drop zone, change color */
-    }
-
-    .dropbox p {
-        font-size: 1.2em;
-        text-align: center;
-        padding: 50px 0;
-    }
 </style>
