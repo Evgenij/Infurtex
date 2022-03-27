@@ -10,14 +10,14 @@ body{
         transition: .3s;
     }
 
-    &::-webkit-scrollbar {
+    *::-webkit-scrollbar {
         width: 6px;               /* ширина scrollbar */
     }
-    &::-webkit-scrollbar-track {
+    *::-webkit-scrollbar-track {
         background: $gray-50;        /* цвет дорожки */
     }
-    &::-webkit-scrollbar-thumb {
-        background-color: $gray-300;    /* цвет плашки */
+    *::-webkit-scrollbar-thumb {
+        background-color: $gray-200;    /* цвет плашки */
         border-radius: 20px;       /* закругления плашки */
         //border: 3px solid orange;  /* padding вокруг плашки */
     }

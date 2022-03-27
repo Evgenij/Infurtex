@@ -116,7 +116,7 @@
                 el.style.opacity = 0
             },
             enter: function (el, done) {
-                var delay = 0
+                let delay = 0
                 setTimeout(function () {
                     Velocity(
                         el,
@@ -126,7 +126,7 @@
                 }, delay)
             },
             leave: function (el, done) {
-                var delay = 0
+                let delay = 0
                 setTimeout(function () {
                     Velocity(
                         el,

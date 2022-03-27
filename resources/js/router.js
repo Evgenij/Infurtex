@@ -16,7 +16,7 @@ import AuthLayout from "./components/layouts/AuthLayout";
 import ModeratorDashboard from "./components/dashboards/moderator/ModeratorDashboard";
 import ModeratorTests from "./components/dashboards/moderator/Tests/Tests";
 import ModeratorTeams from "./components/dashboards/moderator/Teams/Teams";
-import ModeratorAddingTest from "./components/dashboards/moderator/Tests/AddTest.vue"
+import ModeratorAddingTest from "./components/dashboards/moderator/Tests/AddingTests/AddTest.vue"
 
 import RespondentDashboard from "./components/dashboards/respondent/RespondentDashboard";
 import RespondentTests from "./components/dashboards/respondent/Tests/Tests";

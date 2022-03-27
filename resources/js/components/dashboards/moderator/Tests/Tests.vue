@@ -1,5 +1,5 @@
 <template>
-    <list-tests :tests="tests"></list-tests>
+    <list-tests :tests="this.tests"></list-tests>
 </template>
 
 <script>

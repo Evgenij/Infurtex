@@ -1,10 +1,10 @@
 <template>
-    <div class="root relative">
+    <main class="main relative">
         <app-header :user-menu="menuLinks" :links="links"></app-header>
         <div class="content mx-auto">
             <router-view></router-view>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>

@@ -30,4 +30,11 @@ const categoryTest = {
     Finished: 'finished',
 }
 
-export default { userRole, durationTests, ownerTest, typeTest, categoryTest}
+const typeQuestion = {
+    Text: 1,
+    Radio: 2,
+    CheckBox: 3,
+    Scale: 4
+}
+
+export default { userRole, durationTests, ownerTest, typeTest, categoryTest, typeQuestion}
