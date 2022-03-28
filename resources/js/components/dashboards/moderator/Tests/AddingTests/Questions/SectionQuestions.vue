@@ -1,8 +1,34 @@
 <template>
     <div class="questions flex flex-col space-y-4">
         <question-block v-for="(question, index) in questions"
-            :id="++index" :text="question.text" :type="question.type" :key="index" :change-type="test">
+            :id="++index" :text="question.text" :type="question.type" :key="index" @remove-question="removeQuestion">
         </question-block>
+
+        <footer>
+            <vs-button transparent dark @click="activeTooltip=!activeTooltip" class="w-full">
+                <i class="bx bx-plus left"></i>
+                Добавить вопрос
+            </vs-button>
+            <div v-if="activeTooltip" class="footer__title flex flex-col border rounded-lg border-slate-100 p-4">
+                <h4 class="text-center text-sm mb-2 font-medium">
+                    Тип вопроса
+                </h4>
+                <div class="buttons flex items-center space-x-2">
+                    <vs-button class="w-full" flat dark @click="addNewQuestion(1)">
+                        <i class="bx bx-font-family left"></i>
+                        Текстовый ответ
+                    </vs-button>
+                    <vs-button class="w-full" flat dark @click="addNewQuestion(2)">
+                        <i class="bx bx-list-check left"></i>
+                        Один из нескольких
+                    </vs-button>
+                    <vs-button class="w-full" flat dark @click="addNewQuestion(3)">
+                        <i class="bx bx-select-multiple left"></i>
+                        Несколько ответов
+                    </vs-button>
+                </div>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -15,22 +41,32 @@ export default {
     name: "SectionQuestions",
     components: {QuestionBlock},
     data: ()=>({
+        activeTooltip: false,
         questions: [
             {
                 id: 1,
-                text: "Question - " + Math.random(),
                 type: type.typeQuestion.Text
             },
             {
                 id: 2,
-                text: "Question - " + Math.random(),
                 type: type.typeQuestion.CheckBox
             },
-        ]
+        ],
+        newQuestionType: 0,
     }),
-    methods: {
-        test(type){
-            alert(type)
+    methods:{
+        addNewQuestion(type) {
+            this.questions.push({
+                id: this.questions.length+1,
+                type: type
+            })
+            this.switchStatePanel()
+        },
+        switchStatePanel(){
+            this.activeTooltip=!this.activeTooltip
+        },
+        removeQuestion(idQuestion){
+            this.questions = this.questions.filter(el => el.id !== idQuestion)
         }
     }
 }

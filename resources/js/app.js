@@ -42,7 +42,7 @@ Vue.use(
             success:'rgb(62,190,119)',
             danger:'rgb(255,65,65)',
             warning:'rgb(255, 130, 0)',
-            dark:'rgb(100,100,103)'
+            dark:'rgb(152,152,156)'
         },
     })
 Vue.use(vcdonut.default)

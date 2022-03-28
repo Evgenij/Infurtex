@@ -1,14 +1,13 @@
 <template>
-    <div class="question-block">
+    <div class="question-block border-b border-slate-100 pb-4">
         <header class="flex items-center justify-between">
             <span class="text-sm text-slate-400 font-normal"> {{id + '. ' + getTypeToText}}</span>
-            <div class="button-actions flex items-center justify-end">
-                <div class="button-actions__item p-2 rounded-lg hover:bg-slate-100 cursor-pointer">
-                    <i class="bx bx-trash text-slate-400"></i>
-                </div>
-            </div>
+            <vs-button dark transparent @click="remove">
+                Удалить вопрос
+                <i class="bx bx-trash right"></i>
+            </vs-button>
         </header>
-        <component :is="questionTest" :change-type="test"/>
+        <component :is="questionTest"></component>
     </div>
 </template>
 
@@ -19,8 +18,9 @@ import CheckboxQuestion from "./TypeQuestions/CheckboxQuestion";
 
 export default {
     name: "QuestionBlock",
-    components: {TextQuestion},
+    components: {CheckboxQuestion, TextQuestion},
     data: ()=>({
+        typeQuestion: type.typeQuestion,
         answers: [
             {
                 id: Math.random(),
@@ -33,19 +33,10 @@ export default {
             type: Number,
             required: true
         },
-        text: {
-            type: String,
-            required: true
-        },
         type: {
             type: Number,
             required: true
         },
-    },
-    methods: {
-        test(type){
-            alert(type)
-        }
     },
     computed: {
         getTypeToText(){
@@ -69,6 +60,11 @@ export default {
             }
 
             return () => import(`./TypeQuestions/${nameComponentQuestion}`)
+        },
+    },
+    methods: {
+        remove(){
+            this.$emit('remove-question', this.id)
         }
     }
 }
