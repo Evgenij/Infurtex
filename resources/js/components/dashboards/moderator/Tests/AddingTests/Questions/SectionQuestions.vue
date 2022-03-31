@@ -1,9 +1,9 @@
 <template>
     <div class="questions flex flex-col space-y-4">
         <question-block v-for="(question, index) in questions"
-            :id="++index" :text="question.text" :type="question.type" :key="index" @remove-question="removeQuestion">
+            :id="++index" :text="question.text" :type="question.type" :answers="question.answers" :key="index"
+                        @remove-question="removeQuestion" @remove-answer="removeAnswer" @add-answer="addAnswer">
         </question-block>
-
         <footer>
             <vs-button transparent dark @click="activeTooltip=!activeTooltip" class="w-full">
                 <i class="bx bx-plus left"></i>
@@ -42,23 +42,23 @@ export default {
     components: {QuestionBlock},
     data: ()=>({
         activeTooltip: false,
-        questions: [
-            {
-                id: 1,
-                type: type.typeQuestion.Text
-            },
-            {
-                id: 2,
-                type: type.typeQuestion.CheckBox
-            },
-        ],
-        newQuestionType: 0,
+        sectionQuestions: []
     }),
+    props: {
+        questions: {
+            type: Array,
+            required: true
+        }
+    },
     methods:{
         addNewQuestion(type) {
             this.questions.push({
                 id: this.questions.length+1,
-                type: type
+                type: type,
+                answers: [
+                    {id: 1, value: ''},
+                    {id: 2, value: ''},
+                ]
             })
             this.switchStatePanel()
         },
@@ -67,6 +67,23 @@ export default {
         },
         removeQuestion(idQuestion){
             this.questions = this.questions.filter(el => el.id !== idQuestion)
+        },
+        removeAnswer(obj){
+            let question = this.questions.filter(el=>el.id === obj.id)[0]
+            this.questions.filter(el=>el.id === obj.id)[0].answers = question.answers.filter(el=> el.id !== obj.idAnswer)
+            //console.log('!!! ', this.questions)
+            //this.$emit('remove-answer', obj)
+        },
+        addAnswer(obj){
+            let question = this.questions.filter(el=>el.id === obj.id)[0]
+            console.log(question)
+            this.questions.filter(el=>el.id === obj.id)[0].answers = obj.answers
+            console.log(this.questions)
+        }
+    },
+    computed: {
+        setQuestions(){
+            this.sectionQuestions = this.$props.questions
         }
     }
 }

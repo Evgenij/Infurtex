@@ -1,14 +1,13 @@
 <template>
     <div class="answer-block flex items-center">
-        <span class="p-1">{{id}}</span>
+        <span class="px-2 text-slate-300 text-sm">{{id}}</span>
         <vs-input primary
                   v-model="valueAnswer"
-                  placeholder="Текст вопроса" class="w-full mr-3">
+                  placeholder="текст варианта" class="w-full">
         </vs-input>
-        <div class="p-2 rounded-lg hover:bg-slate-100 cursor-pointer"
-             @click="remove">
-            <i class="bx bx-trash text-slate-400"></i>
-        </div>
+        <vs-button danger transparent @click="remove">
+            <i class="bx bx-trash"></i>
+        </vs-button>
     </div>
 </template>
 
@@ -16,7 +15,7 @@
 export default {
     name: "AnswerBlock",
     data: ()=>({
-        valueAnswer: ''
+        valueAnswer: '',
     }),
     props: {
         id: {
@@ -30,7 +29,16 @@ export default {
     },
     methods: {
         remove(){
+            console.log('delete ', this.id, ' answer')
             this.$emit('remove', this.id)
+        },
+    },
+    watch: {
+        valueAnswer(val){
+            this.$emit('change', {
+                val: val,
+                id: this.id
+            })
         }
     },
     computed: {

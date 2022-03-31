@@ -13,8 +13,24 @@ import type from '../../../../../../../enums'
 export default {
     name: "TextQuestion",
     data: ()=>({
-        text: '',
+        textQuestion: '',
     }),
+    props: {
+        text:{
+            type: String,
+            required: true
+        }
+    },
+    watch: {
+        text(val){
+            this.$emit('change', val)
+        }
+    },
+    computed: {
+        setTextQuestion(){
+            this.textQuestion = this.$props.text
+        }
+    }
 }
 </script>
 

@@ -7,7 +7,9 @@
                 <i class="bx bx-trash right"></i>
             </vs-button>
         </header>
-        <component :is="questionTest"></component>
+        <text-question v-if="type===1" :text="text" @change="changeText"></text-question>
+        <radio-button-question v-if="type===2" :answers="answers" @remove-answer="removeAnswer"></radio-button-question>
+        <checkbox-question v-if="type===3" :answers="answers" @remove-answer="removeAnswer" @add-answer="addAnswer"></checkbox-question>
     </div>
 </template>
 
@@ -15,18 +17,13 @@
 import type from "../../../../../../enums"
 import TextQuestion from "./TypeQuestions/TextQuestion";
 import CheckboxQuestion from "./TypeQuestions/CheckboxQuestion";
+import RadioButtonQuestion from "./TypeQuestions/RadioButtonQuestion";
 
 export default {
     name: "QuestionBlock",
-    components: {CheckboxQuestion, TextQuestion},
+    components: {RadioButtonQuestion, CheckboxQuestion, TextQuestion},
     data: ()=>({
         typeQuestion: type.typeQuestion,
-        answers: [
-            {
-                id: Math.random(),
-                value: ''
-            },
-        ]
     }),
     props: {
         id: {
@@ -37,10 +34,18 @@ export default {
             type: Number,
             required: true
         },
+        text: {
+            type: String,
+            required: true
+        },
+        answers: {
+            type: Array,
+            required: true
+        }
     },
     computed: {
-        getTypeToText(){
-            if (this.type === type.typeQuestion.Text){
+        getTypeToText() {
+            if (this.type === type.typeQuestion.Text) {
                 return "Текстовый ответ"
             } else if (this.type === type.typeQuestion.CheckBox) {
                 return "Выбор нескольких вариантов"
@@ -50,21 +55,38 @@ export default {
                 return "Ответ по шкале"
             }
         },
-        questionTest(){
-            let nameComponentQuestion = this.type ? 'TextQuestion' : 'UserInfo'
-
-            if (this.type === type.typeQuestion.Text) {
-                nameComponentQuestion = "TextQuestion"
-            } if (this.type === type.typeQuestion.CheckBox) {
-                nameComponentQuestion = 'CheckboxQuestion'
-            }
-
-            return () => import(`./TypeQuestions/${nameComponentQuestion}`)
-        },
+        // questionTest(){
+        //     let nameComponentQuestion = this.type ? 'TextQuestion' : 'UserInfo'
+        //
+        //     if (this.type === type.typeQuestion.Text) {
+        //         nameComponentQuestion = "TextQuestion"
+        //     } if (this.type === type.typeQuestion.CheckBox) {
+        //         nameComponentQuestion = 'CheckboxQuestion'
+        //     }
+        //
+        //     return () => import(`./TypeQuestions/${nameComponentQuestion}`)
+        //},
     },
     methods: {
         remove(){
             this.$emit('remove-question', this.id)
+        },
+        changeText(val){
+            this.text = val
+        },
+        removeAnswer(idAnswer){
+            console.log('remove - ', idAnswer)
+            this.$emit('remove-answer', {
+                id: this.id,
+                idAnswer: idAnswer
+            })
+        },
+        addAnswer(answers){
+            console.log('1')
+            this.$emit('add-answer', {
+                id: this.id,
+                answers: answers
+            })
         }
     }
 }

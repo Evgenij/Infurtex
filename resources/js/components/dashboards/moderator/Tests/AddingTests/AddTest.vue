@@ -1,5 +1,5 @@
 <template>
-    <section class="relative tabs bg-white p-6 rounded-lg w-4/5 mx-auto" id="tabs">
+    <section class="relative tabs bg-white p-6 rounded-lg w-4/5 mx-auto mb-6" id="tabs">
         <div class="general-data-test left-10 fixed rounded-lg bg-white p-3">
             13324
         </div>
@@ -14,7 +14,6 @@
             </div>
         </div>
         <div class="tabs-content tab pt-5 flex flex-col space-y-8" v-if="activeTab === 1">
-
             <div class="tab-data grid grid-cols-2 gap-3 mt-2">
                 <h2 class="col-span-2 font-medium text-base">Основные данные</h2>
                 <div class="cell flex items-center">

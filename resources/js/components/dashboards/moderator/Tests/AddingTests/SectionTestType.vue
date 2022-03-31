@@ -24,7 +24,7 @@ export default {
             if(this.typeTest === type.typeTest.FirstClick) {
                 nameTypeTestComponent = 'FirstClick'
             } else if (this.typeTest === type.typeTest.Like){
-                //nameTypeTestComponent = 'CheckboxQuestion'
+                //nameTypeTestComponent = 'FirstClick'
             }
             return () => import(`./TypeTests/${nameTypeTestComponent}`)
         }

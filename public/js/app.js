@@ -1870,7 +1870,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2127,7 +2126,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AnswerBlock",
   data: function data() {
@@ -2147,7 +2145,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     remove: function remove() {
+      console.log('delete ', this.id, ' answer');
       this.$emit('remove', this.id);
+    }
+  },
+  watch: {
+    valueAnswer: function valueAnswer(val) {
+      this.$emit('change', {
+        val: val,
+        id: this.id
+      });
     }
   },
   computed: {
@@ -2201,20 +2208,49 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       text: '',
-      answers: [{
-        value: 'вариант 1'
-      }, {
-        value: 'вариант 2'
-      }],
-      checkedAnswers: []
+      questionAnswers: []
     };
+  },
+  props: {
+    answers: {
+      type: Array,
+      required: true
+    }
   },
   methods: {
     removeAnswer: function removeAnswer(idAnswer) {
-      this.answers = this.answers.filter(function (el) {
-        return el.id !== idAnswer;
-      });
+      if (this.questionAnswers.length > 2) {
+        this.questionAnswers = this.questionAnswers.filter(function (el) {
+          return el.id !== idAnswer;
+        });
+        this.$emit('remove-answer', idAnswer);
+      }
+    },
+    addAnswer: function addAnswer() {
+      var newIdAnswer = this.questionAnswers.length + 1;
+
+      if (this.questionAnswers.length < 5) {
+        this.questionAnswers.push({
+          id: newIdAnswer,
+          value: ''
+        }); //console.log(this.questionAnswers)
+
+        this.$emit('add-answer', this.questionAnswers);
+      }
+    },
+    changeDataAnswer: function changeDataAnswer(obj) {
+      this.questionAnswers.filter(function (el) {
+        return el.id === obj.id;
+      })[0].value = obj.val;
     }
+  },
+  computed: {
+    setQuestionAnswers: function setQuestionAnswers() {
+      this.questionAnswers = this.$props.answers;
+    }
+  },
+  created: function created() {
+    this.questionAnswers = this.$props.answers;
   }
 });
 
@@ -2259,7 +2295,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.FirstClick) {
         nameTypeTestComponent = 'FirstClick';
-      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Like) {//nameTypeTestComponent = 'CheckboxQuestion'
+      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Like) {//nameTypeTestComponent = 'FirstClick'
       }
 
       return function () {
@@ -13750,7 +13786,7 @@ var render = function () {
   return _c(
     "section",
     {
-      staticClass: "relative tabs bg-white p-6 rounded-lg w-4/5 mx-auto",
+      staticClass: "relative tabs bg-white p-6 rounded-lg w-4/5 mx-auto mb-6",
       attrs: { id: "tabs" },
     },
     [
@@ -14121,11 +14157,13 @@ var render = function () {
     "div",
     { staticClass: "answer-block flex items-center" },
     [
-      _c("span", { staticClass: "p-1" }, [_vm._v(_vm._s(_vm.id))]),
+      _c("span", { staticClass: "px-2 text-slate-300 text-sm" }, [
+        _vm._v(_vm._s(_vm.id)),
+      ]),
       _vm._v(" "),
       _c("vs-input", {
-        staticClass: "w-full mr-3",
-        attrs: { primary: "", placeholder: "Текст вопроса" },
+        staticClass: "w-full",
+        attrs: { primary: "", placeholder: "текст варианта" },
         model: {
           value: _vm.valueAnswer,
           callback: function ($$v) {
@@ -14136,12 +14174,9 @@ var render = function () {
       }),
       _vm._v(" "),
       _c(
-        "div",
-        {
-          staticClass: "p-2 rounded-lg hover:bg-slate-100 cursor-pointer",
-          on: { click: _vm.remove },
-        },
-        [_c("i", { staticClass: "bx bx-trash text-slate-400" })]
+        "vs-button",
+        { attrs: { danger: "", transparent: "" }, on: { click: _vm.remove } },
+        [_c("i", { staticClass: "bx bx-trash" })]
       ),
     ],
     1
@@ -14196,11 +14231,11 @@ var render = function () {
         _c(
           "main",
           { staticClass: "answers__list flex flex-col space-y-2" },
-          _vm._l(_vm.answers, function (answer, index) {
+          _vm._l(_vm.questionAnswers, function (answer, index) {
             return _c("answer-block", {
               key: index,
-              attrs: { id: ++index, value: answer.value },
-              on: { remove: _vm.removeAnswer },
+              attrs: { id: answer.id, value: answer.value },
+              on: { remove: _vm.removeAnswer, change: _vm.changeDataAnswer },
             })
           }),
           1
@@ -14208,11 +14243,19 @@ var render = function () {
         _vm._v(" "),
         _c(
           "footer",
-          { staticClass: "answers__add-button" },
+          { staticClass: "answers__add-button flex justify-end py-2" },
           [
-            _c("vs-button", { attrs: { transparent: "", success: "" } }, [
-              _vm._v("Добавить вариант"),
-            ]),
+            _c(
+              "vs-button",
+              {
+                attrs: {
+                  success: "",
+                  disabled: _vm.questionAnswers.length >= 5,
+                },
+                on: { click: _vm.addAnswer },
+              },
+              [_vm._v("Добавить вариант")]
+            ),
           ],
           1
         ),

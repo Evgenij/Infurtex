@@ -19,10 +19,11 @@
     </div>
 </template>
 
+
 <script>
 import AnswerBlock from "../AnswerBlock";
 export default {
-    name: "CheckboxQuestion",
+    name: "RadioButtonQuestion",
     components: {AnswerBlock},
     data: ()=>({
         text: '',
@@ -36,20 +37,15 @@ export default {
     },
     methods:{
         removeAnswer(idAnswer){
-            if(this.questionAnswers.length>2) {
+            if(this.questionAnswers.length>2){
                 this.questionAnswers = this.questionAnswers.filter(el=>el.id !== idAnswer)
                 this.$emit('remove-answer', idAnswer)
             }
         },
         addAnswer(){
-            let newIdAnswer = this.questionAnswers.length + 1
-            if(this.questionAnswers.length<5) {
-                this.questionAnswers.push({
-                    id: newIdAnswer, value: ''
-                })
-                //console.log(this.questionAnswers)
-                this.$emit('add-answer', this.questionAnswers)
-            }
+            this.questionAnswers.push({
+                id: this.questionAnswers.length + 1, value: ''
+            })
         },
         changeDataAnswer(obj){
             this.questionAnswers.filter(el => el.id === obj.id)[0].value = obj.val
