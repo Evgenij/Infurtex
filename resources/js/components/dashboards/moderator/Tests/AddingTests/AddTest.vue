@@ -46,7 +46,7 @@
 <!--                    <vs-button dark flat v-if="this.projectId !== ''" class="min-w-max" @click="resetProject">-->
 <!--                        <i class='bx bx-x'></i>-->
 <!--                    </vs-button>-->
-                    <dropdown :data-list="listProjects" :add-item="addProject"></dropdown>
+                    <dropdown :listItems="listProjects" @add-item="addProject" :data="dataProject"></dropdown>
                 </div>
                 <hr class="col-span-2 my-3 mt-4">
                 <div v-if="testType === 0" class="list-type-test col-span-2">
@@ -93,33 +93,36 @@
             ],
             nameTest: '',
             listProjects: [
-                { name: 'Дизайн приложений', value: 1 },
-                { name: 'Упаковки', value: 2 },
-                { name: '123', value: 3 },
-                { name: '435', value: 4 },
-                { name: '57', value: 5 },
-                { name: '45646', value: 6 },
+                { value: 'Дизайн приложений', id: 1 },
+                { value: 'Упаковки', id: 2 },
+                { value: '123', id: 3 },
+                { value: '435', id: 4 },
+                { value: '57', id: 5 },
+                { value: '45646', id: 6 },
             ],
+            dataProject: {id:0,value:''},
             testSections: [],
             testType: 0
-
         }),
         methods: {
             activate(index) {
                 this.activeTab = index;
             },
-            addProject(item) {
-                console.log(item)
-                // let nameNewProject = document.getElementById('vs-input--20').value
-                // let idNewProject = this.listProjects.length+1
-                // this.listProjects.push({
-                //     name: nameNewProject,
-                //     value:  idNewProject
-                // })
-                // this.projectName = nameNewProject
-                // this.projectId = idNewProject
-                //
-                // this.switchListProjects()
+            addProject(data) {
+                console.log(data)
+                //let nameNewProject = document.getElementById('vs-input--20').value
+                let nameNewProject = data.input.value
+                console.log(nameNewProject)
+                let idNewProject = data.listProjects.length+1
+                console.log(idNewProject)
+                this.listProjects.push({
+                    value: nameNewProject,
+                    id:  idNewProject
+                })
+                this.dataProject.value = nameNewProject
+                this.dataProject.id = idNewProject
+
+
             },
             addSectionTest(id){
                 console.log('Test type: ', this.testType = id)

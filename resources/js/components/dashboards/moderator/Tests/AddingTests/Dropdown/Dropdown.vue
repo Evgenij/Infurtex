@@ -1,7 +1,7 @@
 <template>
     <div class="dropdown w-full flex items-center">
         <div class="relative w-full">
-            <vs-input ref="input" v-model="itemName" primary placeholder="проект" @focus="switchListProjects">
+            <vs-input ref="input" v-model="name" primary placeholder="проект" @focus="switchListProjects">
                 <template #icon>
                     <i class='bx bx-folder'></i>
                 </template>
@@ -9,17 +9,15 @@
             <div v-if="openListItems"
                  class="absolute z-10 project-list flex flex-col space-y-1 mt-1 p-1 w-full border-2 border-slate-100 top-full bg-white rounded-lg"
                  @mouseleave="switchListProjects">
-                <div v-for="project in filteredItems"
-                     class="project-list__item text-sm p-2 px-3 hover:bg-gray-100 cursor-pointer rounded-lg"
-                     @click="switchListProjects">
-                    {{project.name}}
-                </div>
+                <dropdown-item v-for="project in filteredItems"
+                               :value="project.value" :id="project.id" :key="project.id"
+                                @set-data="setDataDropdown"></dropdown-item>
             </div>
         </div>
-        <vs-button success v-if="!searchedItems && this.itemId === ''" class="min-w-max" @click="addItem">
+        <vs-button success v-if="!searchedItems && this.id === 0" class="min-w-max" @click="addItem">
             <i class='bx bx-plus left'></i> Добавить
         </vs-button>
-        <vs-button dark flat v-if="this.itemId !== ''" class="min-w-max" @click="resetProject">
+        <vs-button dark flat v-if="this.id !== 0" class="min-w-max" @click="resetProject">
             <i class='bx bx-x'></i>
         </vs-button>
     </div>
@@ -27,54 +25,73 @@
 </template>
 
 <script>
+    import DropdownItem from "./DropdownItem";
     export default {
         name: "Dropdown",
+        components: {DropdownItem},
         data: ()=>({
-            itemName: '',
-            itemId: '',
-            listItems: [],
+            name: '',
+            id: '',
             filteredItems: [],
             searchedItems: true,
             openListItems: false,
         }),
         props: {
-            dataList: {
+            listItems: {
                 type: Array,
+                required: true
+            },
+            data: {
+                type: Object,
                 required: true
             }
         },
         methods: {
             resetProject(){
-                this.itemName = ''
-                this.itemId = ''
+                this.name = ''
+                this.id = 0
             },
             addItem(){
-                this.$emit('add-item', this.$refs.input)
+                this.$emit('add-item', {
+                    input: this.$refs.input,
+                    listProjects: this.listItems,
+                })
             },
             switchListProjects(){
-                this.filteredItems = this.props.dataList
+                this.filteredItems = this.$props.listItems
                 this.openListItems = !this.openListItems
             },
-            filterProjects(name){
-                this.filteredItems = this.props.listItems.filter(item => item.name.toLowerCase().includes(name.toLowerCase()))
-                console.log(this.filteredItems)
+            filterProjects(value){
+                this.filteredItems = this.$props.listItems.filter(item => item.value.toLowerCase().includes(value.toLowerCase()))
+                //console.log(this.filteredItems)
                 if (this.filteredItems.length >= 1){
                     this.searchedItems = true
                 } else {
                     this.filteredItems = [{
-                        name: 'Поиск не дал результатов', value: 0
+                        value: 'Поиск не дал результатов', id: 0
                     }]
                     this.searchedItems = false
                 }
 
                 this.openListItems = true
             },
+            setDataDropdown(data){
+                this.id = data.id
+                this.name = data.value
+                this.switchListProjects()
+            }
         },
         watch: {
-            itemName(val) {
+            name(val) {
                 this.filterProjects(val)
             }
         },
+        computed: {
+            setData(){
+                this.id = this.$props.data.id
+                this.name= this.$props.data.value
+            }
+        }
     }
 </script>
 

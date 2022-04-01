@@ -7,9 +7,13 @@
                 <i class="bx bx-trash right"></i>
             </vs-button>
         </header>
-        <text-question v-if="type===1" :text="text" @change="changeText"></text-question>
-        <radio-button-question v-if="type===2" :answers="answers" @remove-answer="removeAnswer"></radio-button-question>
-        <checkbox-question v-if="type===3" :answers="answers" @remove-answer="removeAnswer" @add-answer="addAnswer"></checkbox-question>
+        <text-question v-if="type===1" @change-text-question="changeTextQuestion"></text-question>
+        <radio-button-question v-if="type===2" :text="text" :answers="answers"
+                               @remove-answer="removeAnswer" @add-answer="addAnswer"
+                               @change-text-question="changeTextQuestion"></radio-button-question>
+        <checkbox-question v-if="type===3" :answers="answers"
+                            @remove-answer="removeAnswer" @add-answer="addAnswer"
+                            @change-text-question="changeTextQuestion"></checkbox-question>
     </div>
 </template>
 
@@ -71,9 +75,6 @@ export default {
         remove(){
             this.$emit('remove-question', this.id)
         },
-        changeText(val){
-            this.text = val
-        },
         removeAnswer(idAnswer){
             console.log('remove - ', idAnswer)
             this.$emit('remove-answer', {
@@ -87,8 +88,14 @@ export default {
                 id: this.id,
                 answers: answers
             })
+        },
+        changeTextQuestion(val){
+            this.$emit('change-text-question', {
+                id: this.id,
+                text: val
+            })
         }
-    }
+    },
 }
 </script>
 

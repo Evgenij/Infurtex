@@ -30,6 +30,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -92,9 +96,6 @@ __webpack_require__.r(__webpack_exports__);
     remove: function remove() {
       this.$emit('remove-question', this.id);
     },
-    changeText: function changeText(val) {
-      this.text = val;
-    },
     removeAnswer: function removeAnswer(idAnswer) {
       console.log('remove - ', idAnswer);
       this.$emit('remove-answer', {
@@ -107,6 +108,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('add-answer', {
         id: this.id,
         answers: answers
+      });
+    },
+    changeTextQuestion: function changeTextQuestion(val) {
+      this.$emit('change-text-question', {
+        id: this.id,
+        text: val
       });
     }
   }
@@ -126,6 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _QuestionBlock__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./QuestionBlock */ "./resources/js/components/dashboards/moderator/Tests/AddingTests/Questions/QuestionBlock.vue");
 /* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../enums */ "./resources/js/enums.js");
+//
 //
 //
 //
@@ -181,9 +189,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addNewQuestion: function addNewQuestion(type) {
-      this.questions.push({
+      var newQuestionBlock = {
         id: this.questions.length + 1,
         type: type,
+        text: '',
         answers: [{
           id: 1,
           value: ''
@@ -191,16 +200,16 @@ __webpack_require__.r(__webpack_exports__);
           id: 2,
           value: ''
         }]
-      });
+      };
+      this.$emit('add-question-block', newQuestionBlock);
       this.switchStatePanel();
     },
     switchStatePanel: function switchStatePanel() {
       this.activeTooltip = !this.activeTooltip;
     },
     removeQuestion: function removeQuestion(idQuestion) {
-      this.questions = this.questions.filter(function (el) {
-        return el.id !== idQuestion;
-      });
+      //this.questions = this.questions.filter(el => el.id !== idQuestion)
+      this.$emit('remove-question-block', idQuestion);
     },
     removeAnswer: function removeAnswer(obj) {
       var question = this.questions.filter(function (el) {
@@ -214,14 +223,16 @@ __webpack_require__.r(__webpack_exports__);
       //this.$emit('remove-answer', obj)
     },
     addAnswer: function addAnswer(obj) {
-      var question = this.questions.filter(function (el) {
-        return el.id === obj.id;
-      })[0];
-      console.log(question);
+      //let question = this.questions.filter(el=>el.id === obj.id)[0]
+      //console.log(question)
       this.questions.filter(function (el) {
         return el.id === obj.id;
-      })[0].answers = obj.answers;
-      console.log(this.questions);
+      })[0].answers = obj.answers; //console.log(this.questions)
+    },
+    changeTextQuestion: function changeTextQuestion(obj) {
+      this.questions.filter(function (el) {
+        return el.id === obj.id;
+      })[0].text = obj.text;
     }
   },
   computed: {
@@ -274,8 +285,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      text: '',
-      questionAnswers: []
+      questionAnswers: [],
+      textQuestion: ''
     };
   },
   props: {
@@ -294,10 +305,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     addAnswer: function addAnswer() {
-      this.questionAnswers.push({
-        id: this.questionAnswers.length + 1,
-        value: ''
-      });
+      var newIdAnswer = this.questionAnswers.length + 1;
+
+      if (this.questionAnswers.length < 5) {
+        this.questionAnswers.push({
+          id: newIdAnswer,
+          value: ''
+        }); //console.log(this.questionAnswers)
+
+        this.$emit('add-answer', this.questionAnswers);
+      }
     },
     changeDataAnswer: function changeDataAnswer(obj) {
       this.questionAnswers.filter(function (el) {
@@ -305,11 +322,16 @@ __webpack_require__.r(__webpack_exports__);
       })[0].value = obj.val;
     }
   },
-  computed: {
-    setQuestionAnswers: function setQuestionAnswers() {
-      this.questionAnswers = this.$props.answers;
+  watch: {
+    textQuestion: function textQuestion() {
+      this.$emit('change-text-question', this.textQuestion);
     }
   },
+  // computed: {
+  //     setQuestionAnswers(){
+  //         this.questionAnswers = this.$props.answers
+  //     },
+  // },
   created: function created() {
     this.questionAnswers = this.$props.answers;
   }
@@ -346,20 +368,9 @@ __webpack_require__.r(__webpack_exports__);
       textQuestion: ''
     };
   },
-  props: {
-    text: {
-      type: String,
-      required: true
-    }
-  },
   watch: {
-    text: function text(val) {
-      this.$emit('change', val);
-    }
-  },
-  computed: {
-    setTextQuestion: function setTextQuestion() {
-      this.textQuestion = this.$props.text;
+    textQuestion: function textQuestion() {
+      this.$emit('change-text-question', this.textQuestion);
     }
   }
 });
@@ -378,6 +389,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Questions_SectionQuestions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Questions/SectionQuestions */ "./resources/js/components/dashboards/moderator/Tests/AddingTests/Questions/SectionQuestions.vue");
 /* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../enums */ "./resources/js/enums.js");
+//
+//
 //
 //
 //
@@ -443,7 +456,8 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  methods: {// removeAnswer(obj){
+  methods: {
+    // removeAnswer(obj){
     //     console.log(obj)
     //     let question = this.questions.filter(el=>el.id === obj.id)[0].answers.filter(el=>el.id !== obj.idAnswer)
     //     console.log(question)
@@ -452,6 +466,16 @@ __webpack_require__.r(__webpack_exports__);
     // addAnswer(){
     //
     // }
+    addQuestionBlock: function addQuestionBlock(newQuestion) {
+      this.questions.push(newQuestion);
+    },
+    removeQuestionBlock: function removeQuestionBlock(idRemovingQuestion) {
+      console.log(idRemovingQuestion);
+      this.questions = this.questions.filter(function (el) {
+        return el.id !== idRemovingQuestion;
+      });
+      console.log(this.questions);
+    }
   },
   watch: {
     questions: function questions(val) {
@@ -848,15 +872,18 @@ var render = function () {
       _vm._v(" "),
       _vm.type === 1
         ? _c("text-question", {
-            attrs: { text: _vm.text },
-            on: { change: _vm.changeText },
+            on: { "change-text-question": _vm.changeTextQuestion },
           })
         : _vm._e(),
       _vm._v(" "),
       _vm.type === 2
         ? _c("radio-button-question", {
-            attrs: { answers: _vm.answers },
-            on: { "remove-answer": _vm.removeAnswer },
+            attrs: { text: _vm.text, answers: _vm.answers },
+            on: {
+              "remove-answer": _vm.removeAnswer,
+              "add-answer": _vm.addAnswer,
+              "change-text-question": _vm.changeTextQuestion,
+            },
           })
         : _vm._e(),
       _vm._v(" "),
@@ -866,6 +893,7 @@ var render = function () {
             on: {
               "remove-answer": _vm.removeAnswer,
               "add-answer": _vm.addAnswer,
+              "change-text-question": _vm.changeTextQuestion,
             },
           })
         : _vm._e(),
@@ -903,7 +931,7 @@ var render = function () {
         return _c("question-block", {
           key: index,
           attrs: {
-            id: ++index,
+            id: question.id,
             text: question.text,
             type: question.type,
             answers: question.answers,
@@ -912,6 +940,7 @@ var render = function () {
             "remove-question": _vm.removeQuestion,
             "remove-answer": _vm.removeAnswer,
             "add-answer": _vm.addAnswer,
+            "change-text-question": _vm.changeTextQuestion,
           },
         })
       }),
@@ -1055,11 +1084,11 @@ var render = function () {
         staticClass: "w-full mr-3",
         attrs: { primary: "", placeholder: "Текст вопроса", label: "Вопрос" },
         model: {
-          value: _vm.text,
+          value: _vm.textQuestion,
           callback: function ($$v) {
-            _vm.text = $$v
+            _vm.textQuestion = $$v
           },
-          expression: "text",
+          expression: "textQuestion",
         },
       }),
       _vm._v(" "),
@@ -1136,11 +1165,11 @@ var render = function () {
         staticClass: "w-full mr-3",
         attrs: { primary: "", placeholder: "Текст вопроса", label: "Вопрос" },
         model: {
-          value: _vm.text,
+          value: _vm.textQuestion,
           callback: function ($$v) {
-            _vm.text = $$v
+            _vm.textQuestion = $$v
           },
-          expression: "text",
+          expression: "textQuestion",
         },
       }),
     ],
@@ -1182,7 +1211,13 @@ var render = function () {
           _vm._v("Вопросы"),
         ]),
         _vm._v(" "),
-        _c("section-questions", { attrs: { questions: _vm.questions } }),
+        _c("section-questions", {
+          attrs: { questions: _vm.questions },
+          on: {
+            "add-question-block": _vm.addQuestionBlock,
+            "remove-question-block": _vm.removeQuestionBlock,
+          },
+        }),
       ],
       1
     ),

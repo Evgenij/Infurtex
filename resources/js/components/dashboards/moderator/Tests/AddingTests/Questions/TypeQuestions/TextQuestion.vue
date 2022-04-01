@@ -1,7 +1,7 @@
 <template>
     <div class="question mt-2 pt-4">
         <vs-input primary
-                  v-model="text"
+                  v-model="textQuestion"
                   placeholder="Текст вопроса"
                   label="Вопрос" class="w-full mr-3">
         </vs-input>
@@ -13,24 +13,13 @@ import type from '../../../../../../../enums'
 export default {
     name: "TextQuestion",
     data: ()=>({
-        textQuestion: '',
+        textQuestion: ''
     }),
-    props: {
-        text:{
-            type: String,
-            required: true
-        }
-    },
     watch: {
-        text(val){
-            this.$emit('change', val)
+        textQuestion(){
+            this.$emit('change-text-question', this.textQuestion)
         }
     },
-    computed: {
-        setTextQuestion(){
-            this.textQuestion = this.$props.text
-        }
-    }
 }
 </script>
 

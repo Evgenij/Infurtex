@@ -5,7 +5,9 @@
         </div>
         <div class="first-click-block__questions">
             <h2 class="font-medium text-base mb-2">Вопросы</h2>
-            <section-questions :questions="questions">
+            <section-questions :questions="questions"
+                               @add-question-block="addQuestionBlock"
+                               @remove-question-block="removeQuestionBlock">
 <!--                               @remove-answer="removeAnswer" @add-answer="addAnswer"-->
             </section-questions>
         </div>
@@ -61,6 +63,14 @@ export default {
         // addAnswer(){
         //
         // }
+        addQuestionBlock(newQuestion){
+            this.questions.push(newQuestion)
+        },
+        removeQuestionBlock(idRemovingQuestion){
+            console.log(idRemovingQuestion)
+            this.questions = this.questions.filter(el => el.id !== idRemovingQuestion)
+            console.log(this.questions)
+        }
     },
     watch: {
         questions(val){

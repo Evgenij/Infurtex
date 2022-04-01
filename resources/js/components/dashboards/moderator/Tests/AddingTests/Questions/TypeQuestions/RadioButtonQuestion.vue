@@ -1,7 +1,7 @@
 <template>
     <div class="question mt-2 flex flex-col pt-4">
         <vs-input primary
-                  v-model="text"
+                  v-model="textQuestion"
                   placeholder="Текст вопроса"
                   label="Вопрос" class="w-full mr-3">
         </vs-input>
@@ -26,8 +26,8 @@ export default {
     name: "RadioButtonQuestion",
     components: {AnswerBlock},
     data: ()=>({
-        text: '',
         questionAnswers: [],
+        textQuestion: ''
     }),
     props: {
         answers: {
@@ -37,25 +37,35 @@ export default {
     },
     methods:{
         removeAnswer(idAnswer){
-            if(this.questionAnswers.length>2){
+            if(this.questionAnswers.length>2) {
                 this.questionAnswers = this.questionAnswers.filter(el=>el.id !== idAnswer)
                 this.$emit('remove-answer', idAnswer)
             }
         },
         addAnswer(){
-            this.questionAnswers.push({
-                id: this.questionAnswers.length + 1, value: ''
-            })
+            let newIdAnswer = this.questionAnswers.length + 1
+            if(this.questionAnswers.length<5) {
+                this.questionAnswers.push({
+                    id: newIdAnswer, value: ''
+                })
+                //console.log(this.questionAnswers)
+                this.$emit('add-answer', this.questionAnswers)
+            }
         },
         changeDataAnswer(obj){
             this.questionAnswers.filter(el => el.id === obj.id)[0].value = obj.val
+        },
+    },
+    watch: {
+        textQuestion(){
+            this.$emit('change-text-question', this.textQuestion)
         }
     },
-    computed: {
-        setQuestionAnswers(){
-            this.questionAnswers = this.$props.answers
-        }
-    },
+    // computed: {
+    //     setQuestionAnswers(){
+    //         this.questionAnswers = this.$props.answers
+    //     },
+    // },
     created() {
         this.questionAnswers = this.$props.answers
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="question mt-2 flex flex-col pt-4">
         <vs-input primary
-                  v-model="text"
+                  v-model="textQuestion"
                   placeholder="Текст вопроса"
                   label="Вопрос" class="w-full mr-3">
         </vs-input>
@@ -25,8 +25,8 @@ export default {
     name: "CheckboxQuestion",
     components: {AnswerBlock},
     data: ()=>({
-        text: '',
         questionAnswers: [],
+        textQuestion: ''
     }),
     props: {
         answers: {
@@ -53,13 +53,18 @@ export default {
         },
         changeDataAnswer(obj){
             this.questionAnswers.filter(el => el.id === obj.id)[0].value = obj.val
+        },
+    },
+    watch: {
+        textQuestion(){
+            this.$emit('change-text-question', this.textQuestion)
         }
     },
-    computed: {
-        setQuestionAnswers(){
-            this.questionAnswers = this.$props.answers
-        }
-    },
+    // computed: {
+    //     setQuestionAnswers(){
+    //         this.questionAnswers = this.$props.answers
+    //     },
+    // },
     created() {
         this.questionAnswers = this.$props.answers
     }
