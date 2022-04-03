@@ -15,7 +15,7 @@
             </div>
         </div>
         <vs-button success v-if="!searchedItems && this.id === 0" class="min-w-max" @click="addItem">
-            <i class='bx bx-plus left'></i> Добавить
+            <i class='bx bx-plus left'></i> Создать
         </vs-button>
         <vs-button dark flat v-if="this.id !== 0" class="min-w-max" @click="resetProject">
             <i class='bx bx-x'></i>
@@ -31,7 +31,7 @@
         components: {DropdownItem},
         data: ()=>({
             name: '',
-            id: '',
+            id: 0,
             filteredItems: [],
             searchedItems: true,
             openListItems: false,

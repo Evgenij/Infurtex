@@ -1,5 +1,5 @@
 <template>
-    <div class="questions flex flex-col space-y-4">
+    <div class="questions flex flex-col space-y-2">
         <question-block v-for="(question, index) in questions"
             :id="question.id" :text="question.text" :type="question.type" :answers="question.answers" :key="index"
                         @remove-question="removeQuestion" @remove-answer="removeAnswer"

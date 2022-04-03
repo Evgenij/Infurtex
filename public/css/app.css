@@ -11,6 +11,7 @@
 .vs-button__content {
   padding: 3px 10px;
   font-size: 14px;
+  line-height: 2em;
 }
 
 .vs-input-content {
@@ -128,24 +129,24 @@
   font-size: 16px;
 }
 
-body {
+html {
   line-height: 1.6em;
   background: #F5F7F8;
+}
+html * {
+  transition: 0.3s;
   font-family: Inter, sans-serif;
 }
-body * {
-  transition: 0.3s;
-}
-body *::-webkit-scrollbar {
+html *::-webkit-scrollbar {
   width: 6px;
   /* ширина scrollbar */
 }
-body *::-webkit-scrollbar-track {
+html *::-webkit-scrollbar-track {
   background: #F5F7F8;
   /* цвет дорожки */
 }
-body *::-webkit-scrollbar-thumb {
-  background-color: #E2E4E6;
+html *::-webkit-scrollbar-thumb {
+  background-color: #CED3D6;
   /* цвет плашки */
   border-radius: 20px;
   /* закругления плашки */

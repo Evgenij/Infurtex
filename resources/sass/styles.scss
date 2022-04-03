@@ -1,13 +1,14 @@
 @import "variables";
 @import "elements/main";
 
-body{
+html{
     line-height: 1.6em;
     background: $background;
-    font-family: Inter, sans-serif;
+
 
     * {
         transition: .3s;
+        font-family: Inter, sans-serif;
     }
 
     *::-webkit-scrollbar {
@@ -17,7 +18,7 @@ body{
         background: $gray-50;        /* цвет дорожки */
     }
     *::-webkit-scrollbar-thumb {
-        background-color: $gray-200;    /* цвет плашки */
+        background-color: $gray-300;    /* цвет плашки */
         border-radius: 20px;       /* закругления плашки */
         //border: 3px solid orange;  /* padding вокруг плашки */
     }

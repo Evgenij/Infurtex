@@ -24,28 +24,6 @@
                     </vs-input>
                 </div>
                 <div class="cell flex items-center">
-<!--                    <div class="projects relative w-full">-->
-<!--                        <vs-input v-model="projectName" primary placeholder="проект" @focus="switchListProjects">-->
-<!--                            <template #icon>-->
-<!--                                <i class='bx bx-folder'></i>-->
-<!--                            </template>-->
-<!--                        </vs-input>-->
-<!--                        <div v-if="openListProjects"-->
-<!--                             class="absolute z-10 project-list flex flex-col space-y-1 mt-1 p-1 w-full border-2 border-slate-100 top-full bg-white rounded-lg"-->
-<!--                            @mouseleave="switchListProjects">-->
-<!--                            <div v-for="project in filteredProjects"-->
-<!--                                 class="roject-list__item text-sm p-2 px-3 hover:bg-gray-100 cursor-pointer rounded-lg"-->
-<!--                                @click="switchListProjects">-->
-<!--                                {{project.name}}-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <vs-button success v-if="!searchedProjects && this.projectId === ''" class="min-w-max" @click="addProject">-->
-<!--                        <i class='bx bx-plus left'></i> Добавить-->
-<!--                    </vs-button>-->
-<!--                    <vs-button dark flat v-if="this.projectId !== ''" class="min-w-max" @click="resetProject">-->
-<!--                        <i class='bx bx-x'></i>-->
-<!--                    </vs-button>-->
                     <dropdown :listItems="listProjects" @add-item="addProject" :data="dataProject"></dropdown>
                 </div>
                 <hr class="col-span-2 my-3 mt-4">
@@ -53,7 +31,9 @@
                     <h2 class="font-medium text-base mb-3">Вид теста</h2>
                     <list-test-type @add-section="addSectionTest"></list-test-type>
                 </div>
-                <section-test-type v-else :type-test="testType"></section-test-type>
+                <section-test-type v-else :type-test="testType"
+                                   @reset-type-test="resetTypeTest"
+                                   @next-step="activate(2)"></section-test-type>
             </div>
             <hr>
             <div class="navigation-buttons flex items-center justify-center">
@@ -109,23 +89,21 @@
                 this.activeTab = index;
             },
             addProject(data) {
-                console.log(data)
-                //let nameNewProject = document.getElementById('vs-input--20').value
                 let nameNewProject = data.input.value
-                console.log(nameNewProject)
                 let idNewProject = data.listProjects.length+1
-                console.log(idNewProject)
                 this.listProjects.push({
                     value: nameNewProject,
                     id:  idNewProject
                 })
                 this.dataProject.value = nameNewProject
                 this.dataProject.id = idNewProject
-
-
             },
             addSectionTest(id){
                 console.log('Test type: ', this.testType = id)
+            },
+            resetTypeTest(){
+                this.testType = 0
+                this.activate(1)
             }
         },
     }

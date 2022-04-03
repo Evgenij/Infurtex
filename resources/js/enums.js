@@ -36,4 +36,9 @@ const typeQuestion = {
     CheckBox: 3,
 }
 
-export default { userRole, durationTests, ownerTest, typeTest, categoryTest, typeQuestion}
+const typeFileLoader = {
+    Single: 1,
+    Multiply: 2
+}
+
+export default { userRole, durationTests, ownerTest, typeTest, categoryTest, typeQuestion, typeFileLoader}

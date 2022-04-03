@@ -1,7 +1,7 @@
 <template>
     <section class="first-click-block">
         <div class="first-click-block__files">
-            файлы
+            <file-loader :typeFileLoader="typeFL.Single"></file-loader>
         </div>
         <div class="first-click-block__questions">
             <h2 class="font-medium text-base mb-2">Вопросы</h2>
@@ -16,42 +16,16 @@
 
 <script>
 import SectionQuestions from "../Questions/SectionQuestions";
-import type from "../../../../../../enums";
+import FileLoader from "../../FileLoader/FileLoader";
+import typeFileLoader from "../../../../../../enums"
+
 export default {
     name: "FirstClick",
-    components: {SectionQuestions},
+    components: {FileLoader, SectionQuestions},
     data: ()=>({
         questions: [
-            {
-                id: 1,
-                type: type.typeQuestion.Text,
-                text: '',
-                answers: [
-                    {id: 1, value: ''}
-                ]
-            },
-            {
-                id: 2,
-                type: type.typeQuestion.CheckBox,
-                text: '',
-                answers: [
-                    {id: 1, value: ''},
-                    {id: 2, value: ''},
-                    {id: 3, value: ''},
-                    {id: 4, value: ''},
-                ]
-            },
-            {
-                id: 3,
-                type: type.typeQuestion.Radio,
-                text: '',
-                answers: [
-                    {id: 1, value: ''},
-                    {id: 2, value: ''},
-                    {id: 3, value: ''},
-                ]
-            },
         ],
+        typeFL: typeFileLoader.typeFileLoader
     }),
     methods: {
         // removeAnswer(obj){

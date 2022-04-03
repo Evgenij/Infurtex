@@ -76,14 +76,12 @@ export default {
             this.$emit('remove-question', this.id)
         },
         removeAnswer(idAnswer){
-            console.log('remove - ', idAnswer)
             this.$emit('remove-answer', {
                 id: this.id,
                 idAnswer: idAnswer
             })
         },
         addAnswer(answers){
-            console.log('1')
             this.$emit('add-answer', {
                 id: this.id,
                 answers: answers

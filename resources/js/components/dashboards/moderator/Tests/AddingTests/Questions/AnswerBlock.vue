@@ -1,6 +1,6 @@
 <template>
     <div class="answer-block flex items-center">
-        <span class="px-2 text-slate-300 text-sm">{{id}}</span>
+        <span class="px-2 text-slate-300 text-sm"><slot></slot></span>
         <vs-input primary
                   v-model="valueAnswer"
                   placeholder="текст варианта" class="w-full">

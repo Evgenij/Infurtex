@@ -10,7 +10,7 @@
             <main class="answers__list flex flex-col space-y-2">
                 <answer-block v-for="(answer, index) in questionAnswers"
                               :id="answer.id" :value="answer.value"
-                              @remove="removeAnswer" :key="index" @change="changeDataAnswer"></answer-block>
+                              @remove="removeAnswer" :key="index" @change="changeDataAnswer">{{++index}}</answer-block>
             </main>
             <footer class="answers__add-button flex justify-end py-2">
                 <vs-button success @click="addAnswer" :disabled="questionAnswers.length>=5">Добавить вариант</vs-button>
