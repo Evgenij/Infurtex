@@ -1,5 +1,5 @@
 <template>
-    <div class="five-seconds-block flex flex-col space-y-4">
+    <div class="overall-impression-block flex flex-col space-y-4">
         <div class="first-click-block__instruction">
             <h2 class="font-medium text-base">Инструкция</h2>
             <vs-input primary
@@ -27,7 +27,7 @@ import SectionQuestions from "../Questions/SectionQuestions";
 import FileLoader from "../../FileLoader/FileLoader";
 
 export default {
-    name: "FiveSeconds",
+    name: "OverallImpression",
     components: {FileLoader, SectionQuestions},
     data: () => ({
         textInstruction: '',

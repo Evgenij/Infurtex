@@ -1,5 +1,5 @@
 <template>
-    <div class="five-seconds-block flex flex-col space-y-4">
+    <div class="navigation-block flex flex-col space-y-4">
         <div class="first-click-block__instruction">
             <h2 class="font-medium text-base">Инструкция</h2>
             <vs-input primary
@@ -9,7 +9,7 @@
             </vs-input>
         </div>
         <div class="first-click-block__files">
-            <file-loader :typeFileLoader="typeFL.Single"></file-loader>
+            <file-loader :typeFileLoader="typeFL.Multiply" :navigationList="navigationList"></file-loader>
         </div>
         <div class="first-click-block__questions">
             <h2 class="font-medium text-base mb-2">Вопросы</h2>
@@ -22,17 +22,18 @@
 </template>
 
 <script>
-import typeFileLoader from "../../../../../../enums";
-import SectionQuestions from "../Questions/SectionQuestions";
 import FileLoader from "../../FileLoader/FileLoader";
+import SectionQuestions from "../Questions/SectionQuestions";
+import typeFileLoader from "../../../../../../enums";
 
 export default {
-    name: "FiveSeconds",
+    name: "Navigation",
     components: {FileLoader, SectionQuestions},
     data: () => ({
         textInstruction: '',
         questions: [],
-        typeFL: typeFileLoader.typeFileLoader
+        typeFL: typeFileLoader.typeFileLoader,
+        navigationList: [1,2,3,4]
     }),
     methods: {
         addQuestionBlock(newQuestion){

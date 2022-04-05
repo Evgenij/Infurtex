@@ -1,8 +1,10 @@
 <template>
     <section class="col-span-2">
-        <div class="buttons flex justify-between mb-3">
-            <vs-button flat dark @click="resetTypeTest">назад</vs-button>
-            <vs-button class="w-max" success @click="next">
+        <div class="buttons flex justify-between mb-4">
+            <vs-button flat dark @click="resetTypeTest">
+                <i class="bx bx-left-arrow-alt left"></i>
+                 назад</vs-button>
+            <vs-button class="w-max" primary @click="next">
                 продолжить
                 <i class="bx bx-chevrons-right text-lg right"></i>
             </vs-button>
@@ -37,12 +39,12 @@ export default {
             let nameTypeTestComponent = ''
             if(this.typeTest === type.typeTest.FirstClick) {
                 nameTypeTestComponent = 'FirstClick'
+            } else if (this.typeTest === type.typeTest.OverallImpression){
+                nameTypeTestComponent = 'OverallImpression'
             } else if (this.typeTest === type.typeTest.Like){
-                //nameTypeTestComponent = 'FirstClick'
-            } else if (this.typeTest === type.typeTest.Like){
-                //nameTypeTestComponent = 'FirstClick'
-            } else if (this.typeTest === type.typeTest.Like){
-                //nameTypeTestComponent = 'FirstClick'
+                nameTypeTestComponent = 'Like'
+            } else if (this.typeTest === type.typeTest.Navigation){
+                nameTypeTestComponent = 'Navigation'
             } else if (this.typeTest === type.typeTest.FiveSeconds){
                 nameTypeTestComponent = 'FiveSeconds'
             }

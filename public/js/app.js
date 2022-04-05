@@ -2174,6 +2174,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SectionTestType",
@@ -2201,9 +2203,12 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.FirstClick) {
         nameTypeTestComponent = 'FirstClick';
-      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Like) {//nameTypeTestComponent = 'FirstClick'
-      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Like) {//nameTypeTestComponent = 'FirstClick'
-      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Like) {//nameTypeTestComponent = 'FirstClick'
+      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.OverallImpression) {
+        nameTypeTestComponent = 'OverallImpression';
+      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Like) {
+        nameTypeTestComponent = 'Like';
+      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Navigation) {
+        nameTypeTestComponent = 'Navigation';
       } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.FiveSeconds) {
         nameTypeTestComponent = 'FiveSeconds';
       }
@@ -14032,19 +14037,22 @@ var render = function () {
     [
       _c(
         "div",
-        { staticClass: "buttons flex justify-between mb-3" },
+        { staticClass: "buttons flex justify-between mb-4" },
         [
           _c(
             "vs-button",
             { attrs: { flat: "", dark: "" }, on: { click: _vm.resetTypeTest } },
-            [_vm._v("назад")]
+            [
+              _c("i", { staticClass: "bx bx-left-arrow-alt left" }),
+              _vm._v("\n             назад"),
+            ]
           ),
           _vm._v(" "),
           _c(
             "vs-button",
             {
               staticClass: "w-max",
-              attrs: { success: "" },
+              attrs: { primary: "" },
               on: { click: _vm.next },
             },
             [
@@ -62979,6 +62987,30 @@ var map = {
 	"./FiveSeconds.vue": [
 		"./resources/js/components/dashboards/moderator/Tests/AddingTests/TypeTests/FiveSeconds.vue",
 		"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_FiveSeconds_vue"
+	],
+	"./Like": [
+		"./resources/js/components/dashboards/moderator/Tests/AddingTests/TypeTests/Like.vue",
+		"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_Like_vue"
+	],
+	"./Like.vue": [
+		"./resources/js/components/dashboards/moderator/Tests/AddingTests/TypeTests/Like.vue",
+		"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_Like_vue"
+	],
+	"./Navigation": [
+		"./resources/js/components/dashboards/moderator/Tests/AddingTests/TypeTests/Navigation.vue",
+		"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_Navigation_vue"
+	],
+	"./Navigation.vue": [
+		"./resources/js/components/dashboards/moderator/Tests/AddingTests/TypeTests/Navigation.vue",
+		"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_Navigation_vue"
+	],
+	"./OverallImpression": [
+		"./resources/js/components/dashboards/moderator/Tests/AddingTests/TypeTests/OverallImpression.vue",
+		"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_OverallImpression_vue"
+	],
+	"./OverallImpression.vue": [
+		"./resources/js/components/dashboards/moderator/Tests/AddingTests/TypeTests/OverallImpression.vue",
+		"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_OverallImpression_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -63105,7 +63137,7 @@ module.exports = webpackAsyncContext;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_FirstClick_vue":1,"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_FiveSeconds_vue":1,"resources_js_components_dashboards_moderator_Tests_FileLoader_TypesFileLoader_MultiplyFileLoa-ea46a7":1,"resources_js_components_dashboards_moderator_Tests_FileLoader_TypesFileLoader_SingleFileLoader_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_FirstClick_vue":1,"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_FiveSeconds_vue":1,"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_Like_vue":1,"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_Navigation_vue":1,"resources_js_components_dashboards_moderator_Tests_AddingTests_TypeTests_OverallImpression_vue":1,"resources_js_components_dashboards_moderator_Tests_FileLoader_TypesFileLoader_MultiplyFileLoa-ea46a7":1,"resources_js_components_dashboards_moderator_Tests_FileLoader_TypesFileLoader_SingleFileLoader_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

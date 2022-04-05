@@ -1,5 +1,5 @@
 <template>
-    <div class="five-seconds-block flex flex-col space-y-4">
+    <div class="like-block flex flex-col space-y-4">
         <div class="first-click-block__instruction">
             <h2 class="font-medium text-base">Инструкция</h2>
             <vs-input primary
@@ -9,7 +9,7 @@
             </vs-input>
         </div>
         <div class="first-click-block__files">
-            <file-loader :typeFileLoader="typeFL.Single"></file-loader>
+            <file-loader :typeFileLoader="typeFL.Multiply"></file-loader>
         </div>
         <div class="first-click-block__questions">
             <h2 class="font-medium text-base mb-2">Вопросы</h2>
@@ -18,6 +18,12 @@
                                @remove-question-block="removeQuestionBlock">
             </section-questions>
         </div>
+
+<!--        <img usemap="#primary" src="https://via.placeholder.com/350x150" alt="350 x 150 pic">-->
+<!--        <map name="primary">-->
+<!--            <area shape="rect" style="background: rgba(12,174,158,0.46)" coords="0,0,100,100" href="left.html" alt="Click to go Left">-->
+<!--            <area shape="circle" coords="275,75,75" href="right.html" alt="Click to go Right">-->
+<!--        </map>-->
     </div>
 </template>
 
@@ -27,7 +33,7 @@ import SectionQuestions from "../Questions/SectionQuestions";
 import FileLoader from "../../FileLoader/FileLoader";
 
 export default {
-    name: "FiveSeconds",
+    name: "Like",
     components: {FileLoader, SectionQuestions},
     data: () => ({
         textInstruction: '',

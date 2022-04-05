@@ -1,7 +1,10 @@
 <template>
     <div class="question-block border-b border-slate-100 pb-4">
         <header class="flex items-center justify-between">
-            <span class="text-sm text-slate-400 font-normal"> {{id + '. ' + getTypeToText}}</span>
+            <div class="type flex">
+                <span class="text-sm text-slate-400 font-normal mr-2"><slot></slot>.{{getTypeToText}}</span>
+                <div class="icon flex text-slate-400 items-center" v-html="getIconsType()"></div>
+            </div>
             <vs-button dark transparent @click="remove">
                 Удалить вопрос
                 <i class="bx bx-trash right"></i>
@@ -59,17 +62,6 @@ export default {
                 return "Ответ по шкале"
             }
         },
-        // questionTest(){
-        //     let nameComponentQuestion = this.type ? 'TextQuestion' : 'UserInfo'
-        //
-        //     if (this.type === type.typeQuestion.Text) {
-        //         nameComponentQuestion = "TextQuestion"
-        //     } if (this.type === type.typeQuestion.CheckBox) {
-        //         nameComponentQuestion = 'CheckboxQuestion'
-        //     }
-        //
-        //     return () => import(`./TypeQuestions/${nameComponentQuestion}`)
-        //},
     },
     methods: {
         remove(){
@@ -92,6 +84,21 @@ export default {
                 id: this.id,
                 text: val
             })
+        },
+        getIconsType(){
+            if (this.type === type.typeQuestion.Text) {
+                return `<i class="bx bx-receipt"></i>`
+            } else if (this.type === type.typeQuestion.CheckBox) {
+                return `<i class="bx bx-checkbox"></i>` +
+                    `<i class="bx bx-checkbox-checked"></i>` +
+                    `<i class="bx bx-checkbox-checked"></i>`
+            } else if (this.type === type.typeQuestion.Radio) {
+                return `<i class="bx bx-radio-circle"></i>` +
+                    `<i class="bx bx-radio-circle-marked"></i>` +
+                    `<i class="bx bx-radio-circle"></i>`
+            } else {
+                return "Ответ по шкале"
+            }
         }
     },
 }

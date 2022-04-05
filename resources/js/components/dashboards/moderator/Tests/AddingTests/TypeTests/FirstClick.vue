@@ -1,5 +1,13 @@
 <template>
-    <section class="first-click-block">
+    <section class="first-click-block flex flex-col space-y-4">
+        <div class="first-click-block__instruction">
+            <h2 class="font-medium text-base">Инструкция</h2>
+            <vs-input primary
+                      v-model="textInstruction"
+                      placeholder="Что нужно сделать в тесте ..."
+                      class="w-full mt-2">
+            </vs-input>
+        </div>
         <div class="first-click-block__files">
             <file-loader :typeFileLoader="typeFL.Single"></file-loader>
         </div>
@@ -8,7 +16,6 @@
             <section-questions :questions="questions"
                                @add-question-block="addQuestionBlock"
                                @remove-question-block="removeQuestionBlock">
-<!--                               @remove-answer="removeAnswer" @add-answer="addAnswer"-->
             </section-questions>
         </div>
     </section>
@@ -23,32 +30,18 @@ export default {
     name: "FirstClick",
     components: {FileLoader, SectionQuestions},
     data: ()=>({
-        questions: [
-        ],
+        textInstruction: '',
+        questions: [],
         typeFL: typeFileLoader.typeFileLoader
     }),
     methods: {
-        // removeAnswer(obj){
-        //     console.log(obj)
-        //     let question = this.questions.filter(el=>el.id === obj.id)[0].answers.filter(el=>el.id !== obj.idAnswer)
-        //     console.log(question)
-        //     this.questions.filter(el=>el.id === obj.id)[0].answers = question
-        // },
-        // addAnswer(){
-        //
-        // }
         addQuestionBlock(newQuestion){
             this.questions.push(newQuestion)
         },
         removeQuestionBlock(idRemovingQuestion){
-            console.log(idRemovingQuestion)
+            //console.log(idRemovingQuestion)
             this.questions = this.questions.filter(el => el.id !== idRemovingQuestion)
-            console.log(this.questions)
-        }
-    },
-    watch: {
-        questions(val){
-            console.log(val)
+            //console.log(this.questions)
         }
     }
 }

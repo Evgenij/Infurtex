@@ -1,5 +1,6 @@
 <template>
-    <div class="file-loader">
+    <div class="file-loader flex flex-col space-y-2">
+        <h2 class="font-medium text-base">Дизайн</h2>
         <component :is="setTypeFileLoader"></component>
     </div>
 </template>

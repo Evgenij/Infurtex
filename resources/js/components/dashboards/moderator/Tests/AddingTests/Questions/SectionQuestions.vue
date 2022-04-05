@@ -4,6 +4,7 @@
             :id="question.id" :text="question.text" :type="question.type" :answers="question.answers" :key="index"
                         @remove-question="removeQuestion" @remove-answer="removeAnswer"
                         @add-answer="addAnswer" @change-text-question="changeTextQuestion">
+            {{++index}}
         </question-block>
         <footer>
             <vs-button transparent dark @click="activeTooltip=!activeTooltip" class="w-full">
