@@ -13,28 +13,54 @@
             </vs-button>
         </main>
         <section v-else class="image grid grid-cols-2 gap-5">
-            <div class="cell flex items-center font-medium">Файлы</div>
+            <div class="cell flex items-center font-medium">
+                <template v-if="navigationList === true">
+                    Экраны
+                </template>
+                <template v-else>
+                    Файлы
+                </template>
+            </div>
             <div class="cell flex justify-end items-center">
                 <vs-button flat success @click="addFile">
                     <i class="bx bx-plus left"></i>
-                    Добавить файл
+                    <template v-if="navigationList === true">
+                        Добавить экран
+                    </template>
+                    <template v-else>
+                        Добавить файл
+                    </template>
                 </vs-button>
             </div>
-            <div class="image__item col-span-2 grid grid-cols-2 rounded-lg border gap-3 border-slate-200 p-3" v-for="(file, key) in files">
-                <img :src="file.name" alt="" class="rounded-lg bg-slate-100">
-                <div class="image__data">
+            <div class="image__item col-span-2 grid grid-cols-3 rounded-lg border gap-3 border-slate-200 p-3" v-for="(file, key) in files">
+                <areas-manager v-if="navigationList === true" :active="activeAreasManager" :data="data" @closing="closing"></areas-manager>
+                <div class="img-wrapper rounded-lg flex items-center justify-center overflow-hidden">
+                    <img :src="file.name" v-bind:ref="'image'+parseInt( key )" :alt="file.name"
+                         class="preview w-full">
+                </div>
+                <div class="image__data col-span-2 justify-center flex flex-col space-y-2">
                     <h5 class="mb-2 pl-2 font-medium">{{file.name}}</h5>
-                    <vs-button class="min-w-max"
-                               style="min-width: 90px"
-                               danger
-                               flat
-                               animation-type="scale"
-                               @click="removeFile(key)">
-                        <i class='bx bx-trash' ></i>
-                        <template #animate>
-                            Удалить
-                        </template>
-                    </vs-button>
+                    <section v-if="navigationList === true" class="pl-2 text-sm text-slate-400">
+                        Кол-во целевых областей: 2
+                    </section>
+                    <div class="buttons flex space-x-2">
+                        <vs-button v-if="navigationList === true" class="min-w-max" flat
+                                   @click="activeAreasManager=!activeAreasManager">
+                            <i class='bx bx-screenshot left'></i>
+                            Целевые области
+                        </vs-button>
+                        <vs-button class="min-w-max"
+                                   style="min-width: 90px"
+                                   danger
+                                   flat
+                                   animation-type="scale"
+                                   @click="removeFile(key)">
+                            <i class='bx bx-trash' ></i>
+                            <template #animate>
+                                Удалить
+                            </template>
+                        </vs-button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -44,30 +70,44 @@
                @change="handleFilesUpload()"/>
     </div>
 </template>
-
 <script>
 
 import axios from 'axios'
+import AreasManager from "../../AddingTests/AreasManager/AreasManager";
 
 export default {
+    components: {AreasManager},
     data(){
         return {
-            files: []
+            files: [
+
+            ],
+            activeAreasManager: false,
+            data: {
+                img: '/store/images/mocks/TestImages/Main.png'
+            }
         }
     },
     props: {
         navigationList:{
+            type: Boolean,
+            default: false
+        },
+        navigationListData: {
             type: Array
         }
     },
     methods: {
+        addFiles(){
+            this.$refs.files.click();
+        },
         submitFiles(){
             let formData = new FormData();
-            for(let i = 0; i < this.files.length; i++ ){
+            for( var i = 0; i < this.files.length; i++ ){
                 let file = this.files[i];
                 formData.append('files[' + i + ']', file);
             }
-            axios.post( '/select-files',
+            axios.post( '/file-multiple-preview',
                 formData,
                 {
                     headers: {
@@ -75,17 +115,28 @@ export default {
                     }
                 }
             ).then(function(){
-                this.resetFile()
                 console.log('SUCCESS!!');
             })
-            .catch(function(){
-                console.log('FAILURE!!');
-            });
+                .catch(function(){
+                    console.log('FAILURE!!');
+                });
         },
         handleFilesUpload(){
             let uploadedFiles = this.$refs.files.files;
-            for(let i = 0; i < uploadedFiles.length; i++){
+            for( var i = 0; i < uploadedFiles.length; i++ ){
                 this.files.push( uploadedFiles[i] );
+            }
+            this.getImagePreviews();
+        },
+        getImagePreviews(){
+            for( let i = 0; i < this.files.length; i++ ){
+                if ( /\.(jpe?g|png|gif)$/i.test( this.files[i].name ) ) {
+                    let reader = new FileReader();
+                    reader.addEventListener("load", function(){
+                        this.$refs['image'+parseInt( i )][0].src = reader.result;
+                    }.bind(this), false);
+                    reader.readAsDataURL( this.files[i] );
+                }
             }
         },
         addFile(){
@@ -96,12 +147,22 @@ export default {
         },
         removeFile(key){
             this.files.splice(key, 1);
+        },
+        closing(val){
+            this.activeAreasManager = val
+        }
+    },
+    computed: {
+        getCountAreas(){
+            return this.navigationListData.length
         }
     }
 }
 </script>
 
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .img-wrapper{
+        max-height: 250px;
+    }
 </style>

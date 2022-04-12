@@ -584,6 +584,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -634,11 +635,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "FileLoader",
   props: {
-    typeFileLoader: _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeFileLoader
+    typeFileLoader: _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeFileLoader,
+    navigationList: {
+      type: Boolean,
+      "default": false
+    },
+    navigationListData: {
+      type: Array
+    }
   },
   computed: {
     setTypeFileLoader: function setTypeFileLoader() {
@@ -1793,7 +1802,13 @@ var render = function () {
     _c(
       "div",
       { staticClass: "first-click-block__files" },
-      [_c("file-loader", { attrs: { typeFileLoader: _vm.typeFL.Multiply } })],
+      [
+        _c("h2", { staticClass: "font-medium text-base mb-2" }, [
+          _vm._v("Дизайн"),
+        ]),
+        _vm._v(" "),
+        _c("file-loader", { attrs: { typeFileLoader: _vm.typeFL.Multiply } }),
+      ],
       1
     ),
     _vm._v(" "),
@@ -1844,9 +1859,13 @@ var render = function () {
     "div",
     { staticClass: "file-loader flex flex-col space-y-2" },
     [
-      _c("h2", { staticClass: "font-medium text-base" }, [_vm._v("Дизайн")]),
-      _vm._v(" "),
-      _c(_vm.setTypeFileLoader, { tag: "component" }),
+      _c(_vm.setTypeFileLoader, {
+        tag: "component",
+        attrs: {
+          navigationList: _vm.navigationList,
+          navigationListData: _vm.navigationListData,
+        },
+      }),
     ],
     1
   )

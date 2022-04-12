@@ -9,6 +9,7 @@
             </vs-input>
         </div>
         <div class="first-click-block__files">
+            <h2 class="font-medium text-base mb-2">Дизайн</h2>
             <file-loader :typeFileLoader="typeFL.Multiply"></file-loader>
         </div>
         <div class="first-click-block__questions">

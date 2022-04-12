@@ -4393,6 +4393,9 @@ Vue.mixin({
   methods: {
     formattingNumber: function formattingNumber(x, delimiter) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delimiter || " ");
+    },
+    getRandomInt: function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
     }
   }
 });

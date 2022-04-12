@@ -1,7 +1,11 @@
 .vs-dialog {
     min-width: 500px !important;
+    &__content{
+        height: 100% !important;
+    }
 }
-.vs-dialog-content.blur {
+
+.vs-dialog-content.blur{
     filter: none !important;
 
     .vs-dialog{

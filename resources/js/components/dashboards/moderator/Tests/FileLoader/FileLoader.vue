@@ -1,7 +1,8 @@
 <template>
     <div class="file-loader flex flex-col space-y-2">
-        <h2 class="font-medium text-base">Дизайн</h2>
-        <component :is="setTypeFileLoader"></component>
+        <component :is="setTypeFileLoader"
+                   :navigationList="navigationList"
+                   :navigationListData="navigationListData"></component>
     </div>
 </template>
 
@@ -11,7 +12,14 @@ import type from "../../../../../enums";
 export default {
     name: "FileLoader",
     props: {
-        typeFileLoader: type.typeFileLoader
+        typeFileLoader: type.typeFileLoader,
+        navigationList: {
+            type: Boolean,
+            default: false
+        },
+        navigationListData: {
+            type: Array
+        }
     },
     computed: {
         setTypeFileLoader(){

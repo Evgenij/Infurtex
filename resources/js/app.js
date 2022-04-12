@@ -51,6 +51,9 @@ Vue.mixin({
     methods:{
         formattingNumber(x, delimiter){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delimiter || " ");
+        },
+        getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
         }
     }
 })

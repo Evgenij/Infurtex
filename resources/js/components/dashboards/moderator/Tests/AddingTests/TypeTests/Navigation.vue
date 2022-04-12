@@ -8,8 +8,15 @@
                       class="w-full mt-2">
             </vs-input>
         </div>
-        <div class="first-click-block__files">
-            <file-loader :typeFileLoader="typeFL.Multiply" :navigationList="navigationList"></file-loader>
+        <div class="navigation-block__screens">
+            <header class="flex justify-between items-center mb-2">
+                <h2 class="font-medium text-base">Экраны</h2>
+                <vs-button flat success @click="">
+                    <i class="bx bx-plus left"></i>
+                    Добавить экран
+                </vs-button>
+            </header>
+            <navigation-screen></navigation-screen>
         </div>
         <div class="first-click-block__questions">
             <h2 class="font-medium text-base mb-2">Вопросы</h2>
@@ -25,15 +32,16 @@
 import FileLoader from "../../FileLoader/FileLoader";
 import SectionQuestions from "../Questions/SectionQuestions";
 import typeFileLoader from "../../../../../../enums";
+import NavigationScreen from "../NavigationScreen";
 
 export default {
     name: "Navigation",
-    components: {FileLoader, SectionQuestions},
+    components: {NavigationScreen, FileLoader, SectionQuestions},
     data: () => ({
         textInstruction: '',
         questions: [],
         typeFL: typeFileLoader.typeFileLoader,
-        navigationList: [1,2,3,4]
+        navigationListData: [1,2,3,4]
     }),
     methods: {
         addQuestionBlock(newQuestion){

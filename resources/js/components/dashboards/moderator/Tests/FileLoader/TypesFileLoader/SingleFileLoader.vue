@@ -13,7 +13,9 @@
             </vs-button>
         </main>
         <section v-else class="image grid grid-cols-2 gap-5">
-            <img :src="this.file.name" alt="" class="rounded-lg">
+            <div class="img-wrapper rounded-lg flex items-center justify-center overflow-hidden">
+                <img v-bind:src="imagePreview" :alt="this.file.name" class="preview w-full">
+            </div>
             <div class="image__data flex flex-col mb-4">
                 <h5 class="mb-2 pl-2 font-medium">{{this.file.name}}</h5>
                 <div class="image__buttons flex">
@@ -50,21 +52,18 @@ import axios from 'axios'
 
 export default {
     name: "SingleFileLoader",
-    data: ()=>({
-        file: ''
-    }),
+    data(){
+        return {
+            file: '',
+            showPreview: false,
+            imagePreview: ''
+        }
+    },
     methods: {
-        handleFileUpload(){
-            this.file = this.$refs.file.files[0];
-            //console.log(this.file)
-
-            this.sendFileToServer()
-        },
-        sendFileToServer(){
+        submitFile(){
             let formData = new FormData();
             formData.append('file', this.file);
-
-            axios.post( '/single-file',
+            axios.post( '/file-preview',
                 formData,
                 {
                     headers: {
@@ -74,9 +73,22 @@ export default {
             ).then(function(){
                 console.log('SUCCESS!!');
             })
-            .catch(function(){
-                console.log('FAILURE!!');
-            });
+                .catch(function(){
+                    console.log('FAILURE!!');
+                });
+        },
+        handleFileUpload(){
+            this.file = this.$refs.file.files[0];
+            let reader  = new FileReader();
+            reader.addEventListener("load", function () {
+                this.showPreview = true;
+                this.imagePreview = reader.result;
+            }.bind(this), false);
+            if( this.file ){
+                if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
+                    reader.readAsDataURL( this.file );
+                }
+            }
         },
         browseFile(){
             this.$refs["label-file"].click()
@@ -88,6 +100,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .img-wrapper{
+        max-height: 250px;
+    }
 </style>
