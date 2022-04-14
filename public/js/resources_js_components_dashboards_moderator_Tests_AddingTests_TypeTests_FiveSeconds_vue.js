@@ -579,6 +579,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -629,18 +635,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "FileLoader",
+  data: function data() {
+    return {
+      file: ''
+    };
+  },
   props: {
     typeFileLoader: _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeFileLoader,
-    navigationList: {
+    navigation: {
       type: Boolean,
       "default": false
     },
-    navigationListData: {
+    imageFile: {
+      type: String
+    },
+    areas: {
       type: Array
+    }
+  },
+  methods: {
+    addArea: function addArea() {
+      this.$emit('add-area');
+    },
+    changeFile: function changeFile(file) {
+      this.file = file;
     }
   },
   computed: {
@@ -656,6 +677,11 @@ __webpack_require__.r(__webpack_exports__);
       return function () {
         return __webpack_require__("./resources/js/components/dashboards/moderator/Tests/FileLoader/TypesFileLoader lazy recursive ^\\.\\/.*$")("./".concat(nameFileLoaderComponent));
       };
+    }
+  },
+  watch: {
+    file: function file() {
+      this.$emit('changeFile', this.file);
     }
   }
 });
@@ -1773,6 +1799,8 @@ var render = function () {
     "div",
     { staticClass: "five-seconds-block flex flex-col space-y-4" },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "first-click-block__instruction" },
@@ -1833,7 +1861,31 @@ var render = function () {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "header",
+      {
+        staticClass:
+          "flex items-center justify-center text-lg font-medium border-b border-slate-100 pb-4",
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "p-2 px-3 rounded-lg flex items-center justify-center bg-slate-400 mr-2",
+          },
+          [_c("i", { staticClass: "bx bxs-stopwatch text-white text-sm" })]
+        ),
+        _vm._v("\n        Тест 5-ти секунд\n    "),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -1863,9 +1915,11 @@ var render = function () {
       _c(_vm.setTypeFileLoader, {
         tag: "component",
         attrs: {
-          navigationList: _vm.navigationList,
-          navigationListData: _vm.navigationListData,
+          navigation: _vm.navigation,
+          imageFile: _vm.file,
+          areas: _vm.areas,
         },
+        on: { "add-area": _vm.addArea, changeFile: _vm.changeFile },
       }),
     ],
     1

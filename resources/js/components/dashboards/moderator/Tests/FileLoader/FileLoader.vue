@@ -1,8 +1,7 @@
 <template>
     <div class="file-loader flex flex-col space-y-2">
         <component :is="setTypeFileLoader"
-                   :navigationList="navigationList"
-                   :navigationListData="navigationListData"></component>
+                   :navigation="navigation" :imageFile="file" :areas="areas" @add-area="addArea" @changeFile="changeFile"></component>
     </div>
 </template>
 
@@ -11,14 +10,29 @@ import type from "../../../../../enums";
 
 export default {
     name: "FileLoader",
+    data: ()=>({
+        file: ''
+    }),
     props: {
         typeFileLoader: type.typeFileLoader,
-        navigationList: {
+        navigation: {
             type: Boolean,
             default: false
         },
-        navigationListData: {
+        imageFile: {
+            type: String
+        },
+        areas: {
             type: Array
+        }
+
+    },
+    methods: {
+        addArea(){
+            this.$emit('add-area')
+        },
+        changeFile(file){
+            this.file = file
         }
     },
     computed: {
@@ -30,6 +44,11 @@ export default {
                 nameFileLoaderComponent = 'MultiplyFileLoader'
             }
             return () => import(`./TypesFileLoader/${nameFileLoaderComponent}`)
+        }
+    },
+    watch: {
+        file(){
+            this.$emit('changeFile', this.file)
         }
     }
 }

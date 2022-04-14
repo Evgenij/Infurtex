@@ -125,8 +125,7 @@ export default {
 			},
 			scrollLeft: 0,
 			scrollTop: 0,
-			areas: [
-			],
+			areas: [],
 			moveTempX: 0,
 			moveTempY: 0,
 			moveCurrentX: 0,
@@ -142,35 +141,40 @@ export default {
 			// default: 'https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/45585072_925043081015026_6599956628924006400_o.jpg?_nc_cat=108&_nc_oc=AQlJUcFj4S_wGeX016thVhmgINU5wDV4xPBNSCIcYSti9Sm5WEPBDYO_kxK4aRP0Emo&_nc_ht=scontent.fhan2-3.fna&oh=052bb05956a1460d014205754da5a15b&oe=5DCC1053'
 			default: 'https://avatars.mds.yandex.net/i?id=e579939053592af27374094201442765-5869113-images-thumbs&n=13&exp=1'
 		},
-		width: {
-			type: Number,
-			default: 1500
-		},
 		posCorrection: {
 			type: Boolean,
 			default: false
-		}
+		},
+        listAreas: {
+            type: Array,
+            required: true
+        }
 	},
 	components: {
 		TargetArea
 	},
 	created () {
 	},
-	watch: {
+    beforeMount() {
+        this.areas = this.listAreas
+    },
+    watch: {
 		cropUrl (val) {
 			this.url = val
-            this.setSize()
-			// setTimeout(() => {
-			// 	this.setSize()
-			// }, 200)
+			setTimeout(() => {
+				this.setSize()
+			}, 200)
 		},
 		// send data to parent when list areas change
 		areas () {
-            this.getListAreas()
-			// setTimeout(() => {
-			// 	this.getListAreas()
-			// }, 200)
-		}
+			setTimeout(() => {
+				this.getListAreas()
+			}, 200)
+		},
+        // listAreas(){
+        //     console.log('picture-areas watcher', this.areas, this.listAreas)
+        //     this.areas = this.listAreas
+        // }
 	},
 	methods: {
 		areaDisplayPosX (area) {
@@ -254,8 +258,8 @@ export default {
 					height: 0,
 					z: 0,
 					resizable: true,
-                    screen: 0,
-                    name: ''
+                    screen: '',
+                    name: '№1'
 				}
 				this.areas.push(newArea)
 				this.temp = newArea.id
@@ -271,14 +275,12 @@ export default {
 					height: 0,
 					z: 0,
 					resizable: true,
-                    screen: 0,
-                    name: ''
+                    screen: '',
+                    name: '№'+newAreaId
 				}
 				this.areas.push(newArea)
 				this.temp = newArea.id
 			}
-
-
 		},
 
 		mouseMove (e) {

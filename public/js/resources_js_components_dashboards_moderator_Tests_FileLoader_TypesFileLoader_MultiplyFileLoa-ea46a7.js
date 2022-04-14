@@ -2125,6 +2125,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AreasManager",
@@ -2135,30 +2137,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       stateManager: {
         active: false
-      },
-      areas: [{
-        id: 1,
-        x: 10,
-        y: 10,
-        color: 'red',
-        width: 100,
-        height: 100,
-        z: 0,
-        resizable: false,
-        screen: 100,
-        name: ''
-      }, {
-        id: 2,
-        x: 130,
-        y: 10,
-        color: 'blue',
-        width: 100,
-        height: 100,
-        z: 0,
-        resizable: false,
-        screen: 100,
-        name: ''
-      }]
+      }
     };
   },
   props: {
@@ -2173,12 +2152,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     closingManager: function closingManager() {
-      console.log('!!!!');
       this.$emit('closing', false);
     },
     getListAreas: function getListAreas(value) {
-      // console.log(value)
-      this.areas = value;
+      this.data.areas = value;
     }
   },
   watch: {
@@ -2349,32 +2326,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // default: 'https://scontent.fhan2-3.fna.fbcdn.net/v/t1.0-9/45585072_925043081015026_6599956628924006400_o.jpg?_nc_cat=108&_nc_oc=AQlJUcFj4S_wGeX016thVhmgINU5wDV4xPBNSCIcYSti9Sm5WEPBDYO_kxK4aRP0Emo&_nc_ht=scontent.fhan2-3.fna&oh=052bb05956a1460d014205754da5a15b&oe=5DCC1053'
       "default": 'https://avatars.mds.yandex.net/i?id=e579939053592af27374094201442765-5869113-images-thumbs&n=13&exp=1'
     },
-    width: {
-      type: Number,
-      "default": 1500
-    },
     posCorrection: {
       type: Boolean,
       "default": false
+    },
+    listAreas: {
+      type: Array,
+      required: true
     }
   },
   components: {
     TargetArea: _TargetArea__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {},
+  beforeMount: function beforeMount() {
+    this.areas = this.listAreas;
+  },
   watch: {
     cropUrl: function cropUrl(val) {
+      var _this2 = this;
+
       this.url = val;
-      this.setSize(); // setTimeout(() => {
-      // 	this.setSize()
-      // }, 200)
+      setTimeout(function () {
+        _this2.setSize();
+      }, 200);
     },
     // send data to parent when list areas change
     areas: function areas() {
-      this.getListAreas(); // setTimeout(() => {
-      // 	this.getListAreas()
-      // }, 200)
-    }
+      var _this3 = this;
+
+      setTimeout(function () {
+        _this3.getListAreas();
+      }, 200);
+    } // listAreas(){
+    //     console.log('picture-areas watcher', this.areas, this.listAreas)
+    //     this.areas = this.listAreas
+    // }
+
   },
   methods: {
     areaDisplayPosX: function areaDisplayPosX(area) {
@@ -2390,7 +2378,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return e.pageY - this.posImg.top;
     },
     setSize: function setSize() {
-      var _this2 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var imgSize;
@@ -2398,7 +2386,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_this2.url) {
+                if (_this4.url) {
                   _context.next = 2;
                   break;
                 }
@@ -2407,11 +2395,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _context.next = 4;
-                return _this2.getSize(_this2.url);
+                return _this4.getSize(_this4.url);
 
               case 4:
                 imgSize = _context.sent;
-                _this2.originImgSize = imgSize;
+                _this4.originImgSize = imgSize;
 
               case 6:
               case "end":
@@ -2485,8 +2473,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           height: 0,
           z: 0,
           resizable: true,
-          screen: 0,
-          name: ''
+          screen: '',
+          name: '№1'
         };
         this.areas.push(newArea);
         this.temp = newArea.id;
@@ -2502,26 +2490,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           height: 0,
           z: 0,
           resizable: true,
-          screen: 0,
-          name: ''
+          screen: '',
+          name: '№' + newAreaId
         };
         this.areas.push(_newArea);
         this.temp = _newArea.id;
       }
     },
     mouseMove: function mouseMove(e) {
-      var _this3 = this;
+      var _this5 = this;
 
       if (this.mousedown && this.areas.length <= this.colorsAreas.length) {
         this.areas.filter(function (x) {
-          return x.id === _this3.temp;
+          return x.id === _this5.temp;
         }).map(function (item) {
           if (e.pageX - item.x < 0 || e.pageY - item.y < 0) {
             item.width = 50;
             item.height = 50;
           } else {
-            item.width = e.pageX - item.x - _this3.posImg.left - 8;
-            item.height = e.pageY - item.y - _this3.posImg.top - 8;
+            item.width = e.pageX - item.x - _this5.posImg.left - 8;
+            item.height = e.pageY - item.y - _this5.posImg.top - 8;
           }
         });
       }
@@ -2897,27 +2885,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2926,11 +2893,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      files: [],
-      activeAreasManager: false,
-      data: {
-        img: '/store/images/mocks/TestImages/Main.png'
-      }
+      files: []
     };
   },
   props: {
@@ -2998,9 +2961,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeFile: function removeFile(key) {
       this.files.splice(key, 1);
-    },
-    closing: function closing(val) {
-      this.activeAreasManager = val;
     }
   },
   computed: {
@@ -3029,7 +2989,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".link-to-screen[data-v-39fd39a3]:before {\n  content: \"\";\n  display: block;\n  width: 2px;\n  height: 24px;\n  background: #d1d7e0;\n  position: absolute;\n  left: 16px;\n  top: -50%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".link-to-screen[data-v-39fd39a3]:before {\n  content: \"\";\n  display: block;\n  width: 2px;\n  height: 24px;\n  background: #d1d7e0;\n  position: absolute;\n  left: 16px;\n  top: -50%;\n}\n.controls-areas[data-v-39fd39a3] {\n  min-width: 350px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4377,151 +4337,161 @@ var render = function () {
           { staticClass: "w-4/5 overflow-y-scroll h-full rounded-lg" },
           [
             _c("picture-areas", {
-              attrs: { "crop-url": _vm.data.img },
+              attrs: { "crop-url": _vm.data.img, listAreas: _vm.data.areas },
               on: { getListAreas: _vm.getListAreas },
             }),
           ],
           1
         ),
         _vm._v(" "),
-        _c("section", { staticClass: "flex flex-col h-full justify-between" }, [
-          _c(
-            "div",
-            {
-              staticClass: "areas-list h-full overflow-y-scroll space-y-2 pr-3",
-            },
-            _vm._l(_vm.areas, function (area) {
-              return _c(
-                "div",
-                {
-                  staticClass:
-                    "area flex flex-col space-y-1 rounded-lg border-2 border-slate-200 p-3",
-                },
-                [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "font-medium text-xs rounded-lg border-2 p-1 px-2 min-w-min",
-                      style: {
-                        color: area.color,
-                        border: "2px solid " + area.color,
-                        "margin-bottom": "30px",
-                        width: "fit-content",
-                      },
-                    },
-                    [
-                      _vm._v(
-                        "\n                        Целевая зона №" +
-                          _vm._s(area.id) +
-                          "\n                    "
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("vs-input", {
-                    staticClass: "w-full",
-                    style: { "margin-bottom": "24px" },
-                    attrs: {
-                      placeholder: "название зоны",
-                      label: "Название зоны",
-                    },
-                    model: {
-                      value: area.name,
-                      callback: function ($$v) {
-                        _vm.$set(area, "name", $$v)
-                      },
-                      expression: "area.name",
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "link-to-screen relative flex items-center",
-                    },
-                    [
-                      _c("i", { staticClass: "bx bx-link p-2 text-slate-400" }),
-                      _vm._v(" "),
-                      _c(
-                        "vs-select",
-                        {
-                          staticClass: "w-full",
-                          attrs: {
-                            placeholder: "Название экрана",
-                            label: "Экран",
-                          },
-                          model: {
-                            value: area.screen,
-                            callback: function ($$v) {
-                              _vm.$set(area, "screen", $$v)
-                            },
-                            expression: "area.screen",
-                          },
+        _c(
+          "section",
+          {
+            staticClass: "controls-areas flex flex-col h-full justify-between",
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "areas-list h-full overflow-y-scroll space-y-2 pr-3",
+              },
+              _vm._l(_vm.data.areas, function (area) {
+                return _c(
+                  "div",
+                  {
+                    staticClass:
+                      "area flex flex-col space-y-1 rounded-lg border-2 border-slate-200 p-3",
+                  },
+                  [
+                    _c(
+                      "span",
+                      {
+                        staticClass:
+                          "font-medium text-xs rounded-lg border-2 p-1 px-2 min-w-min",
+                        style: {
+                          color: area.color,
+                          border: "2px solid " + area.color,
+                          "margin-bottom": "30px",
+                          width: "fit-content",
                         },
-                        [
-                          _c(
-                            "vs-option",
-                            { attrs: { label: "Экран 1", value: "100" } },
-                            [
-                              _vm._v(
-                                "\n                                Экран 1\n                            "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "vs-option",
-                            { attrs: { label: "Экран 2", value: "200" } },
-                            [
-                              _vm._v(
-                                "\n                                Экран 2\n                            "
-                              ),
-                            ]
-                          ),
-                        ],
-                        1
-                      ),
-                    ],
-                    1
-                  ),
-                ],
-                1
-              )
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "buttons flex justify-end pt-4" },
-            [
-              _c(
-                "vs-button",
-                {
-                  staticClass: "w-full",
-                  attrs: { dark: "", flat: "" },
-                  on: { click: _vm.closingManager },
-                },
-                [_vm._v("\n                    Отменить\n                ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "vs-button",
-                {
-                  staticClass: "w-full",
-                  attrs: { success: "" },
-                  on: { click: _vm.closingManager },
-                },
-                [
-                  _c("i", { staticClass: "bx bx-check" }),
-                  _vm._v("\n                    Сохранить\n                "),
-                ]
-              ),
-            ],
-            1
-          ),
-        ]),
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Целевая зона №" +
+                            _vm._s(area.id) +
+                            "\n                    "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("vs-input", {
+                      staticClass: "w-full",
+                      style: { "margin-bottom": "24px" },
+                      attrs: {
+                        placeholder: "название зоны",
+                        label: "Название зоны",
+                      },
+                      model: {
+                        value: area.name,
+                        callback: function ($$v) {
+                          _vm.$set(area, "name", $$v)
+                        },
+                        expression: "area.name",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "link-to-screen relative flex items-center",
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "bx bx-link p-2 text-slate-400",
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "vs-select",
+                          {
+                            staticClass: "w-full",
+                            attrs: {
+                              placeholder: "Название экрана",
+                              label: "Экран",
+                            },
+                            model: {
+                              value: area.screen,
+                              callback: function ($$v) {
+                                _vm.$set(area, "screen", $$v)
+                              },
+                              expression: "area.screen",
+                            },
+                          },
+                          [
+                            _c(
+                              "vs-option",
+                              { attrs: { label: "Экран 1", value: "Экран 1" } },
+                              [
+                                _vm._v(
+                                  "\n                                Экран 1\n                            "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "vs-option",
+                              { attrs: { label: "Экран 2", value: "Экран 2" } },
+                              [
+                                _vm._v(
+                                  "\n                                Экран 2\n                            "
+                                ),
+                              ]
+                            ),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                  ],
+                  1
+                )
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "buttons flex justify-end pt-4" },
+              [
+                _c(
+                  "vs-button",
+                  {
+                    staticClass: "w-full",
+                    attrs: { dark: "", flat: "" },
+                    on: { click: _vm.closingManager },
+                  },
+                  [_vm._v("\n                    Отменить\n                ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-button",
+                  {
+                    staticClass: "w-full",
+                    attrs: { success: "" },
+                    on: { click: _vm.closingManager },
+                  },
+                  [
+                    _c("i", { staticClass: "bx bx-check" }),
+                    _vm._v("\n                    Сохранить\n                "),
+                  ]
+                ),
+              ],
+              1
+            ),
+          ]
+        ),
       ]),
     ]
   )
@@ -4864,16 +4834,9 @@ var render = function () {
             "section",
             { staticClass: "image grid grid-cols-2 gap-5" },
             [
-              _c(
-                "div",
-                { staticClass: "cell flex items-center font-medium" },
-                [
-                  _vm.navigationList === true
-                    ? [_vm._v("\n                Экраны\n            ")]
-                    : [_vm._v("\n                Файлы\n            ")],
-                ],
-                2
-              ),
+              _c("div", { staticClass: "cell flex items-center font-medium" }, [
+                _vm._v("\n            Файлы\n        "),
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -4887,20 +4850,8 @@ var render = function () {
                     },
                     [
                       _c("i", { staticClass: "bx bx-plus left" }),
-                      _vm._v(" "),
-                      _vm.navigationList === true
-                        ? [
-                            _vm._v(
-                              "\n                    Добавить экран\n                "
-                            ),
-                          ]
-                        : [
-                            _vm._v(
-                              "\n                    Добавить файл\n                "
-                            ),
-                          ],
-                    ],
-                    2
+                      _vm._v("\n                Добавить файл\n            "),
+                    ]
                   ),
                 ],
                 1
@@ -4914,16 +4865,6 @@ var render = function () {
                       "image__item col-span-2 grid grid-cols-3 rounded-lg border gap-3 border-slate-200 p-3",
                   },
                   [
-                    _vm.navigationList === true
-                      ? _c("areas-manager", {
-                          attrs: {
-                            active: _vm.activeAreasManager,
-                            data: _vm.data,
-                          },
-                          on: { closing: _vm.closing },
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
                     _c(
                       "div",
                       {
@@ -4951,88 +4892,45 @@ var render = function () {
                           _vm._v(_vm._s(file.name)),
                         ]),
                         _vm._v(" "),
-                        _vm.navigationList === true
-                          ? _c(
-                              "section",
-                              { staticClass: "pl-2 text-sm text-slate-400" },
-                              [
-                                _vm._v(
-                                  "\n                    Кол-во целевых областей: 2\n                "
-                                ),
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
                         _c(
-                          "div",
-                          { staticClass: "buttons flex space-x-2" },
-                          [
-                            _vm.navigationList === true
-                              ? _c(
-                                  "vs-button",
-                                  {
-                                    staticClass: "min-w-max",
-                                    attrs: { flat: "" },
-                                    on: {
-                                      click: function ($event) {
-                                        _vm.activeAreasManager =
-                                          !_vm.activeAreasManager
-                                      },
-                                    },
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "bx bx-screenshot left",
-                                    }),
-                                    _vm._v(
-                                      "\n                        Целевые области\n                    "
-                                    ),
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "vs-button",
-                              {
-                                staticClass: "min-w-max",
-                                staticStyle: { "min-width": "90px" },
-                                attrs: {
-                                  danger: "",
-                                  flat: "",
-                                  "animation-type": "scale",
-                                },
-                                on: {
-                                  click: function ($event) {
-                                    return _vm.removeFile(key)
-                                  },
-                                },
-                                scopedSlots: _vm._u(
-                                  [
-                                    {
-                                      key: "animate",
-                                      fn: function () {
-                                        return [
-                                          _vm._v(
-                                            "\n                            Удалить\n                        "
-                                          ),
-                                        ]
-                                      },
-                                      proxy: true,
-                                    },
-                                  ],
-                                  null,
-                                  true
-                                ),
+                          "vs-button",
+                          {
+                            staticClass: "min-w-max",
+                            staticStyle: { "min-width": "90px" },
+                            attrs: {
+                              danger: "",
+                              flat: "",
+                              "animation-type": "scale",
+                            },
+                            on: {
+                              click: function ($event) {
+                                return _vm.removeFile(key)
                               },
-                              [_c("i", { staticClass: "bx bx-trash" })]
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "animate",
+                                  fn: function () {
+                                    return [
+                                      _vm._v(
+                                        "\n                        Удалить\n                    "
+                                      ),
+                                    ]
+                                  },
+                                  proxy: true,
+                                },
+                              ],
+                              null,
+                              true
                             ),
-                          ],
-                          1
+                          },
+                          [_c("i", { staticClass: "bx bx-trash" })]
                         ),
-                      ]
+                      ],
+                      1
                     ),
-                  ],
-                  1
+                  ]
                 )
               }),
             ],

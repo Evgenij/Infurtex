@@ -1,6 +1,6 @@
 <template>
     <div class="single-file-loader w-full rounded-lg border-2 border-dashed
-            border-slate-300 p-6">
+            border-slate-200 p-6">
         <main v-if="file === ''" class="fileloader-content w-full flex items-center justify-between">
             <div class="fileloader-content__text">
                 <h4 class="font-bold mb-2">Добавьте файл для теста</h4>
@@ -13,17 +13,18 @@
             </vs-button>
         </main>
         <section v-else class="image grid grid-cols-2 gap-5">
-            <div class="img-wrapper rounded-lg flex items-center justify-center overflow-hidden">
-                <img v-bind:src="imagePreview" :alt="this.file.name" class="preview w-full">
+            <div class="img-wrapper rounded-lg flex items-center justify-center overflow-hidden border border-slate-100">
+                <img v-bind:src="imagePreview" :alt="this.file.name" class="preview w-full rounded-lg">
             </div>
-            <div class="image__data flex flex-col mb-4">
-                <h5 class="mb-2 pl-2 font-medium">{{this.file.name}}</h5>
-                <div class="image__buttons flex">
+            <div class="image__data flex flex-col mb-4 pl-2">
+                <h5 class="mb-2 font-medium pl-2">{{this.file.name}}</h5>
+
+                <div class="image__content flex">
                     <vs-button class="min-w-max" flat dark @click="browseFile">
                         <i class="bx bx-reset left"></i>
                         Изменить
                     </vs-button>
-                    <vs-button class="min-w-max"
+                    <vs-button v-if="navigation === false" class="min-w-max"
                                style="min-width: 90px"
                                danger
                                flat
@@ -34,6 +35,23 @@
                             Удалить
                         </template>
                     </vs-button>
+                </div>
+                <div v-if="navigation === true" class="image__content flex flex-col space-y-2 pt-6 pl-2">
+                    <h4 class="text-sm font-medium">Целевые области <span class="text-slate-400">(x{{areas.length}})</span></h4>
+                    <div class="list-areas flex flex-col space-y-2">
+                        <div v-for="area in areas" class="area pb-2 border-b border-slate-100">
+                            <div class="area__data flex items-center space-x-2">
+                                <div class="area__color rounded-lg" :style="{background: area.color}"></div>
+                                <span class="text-sm">{{area.name}}</span>
+                            </div>
+                            <div class="area__screen flex items-center ml-1 mt-1 text-slate-400">
+                                <i class="bx bx-link mr-2"></i>
+                                {{area.screen}}
+                            </div>
+                        </div>
+                    </div>
+                    <span class="text-slate-400 hover:text-green-500 text-sm cursor-pointer max-w-fit"
+                        @click="addingArea">+ добавить область</span>
                 </div>
             </div>
         </section>
@@ -57,6 +75,19 @@ export default {
             file: '',
             showPreview: false,
             imagePreview: ''
+        }
+    },
+    props: {
+        navigation:{
+            type: Boolean,
+            default: false
+        },
+        areas:{
+            type: Array,
+            required: true,
+            default: ()=>{
+                return []
+            }
         }
     },
     methods: {
@@ -83,6 +114,7 @@ export default {
             reader.addEventListener("load", function () {
                 this.showPreview = true;
                 this.imagePreview = reader.result;
+                this.imageFile = reader.result;
             }.bind(this), false);
             if( this.file ){
                 if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
@@ -95,6 +127,14 @@ export default {
         },
         resetFile(){
             this.file = '';
+        },
+        addingArea(){
+            this.$emit('add-area')
+        }
+    },
+    watch: {
+        imagePreview(){
+            this.$emit('changeFile', this.imagePreview)
         }
     }
 }
@@ -103,5 +143,9 @@ export default {
 <style lang="scss" scoped>
     .img-wrapper{
         max-height: 250px;
+    }
+    .area__color{
+        width: 26px;
+        height: 26px;
     }
 </style>

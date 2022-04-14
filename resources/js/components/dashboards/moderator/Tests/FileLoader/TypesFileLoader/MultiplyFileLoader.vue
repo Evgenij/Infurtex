@@ -14,53 +14,32 @@
         </main>
         <section v-else class="image grid grid-cols-2 gap-5">
             <div class="cell flex items-center font-medium">
-                <template v-if="navigationList === true">
-                    Экраны
-                </template>
-                <template v-else>
-                    Файлы
-                </template>
+                Файлы
             </div>
             <div class="cell flex justify-end items-center">
                 <vs-button flat success @click="addFile">
                     <i class="bx bx-plus left"></i>
-                    <template v-if="navigationList === true">
-                        Добавить экран
-                    </template>
-                    <template v-else>
-                        Добавить файл
-                    </template>
+                    Добавить файл
                 </vs-button>
             </div>
             <div class="image__item col-span-2 grid grid-cols-3 rounded-lg border gap-3 border-slate-200 p-3" v-for="(file, key) in files">
-                <areas-manager v-if="navigationList === true" :active="activeAreasManager" :data="data" @closing="closing"></areas-manager>
                 <div class="img-wrapper rounded-lg flex items-center justify-center overflow-hidden">
                     <img :src="file.name" v-bind:ref="'image'+parseInt( key )" :alt="file.name"
                          class="preview w-full">
                 </div>
                 <div class="image__data col-span-2 justify-center flex flex-col space-y-2">
                     <h5 class="mb-2 pl-2 font-medium">{{file.name}}</h5>
-                    <section v-if="navigationList === true" class="pl-2 text-sm text-slate-400">
-                        Кол-во целевых областей: 2
-                    </section>
-                    <div class="buttons flex space-x-2">
-                        <vs-button v-if="navigationList === true" class="min-w-max" flat
-                                   @click="activeAreasManager=!activeAreasManager">
-                            <i class='bx bx-screenshot left'></i>
-                            Целевые области
-                        </vs-button>
-                        <vs-button class="min-w-max"
-                                   style="min-width: 90px"
-                                   danger
-                                   flat
-                                   animation-type="scale"
-                                   @click="removeFile(key)">
-                            <i class='bx bx-trash' ></i>
-                            <template #animate>
-                                Удалить
-                            </template>
-                        </vs-button>
-                    </div>
+                    <vs-button class="min-w-max"
+                               style="min-width: 90px"
+                               danger
+                               flat
+                               animation-type="scale"
+                               @click="removeFile(key)">
+                        <i class='bx bx-trash' ></i>
+                        <template #animate>
+                            Удалить
+                        </template>
+                    </vs-button>
                 </div>
             </div>
         </section>
@@ -79,13 +58,7 @@ export default {
     components: {AreasManager},
     data(){
         return {
-            files: [
-
-            ],
-            activeAreasManager: false,
-            data: {
-                img: '/store/images/mocks/TestImages/Main.png'
-            }
+            files: [],
         }
     },
     props: {
@@ -148,9 +121,6 @@ export default {
         removeFile(key){
             this.files.splice(key, 1);
         },
-        closing(val){
-            this.activeAreasManager = val
-        }
     },
     computed: {
         getCountAreas(){

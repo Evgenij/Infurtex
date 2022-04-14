@@ -2114,6 +2114,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SingleFileLoader",
@@ -2123,6 +2141,19 @@ __webpack_require__.r(__webpack_exports__);
       showPreview: false,
       imagePreview: ''
     };
+  },
+  props: {
+    navigation: {
+      type: Boolean,
+      "default": false
+    },
+    areas: {
+      type: Array,
+      required: true,
+      "default": function _default() {
+        return [];
+      }
+    }
   },
   methods: {
     submitFile: function submitFile() {
@@ -2144,6 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
       reader.addEventListener("load", function () {
         this.showPreview = true;
         this.imagePreview = reader.result;
+        this.imageFile = reader.result;
       }.bind(this), false);
 
       if (this.file) {
@@ -2157,6 +2189,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     resetFile: function resetFile() {
       this.file = '';
+    },
+    addingArea: function addingArea() {
+      this.$emit('add-area');
+    }
+  },
+  watch: {
+    imagePreview: function imagePreview() {
+      this.$emit('changeFile', this.imagePreview);
     }
   }
 });
@@ -2180,7 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".img-wrapper[data-v-a7ce4cfe] {\n  max-height: 250px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".img-wrapper[data-v-a7ce4cfe] {\n  max-height: 250px;\n}\n.area__color[data-v-a7ce4cfe] {\n  width: 26px;\n  height: 26px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2324,7 +2364,7 @@ var render = function () {
     "div",
     {
       staticClass:
-        "single-file-loader w-full rounded-lg border-2 border-dashed\n        border-slate-300 p-6",
+        "single-file-loader w-full rounded-lg border-2 border-dashed\n        border-slate-200 p-6",
     },
     [
       _vm.file === ""
@@ -2357,24 +2397,24 @@ var render = function () {
               "div",
               {
                 staticClass:
-                  "img-wrapper rounded-lg flex items-center justify-center overflow-hidden",
+                  "img-wrapper rounded-lg flex items-center justify-center overflow-hidden border border-slate-100",
               },
               [
                 _c("img", {
-                  staticClass: "preview w-full",
+                  staticClass: "preview w-full rounded-lg",
                   attrs: { src: _vm.imagePreview, alt: this.file.name },
                 }),
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "image__data flex flex-col mb-4" }, [
-              _c("h5", { staticClass: "mb-2 pl-2 font-medium" }, [
+            _c("div", { staticClass: "image__data flex flex-col mb-4 pl-2" }, [
+              _c("h5", { staticClass: "mb-2 font-medium pl-2" }, [
                 _vm._v(_vm._s(this.file.name)),
               ]),
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "image__buttons flex" },
+                { staticClass: "image__content flex" },
                 [
                   _c(
                     "vs-button",
@@ -2391,36 +2431,121 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "vs-button",
-                    {
-                      staticClass: "min-w-max",
-                      staticStyle: { "min-width": "90px" },
-                      attrs: {
-                        danger: "",
-                        flat: "",
-                        "animation-type": "scale",
-                      },
-                      on: { click: _vm.resetFile },
-                      scopedSlots: _vm._u([
+                  _vm.navigation === false
+                    ? _c(
+                        "vs-button",
                         {
-                          key: "animate",
-                          fn: function () {
-                            return [
-                              _vm._v(
-                                "\n                        Удалить\n                    "
-                              ),
-                            ]
+                          staticClass: "min-w-max",
+                          staticStyle: { "min-width": "90px" },
+                          attrs: {
+                            danger: "",
+                            flat: "",
+                            "animation-type": "scale",
                           },
-                          proxy: true,
+                          on: { click: _vm.resetFile },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "animate",
+                                fn: function () {
+                                  return [
+                                    _vm._v(
+                                      "\n                        Удалить\n                    "
+                                    ),
+                                  ]
+                                },
+                                proxy: true,
+                              },
+                            ],
+                            null,
+                            false,
+                            3080118668
+                          ),
                         },
-                      ]),
-                    },
-                    [_c("i", { staticClass: "bx bx-trash" })]
-                  ),
+                        [_c("i", { staticClass: "bx bx-trash" })]
+                      )
+                    : _vm._e(),
                 ],
                 1
               ),
+              _vm._v(" "),
+              _vm.navigation === true
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "image__content flex flex-col space-y-2 pt-6 pl-2",
+                    },
+                    [
+                      _c("h4", { staticClass: "text-sm font-medium" }, [
+                        _vm._v("Целевые области "),
+                        _c("span", { staticClass: "text-slate-400" }, [
+                          _vm._v("(x" + _vm._s(_vm.areas.length) + ")"),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "list-areas flex flex-col space-y-2" },
+                        _vm._l(_vm.areas, function (area) {
+                          return _c(
+                            "div",
+                            {
+                              staticClass:
+                                "area pb-2 border-b border-slate-100",
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "area__data flex items-center space-x-2",
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass: "area__color rounded-lg",
+                                    style: { background: area.color },
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "text-sm" }, [
+                                    _vm._v(_vm._s(area.name)),
+                                  ]),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "area__screen flex items-center ml-1 mt-1 text-slate-400",
+                                },
+                                [
+                                  _c("i", { staticClass: "bx bx-link mr-2" }),
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(area.screen) +
+                                      "\n                        "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "text-slate-400 hover:text-green-500 text-sm cursor-pointer max-w-fit",
+                          on: { click: _vm.addingArea },
+                        },
+                        [_vm._v("+ добавить область")]
+                      ),
+                    ]
+                  )
+                : _vm._e(),
             ]),
           ]),
       _vm._v(" "),

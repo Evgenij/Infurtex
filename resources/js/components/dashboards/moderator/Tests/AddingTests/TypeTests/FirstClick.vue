@@ -1,5 +1,11 @@
 <template>
     <section class="first-click-block flex flex-col space-y-4">
+        <header class="flex items-center justify-center text-lg font-medium border-b border-slate-100 pb-4">
+            <div class="p-2 px-3 rounded-lg flex items-center justify-center bg-yellow-500 mr-2">
+                <i class="bx bxs-pointer text-white text-sm"></i>
+            </div>
+            Тест первого клика
+        </header>
         <div class="first-click-block__instruction">
             <h2 class="font-medium text-base">Инструкция</h2>
             <vs-input primary
