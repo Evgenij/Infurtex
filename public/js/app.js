@@ -933,7 +933,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         status: false
       },
       nameTeam: {
-        val: 'Название команды',
+        val: '',
         error: false
       },
       color: '#0f9653',
@@ -7234,7 +7234,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2_
       },
       filledData: true,
       role: _enums__WEBPACK_IMPORTED_MODULE_0__["default"].userRole.Moderator,
-      token: 13
+      token: 123
     }
   },
   getters: {},

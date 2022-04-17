@@ -258,7 +258,7 @@ export default {
 					height: 0,
 					z: 0,
 					resizable: true,
-                    screen: '',
+                    screen: {id: 0, name: ''},
                     name: '№1'
 				}
 				this.areas.push(newArea)
@@ -275,7 +275,7 @@ export default {
 					height: 0,
 					z: 0,
 					resizable: true,
-                    screen: '',
+                    screen: {id: 0, name: ''},
                     name: '№'+newAreaId
 				}
 				this.areas.push(newArea)

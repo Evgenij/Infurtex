@@ -14,7 +14,7 @@ export default new Vuex.Store({
             },
             filledData: true,
             role: role.userRole.Moderator,
-            token: 13
+            token: 123
         }
     },
     getters:{},
