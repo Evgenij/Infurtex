@@ -2127,6 +2127,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AreasManager",
@@ -2148,6 +2157,9 @@ __webpack_require__.r(__webpack_exports__);
     data: {
       type: Object,
       required: true
+    },
+    screens: {
+      type: Array
     }
   },
   methods: {
@@ -2473,7 +2485,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           height: 0,
           z: 0,
           resizable: true,
-          screen: '',
+          screen: {
+            id: 0,
+            name: ''
+          },
           name: '№1'
         };
         this.areas.push(newArea);
@@ -2490,7 +2505,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           height: 0,
           z: 0,
           resizable: true,
-          screen: '',
+          screen: {
+            id: 0,
+            name: ''
+          },
           name: '№' + newAreaId
         };
         this.areas.push(_newArea);
@@ -4347,123 +4365,158 @@ var render = function () {
         _c(
           "section",
           {
-            staticClass: "controls-areas flex flex-col h-full justify-between",
+            staticClass:
+              "controls-areas flex flex-col space-y-2 justify-between",
           },
           [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "areas-list h-full overflow-y-scroll space-y-2 pr-3",
-              },
-              _vm._l(_vm.data.areas, function (area) {
-                return _c(
-                  "div",
-                  {
-                    staticClass:
-                      "area flex flex-col space-y-1 rounded-lg border-2 border-slate-200 p-3",
-                  },
-                  [
-                    _c(
-                      "span",
-                      {
-                        staticClass:
-                          "font-medium text-xs rounded-lg border-2 p-1 px-2 min-w-min",
-                        style: {
-                          color: area.color,
-                          border: "2px solid " + area.color,
-                          "margin-bottom": "30px",
-                          width: "fit-content",
+            _c("header", { staticClass: "py-3 border-b border-slate-100" }, [
+              _c("h2", { staticClass: "font-bold mb-1 w-4/5" }, [
+                _vm._v("Определите целевые области"),
+              ]),
+              _vm._v(" "),
+              _c("h3", { staticClass: "text-slate-500 text-sm" }, [
+                _vm._v(
+                  "Для создания области зажмите левую кнопку мыши и тяните для выделения области"
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("main", { staticClass: "h-full overflow-hidden" }, [
+              _c("h4", { staticClass: "font-bold text-sm mb-3" }, [
+                _vm._v("Целевые области "),
+                _c("span", { staticClass: "text-slate-400" }, [
+                  _vm._v("(x" + _vm._s(_vm.data.areas.length) + ")"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _vm.data.areas.length > 0
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "areas-list h-full overflow-y-scroll space-y-2 pr-3 pb-11",
+                    },
+                    _vm._l(_vm.data.areas, function (area) {
+                      return _c(
+                        "div",
+                        {
+                          staticClass:
+                            "area flex flex-col space-y-1 rounded-lg border-2 border-slate-200 p-3",
                         },
-                      },
-                      [
-                        _vm._v(
-                          "\n                        Целевая зона №" +
-                            _vm._s(area.id) +
-                            "\n                    "
-                        ),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("vs-input", {
-                      staticClass: "w-full",
-                      style: { "margin-bottom": "24px" },
-                      attrs: {
-                        placeholder: "название зоны",
-                        label: "Название зоны",
-                      },
-                      model: {
-                        value: area.name,
-                        callback: function ($$v) {
-                          _vm.$set(area, "name", $$v)
-                        },
-                        expression: "area.name",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "link-to-screen relative flex items-center",
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "bx bx-link p-2 text-slate-400",
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "vs-select",
-                          {
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "font-medium text-xs rounded-lg border-2 p-1 px-2 min-w-min",
+                              style: {
+                                color: area.color,
+                                border: "2px solid " + area.color,
+                                "margin-bottom": "30px",
+                                width: "fit-content",
+                              },
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Целевая зона №" +
+                                  _vm._s(area.id) +
+                                  "\n                    "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("vs-input", {
                             staticClass: "w-full",
+                            style: { "margin-bottom": "24px" },
                             attrs: {
-                              placeholder: "Название экрана",
-                              label: "Экран",
+                              placeholder: "название зоны",
+                              label: "Название зоны",
                             },
                             model: {
-                              value: area.screen,
+                              value: area.name,
                               callback: function ($$v) {
-                                _vm.$set(area, "screen", $$v)
+                                _vm.$set(area, "name", $$v)
                               },
-                              expression: "area.screen",
+                              expression: "area.name",
                             },
-                          },
-                          [
-                            _c(
-                              "vs-option",
-                              { attrs: { label: "Экран 1", value: "Экран 1" } },
-                              [
-                                _vm._v(
-                                  "\n                                Экран 1\n                            "
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "vs-option",
-                              { attrs: { label: "Экран 2", value: "Экран 2" } },
-                              [
-                                _vm._v(
-                                  "\n                                Экран 2\n                            "
-                                ),
-                              ]
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ],
-                  1
-                )
-              }),
-              0
-            ),
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "link-to-screen relative flex items-center",
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "bx bx-link p-2 text-slate-400",
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "vs-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    placeholder: "Название экрана",
+                                    label: "Экран",
+                                  },
+                                  model: {
+                                    value: area.screen.id,
+                                    callback: function ($$v) {
+                                      _vm.$set(area.screen, "id", $$v)
+                                    },
+                                    expression: "area.screen.id",
+                                  },
+                                },
+                                [
+                                  _vm._l(_vm.screens, function (screen) {
+                                    return [
+                                      _c(
+                                        "vs-option",
+                                        {
+                                          attrs: {
+                                            label: screen.name,
+                                            value: screen.id,
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                        " +
+                                              _vm._s(screen.name) +
+                                              "\n                                    "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  }),
+                                ],
+                                2
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      )
+                    }),
+                    0
+                  )
+                : _c(
+                    "section",
+                    {
+                      staticClass:
+                        "flex items-center justify-center h-full text-slate-400 text-sm",
+                    },
+                    [
+                      _c("i", { staticClass: "bx bx-info-circle mr-1" }),
+                      _vm._v(" Целевые области отстутсвуют\n                "),
+                    ]
+                  ),
+            ]),
             _vm._v(" "),
             _c(
-              "div",
-              { staticClass: "buttons flex justify-end pt-4" },
+              "footer",
+              { staticClass: "buttons flex justify-end" },
               [
                 _c(
                   "vs-button",

@@ -235,6 +235,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -555,6 +560,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../enums */ "./resources/js/enums.js");
 /* harmony import */ var _Questions_SectionQuestions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Questions/SectionQuestions */ "./resources/js/components/dashboards/moderator/Tests/AddingTests/Questions/SectionQuestions.vue");
 /* harmony import */ var _FileLoader_FileLoader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../FileLoader/FileLoader */ "./resources/js/components/dashboards/moderator/Tests/FileLoader/FileLoader.vue");
+//
 //
 //
 //
@@ -1423,140 +1429,153 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "questions flex flex-col space-y-2" },
-    [
-      _vm._l(_vm.questions, function (question, index) {
-        return _c(
-          "question-block",
-          {
-            key: index,
-            attrs: {
-              id: question.id,
-              text: question.text,
-              type: question.type,
-              answers: question.answers,
-            },
-            on: {
-              "remove-question": _vm.removeQuestion,
-              "remove-answer": _vm.removeAnswer,
-              "add-answer": _vm.addAnswer,
-              "change-text-question": _vm.changeTextQuestion,
-            },
-          },
-          [_vm._v("\n        " + _vm._s(++index) + "\n    ")]
-        )
-      }),
-      _vm._v(" "),
-      _c(
-        "footer",
-        [
-          _c(
-            "vs-button",
-            {
-              staticClass: "w-full",
-              attrs: { transparent: "", dark: "" },
-              on: {
-                click: function ($event) {
-                  _vm.activeTooltip = !_vm.activeTooltip
+  return _c("section", { staticClass: "section-question" }, [
+    _vm.questions.length !== 0
+      ? _c(
+          "main",
+          { staticClass: "questions flex flex-col space-y-2" },
+          _vm._l(_vm.questions, function (question, index) {
+            return _c(
+              "question-block",
+              {
+                key: question.id,
+                attrs: {
+                  id: question.id,
+                  text: question.text,
+                  type: question.type,
+                  answers: question.answers,
+                },
+                on: {
+                  "remove-question": _vm.removeQuestion,
+                  "remove-answer": _vm.removeAnswer,
+                  "add-answer": _vm.addAnswer,
+                  "change-text-question": _vm.changeTextQuestion,
                 },
               },
+              [_vm._v("\n            " + _vm._s(++index) + "\n        ")]
+            )
+          }),
+          1
+        )
+      : _c(
+          "div",
+          {
+            staticClass:
+              "empty-screens border-2 p-6 rounded-lg border-slate-100 text-slate-400 text-sm flex items-center justify-center",
+          },
+          [
+            _c("i", { staticClass: "bx bx-info-circle mr-1" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "pb-1" }, [
+              _vm._v("список вопросов пуст"),
+            ]),
+          ]
+        ),
+    _vm._v(" "),
+    _c(
+      "footer",
+      [
+        _c(
+          "vs-button",
+          {
+            staticClass: "w-full",
+            attrs: { transparent: "", dark: "" },
+            on: {
+              click: function ($event) {
+                _vm.activeTooltip = !_vm.activeTooltip
+              },
             },
-            [
-              _c("i", { staticClass: "bx bx-plus left" }),
-              _vm._v("\n            Добавить вопрос\n        "),
-            ]
-          ),
-          _vm._v(" "),
-          _vm.activeTooltip
-            ? _c(
-                "div",
-                {
-                  staticClass:
-                    "footer__title flex flex-col border rounded-lg border-slate-100 p-4",
-                },
-                [
-                  _c(
-                    "h4",
-                    { staticClass: "text-center text-sm mb-2 font-medium" },
-                    [_vm._v("\n                Тип вопроса\n            ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "buttons flex items-center space-x-2" },
-                    [
-                      _c(
-                        "vs-button",
-                        {
-                          staticClass: "w-full",
-                          attrs: { flat: "", dark: "" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.addNewQuestion(1)
-                            },
+          },
+          [
+            _c("i", { staticClass: "bx bx-plus left" }),
+            _vm._v("\n            Добавить вопрос\n        "),
+          ]
+        ),
+        _vm._v(" "),
+        _vm.activeTooltip
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "footer__title flex flex-col border rounded-lg border-slate-100 p-4",
+              },
+              [
+                _c(
+                  "h4",
+                  { staticClass: "text-center text-sm mb-2 font-medium" },
+                  [_vm._v("\n                Тип вопроса\n            ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "buttons flex items-center space-x-2" },
+                  [
+                    _c(
+                      "vs-button",
+                      {
+                        staticClass: "w-full",
+                        attrs: { flat: "", dark: "" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.addNewQuestion(1)
                           },
                         },
-                        [
-                          _c("i", { staticClass: "bx bx-font-family left" }),
-                          _vm._v(
-                            "\n                    Текстовый ответ\n                "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "vs-button",
-                        {
-                          staticClass: "w-full",
-                          attrs: { flat: "", dark: "" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.addNewQuestion(2)
-                            },
+                      },
+                      [
+                        _c("i", { staticClass: "bx bx-font-family left" }),
+                        _vm._v(
+                          "\n                    Текстовый ответ\n                "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-button",
+                      {
+                        staticClass: "w-full",
+                        attrs: { flat: "", dark: "" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.addNewQuestion(2)
                           },
                         },
-                        [
-                          _c("i", { staticClass: "bx bx-list-check left" }),
-                          _vm._v(
-                            "\n                    Один из нескольких\n                "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "vs-button",
-                        {
-                          staticClass: "w-full",
-                          attrs: { flat: "", dark: "" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.addNewQuestion(3)
-                            },
+                      },
+                      [
+                        _c("i", { staticClass: "bx bx-list-check left" }),
+                        _vm._v(
+                          "\n                    Один из нескольких\n                "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-button",
+                      {
+                        staticClass: "w-full",
+                        attrs: { flat: "", dark: "" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.addNewQuestion(3)
                           },
                         },
-                        [
-                          _c("i", {
-                            staticClass: "bx bx-select-multiple left",
-                          }),
-                          _vm._v(
-                            "\n                    Несколько ответов\n                "
-                          ),
-                        ]
-                      ),
-                    ],
-                    1
-                  ),
-                ]
-              )
-            : _vm._e(),
-        ],
-        1
-      ),
-    ],
-    2
-  )
+                      },
+                      [
+                        _c("i", { staticClass: "bx bx-select-multiple left" }),
+                        _vm._v(
+                          "\n                    Несколько ответов\n                "
+                        ),
+                      ]
+                    ),
+                  ],
+                  1
+                ),
+              ]
+            )
+          : _vm._e(),
+      ],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -1611,7 +1630,7 @@ var render = function () {
             return _c(
               "answer-block",
               {
-                key: index,
+                key: answer.id,
                 attrs: { id: answer.id, value: answer.value },
                 on: { remove: _vm.removeAnswer, change: _vm.changeDataAnswer },
               },
@@ -1697,7 +1716,7 @@ var render = function () {
             return _c(
               "answer-block",
               {
-                key: index,
+                key: answer.id,
                 attrs: { id: answer.id, value: answer.value },
                 on: { remove: _vm.removeAnswer, change: _vm.changeDataAnswer },
               },
@@ -1877,7 +1896,7 @@ var staticRenderFns = [
           "div",
           {
             staticClass:
-              "p-2 px-3 rounded-lg flex items-center justify-center bg-slate-400 mr-2",
+              "p-2 px-3 rounded-lg flex items-center justify-center bg-slate-400 mr-2\n            shadow-lg shadow-slate-500/50",
           },
           [_c("i", { staticClass: "bx bxs-stopwatch text-white text-sm" })]
         ),

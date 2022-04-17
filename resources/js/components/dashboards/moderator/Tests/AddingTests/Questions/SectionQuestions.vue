@@ -1,11 +1,16 @@
 <template>
-    <div class="questions flex flex-col space-y-2">
-        <question-block v-for="(question, index) in questions"
-            :id="question.id" :text="question.text" :type="question.type" :answers="question.answers" :key="index"
-                        @remove-question="removeQuestion" @remove-answer="removeAnswer"
-                        @add-answer="addAnswer" @change-text-question="changeTextQuestion">
-            {{++index}}
-        </question-block>
+    <section class="section-question">
+        <main v-if="questions.length !== 0" class="questions flex flex-col space-y-2">
+            <question-block v-for="(question, index) in questions"
+                            :id="question.id" :text="question.text" :type="question.type" :answers="question.answers" :key="question.id"
+                            @remove-question="removeQuestion" @remove-answer="removeAnswer"
+                            @add-answer="addAnswer" @change-text-question="changeTextQuestion">
+                {{++index}}
+            </question-block>
+        </main>
+        <div v-else class="empty-screens border-2 p-6 rounded-lg border-slate-100 text-slate-400 text-sm flex items-center justify-center">
+            <i class="bx bx-info-circle mr-1"></i> <span class="pb-1">список вопросов пуст</span>
+        </div>
         <footer>
             <vs-button transparent dark @click="activeTooltip=!activeTooltip" class="w-full">
                 <i class="bx bx-plus left"></i>
@@ -31,7 +36,7 @@
                 </div>
             </div>
         </footer>
-    </div>
+    </section>
 </template>
 
 <script>

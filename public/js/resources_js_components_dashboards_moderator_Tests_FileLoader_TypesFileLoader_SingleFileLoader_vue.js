@@ -2132,6 +2132,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "SingleFileLoader",
@@ -2153,6 +2157,13 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
+    },
+    id: {
+      type: Number,
+      "default": 1
+    },
+    nameScreen: {
+      type: String
     }
   },
   methods: {
@@ -2364,7 +2375,7 @@ var render = function () {
     "div",
     {
       staticClass:
-        "single-file-loader w-full rounded-lg border-2 border-dashed\n        border-slate-200 p-6",
+        "single-file-loader w-full rounded-lg border-2 border-dashed\n        border-slate-300 p-6",
     },
     [
       _vm.file === ""
@@ -2372,7 +2383,7 @@ var render = function () {
             "main",
             {
               staticClass:
-                "fileloader-content w-full flex items-center justify-between",
+                "single-file-loader__content w-full flex items-center justify-between",
             },
             [
               _vm._m(0),
@@ -2397,7 +2408,7 @@ var render = function () {
               "div",
               {
                 staticClass:
-                  "img-wrapper rounded-lg flex items-center justify-center overflow-hidden border border-slate-100",
+                  "img-wrapper rounded-lg flex items-center justify-center overflow-hidden bg-slate-100 border border-slate-200",
               },
               [
                 _c("img", {
@@ -2517,16 +2528,28 @@ var render = function () {
                                 "div",
                                 {
                                   staticClass:
-                                    "area__screen flex items-center ml-1 mt-1 text-slate-400",
+                                    "area__screen flex items-center text-sm ml-1 mt-1 text-slate-400",
                                 },
                                 [
                                   _c("i", { staticClass: "bx bx-link mr-2" }),
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(area.screen) +
-                                      "\n                        "
-                                  ),
-                                ]
+                                  _vm._v(" "),
+                                  area.screen.id !== 0
+                                    ? [
+                                        _vm._v(
+                                          "\n                                " +
+                                            _vm._s(area.screen.name) +
+                                            "\n                            "
+                                        ),
+                                      ]
+                                    : [
+                                        _c(
+                                          "span",
+                                          { staticClass: "text-red-500" },
+                                          [_vm._v(_vm._s(area.screen.name))]
+                                        ),
+                                      ],
+                                ],
+                                2
                               ),
                             ]
                           )
@@ -2535,13 +2558,19 @@ var render = function () {
                       ),
                       _vm._v(" "),
                       _c(
-                        "span",
+                        "div",
                         {
                           staticClass:
-                            "text-slate-400 hover:text-green-500 text-sm cursor-pointer max-w-fit",
+                            "text-slate-400 hover:text-green-500 text-sm flex items-center cursor-pointer max-w-fit",
                           on: { click: _vm.addingArea },
                         },
-                        [_vm._v("+ добавить область")]
+                        [
+                          _c("i", { staticClass: "bx bx-screenshot mr-1" }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "pb-1" }, [
+                            _vm._v("изменить области"),
+                          ]),
+                        ]
                       ),
                     ]
                   )
@@ -2549,12 +2578,16 @@ var render = function () {
             ]),
           ]),
       _vm._v(" "),
-      _c("label", { ref: "label-file", attrs: { for: "file" } }),
+      _c("label", { ref: "label-file", attrs: { for: "file-" + _vm.id } }),
       _vm._v(" "),
       _c("input", {
         ref: "file",
         staticClass: "absolute hidden",
-        attrs: { accept: ".jpg,.jpeg,.png", type: "file", id: "file" },
+        attrs: {
+          accept: ".jpg,.jpeg,.png",
+          type: "file",
+          id: "file-" + _vm.id,
+        },
         on: {
           change: function ($event) {
             return _vm.handleFileUpload()
@@ -2569,7 +2602,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "fileloader-content__text" }, [
+    return _c("div", { staticClass: "single-file-loader__text" }, [
       _c("h4", { staticClass: "font-bold mb-2" }, [
         _vm._v("Добавьте файл для теста"),
       ]),

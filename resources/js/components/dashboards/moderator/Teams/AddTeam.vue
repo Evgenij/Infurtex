@@ -385,7 +385,7 @@
                 status: false
             },
             nameTeam: {
-                val: 'Название команды',
+                val: '',
                 error: false
             },
             color: '#0f9653',
