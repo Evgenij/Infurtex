@@ -43,7 +43,8 @@
 
         <div class="section__form reg-moderator flex items-center flex-grow">
             <div class="section__panel block-form flex flex-col justify-center items-center">
-                <form class="block-form__form form w-full flex flex-col">
+                <form class="block-form__form form w-full flex flex-col"
+                    @submit.prevent="register">
                     <div class="form__row">
                         <h1 class="header font-bold text-3xl">
                             Регистрация
@@ -97,14 +98,22 @@
                                 Надежность пароля максимальна
                             </template>
                         </vs-input>
+                        <vs-input
+                            type="password"
+                            v-model.trim="userData.password_confirmation"
+                            placeholder="пароль повторно"
+                            class="w-full row__item">
+                            <template #icon>
+                                <i class='bx bx-lock'></i>
+                            </template>
+                        </vs-input>
                     </div>
                     <div class="form__row flex flex-col items-center">
                         <vs-button
                             size="large"
-                            :active="active == 1"
-                            @click.prevent="$router.push({name:'dashboard'})"
                             class="button w-full"
                         >
+<!--                            @click.prevent="$router.push({name:'dashboard'})"-->
                             Зарегистрироваться
                         </vs-button>
                         <router-link :to="{name: 'auth'}" class="link mt-1">
@@ -120,6 +129,9 @@
 <script>
     import { validationMixin } from 'vuelidate'
     import { required, minLength, between, email } from 'vuelidate/lib/validators'
+
+    import store from '../../store/store'
+
     export default {
         name: "registration-moderator",
         mixins: [validationMixin],
@@ -128,9 +140,11 @@
             userData:{
                 username: 'Evgenij',
                 email: 'evgenij.ermolenko@list.ru',
-                password: 'evg123JEKA007*',
+                password: 'evg12345678UP*',
+                password_confirmation: 'evg12345678UP*'
             },
-            hasVisiblePassword: false
+            hasVisiblePassword: false,
+            hasVisiblePasswordConfirmed: false
         }),
         validations: {
             userData:{
@@ -154,13 +168,17 @@
                     console.log('success')
                 }
             },
-            submit() {
-                console.log('submit!')
+            register() {
                 this.$v.$touch()
                 if (this.$v.$invalid) {
                     this.submitStatus = 'ERROR'
                 } else {
                     // do your submit logic here
+                    store.dispatch('register', this.userData)
+                        .then((res)=>{
+                            this.$router.push({name: 'dashboard'})
+                        })
+
                     this.submitStatus = 'PENDING'
                     setTimeout(() => {
                         this.submitStatus = 'OK'

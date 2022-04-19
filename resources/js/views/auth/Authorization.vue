@@ -49,24 +49,24 @@
                         </h1>
                     </div>
                     <div class="form__row row flex flex-col">
-                        <vs-input primary class="w-full row__item" v-model="email" placeholder="email">
+                        <vs-input primary class="w-full row__item" v-model="userData.email" placeholder="email">
                             <template #icon>
                                 <i class='bx bx-at'></i>
                             </template>
                             <template v-if="validEmail" #message-success>
                                 Корректный формат email
                             </template>
-                            <template v-if="!validEmail && email !== ''" #message-danger>
+                            <template v-if="!validEmail && userData.email !== ''" #message-danger>
                                 Некорректный формат email
                             </template>
                         </vs-input>
-                        <vs-input primary type="password" class="w-full row__item" v-model="password" placeholder="пароль">
+                        <vs-input primary type="password" class="w-full row__item" v-model="userData.password" placeholder="пароль">
                             <template #icon>
                                 <i class='bx bx-lock'></i>
                             </template>
                         </vs-input>
                         <div class="remember_me flex justify-between px-2.5">
-                            <vs-checkbox v-model="remember_me">
+                            <vs-checkbox v-model="userData.remember">
                                 Запомнить меня
                             </vs-checkbox>
                             <router-link :to="{name: 'rec-password'}" class="link">
@@ -78,7 +78,8 @@
                         <router-link :to="{name: 'dashboard'}">
                             <vs-button
                                 size="large"
-                                class="button">
+                                class="button"
+                                @click="login">
                                 Войти в систему
                             </vs-button>
                         </router-link>
@@ -90,14 +91,28 @@
 </template>
 
 <script>
+import store from "../../store/store";
+import router from "../../router";
+
     export default {
         name: "authorization",
         data:() => ({
-            email: '',
-            password: '',
-            remember_me: false,
-            option: true
+			userData:{
+				email: 'evgenij@gmail.com',
+				password: 'password',
+				remember: false,
+			}
         }),
+        methods:{
+            login(){
+				store.dispatch('login', this.userData)
+					.then(()=>{
+						router.push({
+							name: 'dashboard'
+						})
+					})
+            }
+        },
         computed: {
             validEmail() {
                 return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)

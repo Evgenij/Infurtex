@@ -74,7 +74,7 @@
                         </template>
                         <hr class="my-1">
                         <div class="content-tooltip__item text-red-400 cursor-pointer flex items-center p-2
-                            hover:bg-red-50 hover:text-red-600 rounded-lg">
+                            hover:bg-red-50 hover:text-red-600 rounded-lg" @click="logout">
                             <i class="bx bx-exit text-lg mr-1"></i> Выйти
                         </div>
                     </div>
@@ -86,6 +86,8 @@
 
 <script>
     import BlockNotification from "./BlockNotification";
+	import store from "../../store/store";
+	import router from "../../router";
 
     export default {
         name: "app-header",
@@ -96,7 +98,16 @@
         props: {
             userMenu: Array,
             links: Array
-        }
+        },
+		methods: {
+			logout() {
+				store.dispatch("logout").then(() => {
+					router.push({
+						name: "login",
+					});
+				});
+			}
+		}
     }
 </script>
 

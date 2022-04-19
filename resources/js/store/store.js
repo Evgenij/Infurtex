@@ -1,24 +1,68 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import role from "../enums";
+import axiosClient from "../axios";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state:{
-        user: {
-            data:{
-                name: 'Evgenij',
-                email: 'tom@example.com',
-                imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-            },
-            filledData: true,
-            role: role.userRole.None,
-            token: null
-        }
-    },
-    getters:{},
-    actions:{},
-    mutations:{},
-    modules: {},
+	state:{
+		user: {
+			data:{},
+			filledData: true,
+			role: role.userRole.Moderator,
+			token: sessionStorage.getItem('TOKEN'),
+		}
+	},
+	getters:{},
+	actions:{
+		register({commit}, userData){
+			return axiosClient.post('/register', userData)
+				.then(({data})=>{
+					console.log(userData)
+					commit('setUser', data)
+					return data
+				})
+			// return fetch('http://localhost:8000/api/register', {
+			// 	headers : {
+			// 		"Content-Type": 'application/json',
+			// 		Accept: 'application/json',
+			// 	},
+			// 	method: "POST",
+			// 	body: JSON.stringify(userData),
+			// })
+			// 	.then((res)=>res.json())
+			// 	.then((res)=>{
+			// 		commit('setUser', res);
+			// 		return res
+			// })
+		},
+		login({commit}, userData){
+			return axiosClient.post('/login', userData)
+				.then(({data})=>{
+					commit('setUser', data)
+					return data
+				})
+		},
+		logout({commit}) {
+			return axiosClient.post('/logout')
+				.then(response => {
+					commit('logout')
+					return response;
+				})
+		},
+	},
+	mutations:{
+		logout: (state) => {
+			state.user.token = null;
+			state.user.data = {};
+			sessionStorage.removeItem("TOKEN");
+		},
+		setUser: (state, user) => {
+			state.user.token = user.token
+			state.user.data = user.userData
+			sessionStorage.setItem('TOKEN', user.token)
+		}
+	},
+	modules: {},
 })
