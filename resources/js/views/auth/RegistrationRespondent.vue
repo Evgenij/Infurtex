@@ -39,32 +39,32 @@
 
         <div class="section__form reg-respondent flex items-center flex-grow">
             <div class="section__panel block-form flex flex-col justify-center items-center">
-                <form class="block-form__form form w-full flex flex-col">
+                <form class="block-form__form form w-full flex flex-col" @submit.prevent="register">
                     <div class="form__row">
                         <h1 class="header font-bold text-3xl">
                             Регистрация
                         </h1>
                     </div>
                     <div class="form__row row flex flex-col">
-                        <vs-input primary class="w-full row__item" v-model="username" placeholder="имя">
+                        <vs-input primary class="w-full row__item" v-model="userData.username" placeholder="имя">
                             <template #icon>
                                 <i class='bx bx-user'></i>
                             </template>
                         </vs-input>
-                        <vs-input primary class="w-full row__item" v-model="email" placeholder="email">
+                        <vs-input primary class="w-full row__item" v-model="userData.email" placeholder="email">
                             <template #icon>
                                 <i class='bx bx-at'></i>
                             </template>
                             <template v-if="validEmail" #message-success>
                                 Корректный формат email
                             </template>
-                            <template v-if="!validEmail && email !== ''" #message-danger>
+                            <template v-if="!validEmail && userData.email !== ''" #message-danger>
                                 Некорректный формат email
                             </template>
                         </vs-input>
                         <vs-input
                             type="password"
-                            v-model="password"
+                            v-model="userData.password"
                             placeholder="пароль"
                             :progress="getProgress"
                             :visiblePassword="hasVisiblePassword"
@@ -89,6 +89,15 @@
                                 Надежность пароля максимальна
                             </template>
                         </vs-input>
+						<vs-input
+							type="password"
+							v-model.trim="userData.password_confirmation"
+							placeholder="пароль повторно"
+							class="w-full row__item">
+							<template #icon>
+								<i class='bx bx-lock'></i>
+							</template>
+						</vs-input>
                     </div>
                     <div class="form__row flex flex-col items-center">
                         <vs-button
@@ -108,49 +117,90 @@
 </template>
 
 <script>
-    export default {
+	import { validationMixin } from 'vuelidate'
+	import { required, minLength, between, email } from 'vuelidate/lib/validators'
+
+    import store from "../../store/store";
+	import role from "../../enums";
+
+	export default {
         name: "registration-respondent",
+		mixins: [validationMixin],
         data:() => ({
-            active: 0,
-            username: '',
-            email: '',
-            password: '',
+			userData:{
+				username: 'Evgenij',
+				email: 'evgenij.ermolenko@list.ru',
+				password: 'evg12345678UP*',
+				password_confirmation: 'evg12345678UP*',
+				role: role.userRole.Respondent,
+				filledData: false
+			},
+			hasVisiblePasswordConfirmed: false,
             hasVisiblePassword: false
         }),
+		validations: {
+			userData:{
+				username: {
+					required,
+					minLength: minLength(1),
+				},
+				email:{
+					required,
+					email
+				},
+				password:{
+					required
+				}
+			},
+		},
+		methods: {
+			register() {
+				this.$v.$touch()
+				if (this.$v.$invalid) {
+					this.submitStatus = 'ERROR'
+				} else {
+					// do your submit logic here
+					store.dispatch('register', this.userData)
+						.then((res)=>{
+							this.$router.push({name: 'dashboard'})
+						})
+				}
+			}
+		},
         computed: {
             validEmail() {
-                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)
+                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.email)
             },
             getProgress() {
                 let progress = 0
 
                 // at least one number
 
-                if (/\d/.test(this.password)) {
+                if (/\d/.test(this.userData.password)) {
                     progress += 20
                 }
 
                 // at least one capital letter
 
-                if (/(.*[A-Z].*)/.test(this.password)) {
+                if (/(.*[A-Z].*)/.test(this.userData.password)) {
                     progress += 20
                 }
 
                 // at menons a lowercase
 
-                if (/(.*[a-z].*)/.test(this.password)) {
+                if (/(.*[a-z].*)/.test(this.userData.password)) {
                     progress += 20
                 }
 
                 // more than 5 digits
 
-                if (this.password.length >= 6) {
+                if (this.userData.password.length >= 6) {
                     progress += 20
                 }
 
                 // at least one special character
 
-                if (/[^A-Za-z0-9]/.test(this.password)) {
+                if (/[^A-Za-z0-9]/.test(this.userData.password)) {
                     progress += 20
                 }
 

@@ -42,7 +42,7 @@
         </div>
         <div class="section__form auth flex items-center flex-grow">
             <div class="section__panel block-form flex flex-col justify-center items-center">
-                <form class="block-form__form form w-full flex flex-col">
+                <form class="block-form__form form w-full flex flex-col" @submit.prevent="login">
                     <div class="form__row">
                         <h1 class="header font-bold text-3xl">
                             Авторизация
@@ -75,14 +75,19 @@
                         </div>
                     </div>
                     <div class="form__row flex flex-col">
-                        <router-link :to="{name: 'dashboard'}">
-                            <vs-button
-                                size="large"
-                                class="button"
-                                @click="login">
-                                Войти в систему
-                            </vs-button>
-                        </router-link>
+						<div class="alert pb-4">
+							<vs-alert color="danger" v-if="this.errorMsg !== ''">
+								<template #title>
+									Ошибка авторизации
+								</template>
+								{{ this.errorMsg }}
+							</vs-alert>
+						</div>
+						<vs-button
+							size="large"
+							class="button">
+							Войти в систему
+						</vs-button>
                     </div>
                 </form>
             </div>
@@ -93,15 +98,17 @@
 <script>
 import store from "../../store/store";
 import router from "../../router";
+import {ref} from 'vue'
 
     export default {
         name: "authorization",
         data:() => ({
 			userData:{
-				email: 'evgenij@gmail.com',
-				password: 'password',
+				email: 'evgenij.ermolenko@list.ru',
+				password: 'evg12345678UP*',
 				remember: false,
-			}
+			},
+			errorMsg: '',
         }),
         methods:{
             login(){
@@ -110,12 +117,14 @@ import router from "../../router";
 						router.push({
 							name: 'dashboard'
 						})
+					}).catch(err=>{
+						this.errorMsg = err.response.data.message
 					})
             }
         },
         computed: {
             validEmail() {
-                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)
+                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.email)
             },
         }
     }

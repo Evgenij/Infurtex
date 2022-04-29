@@ -57,7 +57,7 @@
                             Евгений
                         </template>
                     </vs-avatar>
-                    <span class="ml-4 text-sm font-semibold">Евгений</span>
+                    <span class="ml-4 text-sm font-semibold">{{username}}</span>
                     <i class="bx text-teal-600 text-lg ml-2"
                        :class="{
                             'bx-chevron-down': activeUserMenu === false,
@@ -94,6 +94,7 @@
         components: {BlockNotification},
         data:() => ({
             activeUserMenu: false,
+			username: store.state.user.data.name
         }),
         props: {
             userMenu: Array,
@@ -101,14 +102,16 @@
         },
 		methods: {
 			logout() {
-				store.dispatch("logout").then(() => {
-					router.push({
-						name: "login",
+				this.activeUserMenu = false
+				store.dispatch("logout")
+					.then(() => {
+						router.push({
+							name: "login",
+						});
 					});
-				});
 			}
 		}
-    }
+	}
 </script>
 
 <style lang="scss">

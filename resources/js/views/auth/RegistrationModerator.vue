@@ -113,7 +113,6 @@
                             size="large"
                             class="button w-full"
                         >
-<!--                            @click.prevent="$router.push({name:'dashboard'})"-->
                             Зарегистрироваться
                         </vs-button>
                         <router-link :to="{name: 'auth'}" class="link mt-1">
@@ -129,6 +128,7 @@
 <script>
     import { validationMixin } from 'vuelidate'
     import { required, minLength, between, email } from 'vuelidate/lib/validators'
+	import role from '../../enums'
 
     import store from '../../store/store'
 
@@ -141,7 +141,9 @@
                 username: 'Evgenij',
                 email: 'evgenij.ermolenko@list.ru',
                 password: 'evg12345678UP*',
-                password_confirmation: 'evg12345678UP*'
+                password_confirmation: 'evg12345678UP*',
+				role: role.userRole.Moderator,
+				filledData: true
             },
             hasVisiblePassword: false,
             hasVisiblePasswordConfirmed: false
@@ -173,16 +175,10 @@
                 if (this.$v.$invalid) {
                     this.submitStatus = 'ERROR'
                 } else {
-                    // do your submit logic here
                     store.dispatch('register', this.userData)
                         .then((res)=>{
                             this.$router.push({name: 'dashboard'})
                         })
-
-                    this.submitStatus = 'PENDING'
-                    setTimeout(() => {
-                        this.submitStatus = 'OK'
-                    }, 500)
                 }
             }
         },

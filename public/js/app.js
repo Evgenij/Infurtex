@@ -2350,7 +2350,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      activeUserMenu: false
+      activeUserMenu: false,
+      username: _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].state.user.data.name
     };
   },
   props: {
@@ -2359,6 +2360,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
+      this.activeUserMenu = false;
       _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch("logout").then(function () {
         _router__WEBPACK_IMPORTED_MODULE_2__["default"].push({
           name: "login"
@@ -5834,6 +5836,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5841,24 +5849,29 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       userData: {
-        email: 'evgenij@gmail.com',
-        password: 'password',
+        email: 'evgenij.ermolenko@list.ru',
+        password: 'evg12345678UP*',
         remember: false
-      }
+      },
+      errorMsg: ''
     };
   },
   methods: {
     login: function login() {
+      var _this = this;
+
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('login', this.userData).then(function () {
         _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
           name: 'dashboard'
         });
+      })["catch"](function (err) {
+        _this.errorMsg = err.response.data.message;
       });
     }
   },
   computed: {
     validEmail: function validEmail() {
-      return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+      return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.email);
     }
   }
 });
@@ -6001,9 +6014,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/store */ "./resources/js/store/store.js");
+/* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../enums */ "./resources/js/enums.js");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/store */ "./resources/js/store/store.js");
 //
 //
 //
@@ -6131,13 +6145,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "registration-moderator",
-  mixins: [vuelidate__WEBPACK_IMPORTED_MODULE_1__.validationMixin],
+  mixins: [vuelidate__WEBPACK_IMPORTED_MODULE_2__.validationMixin],
   data: function data() {
     return {
       active: 0,
@@ -6145,7 +6159,9 @@ __webpack_require__.r(__webpack_exports__);
         username: 'Evgenij',
         email: 'evgenij.ermolenko@list.ru',
         password: 'evg12345678UP*',
-        password_confirmation: 'evg12345678UP*'
+        password_confirmation: 'evg12345678UP*',
+        role: _enums__WEBPACK_IMPORTED_MODULE_0__["default"].userRole.Moderator,
+        filledData: true
       },
       hasVisiblePassword: false,
       hasVisiblePasswordConfirmed: false
@@ -6154,15 +6170,15 @@ __webpack_require__.r(__webpack_exports__);
   validations: {
     userData: {
       username: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.minLength)(1)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.minLength)(1)
       },
       email: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required,
-        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.email
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.required,
+        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.email
       },
       password: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_2__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.required
       }
     }
   },
@@ -6182,16 +6198,11 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$v.$invalid) {
         this.submitStatus = 'ERROR';
       } else {
-        // do your submit logic here
-        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('register', this.userData).then(function (res) {
+        _store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('register', this.userData).then(function (res) {
           _this.$router.push({
             name: 'dashboard'
           });
         });
-        this.submitStatus = 'PENDING';
-        setTimeout(function () {
-          _this.submitStatus = 'OK';
-        }, 500);
       }
     }
   },
@@ -6244,6 +6255,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/store */ "./resources/js/store/store.js");
+/* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../enums */ "./resources/js/enums.js");
 //
 //
 //
@@ -6353,45 +6368,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "registration-respondent",
+  mixins: [vuelidate__WEBPACK_IMPORTED_MODULE_2__.validationMixin],
   data: function data() {
     return {
-      active: 0,
-      username: '',
-      email: '',
-      password: '',
+      userData: {
+        username: 'Evgenij',
+        email: 'evgenij.ermolenko@list.ru',
+        password: 'evg12345678UP*',
+        password_confirmation: 'evg12345678UP*',
+        role: _enums__WEBPACK_IMPORTED_MODULE_1__["default"].userRole.Respondent,
+        filledData: false
+      },
+      hasVisiblePasswordConfirmed: false,
       hasVisiblePassword: false
     };
   },
+  validations: {
+    userData: {
+      username: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.minLength)(1)
+      },
+      email: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.required,
+        email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.email
+      },
+      password: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_3__.required
+      }
+    }
+  },
+  methods: {
+    register: function register() {
+      var _this = this;
+
+      this.$v.$touch();
+
+      if (this.$v.$invalid) {
+        this.submitStatus = 'ERROR';
+      } else {
+        // do your submit logic here
+        _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('register', this.userData).then(function (res) {
+          _this.$router.push({
+            name: 'dashboard'
+          });
+        });
+      }
+    }
+  },
   computed: {
     validEmail: function validEmail() {
-      return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+      return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.email);
     },
     getProgress: function getProgress() {
       var progress = 0; // at least one number
 
-      if (/\d/.test(this.password)) {
+      if (/\d/.test(this.userData.password)) {
         progress += 20;
       } // at least one capital letter
 
 
-      if (/(.*[A-Z].*)/.test(this.password)) {
+      if (/(.*[A-Z].*)/.test(this.userData.password)) {
         progress += 20;
       } // at menons a lowercase
 
 
-      if (/(.*[a-z].*)/.test(this.password)) {
+      if (/(.*[a-z].*)/.test(this.userData.password)) {
         progress += 20;
       } // more than 5 digits
 
 
-      if (this.password.length >= 6) {
+      if (this.userData.password.length >= 6) {
         progress += 20;
       } // at least one special character
 
 
-      if (/[^A-Za-z0-9]/.test(this.password)) {
+      if (/[^A-Za-z0-9]/.test(this.userData.password)) {
         progress += 20;
       }
 
@@ -6531,23 +6598,18 @@ var axiosClient = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
 axiosClient.interceptors.request.use(function (config) {
   config.headers.Authorization = "Bearer ".concat(_store_store__WEBPACK_IMPORTED_MODULE_1__["default"].state.user.token);
   return config;
-});
-axiosClient.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  if (error.response.status === 401) {
-    sessionStorage.removeItem('TOKEN');
-    _router__WEBPACK_IMPORTED_MODULE_2__["default"].push({
-      name: 'login'
-    });
-  } else if (error.response.status === 404) {
-    _router__WEBPACK_IMPORTED_MODULE_2__["default"].push({
-      name: 'NotFound'
-    });
-  }
+}); // axiosClient.interceptors.response.use(response => {
+// 	return response;
+// }, error => {
+// 	if (error.response.status === 401) {
+// 		sessionStorage.removeItem('TOKEN')
+// 		router.push({name: 'login'})
+// 	} else if (error.response.status === 404) {
+// 		router.push({name: 'NotFound'})
+// 	}
+// 	return error;
+// })
 
-  return error;
-});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axiosClient);
 
 /***/ }),
@@ -9321,21 +9383,22 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_18__["default"]({
   routes: routes
 });
 router.beforeEach(function (to, from, next) {
-  //console.log(to)
-  if (to.meta.requiresAuth && !_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.token) {
+  console.log(_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.token);
+
+  if (!_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.token && to.meta.requiresAuth) {
     console.log('token empty');
     next({
       name: 'auth'
     });
   } else if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.token && (to.name === 'reg-moderator' || to.name === 'reg-respondent' || to.name === 'rec-password' || to.name === 'login' || to.name === 'dashboard')) {
-    console.log("enter to route as: ", _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.role);
+    console.log("enter to route as: ", _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user);
 
-    if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.role === _enums__WEBPACK_IMPORTED_MODULE_16__["default"].userRole.Moderator) {
+    if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.data.role === _enums__WEBPACK_IMPORTED_MODULE_16__["default"].userRole.Moderator) {
       console.log("enter to moderator");
       next({
         name: 'moderator'
       });
-    } else if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.role === _enums__WEBPACK_IMPORTED_MODULE_16__["default"].userRole.Respondent) {
+    } else if (_store_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.data.role === _enums__WEBPACK_IMPORTED_MODULE_16__["default"].userRole.Respondent) {
       console.log("enter to respondent");
       next({
         name: 'respondent'
@@ -9375,8 +9438,8 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
   state: {
     user: {
       data: {},
-      filledData: true,
-      role: _enums__WEBPACK_IMPORTED_MODULE_0__["default"].userRole.Moderator,
+      //filledData: false,
+      //role: role.userRole.Moderator,
       token: sessionStorage.getItem('TOKEN')
     }
   },
@@ -9384,35 +9447,32 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
   actions: {
     register: function register(_ref, userData) {
       var commit = _ref.commit;
-      return _axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/register', userData).then(function (_ref2) {
-        var data = _ref2.data;
-        console.log(userData);
-        commit('setUser', data);
-        return data;
-      }); // return fetch('http://localhost:8000/api/register', {
-      // 	headers : {
-      // 		"Content-Type": 'application/json',
-      // 		Accept: 'application/json',
-      // 	},
-      // 	method: "POST",
-      // 	body: JSON.stringify(userData),
-      // })
-      // 	.then((res)=>res.json())
-      // 	.then((res)=>{
-      // 		commit('setUser', res);
-      // 		return res
-      // })
+      console.log(userData);
+
+      if (userData.role === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].userRole.Moderator) {
+        return _axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/moderator/register', userData).then(function (_ref2) {
+          var data = _ref2.data;
+          commit('setUser', data);
+          return data;
+        });
+      } else {
+        return _axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/respondent/register', userData).then(function (_ref3) {
+          var data = _ref3.data;
+          commit('setUser', data);
+          return data;
+        });
+      }
     },
-    login: function login(_ref3, userData) {
-      var commit = _ref3.commit;
-      return _axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/login', userData).then(function (_ref4) {
-        var data = _ref4.data;
+    login: function login(_ref4, userData) {
+      var commit = _ref4.commit;
+      return _axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/login', userData).then(function (_ref5) {
+        var data = _ref5.data;
         commit('setUser', data);
         return data;
       });
     },
-    logout: function logout(_ref5) {
-      var commit = _ref5.commit;
+    logout: function logout(_ref6) {
+      var commit = _ref6.commit;
       return _axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/logout').then(function (response) {
         commit('logout');
         return response;
@@ -13991,7 +14051,7 @@ var render = function () {
                       _c(
                         "span",
                         { staticClass: "ml-4 text-sm font-semibold" },
-                        [_vm._v("Евгений")]
+                        [_vm._v(_vm._s(_vm.username))]
                       ),
                       _vm._v(" "),
                       _c("i", {
@@ -18775,7 +18835,15 @@ var render = function () {
           [
             _c(
               "form",
-              { staticClass: "block-form__form form w-full flex flex-col" },
+              {
+                staticClass: "block-form__form form w-full flex flex-col",
+                on: {
+                  submit: function ($event) {
+                    $event.preventDefault()
+                    return _vm.login.apply(null, arguments)
+                  },
+                },
+              },
               [
                 _vm._m(1),
                 _vm._v(" "),
@@ -18801,7 +18869,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                            Корректный формат email\n                        "
+                                      "\n                                Корректный формат email\n                            "
                                     ),
                                   ]
                                 },
@@ -18814,7 +18882,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                            Некорректный формат email\n                        "
+                                      "\n                                Некорректный формат email\n                            "
                                     ),
                                   ]
                                 },
@@ -18878,7 +18946,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                            Запомнить меня\n                        "
+                              "\n                                Запомнить меня\n                            "
                             ),
                           ]
                         ),
@@ -18891,7 +18959,7 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                            Забыл пароль\n                        "
+                              "\n                                Забыл пароль\n                            "
                             ),
                           ]
                         ),
@@ -18907,24 +18975,50 @@ var render = function () {
                   { staticClass: "form__row flex flex-col" },
                   [
                     _c(
-                      "router-link",
-                      { attrs: { to: { name: "dashboard" } } },
+                      "div",
+                      { staticClass: "alert pb-4" },
                       [
-                        _c(
-                          "vs-button",
-                          {
-                            staticClass: "button",
-                            attrs: { size: "large" },
-                            on: { click: _vm.login },
-                          },
-                          [
-                            _vm._v(
-                              "\n                            Войти в систему\n                        "
-                            ),
-                          ]
-                        ),
+                        this.errorMsg !== ""
+                          ? _c(
+                              "vs-alert",
+                              {
+                                attrs: { color: "danger" },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "title",
+                                      fn: function () {
+                                        return [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\t\tОшибка авторизации\n\t\t\t\t\t\t\t\t"
+                                          ),
+                                        ]
+                                      },
+                                      proxy: true,
+                                    },
+                                  ],
+                                  null,
+                                  false,
+                                  2516858855
+                                ),
+                              },
+                              [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t" +
+                                    _vm._s(this.errorMsg) +
+                                    "\n\t\t\t\t\t\t\t"
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-button",
+                      { staticClass: "button", attrs: { size: "large" } },
+                      [_vm._v("\n\t\t\t\t\t\t\tВойти в систему\n\t\t\t\t\t\t")]
                     ),
                   ],
                   1
@@ -18967,7 +19061,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form__row" }, [
       _c("h1", { staticClass: "header font-bold text-3xl" }, [
-        _vm._v("\n                        Авторизация\n                    "),
+        _vm._v(
+          "\n                            Авторизация\n                        "
+        ),
       ]),
     ])
   },
@@ -19326,11 +19422,7 @@ var render = function () {
                 staticClass: "link link-white min-w-max text-center",
                 attrs: { to: { name: "reg-respondent" } },
               },
-              [
-                _vm._v(
-                  "\n                    стать респондентом\n                "
-                ),
-              ]
+              [_vm._v("\n                стать респондентом\n            ")]
             ),
           ],
           1
@@ -19413,7 +19505,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                                Корректный формат email\n                            "
+                                      "\n                            Корректный формат email\n                        "
                                     ),
                                   ]
                                 },
@@ -19425,7 +19517,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                                Некорректный формат email\n                            "
+                                      "\n                            Некорректный формат email\n                        "
                                     ),
                                   ]
                                 },
@@ -19439,7 +19531,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                                обязательное поле\n                            "
+                                      "\n                            обязательное поле\n                        "
                                     ),
                                   ]
                                 },
@@ -19503,7 +19595,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                                Слабый пароль\n                            "
+                                      "\n                            Слабый пароль\n                        "
                                     ),
                                   ]
                                 },
@@ -19515,7 +19607,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                                Пароль средней сложности\n                            "
+                                      "\n                            Пароль средней сложности\n                        "
                                     ),
                                   ]
                                 },
@@ -19527,7 +19619,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                                Пароль высокой сложности\n                            "
+                                      "\n                            Пароль высокой сложности\n                        "
                                     ),
                                   ]
                                 },
@@ -19539,7 +19631,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                                Надежность пароля максимальна\n                            "
+                                      "\n                            Надежность пароля максимальна\n                        "
                                     ),
                                   ]
                                 },
@@ -19606,7 +19698,7 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                            Зарегистрироваться\n                        "
+                          "\n                        Зарегистрироваться\n                    "
                         ),
                       ]
                     ),
@@ -19619,7 +19711,7 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                            войти в систему\n                        "
+                          "\n                        войти в систему\n                    "
                         ),
                       ]
                     ),
@@ -19708,9 +19800,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form__row" }, [
       _c("h1", { staticClass: "header font-bold text-3xl" }, [
-        _vm._v(
-          "\n                            Регистрация\n                        "
-        ),
+        _vm._v("\n                        Регистрация\n                    "),
       ]),
     ])
   },
@@ -19819,7 +19909,11 @@ var render = function () {
                 staticClass: "link link-white min-w-max text-center",
                 attrs: { to: { name: "reg-moderator" } },
               },
-              [_vm._v("\n                стать модератором\n            ")]
+              [
+                _vm._v(
+                  "\n                    стать модератором\n                "
+                ),
+              ]
             ),
           ],
           1
@@ -19842,7 +19936,15 @@ var render = function () {
           [
             _c(
               "form",
-              { staticClass: "block-form__form form w-full flex flex-col" },
+              {
+                staticClass: "block-form__form form w-full flex flex-col",
+                on: {
+                  submit: function ($event) {
+                    $event.preventDefault()
+                    return _vm.register.apply(null, arguments)
+                  },
+                },
+              },
               [
                 _vm._m(1),
                 _vm._v(" "),
@@ -19863,11 +19965,11 @@ var render = function () {
                         },
                       ]),
                       model: {
-                        value: _vm.username,
+                        value: _vm.userData.username,
                         callback: function ($$v) {
-                          _vm.username = $$v
+                          _vm.$set(_vm.userData, "username", $$v)
                         },
-                        expression: "username",
+                        expression: "userData.username",
                       },
                     }),
                     _vm._v(" "),
@@ -19889,20 +19991,20 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                            Корректный формат email\n                        "
+                                      "\n                                Корректный формат email\n                            "
                                     ),
                                   ]
                                 },
                                 proxy: true,
                               }
                             : null,
-                          !_vm.validEmail && _vm.email !== ""
+                          !_vm.validEmail && _vm.userData.email !== ""
                             ? {
                                 key: "message-danger",
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                            Некорректный формат email\n                        "
+                                      "\n                                Некорректный формат email\n                            "
                                     ),
                                   ]
                                 },
@@ -19914,11 +20016,11 @@ var render = function () {
                         true
                       ),
                       model: {
-                        value: _vm.email,
+                        value: _vm.userData.email,
                         callback: function ($$v) {
-                          _vm.email = $$v
+                          _vm.$set(_vm.userData, "email", $$v)
                         },
-                        expression: "email",
+                        expression: "userData.email",
                       },
                     }),
                     _vm._v(" "),
@@ -19962,7 +20064,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                            Слабый пароль\n                        "
+                                      "\n                                Слабый пароль\n                            "
                                     ),
                                   ]
                                 },
@@ -19974,7 +20076,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                            Пароль средней сложности\n                        "
+                                      "\n                                Пароль средней сложности\n                            "
                                     ),
                                   ]
                                 },
@@ -19986,7 +20088,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                            Пароль высокой сложности\n                        "
+                                      "\n                                Пароль высокой сложности\n                            "
                                     ),
                                   ]
                                 },
@@ -19998,7 +20100,7 @@ var render = function () {
                                 fn: function () {
                                   return [
                                     _vm._v(
-                                      "\n                            Надежность пароля максимальна\n                        "
+                                      "\n                                Надежность пароля максимальна\n                            "
                                     ),
                                   ]
                                 },
@@ -20010,11 +20112,39 @@ var render = function () {
                         true
                       ),
                       model: {
-                        value: _vm.password,
+                        value: _vm.userData.password,
                         callback: function ($$v) {
-                          _vm.password = $$v
+                          _vm.$set(_vm.userData, "password", $$v)
                         },
-                        expression: "password",
+                        expression: "userData.password",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("vs-input", {
+                      staticClass: "w-full row__item",
+                      attrs: {
+                        type: "password",
+                        placeholder: "пароль повторно",
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "icon",
+                          fn: function () {
+                            return [_c("i", { staticClass: "bx bx-lock" })]
+                          },
+                          proxy: true,
+                        },
+                      ]),
+                      model: {
+                        value: _vm.userData.password_confirmation,
+                        callback: function ($$v) {
+                          _vm.$set(
+                            _vm.userData,
+                            "password_confirmation",
+                            typeof $$v === "string" ? $$v.trim() : $$v
+                          )
+                        },
+                        expression: "userData.password_confirmation",
                       },
                     }),
                   ],
@@ -20033,7 +20163,7 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        Зарегистрироваться\n                    "
+                          "\n                            Зарегистрироваться\n                        "
                         ),
                       ]
                     ),
@@ -20046,7 +20176,7 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        войти в систему\n                    "
+                          "\n                            войти в систему\n                        "
                         ),
                       ]
                     ),
@@ -20121,7 +20251,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form__row" }, [
       _c("h1", { staticClass: "header font-bold text-3xl" }, [
-        _vm._v("\n                        Регистрация\n                    "),
+        _vm._v(
+          "\n                            Регистрация\n                        "
+        ),
       ]),
     ])
   },

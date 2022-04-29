@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,9 +14,24 @@ use \App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function (){
+	Route::get('/user', function (Request $request) {
+		return $request->user();
+	});
+	Route::post('/logout', [App\Http\Controllers\Authentication\AuthController::class, 'logout']);
+
 });
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::prefix('moderator')->group(function () {
+	Route::post('/register', [App\Http\Controllers\Authentication\Moderator\RegisterController::class, 'register']);
+});
+
+Route::prefix('respondent')->group(function () {
+	Route::post('/register', [App\Http\Controllers\Authentication\Respondent\RegisterController::class, 'register']);
+});
+
+Route::post('/login', [App\Http\Controllers\Authentication\AuthController::class, 'login']);
+
+//Route::post('/register', [RegisterController::class, 'register']);
+//Route::post('/login', [RegisterController::class, 'login']);
+

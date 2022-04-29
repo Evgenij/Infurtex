@@ -9,33 +9,29 @@ export default new Vuex.Store({
 	state:{
 		user: {
 			data:{},
-			filledData: true,
-			role: role.userRole.Moderator,
+			//filledData: false,
+			//role: role.userRole.Moderator,
 			token: sessionStorage.getItem('TOKEN'),
 		}
 	},
 	getters:{},
 	actions:{
 		register({commit}, userData){
-			return axiosClient.post('/register', userData)
-				.then(({data})=>{
-					console.log(userData)
-					commit('setUser', data)
-					return data
-				})
-			// return fetch('http://localhost:8000/api/register', {
-			// 	headers : {
-			// 		"Content-Type": 'application/json',
-			// 		Accept: 'application/json',
-			// 	},
-			// 	method: "POST",
-			// 	body: JSON.stringify(userData),
-			// })
-			// 	.then((res)=>res.json())
-			// 	.then((res)=>{
-			// 		commit('setUser', res);
-			// 		return res
-			// })
+			console.log(userData)
+			if (userData.role === role.userRole.Moderator) {
+				return axiosClient.post('/moderator/register', userData)
+					.then(({data})=>{
+						commit('setUser', data)
+						return data
+					})
+			} else {
+				return axiosClient.post('/respondent/register', userData)
+					.then(({data})=>{
+						commit('setUser', data)
+						return data
+					})
+			}
+
 		},
 		login({commit}, userData){
 			return axiosClient.post('/login', userData)

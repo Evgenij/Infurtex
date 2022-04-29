@@ -119,8 +119,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    //console.log(to)
-    if(to.meta.requiresAuth && !store.state.user.token) {
+    console.log(store.state.user.token)
+    if(!store.state.user.token && to.meta.requiresAuth) {
         console.log('token empty')
         next({name: 'auth'})
     } else if (store.state.user.token &&
@@ -129,15 +129,15 @@ router.beforeEach((to, from, next) => {
             to.name === 'rec-password' ||
             to.name === 'login' ||
             to.name === 'dashboard')){
-        console.log("enter to route as: ", store.state.user.role)
-        if(store.state.user.role === userRole.userRole.Moderator){
+        console.log("enter to route as: ", store.state.user)
+        if(store.state.user.data.role === userRole.userRole.Moderator){
             console.log("enter to moderator")
             next({name: 'moderator'})
-        } else if (store.state.user.role === userRole.userRole.Respondent) {
+        } else if (store.state.user.data.role === userRole.userRole.Respondent) {
             console.log("enter to respondent")
             next({name: 'respondent'})
         } else {
-            next()
+			next()
         }
     } else {
         next()
