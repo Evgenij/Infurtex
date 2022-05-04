@@ -1,5 +1,5 @@
 <template>
-    <div class="block-test relative z-0 flex rounded-lg bg-white mb-3 transform hover:-translate-y-1 cursor-pointer">
+    <div class="block-test relative z-0 flex rounded-lg bg-white mb-4 transform hover:-translate-y-1 cursor-pointer">
         <div class="preview-wrapper flex justify-center items-center rounded-lg overflow-hidden relative">
             <vs-tooltip not-arrow right>
                 <div class="type-test px-2 p-1 absolute top-1.5 left-1.5 bg-white rounded-lg">

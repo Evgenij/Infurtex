@@ -54,10 +54,9 @@
                 </vs-button>
             </router-link>
         </div>
-
         <div ref="content" class="list-tests relative h-full"
              :class="{'content-is-loading': !loadingTests}">
-            <div class="wrapp-list" v-if="this.testsList.length > 0">
+            <div v-if="this.testsList.length > 0">
                 <transition-group
                     v-bind:css="false"
                     v-on:before-enter="beforeEnter"
