@@ -2,7 +2,6 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import store from "./store/store";
 
-import App from "./components/App";
 import Error404 from "./views/errors/Error404";
 
 import Authorization from "./views/auth/Authorization";

@@ -45,7 +45,7 @@ i{
 }
 
 .background-lines{
-    background: url('/store/images/backgrounds/background-lines.png');
+    background: url('/storage/images/backgrounds/background-lines.png');
     width: 800px;
     background-size: cover;
     z-index: 1;
@@ -99,19 +99,19 @@ i{
 
         &.auth {
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-            url('/store/images/backgrounds/background.png');
+            url('/storage/images/backgrounds/background.png');
         }
         &.reg-moderator{
             background: linear-gradient(0deg, rgba(51, 159, 227, 0.3), rgba(51, 159, 227, 0.3)),
-            url('/store/images/backgrounds/back_reg-resp.png');
+            url('/storage/images/backgrounds/back_reg-respondent.png');
         }
         &.reg-respondent{
             background: linear-gradient(0deg, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.3)),
-            url('/store/images/backgrounds/back_reg-moder.png');
+            url('/storage/images/backgrounds/back_reg-moderator.png');
         }
         &.rec-pass{
             background: linear-gradient(0deg, rgba(36, 41, 53, 0.4), rgba(36, 41, 53, 0.4)),
-            url('/store/images/backgrounds/back_rec-pass.png');
+            url('/storage/images/backgrounds/back_rec-pass.png');
         }
         background-size: cover;
 
