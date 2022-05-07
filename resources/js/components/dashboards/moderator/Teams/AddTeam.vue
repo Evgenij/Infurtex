@@ -692,7 +692,6 @@
         },
         computed: {
             getListCountry(){
-                //alert('111')
                 return this.country.listCountRespondents = getListObjects(this.$props.usersData, 'country')
             },
             getListGenders(){
@@ -717,8 +716,6 @@
                 return this.filtered_work_area
             }
         },
-        mounted: function () {
-        }
     }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div class="dropdown w-full flex items-center">
         <div class="relative w-full">
-            <vs-input ref="input" v-model="name" primary placeholder="проект" @focus="switchListProjects">
+            <vs-input ref="input" v-model="value" primary placeholder="проект" @focus="switchListProjects">
                 <template #icon>
                     <i class='bx bx-folder'></i>
                 </template>
@@ -30,7 +30,7 @@
         name: "Dropdown",
         components: {DropdownItem},
         data: ()=>({
-            name: '',
+			value: '',
             id: 0,
             filteredItems: [],
             searchedItems: true,
@@ -48,10 +48,11 @@
         },
         methods: {
             resetProject(){
-                this.name = ''
+                this.value = ''
                 this.id = 0
             },
             addItem(){
+				this.switchListProjects()
                 this.$emit('add-item', {
                     input: this.$refs.input,
                     listProjects: this.listItems,
@@ -77,19 +78,29 @@
             },
             setDataDropdown(data){
                 this.id = data.id
-                this.name = data.value
+                this.value = data.value
                 this.switchListProjects()
-            }
+				this.sendDataProject({
+					id: data.id,
+					value: data.value
+				})
+            },
+			sendDataProject(){
+				this.$emit('changeProject', {
+					id: this.id,
+					value: this.value
+				})
+			}
         },
         watch: {
-            name(val) {
+            value(val) {
                 this.filterProjects(val)
             }
         },
         computed: {
             setData(){
                 this.id = this.$props.data.id
-                this.name= this.$props.data.value
+                this.value = this.$props.data.value
             }
         }
     }

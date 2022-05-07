@@ -80,22 +80,14 @@
 
                 this.calculateRespondents()
             },
-            calculateRespondents(){
-                this.countRespondents = 0
-                //let listAges = getCountUniqueData(this.$props.list_ages,'age')
-                //console.log(listAges)
-                //console.log(this.listAges.length)
-                for (let key in this.listAges){
-                    if(key >= this.valRangeStart && key <= this.valRangeEnd){
-                        this.countRespondents += this.listAges[key]
-                    }
-                    //console.log(key+ ':' + listAges[key])
-                }
-
-                // for(let i = this.valRangeStart; i <= this.valRangeEnd; i++){
-                //     console.log(this.$props.list_ages)
-                // }
-            },
+            calculateRespondents() {
+				this.countRespondents = 0
+				for (let key in this.listAges) {
+					if (key >= this.valRangeStart && key <= this.valRangeEnd) {
+						this.countRespondents += this.listAges[key]
+					}
+				}
+			},
             initUsersData(){
                 //console.log(this.$props.list_ages)
                 this.listAges = this.$props.list_ages
@@ -108,7 +100,6 @@
             this.slideTwo();
             this.$refs.block_count_resp.style.left = `23%`
             this.fillColor();
-            //console.log(this.$props.list_ages)
         },
         watch: {
             valRangeStart(){
@@ -126,19 +117,10 @@
             },
             list_ages(){
                 this.listAges = getCountUniqueData(this.$props.list_ages,'age')
-                //console.log(this.listAges)
-                //alert('recieved! - ' + this.listAges)
-                //console.log(getCountUniqueData(this.$props.list_ages,'age'))
-                //console.log(this.$props.list_ages)
+				console.log(this.listAges)
                 this.calculateRespondents()
             }
         },
-        created() {
-            // alert('created!')
-            // this.$on('sendListUsersData',listUsersData => {
-            //     this.listAges = listUsersData;// Никакого нового this не создается внутри стрелочной функции. Если он не используется здесь =>, это относится к событию
-            // })
-        }
     }
 </script>
 

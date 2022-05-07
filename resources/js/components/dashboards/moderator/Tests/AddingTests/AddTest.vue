@@ -1,7 +1,23 @@
 <template>
     <section class="relative tabs bg-white p-6 rounded-lg w-4/5 mx-auto mb-6" id="tabs">
-        <div class="general-data-test left-10 fixed rounded-lg bg-white p-3">
-            13324
+        <div class="info-test absolute">
+			<div class="info-test__panel fixed">
+				<vs-tooltip right>
+					<div class="wrapp-icon p-3 flex items-center">
+						<i class='bx bx-detail text-white'></i>
+					</div>
+					<template #tooltip>
+						<div class="content-tooltip">
+							<h4>
+								Whats is Vuesax?
+							</h4>
+							<p>
+								Vuesax is a framework of UI components created with Vuejs
+							</p>
+						</div>
+					</template>
+				</vs-tooltip>
+			</div>
         </div>
         <div class="tabs-triggers flex space-x-2 w-full font-medium">
             <div
@@ -25,7 +41,7 @@
                     </vs-input>
                 </div>
                 <div class="cell flex items-center">
-                    <dropdown :listItems="listProjects" @add-item="addProject" :data="dataProject"></dropdown>
+                    <dropdown :listItems="listProjects" @add-item="addProject" :data="dataProject" @changeProject="changeProject"></dropdown>
                 </div>
                 <hr class="col-span-2 my-3 mt-4">
                 <div v-if="testType === 0" class="list-type-test col-span-2">
@@ -55,7 +71,7 @@
 						<div class="data">
 							<h3 class="font-medium text-base">Прохождение по ссылке</h3>
 							<div class="flex items-center w-full space-x-2">
-								<input ref="linkTest" type="text" name="test-url" id="test-url" :value="this.linkTest" readonly
+								<input ref="linkTest" type="text" name="test-url" id="test-url" :value="this.testLink" readonly
 									   class="w-full text-slate-900 border-2 border-slate-100 rounded-lg hover:border-slate-200 px-3 py-2">
 								<vs-button class="min-w-fit hover:no-underline" primary @click="copyLinkTest">
 									<i class="bx bx-copy text-lg left"></i>
@@ -96,7 +112,142 @@
 			</div>
         </div>
         <div class="tabs-content tab pt-5 flex flex-col space-y-8" v-if="activeTab === 3">
-            3
+            <div class="filter-section p-3 transition ease-in-out">
+				<div class="filter-section__button cursor-pointer flex justify-between" @click="switchStateFilter">
+					<div class="filter-section__title flex items-center">
+						<i class='bx bx-slider-alt text-slate-400 text-xl mr-2'></i>
+						<span class="font-medium">
+							Фильтр данных респондентов
+						</span>
+						<i class='bx ml-1' :class="[
+							this.stateFilter ? 'bx-chevron-up' : 'bx-chevron-down'
+						]"></i>
+					</div>
+					<div class="count-respondents flex items-center text-sm">
+						<span class="text-slate-500 mr-2">Выборка:</span>
+						<p class="font-bold">{{formattingNumber(20394)}}</p>
+						<span class="text-slate-500 ml-1">респондентов</span>
+					</div>
+				</div>
+				<div class="filter-section__data rounded-lg border-2 border-slate-100
+						overflow-hidden transition p-3 mt-3 " :class="[
+					this.stateFilter ? '' : 'hidden'
+				]">
+					<div class="column flex flex-col w-full">
+						<div class="row grid grid-cols-2 gap-3 pt-6 w-full">
+							<vs-select
+								filter
+								collapse-chips
+								multiple
+								placeholder="Название страны"
+								v-model="resultsFilters.country"
+								label="Страна"
+								class="w-full"
+							>
+								<template v-for="(country, index) in this.getListCountries">
+									<vs-option :label="country.name_ru" :value="index+1">
+										{{country.name_ru}} <span class="text-slate-400">&nbsp;{{country.iso_code2}}&nbsp;</span>
+									</vs-option>
+								</template>
+							</vs-select>
+							<vs-select
+								filter
+								multiple
+								collapse-chips
+								v-model="resultsFilters.gender"
+								placeholder="Пол респондентов"
+								label="Пол"
+								class="w-full"
+							>
+								<vs-option label="Мужской" value="male">
+									Мужской
+								</vs-option>
+								<vs-option label="Женский" value="female">
+									Женский
+								</vs-option>
+							</vs-select>
+						</div>
+						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">
+							<vs-select
+								filter
+								multiple
+								collapse-chips
+								placeholder="Ваше образование"
+								v-model="resultsFilters.educations"
+								label="Образование"
+								class="w-full"
+							>
+								<template v-for="education in this.getListEducations">
+									<vs-option :label="education.name" :value="education.id">
+										{{education.name}}
+									</vs-option>
+								</template>
+							</vs-select>
+							<vs-select
+								filter
+								multiple
+								collapse-chips
+								placeholder="Трудоустройство"
+								v-model="resultsFilters.statusEmp"
+								label="Статус трудоустройства"
+								class="w-full"
+							>
+								<template v-for="statusEmp in this.getListStatusEmp">
+									<vs-option :label="statusEmp.name" :value="statusEmp.id">
+										{{statusEmp.name}}
+									</vs-option>
+								</template>
+							</vs-select>
+						</div>
+						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">
+							<vs-select
+								filter
+								placeholder="Название индустрии"
+								v-model="industry"
+								label="Индустрия"
+								class="w-full"
+							>
+								<template v-for="industry in this.getListIndustries">
+									<vs-option :label="industry.name" :value="industry.id">
+										{{industry.name}}
+									</vs-option>
+								</template>
+							</vs-select>
+							<vs-select
+								filter
+								collapse-chips
+								multiple
+								placeholder="Название проф.области"
+								v-model="resultsFilters.workArea"
+								label="Название проф.области"
+								class="w-full"
+							>
+								<template v-for="workArea in this.listWorkAreas">
+									<vs-option :label="workArea.name" :value="workArea.id" :key="workArea.id">
+										{{workArea.name}}
+									</vs-option>
+								</template>
+							</vs-select>
+						</div>
+						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">
+							<vs-select
+								placeholder="Ваша техническая подготовка"
+								multiple
+								filter
+								v-model="resultsFilters.techPrep"
+								label="Техническая подготовка"
+								class="w-full"
+							>
+								<template v-for="techPrep in this.getListTechPrep">
+									<vs-option :label="techPrep.name" :value="techPrep.id" :key="techPrep.id">
+										{{techPrep.name}}
+									</vs-option>
+								</template>
+							</vs-select>
+						</div>
+					</div>
+				</div>
+			</div>
         </div>
     </section>
 </template>
@@ -106,6 +257,11 @@
     import SectionTestType from "./SectionTestType";
     import ListTestType from "./ListTestType";
     import TeamBlock from "./TeamBlock";
+	import listCountries from "../../../../../mocks/countries"
+	import listEducations from "../../../../../mocks/usersCriteries/educations"
+	import listStatusEmp from "../../../../../mocks/usersCriteries/statusEmp"
+	import listIndustries from "../../../../../mocks/usersCriteries/industries"
+	import listTechPrep from "../../../../../mocks/usersCriteries/techPrep"
 
     export default {
         name: "AddTest",
@@ -116,7 +272,7 @@
 			TeamBlock
         },
         data: ()=>({
-            activeTab: 2,
+            activeTab: 3,
             tabs: [
                 "Построение",
                 "Рекрутинг",
@@ -131,27 +287,71 @@
                 { value: '57', id: 5 },
                 { value: '45646', id: 6 },
             ],
-            dataProject: {id:0,value:''},
-            testSections: [],
+            dataProject: {id:null,value:null},
             testType: 0,
-			linkTest: 'https://app.usabilityhub.com/tests/2a303ea9824c/recruit',
+			testInstruction: null,
+			testFiles: [],
+			testLink: 'https://app.usabilityhub.com/tests/2a303ea9824c/recruit',
 			teams: [
-				// {
-				// 	id: 1,
-				// 	name: "Team's name 1",
-				// 	count_resp: 20434
-				// },
-				// {
-				// 	id: 2,
-				// 	name: "Team's name 2",
-				// 	count_resp: 34435
-				// },
-				// {
-				// 	id: 3,
-				// 	name: "Team's name 3",
-				// 	count_resp: 20434534
-				// },
-			]
+				{
+					id: 1,
+					name: "Team's name 1",
+					count_resp: 20434
+				},
+				{
+					id: 2,
+					name: "Team's name 2",
+					count_resp: 34435
+				},
+				{
+					id: 3,
+					name: "Team's name 3",
+					count_resp: 20434534
+				},
+			],
+			stateFilter: false,
+			respondents: [
+				{
+					id: 1,
+					country: 12,
+					gender: 'male',
+					age: '25',
+					education: 1,
+					statusEmp: 1,
+					workArea: 2,
+					techPrep: 3
+				},
+				{
+					id: 2,
+					country: 12,
+					gender: 'female',
+					age: '34',
+					education: 2,
+					statusEmp: 3,
+					workArea: 2,
+					techPrep: 3
+				},
+				{
+					id: 3,
+					country: 12,
+					gender: 'female',
+					age: '56',
+					education: 2,
+					statusEmp: 3,
+					workArea: 2,
+					techPrep: 3
+				},
+			],
+			industry: '',
+			listWorkAreas: [],
+			resultsFilters: {
+            	country: [],
+				gender: [],
+				educations: [],
+				statusEmp: [],
+				workArea: [],
+				techPrep: []
+			}
         }),
         methods: {
             activate(index) {
@@ -164,9 +364,20 @@
                     value: nameNewProject,
                     id:  idNewProject
                 })
-                this.dataProject.value = nameNewProject
-                this.dataProject.id = idNewProject
+				this.setDataProject(
+					{
+						value: nameNewProject,
+						id: idNewProject
+					}
+				)
             },
+			changeProject(data){
+				this.setDataProject(data)
+			},
+			setDataProject(data){
+				this.dataProject.value = data.value
+				this.dataProject.id = data.id
+			},
             addSectionTest(id){
                 console.log('Test type: ', this.testType = id)
             },
@@ -195,15 +406,56 @@
 					text: `Теперь респонденты смогут добраться до вашего теста по ссылке`
 				})
 			},
+			switchStateFilter(){
+            	this.stateFilter = !this.stateFilter
+			},
+			getWorkAreas(){
+				this.listWorkAreas.length = 0
+				this.resultsFilters.workArea.length = 0
+				this.listWorkAreas = listIndustries.find(item => item.id === this.industry).workAreas
+			}
         },
+		computed: {
+			getListCountries() {
+				return listCountries
+			},
+			getListEducations() {
+				return listEducations
+			},
+			getListStatusEmp() {
+				return listStatusEmp
+			},
+			getListIndustries() {
+				return listIndustries
+			},
+			getListTechPrep(){
+				return listTechPrep
+			}
+		},
+		watch: {
+			industry(){
+				this.getWorkAreas()
+			},
+			resultsFilters(){
+				console.log('!!!')
+			}
+		}
     }
 </script>
 
 <style lang="scss" scoped>
     @import "../../../../../../sass/variables";
 
-    .general-data-test{
-        @include default-shadow();
+    .info-test {
+		left: -42px;
+		top: 0;
+		height: 100%;
+
+		&__panel {
+			top: 20%;
+			background: $primary;
+			border-radius: 10px 0 0 10px;
+		}
     }
 
     .tabs {
@@ -257,6 +509,10 @@
 		background: $primary;
 		//border-color: $primary;
 		box-shadow: 0 0 10px 1px $primary;
+	}
+
+	.type-recruiting input[type=radio]:not(:checked) + label .data {
+		opacity: .5;
 	}
 
 

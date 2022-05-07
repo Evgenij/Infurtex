@@ -336,7 +336,7 @@ var render = function () {
                   on: { click: _vm.browseFile },
                 },
                 [
-                  _c("i", { staticClass: "bx bx-cloud-download left" }),
+                  _c("i", { staticClass: "bx bx-import left" }),
                   _vm._v("\n            Выбрать файл\n        "),
                 ]
               ),

@@ -295,9 +295,9 @@
         computed: {
             teamsList(){
                 return this.filterTeams();
-            }
+            },
         }
-    }
+	}
 </script>
 
 <style lang="scss">
@@ -319,7 +319,7 @@
     }
 
     .coverage-respondents{
-        background: url('/store/images/map.png') no-repeat center;
+        background: url('/storage/images/map.png') no-repeat center;
         height: 300px;
         background-size: contain;
 

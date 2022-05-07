@@ -12,7 +12,7 @@
             <i class="bx bx-info-circle mr-1"></i> <span class="pb-1">список вопросов пуст</span>
         </div>
         <footer>
-            <vs-button transparent dark @click="activeTooltip=!activeTooltip" class="w-full">
+            <vs-button transparent success @click="activeTooltip=!activeTooltip" class="w-full">
                 <i class="bx bx-plus left"></i>
                 Добавить вопрос
             </vs-button>

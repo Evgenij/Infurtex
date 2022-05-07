@@ -2823,7 +2823,7 @@ var render = function () {
                   on: { click: _vm.addFile },
                 },
                 [
-                  _c("i", { staticClass: "bx bx-cloud-download left" }),
+                  _c("i", { staticClass: "bx bx-import left" }),
                   _vm._v("\n            Выбрать файл\n        "),
                 ]
               ),

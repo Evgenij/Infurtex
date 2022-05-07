@@ -1479,7 +1479,7 @@ var render = function () {
           "vs-button",
           {
             staticClass: "w-full",
-            attrs: { transparent: "", dark: "" },
+            attrs: { transparent: "", success: "" },
             on: {
               click: function ($event) {
                 _vm.activeTooltip = !_vm.activeTooltip

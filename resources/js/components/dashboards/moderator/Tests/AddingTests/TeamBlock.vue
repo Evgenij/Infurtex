@@ -1,8 +1,9 @@
 <template>
-    <div class="team-block transform hover:-translate-y-1">
+    <div class="team-block transform hover:-translate-y-1 ">
 		<input :id="'team-' + this.id" type="radio" name="team" class="hidden" checked>
 		<label :for="'team-' + this.id"
-			   class="rounded-lg border-2 border-slate-100 w-full p-2 pl-3 flex items-center space-x-3 cursor-pointer">
+			   class="rounded-lg border-2 border-slate-100 w-full p-2 pl-3
+			   flex items-center space-x-3 cursor-pointer hover:border-slate-200">
 			<div class="radio-check border-2 rounded relative"></div>
 			<div class="data">
 				<h3 class="font-medium text-sm">{{this.name}}</h3>

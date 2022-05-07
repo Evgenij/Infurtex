@@ -6,7 +6,6 @@ const defaultList = [
             {
                 "id": "4",
                 "text": "Автомойщик",
-
             },
             {
                 "id": "5",

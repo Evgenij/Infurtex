@@ -46,10 +46,10 @@
                             label="Пол"
                             class="w-full"
                         >
-                            <vs-option label="Мужской" value="m">
+                            <vs-option label="Мужской" value="male">
                                 Мужской
                             </vs-option>
-                            <vs-option label="Женский" value="f">
+                            <vs-option label="Женский" value="female">
                                 Женский
                             </vs-option>
                         </vs-select>
@@ -117,7 +117,7 @@
                             filter
                             placeholder="Название индустрии"
                             v-model="workArea"
-                            label="Название проф.индустрии"
+                            label="Название проф.области"
                             class="w-full"
                         >
                             <template v-for="workArea in this.listWorkAreas">

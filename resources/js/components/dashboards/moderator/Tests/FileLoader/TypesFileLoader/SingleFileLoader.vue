@@ -8,7 +8,7 @@
                 <span class="text-slate-400 text-sm">максимальный размер 10 Мб</span>
             </div>
             <vs-button class="min-w-max" success @click="browseFile">
-                <i class="bx bx-cloud-download left"></i>
+                <i class="bx bx-import left"></i>
                 Выбрать файл
             </vs-button>
         </main>

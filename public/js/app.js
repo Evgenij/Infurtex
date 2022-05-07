@@ -2442,19 +2442,13 @@ __webpack_require__.r(__webpack_exports__);
       this.calculateRespondents();
     },
     calculateRespondents: function calculateRespondents() {
-      this.countRespondents = 0; //let listAges = getCountUniqueData(this.$props.list_ages,'age')
-      //console.log(listAges)
-      //console.log(this.listAges.length)
+      this.countRespondents = 0;
 
       for (var key in this.listAges) {
         if (key >= this.valRangeStart && key <= this.valRangeEnd) {
           this.countRespondents += this.listAges[key];
-        } //console.log(key+ ':' + listAges[key])
-
-      } // for(let i = this.valRangeStart; i <= this.valRangeEnd; i++){
-      //     console.log(this.$props.list_ages)
-      // }
-
+        }
+      }
     },
     initUsersData: function initUsersData() {
       //console.log(this.$props.list_ages)
@@ -2467,7 +2461,7 @@ __webpack_require__.r(__webpack_exports__);
     this.slideOne();
     this.slideTwo();
     this.$refs.block_count_resp.style.left = "23%";
-    this.fillColor(); //console.log(this.$props.list_ages)
+    this.fillColor();
   },
   watch: {
     valRangeStart: function valRangeStart() {
@@ -2484,18 +2478,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     list_ages: function list_ages() {
-      this.listAges = (0,_utilities_utilities__WEBPACK_IMPORTED_MODULE_0__.getCountUniqueData)(this.$props.list_ages, 'age'); //console.log(this.listAges)
-      //alert('recieved! - ' + this.listAges)
-      //console.log(getCountUniqueData(this.$props.list_ages,'age'))
-      //console.log(this.$props.list_ages)
-
+      this.listAges = (0,_utilities_utilities__WEBPACK_IMPORTED_MODULE_0__.getCountUniqueData)(this.$props.list_ages, 'age');
+      console.log(this.listAges);
       this.calculateRespondents();
     }
-  },
-  created: function created() {// alert('created!')
-    // this.$on('sendListUsersData',listUsersData => {
-    //     this.listAges = listUsersData;// Никакого нового this не создается внутри стрелочной функции. Если он не используется здесь =>, это относится к событию
-    // })
   }
 });
 
@@ -3292,7 +3278,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   },
   computed: {
     getListCountry: function getListCountry() {
-      //alert('111')
       return this.country.listCountRespondents = (0,_utilities_utilities__WEBPACK_IMPORTED_MODULE_1__.getListObjects)(this.$props.usersData, 'country');
     },
     getListGenders: function getListGenders() {
@@ -3316,8 +3301,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     getFilteredWorksArea: function getFilteredWorksArea() {
       return this.filtered_work_area;
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -3839,6 +3823,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SectionTestType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SectionTestType */ "./resources/js/components/dashboards/moderator/Tests/AddingTests/SectionTestType.vue");
 /* harmony import */ var _ListTestType__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ListTestType */ "./resources/js/components/dashboards/moderator/Tests/AddingTests/ListTestType.vue");
 /* harmony import */ var _TeamBlock__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TeamBlock */ "./resources/js/components/dashboards/moderator/Tests/AddingTests/TeamBlock.vue");
+/* harmony import */ var _mocks_countries__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../mocks/countries */ "./resources/js/mocks/countries.js");
+/* harmony import */ var _mocks_usersCriteries_educations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../mocks/usersCriteries/educations */ "./resources/js/mocks/usersCriteries/educations.js");
+/* harmony import */ var _mocks_usersCriteries_statusEmp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../mocks/usersCriteries/statusEmp */ "./resources/js/mocks/usersCriteries/statusEmp.js");
+/* harmony import */ var _mocks_usersCriteries_industries__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../../mocks/usersCriteries/industries */ "./resources/js/mocks/usersCriteries/industries.js");
+/* harmony import */ var _mocks_usersCriteries_techPrep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../../mocks/usersCriteries/techPrep */ "./resources/js/mocks/usersCriteries/techPrep.js");
 //
 //
 //
@@ -3942,6 +3931,162 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
 
 
 
@@ -3956,7 +4101,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      activeTab: 2,
+      activeTab: 3,
       tabs: ["Построение", "Рекрутинг", "Результаты"],
       nameTest: '',
       listProjects: [{
@@ -3979,28 +4124,65 @@ __webpack_require__.r(__webpack_exports__);
         id: 6
       }],
       dataProject: {
-        id: 0,
-        value: ''
+        id: null,
+        value: null
       },
-      testSections: [],
       testType: 0,
-      linkTest: 'https://app.usabilityhub.com/tests/2a303ea9824c/recruit',
-      teams: [// {
-        // 	id: 1,
-        // 	name: "Team's name 1",
-        // 	count_resp: 20434
-        // },
-        // {
-        // 	id: 2,
-        // 	name: "Team's name 2",
-        // 	count_resp: 34435
-        // },
-        // {
-        // 	id: 3,
-        // 	name: "Team's name 3",
-        // 	count_resp: 20434534
-        // },
-      ]
+      testInstruction: null,
+      testFiles: [],
+      testLink: 'https://app.usabilityhub.com/tests/2a303ea9824c/recruit',
+      teams: [{
+        id: 1,
+        name: "Team's name 1",
+        count_resp: 20434
+      }, {
+        id: 2,
+        name: "Team's name 2",
+        count_resp: 34435
+      }, {
+        id: 3,
+        name: "Team's name 3",
+        count_resp: 20434534
+      }],
+      stateFilter: false,
+      respondents: [{
+        id: 1,
+        country: 12,
+        gender: 'male',
+        age: '25',
+        education: 1,
+        statusEmp: 1,
+        workArea: 2,
+        techPrep: 3
+      }, {
+        id: 2,
+        country: 12,
+        gender: 'female',
+        age: '34',
+        education: 2,
+        statusEmp: 3,
+        workArea: 2,
+        techPrep: 3
+      }, {
+        id: 3,
+        country: 12,
+        gender: 'female',
+        age: '56',
+        education: 2,
+        statusEmp: 3,
+        workArea: 2,
+        techPrep: 3
+      }],
+      industry: '',
+      listWorkAreas: [],
+      resultsFilters: {
+        country: [],
+        gender: [],
+        educations: [],
+        statusEmp: [],
+        workArea: [],
+        techPrep: []
+      }
     };
   },
   methods: {
@@ -4014,8 +4196,17 @@ __webpack_require__.r(__webpack_exports__);
         value: nameNewProject,
         id: idNewProject
       });
-      this.dataProject.value = nameNewProject;
-      this.dataProject.id = idNewProject;
+      this.setDataProject({
+        value: nameNewProject,
+        id: idNewProject
+      });
+    },
+    changeProject: function changeProject(data) {
+      this.setDataProject(data);
+    },
+    setDataProject: function setDataProject(data) {
+      this.dataProject.value = data.value;
+      this.dataProject.id = data.id;
     },
     addSectionTest: function addSectionTest(id) {
       console.log('Test type: ', this.testType = id);
@@ -4048,6 +4239,43 @@ __webpack_require__.r(__webpack_exports__);
         title: 'Ссылка скопирована!',
         text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0440\u0435\u0441\u043F\u043E\u043D\u0434\u0435\u043D\u0442\u044B \u0441\u043C\u043E\u0433\u0443\u0442 \u0434\u043E\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0434\u043E \u0432\u0430\u0448\u0435\u0433\u043E \u0442\u0435\u0441\u0442\u0430 \u043F\u043E \u0441\u0441\u044B\u043B\u043A\u0435"
       });
+    },
+    switchStateFilter: function switchStateFilter() {
+      this.stateFilter = !this.stateFilter;
+    },
+    getWorkAreas: function getWorkAreas() {
+      var _this2 = this;
+
+      this.listWorkAreas.length = 0;
+      this.resultsFilters.workArea.length = 0;
+      this.listWorkAreas = _mocks_usersCriteries_industries__WEBPACK_IMPORTED_MODULE_7__["default"].find(function (item) {
+        return item.id === _this2.industry;
+      }).workAreas;
+    }
+  },
+  computed: {
+    getListCountries: function getListCountries() {
+      return _mocks_countries__WEBPACK_IMPORTED_MODULE_4__["default"];
+    },
+    getListEducations: function getListEducations() {
+      return _mocks_usersCriteries_educations__WEBPACK_IMPORTED_MODULE_5__["default"];
+    },
+    getListStatusEmp: function getListStatusEmp() {
+      return _mocks_usersCriteries_statusEmp__WEBPACK_IMPORTED_MODULE_6__["default"];
+    },
+    getListIndustries: function getListIndustries() {
+      return _mocks_usersCriteries_industries__WEBPACK_IMPORTED_MODULE_7__["default"];
+    },
+    getListTechPrep: function getListTechPrep() {
+      return _mocks_usersCriteries_techPrep__WEBPACK_IMPORTED_MODULE_8__["default"];
+    }
+  },
+  watch: {
+    industry: function industry() {
+      this.getWorkAreas();
+    },
+    resultsFilters: function resultsFilters() {
+      console.log('!!!');
     }
   }
 });
@@ -4100,7 +4328,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      name: '',
+      value: '',
       id: 0,
       filteredItems: [],
       searchedItems: true,
@@ -4119,10 +4347,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     resetProject: function resetProject() {
-      this.name = '';
+      this.value = '';
       this.id = 0;
     },
     addItem: function addItem() {
+      this.switchListProjects();
       this.$emit('add-item', {
         input: this.$refs.input,
         listProjects: this.listItems
@@ -4151,19 +4380,29 @@ __webpack_require__.r(__webpack_exports__);
     },
     setDataDropdown: function setDataDropdown(data) {
       this.id = data.id;
-      this.name = data.value;
+      this.value = data.value;
       this.switchListProjects();
+      this.sendDataProject({
+        id: data.id,
+        value: data.value
+      });
+    },
+    sendDataProject: function sendDataProject() {
+      this.$emit('changeProject', {
+        id: this.id,
+        value: this.value
+      });
     }
   },
   watch: {
-    name: function name(val) {
+    value: function value(val) {
       this.filterProjects(val);
     }
   },
   computed: {
     setData: function setData() {
       this.id = this.$props.data.id;
-      this.name = this.$props.data.value;
+      this.value = this.$props.data.value;
     }
   }
 });
@@ -4369,6 +4608,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -9840,7 +10080,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".content {\n  width: 1040px;\n}\n.content__header {\n  z-index: 1000;\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.content-is-loading .add-team {\n  opacity: 0.3;\n}\n.coverage-respondents {\n  background: url(\"/store/images/map.png\") no-repeat center;\n  height: 300px;\n  background-size: contain;\n}\n.coverage-respondents__content {\n  width: 180px;\n  height: 180px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".content {\n  width: 1040px;\n}\n.content__header {\n  z-index: 1000;\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.content-is-loading .add-team {\n  opacity: 0.3;\n}\n.coverage-respondents {\n  background: url(\"/storage/images/map.png\") no-repeat center;\n  height: 300px;\n  background-size: contain;\n}\n.coverage-respondents__content {\n  width: 180px;\n  height: 180px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9864,7 +10104,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".general-data-test[data-v-c8c16372] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.tabs[data-v-c8c16372] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.tabs-trigger[data-v-c8c16372] {\n  background: #EEEFEF;\n  transition: 0.3s;\n  color: #919B9F;\n}\n.tabs-trigger .step-block[data-v-c8c16372] {\n  background: #E2E4E6;\n  color: #919B9F;\n}\n.tabs-trigger--active[data-v-c8c16372] {\n  background: linear-gradient(50.84deg, #339FE3 0%, #4FD5B8 100%);\n  color: white;\n}\n.tabs-trigger--active .step-block[data-v-c8c16372] {\n  background: white;\n  color: #1ac4b6;\n}\n.type-recruiting .data[data-v-c8c16372] {\n  width: 95%;\n}\n.type-recruiting .radio-circle[data-v-c8c16372] {\n  width: 20px;\n  height: 20px;\n}\n.type-recruiting .radio-circle[data-v-c8c16372]:before {\n  content: \"\";\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  background: white;\n  left: 3px;\n  top: 3px;\n  border-radius: 999px;\n}\n\n/* Checked */\n.type-recruiting input[type=radio]:checked + label .radio-circle[data-v-c8c16372]:before {\n  background: #1ac4b6;\n  box-shadow: 0 0 10px 1px #1ac4b6;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".info-test[data-v-c8c16372] {\n  left: -42px;\n  top: 0;\n  height: 100%;\n}\n.info-test__panel[data-v-c8c16372] {\n  top: 20%;\n  background: #1ac4b6;\n  border-radius: 10px 0 0 10px;\n}\n.tabs[data-v-c8c16372] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.tabs-trigger[data-v-c8c16372] {\n  background: #EEEFEF;\n  transition: 0.3s;\n  color: #919B9F;\n}\n.tabs-trigger .step-block[data-v-c8c16372] {\n  background: #E2E4E6;\n  color: #919B9F;\n}\n.tabs-trigger--active[data-v-c8c16372] {\n  background: linear-gradient(50.84deg, #339FE3 0%, #4FD5B8 100%);\n  color: white;\n}\n.tabs-trigger--active .step-block[data-v-c8c16372] {\n  background: white;\n  color: #1ac4b6;\n}\n.type-recruiting .data[data-v-c8c16372] {\n  width: 95%;\n}\n.type-recruiting .radio-circle[data-v-c8c16372] {\n  width: 20px;\n  height: 20px;\n}\n.type-recruiting .radio-circle[data-v-c8c16372]:before {\n  content: \"\";\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  background: white;\n  left: 3px;\n  top: 3px;\n  border-radius: 999px;\n}\n\n/* Checked */\n.type-recruiting input[type=radio]:checked + label .radio-circle[data-v-c8c16372]:before {\n  background: #1ac4b6;\n  box-shadow: 0 0 10px 1px #1ac4b6;\n}\n.type-recruiting input[type=radio]:not(:checked) + label .data[data-v-c8c16372] {\n  opacity: 0.5;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16039,14 +16279,49 @@ var render = function () {
       attrs: { id: "tabs" },
     },
     [
-      _c(
-        "div",
-        {
-          staticClass:
-            "general-data-test left-10 fixed rounded-lg bg-white p-3",
-        },
-        [_vm._v("\n            13324\n        ")]
-      ),
+      _c("div", { staticClass: "info-test absolute" }, [
+        _c(
+          "div",
+          { staticClass: "info-test__panel fixed" },
+          [
+            _c(
+              "vs-tooltip",
+              {
+                attrs: { right: "" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "tooltip",
+                    fn: function () {
+                      return [
+                        _c("div", { staticClass: "content-tooltip" }, [
+                          _c("h4", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\tWhats is Vuesax?\n\t\t\t\t\t\t\t"
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\tVuesax is a framework of UI components created with Vuejs\n\t\t\t\t\t\t\t"
+                            ),
+                          ]),
+                        ]),
+                      ]
+                    },
+                    proxy: true,
+                  },
+                ]),
+              },
+              [
+                _c("div", { staticClass: "wrapp-icon p-3 flex items-center" }, [
+                  _c("i", { staticClass: "bx bx-detail text-white" }),
+                ]),
+              ]
+            ),
+          ],
+          1
+        ),
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -16142,7 +16417,10 @@ var render = function () {
                           listItems: _vm.listProjects,
                           data: _vm.dataProject,
                         },
-                        on: { "add-item": _vm.addProject },
+                        on: {
+                          "add-item": _vm.addProject,
+                          changeProject: _vm.changeProject,
+                        },
                       }),
                     ],
                     1
@@ -16276,7 +16554,7 @@ var render = function () {
                                   id: "test-url",
                                   readonly: "",
                                 },
-                                domProps: { value: this.linkTest },
+                                domProps: { value: this.testLink },
                               }),
                               _vm._v(" "),
                               _c(
@@ -16432,7 +16710,498 @@ var render = function () {
         ? _c(
             "div",
             { staticClass: "tabs-content tab pt-5 flex flex-col space-y-8" },
-            [_vm._v("\n            3\n        ")]
+            [
+              _c(
+                "div",
+                { staticClass: "filter-section p-3 transition ease-in-out" },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "filter-section__button cursor-pointer flex justify-between",
+                      on: { click: _vm.switchStateFilter },
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "filter-section__title flex items-center",
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "bx bx-slider-alt text-slate-400 text-xl mr-2",
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "font-medium" }, [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\tФильтр данных респондентов\n\t\t\t\t\t\t"
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("i", {
+                            staticClass: "bx ml-1",
+                            class: [
+                              this.stateFilter
+                                ? "bx-chevron-up"
+                                : "bx-chevron-down",
+                            ],
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "count-respondents flex items-center text-sm",
+                        },
+                        [
+                          _c("span", { staticClass: "text-slate-500 mr-2" }, [
+                            _vm._v("Выборка:"),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "font-bold" }, [
+                            _vm._v(_vm._s(_vm.formattingNumber(20394))),
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "text-slate-500 ml-1" }, [
+                            _vm._v("респондентов"),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "filter-section__data rounded-lg border-2 border-slate-100\n\t\t\t\t\t\toverflow-hidden transition p-3 mt-3 ",
+                      class: [this.stateFilter ? "" : "hidden"],
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "column flex flex-col w-full" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "row grid grid-cols-2 gap-3 pt-6 w-full",
+                            },
+                            [
+                              _c(
+                                "vs-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    filter: "",
+                                    "collapse-chips": "",
+                                    multiple: "",
+                                    placeholder: "Название страны",
+                                    label: "Страна",
+                                  },
+                                  model: {
+                                    value: _vm.resultsFilters.country,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.resultsFilters,
+                                        "country",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "resultsFilters.country",
+                                  },
+                                },
+                                [
+                                  _vm._l(
+                                    this.getListCountries,
+                                    function (country, index) {
+                                      return [
+                                        _c(
+                                          "vs-option",
+                                          {
+                                            attrs: {
+                                              label: country.name_ru,
+                                              value: index + 1,
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(country.name_ru) +
+                                                " "
+                                            ),
+                                            _c(
+                                              "span",
+                                              { staticClass: "text-slate-400" },
+                                              [
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(country.iso_code2) +
+                                                    " "
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    }
+                                  ),
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "vs-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    filter: "",
+                                    multiple: "",
+                                    "collapse-chips": "",
+                                    placeholder: "Пол респондентов",
+                                    label: "Пол",
+                                  },
+                                  model: {
+                                    value: _vm.resultsFilters.gender,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.resultsFilters,
+                                        "gender",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "resultsFilters.gender",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "vs-option",
+                                    {
+                                      attrs: {
+                                        label: "Мужской",
+                                        value: "male",
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\tМужской\n\t\t\t\t\t\t\t\t"
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "vs-option",
+                                    {
+                                      attrs: {
+                                        label: "Женский",
+                                        value: "female",
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\tЖенский\n\t\t\t\t\t\t\t\t"
+                                      ),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "row grid grid-cols-2 gap-3 pt-8 w-full",
+                            },
+                            [
+                              _c(
+                                "vs-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    filter: "",
+                                    multiple: "",
+                                    "collapse-chips": "",
+                                    placeholder: "Ваше образование",
+                                    label: "Образование",
+                                  },
+                                  model: {
+                                    value: _vm.resultsFilters.educations,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.resultsFilters,
+                                        "educations",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "resultsFilters.educations",
+                                  },
+                                },
+                                [
+                                  _vm._l(
+                                    this.getListEducations,
+                                    function (education) {
+                                      return [
+                                        _c(
+                                          "vs-option",
+                                          {
+                                            attrs: {
+                                              label: education.name,
+                                              value: education.id,
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(education.name) +
+                                                "\n\t\t\t\t\t\t\t\t\t"
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    }
+                                  ),
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "vs-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    filter: "",
+                                    multiple: "",
+                                    "collapse-chips": "",
+                                    placeholder: "Трудоустройство",
+                                    label: "Статус трудоустройства",
+                                  },
+                                  model: {
+                                    value: _vm.resultsFilters.statusEmp,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.resultsFilters,
+                                        "statusEmp",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "resultsFilters.statusEmp",
+                                  },
+                                },
+                                [
+                                  _vm._l(
+                                    this.getListStatusEmp,
+                                    function (statusEmp) {
+                                      return [
+                                        _c(
+                                          "vs-option",
+                                          {
+                                            attrs: {
+                                              label: statusEmp.name,
+                                              value: statusEmp.id,
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(statusEmp.name) +
+                                                "\n\t\t\t\t\t\t\t\t\t"
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    }
+                                  ),
+                                ],
+                                2
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "row grid grid-cols-2 gap-3 pt-8 w-full",
+                            },
+                            [
+                              _c(
+                                "vs-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    filter: "",
+                                    placeholder: "Название индустрии",
+                                    label: "Индустрия",
+                                  },
+                                  model: {
+                                    value: _vm.industry,
+                                    callback: function ($$v) {
+                                      _vm.industry = $$v
+                                    },
+                                    expression: "industry",
+                                  },
+                                },
+                                [
+                                  _vm._l(
+                                    this.getListIndustries,
+                                    function (industry) {
+                                      return [
+                                        _c(
+                                          "vs-option",
+                                          {
+                                            attrs: {
+                                              label: industry.name,
+                                              value: industry.id,
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(industry.name) +
+                                                "\n\t\t\t\t\t\t\t\t\t"
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    }
+                                  ),
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "vs-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    filter: "",
+                                    "collapse-chips": "",
+                                    multiple: "",
+                                    placeholder: "Название проф.области",
+                                    label: "Название проф.области",
+                                  },
+                                  model: {
+                                    value: _vm.resultsFilters.workArea,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.resultsFilters,
+                                        "workArea",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "resultsFilters.workArea",
+                                  },
+                                },
+                                [
+                                  _vm._l(
+                                    this.listWorkAreas,
+                                    function (workArea) {
+                                      return [
+                                        _c(
+                                          "vs-option",
+                                          {
+                                            key: workArea.id,
+                                            attrs: {
+                                              label: workArea.name,
+                                              value: workArea.id,
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(workArea.name) +
+                                                "\n\t\t\t\t\t\t\t\t\t"
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    }
+                                  ),
+                                ],
+                                2
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "row grid grid-cols-2 gap-3 pt-8 w-full",
+                            },
+                            [
+                              _c(
+                                "vs-select",
+                                {
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    placeholder: "Ваша техническая подготовка",
+                                    multiple: "",
+                                    filter: "",
+                                    label: "Техническая подготовка",
+                                  },
+                                  model: {
+                                    value: _vm.resultsFilters.techPrep,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.resultsFilters,
+                                        "techPrep",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "resultsFilters.techPrep",
+                                  },
+                                },
+                                [
+                                  _vm._l(
+                                    this.getListTechPrep,
+                                    function (techPrep) {
+                                      return [
+                                        _c(
+                                          "vs-option",
+                                          {
+                                            key: techPrep.id,
+                                            attrs: {
+                                              label: techPrep.name,
+                                              value: techPrep.id,
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(techPrep.name) +
+                                                "\n\t\t\t\t\t\t\t\t\t"
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    }
+                                  ),
+                                ],
+                                2
+                              ),
+                            ],
+                            1
+                          ),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]
+              ),
+            ]
           )
         : _vm._e(),
     ]
@@ -16483,11 +17252,11 @@ var render = function () {
               },
             ]),
             model: {
-              value: _vm.name,
+              value: _vm.value,
               callback: function ($$v) {
-                _vm.name = $$v
+                _vm.value = $$v
               },
-              expression: "name",
+              expression: "value",
             },
           }),
           _vm._v(" "),
@@ -16704,7 +17473,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "team-block transform hover:-translate-y-1" },
+    { staticClass: "team-block transform hover:-translate-y-1 " },
     [
       _c("input", {
         staticClass: "hidden",
@@ -16720,7 +17489,7 @@ var render = function () {
         "label",
         {
           staticClass:
-            "rounded-lg border-2 border-slate-100 w-full p-2 pl-3 flex items-center space-x-3 cursor-pointer",
+            "rounded-lg border-2 border-slate-100 w-full p-2 pl-3\n\t\t\t   flex items-center space-x-3 cursor-pointer hover:border-slate-200",
           attrs: { for: "team-" + this.id },
         },
         [
@@ -17816,7 +18585,7 @@ var render = function () {
                         [
                           _c(
                             "vs-option",
-                            { attrs: { label: "Мужской", value: "m" } },
+                            { attrs: { label: "Мужской", value: "male" } },
                             [
                               _vm._v(
                                 "\n                            Мужской\n                        "
@@ -17826,7 +18595,7 @@ var render = function () {
                           _vm._v(" "),
                           _c(
                             "vs-option",
-                            { attrs: { label: "Женский", value: "f" } },
+                            { attrs: { label: "Женский", value: "female" } },
                             [
                               _vm._v(
                                 "\n                            Женский\n                        "
@@ -18049,7 +18818,7 @@ var render = function () {
                             attrs: {
                               filter: "",
                               placeholder: "Название индустрии",
-                              label: "Название проф.индустрии",
+                              label: "Название проф.области",
                             },
                             model: {
                               value: _vm.workArea,
