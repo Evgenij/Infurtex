@@ -111,8 +111,34 @@
 				</vs-button>
 			</div>
         </div>
-        <div class="tabs-content tab pt-5 flex flex-col space-y-8" v-if="activeTab === 3">
-            <div class="filter-section p-3 transition ease-in-out">
+        <div class="tabs-content tab pt-5 flex flex-col space-y-3" v-if="activeTab === 3">
+			<h2 class="font-bold text-xl my-3">Результаты теста</h2>
+			<header class="grid grid-cols-3 gap-3">
+				<div class="coverage-respondents flex flex-col space-y-1 p-3 px-4 rounded-lg bg-slate-100">
+					<span>Охват респондентов</span>
+					<p class="font-bold text-2xl">{{formattingNumber(20394)}}</p>
+				</div>
+				<div class="done-tests flex flex-col space-y-1 p-3 px-4 rounded-lg bg-slate-100">
+					<span>Прошло тест</span>
+					<p class="font-bold text-2xl">{{formattingNumber(11353)}}</p>
+				</div>
+				<div class="export-data flex flex-col space-y-2 p-3 px-4 rounded-lg bg-slate-100">
+					<span>Экспорт результатов</span>
+					<div class="formats-file flex w-full space-x-2">
+						<div class="button flex items-center bg-red-500 hover:bg-red-600 cursor-pointer p-1 px-2
+						rounded text-sm text-white font-medium">
+							<i class='bx bx-export mr-1'></i>
+							Экспортировать как .pdf
+						</div>
+<!--						<div class="button flex items-center bg-emerald-500 hover:bg-emerald-600 cursor-pointer p-1 px-2-->
+<!--						rounded text-sm text-white font-medium">-->
+<!--							<i class='bx bx-download mr-1'></i>-->
+<!--							Excel-->
+<!--						</div>-->
+					</div>
+				</div>
+			</header>
+            <section class="filter-section py-3">
 				<div class="filter-section__button cursor-pointer flex justify-between" @click="switchStateFilter">
 					<div class="filter-section__title flex items-center">
 						<i class='bx bx-slider-alt text-slate-400 text-xl mr-2'></i>
@@ -247,7 +273,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
+			<main>
+				1213
+			</main>
         </div>
     </section>
 </template>
