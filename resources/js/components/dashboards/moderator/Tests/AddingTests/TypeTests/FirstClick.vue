@@ -1,7 +1,7 @@
 <template>
     <section class="first-click-block flex flex-col space-y-4">
         <header class="flex items-center justify-center text-lg font-medium border-b border-slate-100 pb-4">
-            <div class="p-2 px-3 rounded-lg flex items-center justify-center bg-yellow-500 mr-2
+            <div class="p-2 px-3 rounded-lg flex items-center justify-center bg-yellow-500 mr-3
                 shadow-lg shadow-yellow-500/50">
                 <i class="bx bxs-pointer text-white text-sm"></i>
             </div>

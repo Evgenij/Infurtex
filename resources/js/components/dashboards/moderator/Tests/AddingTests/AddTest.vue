@@ -64,12 +64,46 @@
 			<div class="tab-data flex flex-col space-y-2 mt-2">
 				<h2 class="col-span-2 font-medium text-base">Способ рекрутинга</h2>
 				<div class="type-recruiting">
-					<input id="radio-link" type="radio" name="type-recruiting" class="hidden" checked>
-					<label for="radio-link"
-						   class="rounded-lg border-2 border-slate-100 w-full p-3 flex items-center space-x-3 cursor-pointer">
+					<input id="radio-ganeral" type="radio" name="type-recruiting" class="hidden" checked>
+					<label for="radio-ganeral"
+						   class="rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer">
 						<div class="radio-circle border-2 rounded-full relative"></div>
 						<div class="data">
-							<h3 class="font-medium text-base">Прохождение по ссылке</h3>
+							<h3 class="font-bold text-base mb-3">Всеобщая рассылка</h3>
+							<div class="data__cost">
+								<div class="flex">Стоимость:
+									<div class="flex items-center space-x-1 text-teal-500 font-bold">
+										<svg class="ml-2" width="20" height="20" viewBox="0 0 37 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" clip-rule="evenodd" d="M12.1724 0.5L14.1682 4.01778L11.0875 4.00375L11.127 4.07326L9.63764 6.72577L7.64188 3.20799L6.1135 5.93001L8.10926 9.44779L6.58089 12.1698L4.58513 8.65203L0 16.8181L9.42442 33.4298L18.6663 33.4719L16.6706 29.9542L19.7512 29.9682L21.747 33.486L24.8276 33.5L22.8318 29.9822L25.9125 29.9963L25.873 29.9267L27.3624 27.2742L29.3581 30.792L30.8865 28.07L28.8907 24.5522L30.4191 21.8302L32.4149 25.348L37 17.1819L27.5756 0.570157L18.3337 0.528063L20.3294 4.04584L17.2488 4.03181L15.2531 0.514031L12.1724 0.5ZM17.2488 4.03181L19.2446 7.54959L23.8655 7.57064L29.1875 16.9514L26.895 21.0344L28.8907 24.5522L27.3624 27.2742L25.3666 23.7564L23.8384 26.4781L20.8361 26.4644L22.8318 29.9822L19.7512 29.9682L17.7554 26.4504L13.1345 26.4294L7.81246 17.0486L10.105 12.9656L8.10926 9.44779L9.63764 6.72577L11.6334 10.2436L13.1616 7.52189L16.1639 7.53556L14.1682 4.01778L17.2488 4.03181Z" fill="#1ac4b6"/>
+										</svg>
+										<span>
+											{{formattingNumber(6700)}}
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</label>
+				</div>
+				<div class="type-recruiting">
+					<input id="radio-link" type="radio" name="type-recruiting" class="hidden" checked>
+					<label for="radio-link"
+						   class="rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer">
+						<div class="radio-circle border-2 rounded-full relative"></div>
+						<div class="data">
+							<h3 class="font-bold text-base mb-3">Прохождение по ссылке</h3>
+							<div class="data__cost">
+								<div class="flex">Стоимость:
+									<div class="flex items-center space-x-1 text-teal-500 font-bold">
+										<svg class="ml-2" width="20" height="20" viewBox="0 0 37 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" clip-rule="evenodd" d="M12.1724 0.5L14.1682 4.01778L11.0875 4.00375L11.127 4.07326L9.63764 6.72577L7.64188 3.20799L6.1135 5.93001L8.10926 9.44779L6.58089 12.1698L4.58513 8.65203L0 16.8181L9.42442 33.4298L18.6663 33.4719L16.6706 29.9542L19.7512 29.9682L21.747 33.486L24.8276 33.5L22.8318 29.9822L25.9125 29.9963L25.873 29.9267L27.3624 27.2742L29.3581 30.792L30.8865 28.07L28.8907 24.5522L30.4191 21.8302L32.4149 25.348L37 17.1819L27.5756 0.570157L18.3337 0.528063L20.3294 4.04584L17.2488 4.03181L15.2531 0.514031L12.1724 0.5ZM17.2488 4.03181L19.2446 7.54959L23.8655 7.57064L29.1875 16.9514L26.895 21.0344L28.8907 24.5522L27.3624 27.2742L25.3666 23.7564L23.8384 26.4781L20.8361 26.4644L22.8318 29.9822L19.7512 29.9682L17.7554 26.4504L13.1345 26.4294L7.81246 17.0486L10.105 12.9656L8.10926 9.44779L9.63764 6.72577L11.6334 10.2436L13.1616 7.52189L16.1639 7.53556L14.1682 4.01778L17.2488 4.03181Z" fill="#1ac4b6"/>
+										</svg>
+										<span>
+											{{formattingNumber(1300)}}
+										</span>
+									</div>
+								</div>
+							</div>
 							<div class="flex items-center w-full space-x-2">
 								<input ref="linkTest" type="text" name="test-url" id="test-url" :value="this.testLink" readonly
 									   class="w-full text-slate-900 border-2 border-slate-100 rounded-lg hover:border-slate-200 px-3 py-2">
@@ -84,13 +118,14 @@
 				<div class="type-recruiting">
 					<input id="radio-team" type="radio" name="type-recruiting" class="hidden" checked>
 					<label for="radio-team"
-						   class="rounded-lg border-2 border-slate-100 w-full p-3 flex items-center space-x-3 cursor-pointer">
+						   class="rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer">
 						<div class="radio-circle border-2 rounded-full relative w-full"></div>
 						<div class="data">
-							<h3 class="font-medium text-base mb-2">Рассылка по команде</h3>
+							<h3 class="font-bold text-base mb-2">Рассылка по команде</h3>
 							<div v-if="teams.length !== 0" class="list-teams w-full grid grid-cols-3 gap-3">
 								<div  v-for="team in teams" class="team">
-									<team-block :id="team.id" :name="team.name" :count_resp="team.count_resp"></team-block>
+									<team-block :id="team.id" :name="team.name"
+												:count_resp="team.count_resp" :cost="team.cost"></team-block>
 								</div>
 							</div>
 							<div v-else class="text-sm empty-teams text-center text-gray-500 h-full p-2 bg-slate-50 rounded-lg border border-slate-100">
@@ -112,15 +147,33 @@
 			</div>
         </div>
         <div class="tabs-content tab pt-5 flex flex-col space-y-3" v-if="activeTab === 3">
-			<h2 class="font-bold text-xl my-3">Результаты теста</h2>
-			<header class="grid grid-cols-3 gap-3">
-				<div class="coverage-respondents flex flex-col space-y-1 p-3 px-4 rounded-lg bg-slate-100">
-					<span>Охват респондентов</span>
-					<p class="font-bold text-2xl">{{formattingNumber(20394)}}</p>
+			<header class="flex items-center text-base font-medium my-2">
+				<div class="p-2 px-3 rounded-lg flex items-center justify-center bg-yellow-500 mr-3
+                shadow-lg shadow-yellow-500/50">
+					<i class="bx bxs-pointer text-white text-sm"></i>
 				</div>
-				<div class="done-tests flex flex-col space-y-1 p-3 px-4 rounded-lg bg-slate-100">
-					<span>Прошло тест</span>
-					<p class="font-bold text-2xl">{{formattingNumber(11353)}}</p>
+				Тест первого клика
+			</header>
+			<section class="grid grid-cols-3 gap-3">
+				<div class="coverage-respondents flex flex-col space-y-2 p-3 px-4 rounded-lg bg-slate-100">
+					<span>Охват респондентов</span>
+					<div class="count_respondents flex items-end space-x-1">
+						<p class="font-bold text-2xl leading-none">{{formattingNumber(coverageRespondents)}}</p>
+						<span class="text-sm text-slate-400 leading-none">чел</span>
+					</div>
+
+				</div>
+				<div class="done-tests flex justify-between items-start p-3 px-4 rounded-lg bg-slate-100">
+					<div class="wrapp-data flex flex-col space-y-2">
+						<span>Прошло тест</span>
+						<div class="count_respondents flex items-end space-x-1">
+							<p class="font-bold text-2xl leading-none">{{formattingNumber(this.respondentsAnswers.length)}}</p>
+							<span class="text-sm text-slate-400 leading-none">чел</span>
+						</div>
+					</div>
+					<div class="count-percent font-bold text-3xl text-teal-500">
+						{{getPercentDone()}}
+					</div>
 				</div>
 				<div class="export-data flex flex-col space-y-2 p-3 px-4 rounded-lg bg-slate-100">
 					<span>Экспорт результатов</span>
@@ -137,145 +190,145 @@
 <!--						</div>-->
 					</div>
 				</div>
-			</header>
-            <section class="filter-section py-3">
-				<div class="filter-section__button cursor-pointer flex justify-between" @click="switchStateFilter">
-					<div class="filter-section__title flex items-center">
-						<i class='bx bx-slider-alt text-slate-400 text-xl mr-2'></i>
-						<span class="font-medium">
-							Фильтр данных респондентов
-						</span>
-						<i class='bx ml-1' :class="[
-							this.stateFilter ? 'bx-chevron-up' : 'bx-chevron-down'
-						]"></i>
-					</div>
-					<div class="count-respondents flex items-center text-sm">
-						<span class="text-slate-500 mr-2">Выборка:</span>
-						<p class="font-bold">{{formattingNumber(20394)}}</p>
-						<span class="text-slate-500 ml-1">респондентов</span>
-					</div>
-				</div>
-				<div class="filter-section__data rounded-lg border-2 border-slate-100
-						overflow-hidden transition p-3 mt-3 " :class="[
-					this.stateFilter ? '' : 'hidden'
-				]">
-					<div class="column flex flex-col w-full">
-						<div class="row grid grid-cols-2 gap-3 pt-6 w-full">
-							<vs-select
-								filter
-								collapse-chips
-								multiple
-								placeholder="Название страны"
-								v-model="resultsFilters.country"
-								label="Страна"
-								class="w-full"
-							>
-								<template v-for="(country, index) in this.getListCountries">
-									<vs-option :label="country.name_ru" :value="index+1">
-										{{country.name_ru}} <span class="text-slate-400">&nbsp;{{country.iso_code2}}&nbsp;</span>
-									</vs-option>
-								</template>
-							</vs-select>
-							<vs-select
-								filter
-								multiple
-								collapse-chips
-								v-model="resultsFilters.gender"
-								placeholder="Пол респондентов"
-								label="Пол"
-								class="w-full"
-							>
-								<vs-option label="Мужской" value="male">
-									Мужской
-								</vs-option>
-								<vs-option label="Женский" value="female">
-									Женский
-								</vs-option>
-							</vs-select>
-						</div>
-						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">
-							<vs-select
-								filter
-								multiple
-								collapse-chips
-								placeholder="Ваше образование"
-								v-model="resultsFilters.educations"
-								label="Образование"
-								class="w-full"
-							>
-								<template v-for="education in this.getListEducations">
-									<vs-option :label="education.name" :value="education.id">
-										{{education.name}}
-									</vs-option>
-								</template>
-							</vs-select>
-							<vs-select
-								filter
-								multiple
-								collapse-chips
-								placeholder="Трудоустройство"
-								v-model="resultsFilters.statusEmp"
-								label="Статус трудоустройства"
-								class="w-full"
-							>
-								<template v-for="statusEmp in this.getListStatusEmp">
-									<vs-option :label="statusEmp.name" :value="statusEmp.id">
-										{{statusEmp.name}}
-									</vs-option>
-								</template>
-							</vs-select>
-						</div>
-						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">
-							<vs-select
-								filter
-								placeholder="Название индустрии"
-								v-model="industry"
-								label="Индустрия"
-								class="w-full"
-							>
-								<template v-for="industry in this.getListIndustries">
-									<vs-option :label="industry.name" :value="industry.id">
-										{{industry.name}}
-									</vs-option>
-								</template>
-							</vs-select>
-							<vs-select
-								filter
-								collapse-chips
-								multiple
-								placeholder="Название проф.области"
-								v-model="resultsFilters.workArea"
-								label="Название проф.области"
-								class="w-full"
-							>
-								<template v-for="workArea in this.listWorkAreas">
-									<vs-option :label="workArea.name" :value="workArea.id" :key="workArea.id">
-										{{workArea.name}}
-									</vs-option>
-								</template>
-							</vs-select>
-						</div>
-						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">
-							<vs-select
-								placeholder="Ваша техническая подготовка"
-								multiple
-								filter
-								v-model="resultsFilters.techPrep"
-								label="Техническая подготовка"
-								class="w-full"
-							>
-								<template v-for="techPrep in this.getListTechPrep">
-									<vs-option :label="techPrep.name" :value="techPrep.id" :key="techPrep.id">
-										{{techPrep.name}}
-									</vs-option>
-								</template>
-							</vs-select>
-						</div>
-					</div>
-				</div>
 			</section>
-			<main>
-				1213
+<!--            <section class="filter-section py-3">-->
+<!--				<div class="filter-section__button cursor-pointer flex justify-between" @click="switchStateFilter">-->
+<!--					<div class="filter-section__title flex items-center">-->
+<!--						<i class='bx bx-slider-alt text-slate-400 text-xl mr-2'></i>-->
+<!--						<span class="font-medium">-->
+<!--							Фильтр данных респондентов-->
+<!--						</span>-->
+<!--						<i class='bx ml-1' :class="[-->
+<!--							this.stateFilter ? 'bx-chevron-up' : 'bx-chevron-down'-->
+<!--						]"></i>-->
+<!--					</div>-->
+<!--					<div class="count-respondents flex items-center text-sm">-->
+<!--						<span class="text-slate-500 mr-1">Выборка:</span>-->
+<!--						<p class="font-bold">{{formattingNumber(20394)}}</p>-->
+<!--						<span class="text-slate-500 ml-1">респондентов</span>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="filter-section__data rounded-lg border-2 border-slate-100-->
+<!--						overflow-hidden transition p-3 mt-3 " :class="[-->
+<!--					this.stateFilter ? '' : 'hidden'-->
+<!--				]">-->
+<!--					<div class="column flex flex-col w-full">-->
+<!--						<div class="row grid grid-cols-2 gap-3 pt-6 w-full">-->
+<!--							<vs-select-->
+<!--								filter-->
+<!--								collapse-chips-->
+<!--								multiple-->
+<!--								placeholder="Название страны"-->
+<!--								v-model="resultsFilters.country"-->
+<!--								label="Страна"-->
+<!--								class="w-full"-->
+<!--							>-->
+<!--								<template v-for="(country, index) in this.getListCountries">-->
+<!--									<vs-option :label="country.name_ru" :value="index+1">-->
+<!--										{{country.name_ru}} <span class="text-slate-400">&nbsp;{{country.iso_code2}}&nbsp;</span>-->
+<!--									</vs-option>-->
+<!--								</template>-->
+<!--							</vs-select>-->
+<!--							<vs-select-->
+<!--								filter-->
+<!--								multiple-->
+<!--								collapse-chips-->
+<!--								v-model="resultsFilters.gender"-->
+<!--								placeholder="Пол респондентов"-->
+<!--								label="Пол"-->
+<!--								class="w-full"-->
+<!--							>-->
+<!--								<vs-option label="Мужской" value="male">-->
+<!--									Мужской-->
+<!--								</vs-option>-->
+<!--								<vs-option label="Женский" value="female">-->
+<!--									Женский-->
+<!--								</vs-option>-->
+<!--							</vs-select>-->
+<!--						</div>-->
+<!--						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">-->
+<!--							<vs-select-->
+<!--								filter-->
+<!--								multiple-->
+<!--								collapse-chips-->
+<!--								placeholder="Ваше образование"-->
+<!--								v-model="resultsFilters.educations"-->
+<!--								label="Образование"-->
+<!--								class="w-full"-->
+<!--							>-->
+<!--								<template v-for="education in this.getListEducations">-->
+<!--									<vs-option :label="education.name" :value="education.id">-->
+<!--										{{education.name}}-->
+<!--									</vs-option>-->
+<!--								</template>-->
+<!--							</vs-select>-->
+<!--							<vs-select-->
+<!--								filter-->
+<!--								multiple-->
+<!--								collapse-chips-->
+<!--								placeholder="Трудоустройство"-->
+<!--								v-model="resultsFilters.statusEmp"-->
+<!--								label="Статус трудоустройства"-->
+<!--								class="w-full"-->
+<!--							>-->
+<!--								<template v-for="statusEmp in this.getListStatusEmp">-->
+<!--									<vs-option :label="statusEmp.name" :value="statusEmp.id">-->
+<!--										{{statusEmp.name}}-->
+<!--									</vs-option>-->
+<!--								</template>-->
+<!--							</vs-select>-->
+<!--						</div>-->
+<!--						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">-->
+<!--							<vs-select-->
+<!--								filter-->
+<!--								placeholder="Название индустрии"-->
+<!--								v-model="industry"-->
+<!--								label="Индустрия"-->
+<!--								class="w-full"-->
+<!--							>-->
+<!--								<template v-for="industry in this.getListIndustries">-->
+<!--									<vs-option :label="industry.name" :value="industry.id">-->
+<!--										{{industry.name}}-->
+<!--									</vs-option>-->
+<!--								</template>-->
+<!--							</vs-select>-->
+<!--							<vs-select-->
+<!--								filter-->
+<!--								collapse-chips-->
+<!--								multiple-->
+<!--								placeholder="Название проф.области"-->
+<!--								v-model="resultsFilters.workArea"-->
+<!--								label="Название проф.области"-->
+<!--								class="w-full"-->
+<!--							>-->
+<!--								<template v-for="workArea in this.listWorkAreas">-->
+<!--									<vs-option :label="workArea.name" :value="workArea.id" :key="workArea.id">-->
+<!--										{{workArea.name}}-->
+<!--									</vs-option>-->
+<!--								</template>-->
+<!--							</vs-select>-->
+<!--						</div>-->
+<!--						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">-->
+<!--							<vs-select-->
+<!--								placeholder="Ваша техническая подготовка"-->
+<!--								multiple-->
+<!--								filter-->
+<!--								v-model="resultsFilters.techPrep"-->
+<!--								label="Техническая подготовка"-->
+<!--								class="w-full"-->
+<!--							>-->
+<!--								<template v-for="techPrep in this.getListTechPrep">-->
+<!--									<vs-option :label="techPrep.name" :value="techPrep.id" :key="techPrep.id">-->
+<!--										{{techPrep.name}}-->
+<!--									</vs-option>-->
+<!--								</template>-->
+<!--							</vs-select>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</section>-->
+			<main class="pt-2">
+				<manager-answers></manager-answers>
 			</main>
         </div>
     </section>
@@ -291,6 +344,7 @@
 	import listStatusEmp from "../../../../../mocks/usersCriteries/statusEmp"
 	import listIndustries from "../../../../../mocks/usersCriteries/industries"
 	import listTechPrep from "../../../../../mocks/usersCriteries/techPrep"
+	import ManagerAnswers from "../ManagerAnswers";
 
     export default {
         name: "AddTest",
@@ -298,7 +352,8 @@
             ListTestType,
             SectionTestType,
             Dropdown,
-			TeamBlock
+			TeamBlock,
+			ManagerAnswers
         },
         data: ()=>({
             activeTab: 3,
@@ -325,62 +380,53 @@
 				{
 					id: 1,
 					name: "Team's name 1",
-					count_resp: 20434
+					count_resp: 2434,
+					cost: 354
 				},
 				{
 					id: 2,
 					name: "Team's name 2",
-					count_resp: 34435
+					count_resp: 34435,
+					cost: 4523
 				},
 				{
 					id: 3,
 					name: "Team's name 3",
-					count_resp: 20434534
+					count_resp: 204534,
+					cost: 35224
 				},
 			],
-			stateFilter: false,
-			respondents: [
+			//stateFilter: false,
+			coverageRespondents: 20458,
+			respondentsAnswers: [
 				{
-					id: 1,
-					country: 12,
-					gender: 'male',
-					age: '25',
-					education: 1,
-					statusEmp: 1,
-					workArea: 2,
-					techPrep: 3
-				},
-				{
-					id: 2,
-					country: 12,
-					gender: 'female',
-					age: '34',
-					education: 2,
-					statusEmp: 3,
-					workArea: 2,
-					techPrep: 3
-				},
-				{
-					id: 3,
-					country: 12,
-					gender: 'female',
-					age: '56',
-					education: 2,
-					statusEmp: 3,
-					workArea: 2,
-					techPrep: 3
+					dataRespondent: {
+						id: 1,
+						country: 12,
+						gender: 'male',
+						age: '25',
+						education: 1,
+						statusEmp: 1,
+						workArea: 2,
+						techPrep: 3
+					},
+					answers: [
+						{
+
+						}
+					]
 				},
 			],
-			industry: '',
-			listWorkAreas: [],
-			resultsFilters: {
-            	country: [],
-				gender: [],
-				educations: [],
-				statusEmp: [],
-				workArea: [],
-				techPrep: []
-			}
+			// industry: '',
+			// listWorkAreas: [],
+			// resultsFilters: {
+            // 	country: [],
+			// 	gender: [],
+			// 	educations: [],
+			// 	statusEmp: [],
+			// 	workArea: [],
+			// 	techPrep: []
+			// }
         }),
         methods: {
             activate(index) {
@@ -442,6 +488,9 @@
 				this.listWorkAreas.length = 0
 				this.resultsFilters.workArea.length = 0
 				this.listWorkAreas = listIndustries.find(item => item.id === this.industry).workAreas
+			},
+			getPercentDone(){
+            	return (Math.ceil((this.respondentsAnswers.length / this.coverageRespondents) * 100)) + '%'
 			}
         },
 		computed: {
@@ -540,8 +589,9 @@
 		box-shadow: 0 0 10px 1px $primary;
 	}
 
-	.type-recruiting input[type=radio]:not(:checked) + label .data {
-		opacity: .5;
+	.type-recruiting input[type=radio]:checked + label {
+		transform: translateY(-5px);
+		box-shadow: 0 18px 20px 0 #393f4e29;
 	}
 
 

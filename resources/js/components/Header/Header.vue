@@ -44,7 +44,7 @@
                         </div>
                         <div class="content-block__text flex-col items-start text-left py-3">
                             <div class="title font-semibold text-slate-900">Инфьюрты</div>
-                            Системные монеты, используя которые, вы можете применять продвинутые функции системы
+                            Системные монеты, которые используются для оплаты различных функций системы
                         </div>
                     </div>
                 </template>

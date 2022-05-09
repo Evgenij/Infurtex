@@ -1895,7 +1895,7 @@ var staticRenderFns = [
           "div",
           {
             staticClass:
-              "p-2 px-3 rounded-lg flex items-center justify-center bg-red-500 mr-2\n                shadow-lg shadow-red-500/50",
+              "p-2 px-3 rounded-lg flex items-center justify-center bg-red-500 mr-3\n                shadow-lg shadow-red-500/50",
           },
           [_c("i", { staticClass: "bx bxs-heart text-white text-sm" })]
         ),

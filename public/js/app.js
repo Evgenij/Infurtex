@@ -3828,6 +3828,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mocks_usersCriteries_statusEmp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../mocks/usersCriteries/statusEmp */ "./resources/js/mocks/usersCriteries/statusEmp.js");
 /* harmony import */ var _mocks_usersCriteries_industries__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../../mocks/usersCriteries/industries */ "./resources/js/mocks/usersCriteries/industries.js");
 /* harmony import */ var _mocks_usersCriteries_techPrep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../../mocks/usersCriteries/techPrep */ "./resources/js/mocks/usersCriteries/techPrep.js");
+/* harmony import */ var _ManagerAnswers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ManagerAnswers */ "./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue");
 //
 //
 //
@@ -4111,6 +4112,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4126,7 +4181,8 @@ __webpack_require__.r(__webpack_exports__);
     ListTestType: _ListTestType__WEBPACK_IMPORTED_MODULE_2__["default"],
     SectionTestType: _SectionTestType__WEBPACK_IMPORTED_MODULE_1__["default"],
     Dropdown: _Dropdown_Dropdown__WEBPACK_IMPORTED_MODULE_0__["default"],
-    TeamBlock: _TeamBlock__WEBPACK_IMPORTED_MODULE_3__["default"]
+    TeamBlock: _TeamBlock__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ManagerAnswers: _ManagerAnswers__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   data: function data() {
     return {
@@ -4163,55 +4219,44 @@ __webpack_require__.r(__webpack_exports__);
       teams: [{
         id: 1,
         name: "Team's name 1",
-        count_resp: 20434
+        count_resp: 2434,
+        cost: 354
       }, {
         id: 2,
         name: "Team's name 2",
-        count_resp: 34435
+        count_resp: 34435,
+        cost: 4523
       }, {
         id: 3,
         name: "Team's name 3",
-        count_resp: 20434534
+        count_resp: 204534,
+        cost: 35224
       }],
-      stateFilter: false,
-      respondents: [{
-        id: 1,
-        country: 12,
-        gender: 'male',
-        age: '25',
-        education: 1,
-        statusEmp: 1,
-        workArea: 2,
-        techPrep: 3
-      }, {
-        id: 2,
-        country: 12,
-        gender: 'female',
-        age: '34',
-        education: 2,
-        statusEmp: 3,
-        workArea: 2,
-        techPrep: 3
-      }, {
-        id: 3,
-        country: 12,
-        gender: 'female',
-        age: '56',
-        education: 2,
-        statusEmp: 3,
-        workArea: 2,
-        techPrep: 3
-      }],
-      industry: '',
-      listWorkAreas: [],
-      resultsFilters: {
-        country: [],
-        gender: [],
-        educations: [],
-        statusEmp: [],
-        workArea: [],
-        techPrep: []
-      }
+      //stateFilter: false,
+      coverageRespondents: 20458,
+      respondentsAnswers: [{
+        dataRespondent: {
+          id: 1,
+          country: 12,
+          gender: 'male',
+          age: '25',
+          education: 1,
+          statusEmp: 1,
+          workArea: 2,
+          techPrep: 3
+        },
+        answers: [{}]
+      }] // industry: '',
+      // listWorkAreas: [],
+      // resultsFilters: {
+      // 	country: [],
+      // 	gender: [],
+      // 	educations: [],
+      // 	statusEmp: [],
+      // 	workArea: [],
+      // 	techPrep: []
+      // }
+
     };
   },
   methods: {
@@ -4280,6 +4325,9 @@ __webpack_require__.r(__webpack_exports__);
       this.listWorkAreas = _mocks_usersCriteries_industries__WEBPACK_IMPORTED_MODULE_7__["default"].find(function (item) {
         return item.id === _this2.industry;
       }).workAreas;
+    },
+    getPercentDone: function getPercentDone() {
+      return Math.ceil(this.respondentsAnswers.length / this.coverageRespondents * 100) + '%';
     }
   },
   computed: {
@@ -4652,6 +4700,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TeamBlock",
   data: function data() {
@@ -4667,6 +4726,10 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     count_resp: {
+      type: Number,
+      required: true
+    },
+    cost: {
       type: Number,
       required: true
     }
@@ -4933,6 +4996,27 @@ __webpack_require__.r(__webpack_exports__);
       return this.filterTests();
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "ManagerAnswers"
 });
 
 /***/ }),
@@ -10133,7 +10217,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".info-test[data-v-c8c16372] {\n  left: -42px;\n  top: 0;\n  height: 100%;\n}\n.info-test__panel[data-v-c8c16372] {\n  top: 20%;\n  background: #1ac4b6;\n  border-radius: 10px 0 0 10px;\n}\n.tabs[data-v-c8c16372] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.tabs-trigger[data-v-c8c16372] {\n  background: #EEEFEF;\n  transition: 0.3s;\n  color: #919B9F;\n}\n.tabs-trigger .step-block[data-v-c8c16372] {\n  background: #E2E4E6;\n  color: #919B9F;\n}\n.tabs-trigger--active[data-v-c8c16372] {\n  background: linear-gradient(50.84deg, #339FE3 0%, #4FD5B8 100%);\n  color: white;\n}\n.tabs-trigger--active .step-block[data-v-c8c16372] {\n  background: white;\n  color: #1ac4b6;\n}\n.type-recruiting .data[data-v-c8c16372] {\n  width: 95%;\n}\n.type-recruiting .radio-circle[data-v-c8c16372] {\n  width: 20px;\n  height: 20px;\n}\n.type-recruiting .radio-circle[data-v-c8c16372]:before {\n  content: \"\";\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  background: white;\n  left: 3px;\n  top: 3px;\n  border-radius: 999px;\n}\n\n/* Checked */\n.type-recruiting input[type=radio]:checked + label .radio-circle[data-v-c8c16372]:before {\n  background: #1ac4b6;\n  box-shadow: 0 0 10px 1px #1ac4b6;\n}\n.type-recruiting input[type=radio]:not(:checked) + label .data[data-v-c8c16372] {\n  opacity: 0.5;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".info-test[data-v-c8c16372] {\n  left: -42px;\n  top: 0;\n  height: 100%;\n}\n.info-test__panel[data-v-c8c16372] {\n  top: 20%;\n  background: #1ac4b6;\n  border-radius: 10px 0 0 10px;\n}\n.tabs[data-v-c8c16372] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.tabs-trigger[data-v-c8c16372] {\n  background: #EEEFEF;\n  transition: 0.3s;\n  color: #919B9F;\n}\n.tabs-trigger .step-block[data-v-c8c16372] {\n  background: #E2E4E6;\n  color: #919B9F;\n}\n.tabs-trigger--active[data-v-c8c16372] {\n  background: linear-gradient(50.84deg, #339FE3 0%, #4FD5B8 100%);\n  color: white;\n}\n.tabs-trigger--active .step-block[data-v-c8c16372] {\n  background: white;\n  color: #1ac4b6;\n}\n.type-recruiting .data[data-v-c8c16372] {\n  width: 95%;\n}\n.type-recruiting .radio-circle[data-v-c8c16372] {\n  width: 20px;\n  height: 20px;\n}\n.type-recruiting .radio-circle[data-v-c8c16372]:before {\n  content: \"\";\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  background: white;\n  left: 3px;\n  top: 3px;\n  border-radius: 999px;\n}\n\n/* Checked */\n.type-recruiting input[type=radio]:checked + label .radio-circle[data-v-c8c16372]:before {\n  background: #1ac4b6;\n  box-shadow: 0 0 10px 1px #1ac4b6;\n}\n.type-recruiting input[type=radio]:checked + label[data-v-c8c16372] {\n  transform: translateY(-5px);\n  box-shadow: 0 18px 20px 0 #393f4e29;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12156,6 +12240,45 @@ component.options.__file = "resources/js/components/dashboards/moderator/Tests/L
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ManagerAnswers_vue_vue_type_template_id_ee0a5a96_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManagerAnswers.vue?vue&type=template&id=ee0a5a96&scoped=true& */ "./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=template&id=ee0a5a96&scoped=true&");
+/* harmony import */ var _ManagerAnswers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManagerAnswers.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ManagerAnswers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ManagerAnswers_vue_vue_type_template_id_ee0a5a96_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ManagerAnswers_vue_vue_type_template_id_ee0a5a96_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "ee0a5a96",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/dashboards/moderator/Tests/Test.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/dashboards/moderator/Tests/Test.vue ***!
@@ -12986,6 +13109,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManagerAnswers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManagerAnswers.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ManagerAnswers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/dashboards/moderator/Tests/Test.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************!*\
   !*** ./resources/js/components/dashboards/moderator/Tests/Test.vue?vue&type=script&lang=js& ***!
@@ -13720,6 +13859,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=template&id=ee0a5a96&scoped=true&":
+/*!**************************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=template&id=ee0a5a96&scoped=true& ***!
+  \**************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManagerAnswers_vue_vue_type_template_id_ee0a5a96_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManagerAnswers_vue_vue_type_template_id_ee0a5a96_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ManagerAnswers_vue_vue_type_template_id_ee0a5a96_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ManagerAnswers.vue?vue&type=template&id=ee0a5a96&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=template&id=ee0a5a96&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/dashboards/moderator/Tests/Test.vue?vue&type=template&id=4bcc347f&scoped=true&":
 /*!****************************************************************************************************************!*\
   !*** ./resources/js/components/dashboards/moderator/Tests/Test.vue?vue&type=template&id=4bcc347f&scoped=true& ***!
@@ -14286,7 +14442,7 @@ var render = function () {
                                     [_vm._v("Инфьюрты")]
                                   ),
                                   _vm._v(
-                                    "\n                        Системные монеты, используя которые, вы можете применять продвинутые функции системы\n                    "
+                                    "\n                        Системные монеты, которые используются для оплаты различных функций системы\n                    "
                                   ),
                                 ]
                               ),
@@ -16542,6 +16698,87 @@ var render = function () {
                     _c("input", {
                       staticClass: "hidden",
                       attrs: {
+                        id: "radio-ganeral",
+                        type: "radio",
+                        name: "type-recruiting",
+                        checked: "",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass:
+                          "rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer",
+                        attrs: { for: "radio-ganeral" },
+                      },
+                      [
+                        _c("div", {
+                          staticClass:
+                            "radio-circle border-2 rounded-full relative",
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "data" }, [
+                          _c(
+                            "h3",
+                            { staticClass: "font-bold text-base mb-3" },
+                            [_vm._v("Всеобщая рассылка")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "data__cost" }, [
+                            _c("div", { staticClass: "flex" }, [
+                              _vm._v("Стоимость:\n\t\t\t\t\t\t\t\t\t"),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex items-center space-x-1 text-teal-500 font-bold",
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "ml-2",
+                                      attrs: {
+                                        width: "20",
+                                        height: "20",
+                                        viewBox: "0 0 37 34",
+                                        fill: "none",
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                      },
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          "fill-rule": "evenodd",
+                                          "clip-rule": "evenodd",
+                                          d: "M12.1724 0.5L14.1682 4.01778L11.0875 4.00375L11.127 4.07326L9.63764 6.72577L7.64188 3.20799L6.1135 5.93001L8.10926 9.44779L6.58089 12.1698L4.58513 8.65203L0 16.8181L9.42442 33.4298L18.6663 33.4719L16.6706 29.9542L19.7512 29.9682L21.747 33.486L24.8276 33.5L22.8318 29.9822L25.9125 29.9963L25.873 29.9267L27.3624 27.2742L29.3581 30.792L30.8865 28.07L28.8907 24.5522L30.4191 21.8302L32.4149 25.348L37 17.1819L27.5756 0.570157L18.3337 0.528063L20.3294 4.04584L17.2488 4.03181L15.2531 0.514031L12.1724 0.5ZM17.2488 4.03181L19.2446 7.54959L23.8655 7.57064L29.1875 16.9514L26.895 21.0344L28.8907 24.5522L27.3624 27.2742L25.3666 23.7564L23.8384 26.4781L20.8361 26.4644L22.8318 29.9822L19.7512 29.9682L17.7554 26.4504L13.1345 26.4294L7.81246 17.0486L10.105 12.9656L8.10926 9.44779L9.63764 6.72577L11.6334 10.2436L13.1616 7.52189L16.1639 7.53556L14.1682 4.01778L17.2488 4.03181Z",
+                                          fill: "#1ac4b6",
+                                        },
+                                      }),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\t\t" +
+                                        _vm._s(_vm.formattingNumber(6700)) +
+                                        "\n\t\t\t\t\t\t\t\t\t\t"
+                                    ),
+                                  ]),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "type-recruiting" }, [
+                    _c("input", {
+                      staticClass: "hidden",
+                      attrs: {
                         id: "radio-link",
                         type: "radio",
                         name: "type-recruiting",
@@ -16553,7 +16790,7 @@ var render = function () {
                       "label",
                       {
                         staticClass:
-                          "rounded-lg border-2 border-slate-100 w-full p-3 flex items-center space-x-3 cursor-pointer",
+                          "rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer",
                         attrs: { for: "radio-link" },
                       },
                       [
@@ -16563,8 +16800,56 @@ var render = function () {
                         }),
                         _vm._v(" "),
                         _c("div", { staticClass: "data" }, [
-                          _c("h3", { staticClass: "font-medium text-base" }, [
-                            _vm._v("Прохождение по ссылке"),
+                          _c(
+                            "h3",
+                            { staticClass: "font-bold text-base mb-3" },
+                            [_vm._v("Прохождение по ссылке")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "data__cost" }, [
+                            _c("div", { staticClass: "flex" }, [
+                              _vm._v("Стоимость:\n\t\t\t\t\t\t\t\t\t"),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex items-center space-x-1 text-teal-500 font-bold",
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "ml-2",
+                                      attrs: {
+                                        width: "20",
+                                        height: "20",
+                                        viewBox: "0 0 37 34",
+                                        fill: "none",
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                      },
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          "fill-rule": "evenodd",
+                                          "clip-rule": "evenodd",
+                                          d: "M12.1724 0.5L14.1682 4.01778L11.0875 4.00375L11.127 4.07326L9.63764 6.72577L7.64188 3.20799L6.1135 5.93001L8.10926 9.44779L6.58089 12.1698L4.58513 8.65203L0 16.8181L9.42442 33.4298L18.6663 33.4719L16.6706 29.9542L19.7512 29.9682L21.747 33.486L24.8276 33.5L22.8318 29.9822L25.9125 29.9963L25.873 29.9267L27.3624 27.2742L29.3581 30.792L30.8865 28.07L28.8907 24.5522L30.4191 21.8302L32.4149 25.348L37 17.1819L27.5756 0.570157L18.3337 0.528063L20.3294 4.04584L17.2488 4.03181L15.2531 0.514031L12.1724 0.5ZM17.2488 4.03181L19.2446 7.54959L23.8655 7.57064L29.1875 16.9514L26.895 21.0344L28.8907 24.5522L27.3624 27.2742L25.3666 23.7564L23.8384 26.4781L20.8361 26.4644L22.8318 29.9822L19.7512 29.9682L17.7554 26.4504L13.1345 26.4294L7.81246 17.0486L10.105 12.9656L8.10926 9.44779L9.63764 6.72577L11.6334 10.2436L13.1616 7.52189L16.1639 7.53556L14.1682 4.01778L17.2488 4.03181Z",
+                                          fill: "#1ac4b6",
+                                        },
+                                      }),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\t\t" +
+                                        _vm._s(_vm.formattingNumber(1300)) +
+                                        "\n\t\t\t\t\t\t\t\t\t\t"
+                                    ),
+                                  ]),
+                                ]
+                              ),
+                            ]),
                           ]),
                           _vm._v(" "),
                           _c(
@@ -16625,7 +16910,7 @@ var render = function () {
                       "label",
                       {
                         staticClass:
-                          "rounded-lg border-2 border-slate-100 w-full p-3 flex items-center space-x-3 cursor-pointer",
+                          "rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer",
                         attrs: { for: "radio-team" },
                       },
                       [
@@ -16637,7 +16922,7 @@ var render = function () {
                         _c("div", { staticClass: "data" }, [
                           _c(
                             "h3",
-                            { staticClass: "font-medium text-base mb-2" },
+                            { staticClass: "font-bold text-base mb-2" },
                             [_vm._v("Рассылка по команде")]
                           ),
                           _vm._v(" "),
@@ -16658,6 +16943,7 @@ var render = function () {
                                           id: team.id,
                                           name: team.name,
                                           count_resp: team.count_resp,
+                                          cost: team.cost,
                                         },
                                       }),
                                     ],
@@ -16740,23 +17026,46 @@ var render = function () {
             "div",
             { staticClass: "tabs-content tab pt-5 flex flex-col space-y-3" },
             [
-              _c("h2", { staticClass: "font-bold text-xl my-3" }, [
-                _vm._v("Результаты теста"),
-              ]),
+              _vm._m(0),
               _vm._v(" "),
-              _c("header", { staticClass: "grid grid-cols-3 gap-3" }, [
+              _c("section", { staticClass: "grid grid-cols-3 gap-3" }, [
                 _c(
                   "div",
                   {
                     staticClass:
-                      "coverage-respondents flex flex-col space-y-1 p-3 px-4 rounded-lg bg-slate-100",
+                      "coverage-respondents flex flex-col space-y-2 p-3 px-4 rounded-lg bg-slate-100",
                   },
                   [
                     _c("span", [_vm._v("Охват респондентов")]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "font-bold text-2xl" }, [
-                      _vm._v(_vm._s(_vm.formattingNumber(20394))),
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "count_respondents flex items-end space-x-1",
+                      },
+                      [
+                        _c(
+                          "p",
+                          { staticClass: "font-bold text-2xl leading-none" },
+                          [
+                            _vm._v(
+                              _vm._s(
+                                _vm.formattingNumber(_vm.coverageRespondents)
+                              )
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "text-sm text-slate-400 leading-none",
+                          },
+                          [_vm._v("чел")]
+                        ),
+                      ]
+                    ),
                   ]
                 ),
                 _vm._v(" "),
@@ -16764,54 +17073,48 @@ var render = function () {
                   "div",
                   {
                     staticClass:
-                      "done-tests flex flex-col space-y-1 p-3 px-4 rounded-lg bg-slate-100",
-                  },
-                  [
-                    _c("span", [_vm._v("Прошло тест")]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "font-bold text-2xl" }, [
-                      _vm._v(_vm._s(_vm.formattingNumber(11353))),
-                    ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(0),
-              ]),
-              _vm._v(" "),
-              _c("section", { staticClass: "filter-section py-3" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "filter-section__button cursor-pointer flex justify-between",
-                    on: { click: _vm.switchStateFilter },
+                      "done-tests flex justify-between items-start p-3 px-4 rounded-lg bg-slate-100",
                   },
                   [
                     _c(
                       "div",
-                      {
-                        staticClass: "filter-section__title flex items-center",
-                      },
+                      { staticClass: "wrapp-data flex flex-col space-y-2" },
                       [
-                        _c("i", {
-                          staticClass:
-                            "bx bx-slider-alt text-slate-400 text-xl mr-2",
-                        }),
+                        _c("span", [_vm._v("Прошло тест")]),
                         _vm._v(" "),
-                        _c("span", { staticClass: "font-medium" }, [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\tФильтр данных респондентов\n\t\t\t\t\t\t"
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("i", {
-                          staticClass: "bx ml-1",
-                          class: [
-                            this.stateFilter
-                              ? "bx-chevron-up"
-                              : "bx-chevron-down",
-                          ],
-                        }),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "count_respondents flex items-end space-x-1",
+                          },
+                          [
+                            _c(
+                              "p",
+                              {
+                                staticClass: "font-bold text-2xl leading-none",
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.formattingNumber(
+                                      this.respondentsAnswers.length
+                                    )
+                                  )
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "text-sm text-slate-400 leading-none",
+                              },
+                              [_vm._v("чел")]
+                            ),
+                          ]
+                        ),
                       ]
                     ),
                     _vm._v(" "),
@@ -16819,410 +17122,23 @@ var render = function () {
                       "div",
                       {
                         staticClass:
-                          "count-respondents flex items-center text-sm",
+                          "count-percent font-bold text-3xl text-teal-500",
                       },
                       [
-                        _c("span", { staticClass: "text-slate-500 mr-2" }, [
-                          _vm._v("Выборка:"),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "font-bold" }, [
-                          _vm._v(_vm._s(_vm.formattingNumber(20394))),
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "text-slate-500 ml-1" }, [
-                          _vm._v("респондентов"),
-                        ]),
+                        _vm._v(
+                          "\n\t\t\t\t\t\t" +
+                            _vm._s(_vm.getPercentDone()) +
+                            "\n\t\t\t\t\t"
+                        ),
                       ]
                     ),
                   ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "filter-section__data rounded-lg border-2 border-slate-100\n\t\t\t\t\t\toverflow-hidden transition p-3 mt-3 ",
-                    class: [this.stateFilter ? "" : "hidden"],
-                  },
-                  [
-                    _c("div", { staticClass: "column flex flex-col w-full" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "row grid grid-cols-2 gap-3 pt-6 w-full",
-                        },
-                        [
-                          _c(
-                            "vs-select",
-                            {
-                              staticClass: "w-full",
-                              attrs: {
-                                filter: "",
-                                "collapse-chips": "",
-                                multiple: "",
-                                placeholder: "Название страны",
-                                label: "Страна",
-                              },
-                              model: {
-                                value: _vm.resultsFilters.country,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.resultsFilters, "country", $$v)
-                                },
-                                expression: "resultsFilters.country",
-                              },
-                            },
-                            [
-                              _vm._l(
-                                this.getListCountries,
-                                function (country, index) {
-                                  return [
-                                    _c(
-                                      "vs-option",
-                                      {
-                                        attrs: {
-                                          label: country.name_ru,
-                                          value: index + 1,
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t\t" +
-                                            _vm._s(country.name_ru) +
-                                            " "
-                                        ),
-                                        _c(
-                                          "span",
-                                          { staticClass: "text-slate-400" },
-                                          [
-                                            _vm._v(
-                                              " " +
-                                                _vm._s(country.iso_code2) +
-                                                " "
-                                            ),
-                                          ]
-                                        ),
-                                      ]
-                                    ),
-                                  ]
-                                }
-                              ),
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "vs-select",
-                            {
-                              staticClass: "w-full",
-                              attrs: {
-                                filter: "",
-                                multiple: "",
-                                "collapse-chips": "",
-                                placeholder: "Пол респондентов",
-                                label: "Пол",
-                              },
-                              model: {
-                                value: _vm.resultsFilters.gender,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.resultsFilters, "gender", $$v)
-                                },
-                                expression: "resultsFilters.gender",
-                              },
-                            },
-                            [
-                              _c(
-                                "vs-option",
-                                { attrs: { label: "Мужской", value: "male" } },
-                                [
-                                  _vm._v(
-                                    "\n\t\t\t\t\t\t\t\t\tМужской\n\t\t\t\t\t\t\t\t"
-                                  ),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-option",
-                                {
-                                  attrs: { label: "Женский", value: "female" },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n\t\t\t\t\t\t\t\t\tЖенский\n\t\t\t\t\t\t\t\t"
-                                  ),
-                                ]
-                              ),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "row grid grid-cols-2 gap-3 pt-8 w-full",
-                        },
-                        [
-                          _c(
-                            "vs-select",
-                            {
-                              staticClass: "w-full",
-                              attrs: {
-                                filter: "",
-                                multiple: "",
-                                "collapse-chips": "",
-                                placeholder: "Ваше образование",
-                                label: "Образование",
-                              },
-                              model: {
-                                value: _vm.resultsFilters.educations,
-                                callback: function ($$v) {
-                                  _vm.$set(
-                                    _vm.resultsFilters,
-                                    "educations",
-                                    $$v
-                                  )
-                                },
-                                expression: "resultsFilters.educations",
-                              },
-                            },
-                            [
-                              _vm._l(
-                                this.getListEducations,
-                                function (education) {
-                                  return [
-                                    _c(
-                                      "vs-option",
-                                      {
-                                        attrs: {
-                                          label: education.name,
-                                          value: education.id,
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t\t" +
-                                            _vm._s(education.name) +
-                                            "\n\t\t\t\t\t\t\t\t\t"
-                                        ),
-                                      ]
-                                    ),
-                                  ]
-                                }
-                              ),
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "vs-select",
-                            {
-                              staticClass: "w-full",
-                              attrs: {
-                                filter: "",
-                                multiple: "",
-                                "collapse-chips": "",
-                                placeholder: "Трудоустройство",
-                                label: "Статус трудоустройства",
-                              },
-                              model: {
-                                value: _vm.resultsFilters.statusEmp,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.resultsFilters, "statusEmp", $$v)
-                                },
-                                expression: "resultsFilters.statusEmp",
-                              },
-                            },
-                            [
-                              _vm._l(
-                                this.getListStatusEmp,
-                                function (statusEmp) {
-                                  return [
-                                    _c(
-                                      "vs-option",
-                                      {
-                                        attrs: {
-                                          label: statusEmp.name,
-                                          value: statusEmp.id,
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t\t" +
-                                            _vm._s(statusEmp.name) +
-                                            "\n\t\t\t\t\t\t\t\t\t"
-                                        ),
-                                      ]
-                                    ),
-                                  ]
-                                }
-                              ),
-                            ],
-                            2
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "row grid grid-cols-2 gap-3 pt-8 w-full",
-                        },
-                        [
-                          _c(
-                            "vs-select",
-                            {
-                              staticClass: "w-full",
-                              attrs: {
-                                filter: "",
-                                placeholder: "Название индустрии",
-                                label: "Индустрия",
-                              },
-                              model: {
-                                value: _vm.industry,
-                                callback: function ($$v) {
-                                  _vm.industry = $$v
-                                },
-                                expression: "industry",
-                              },
-                            },
-                            [
-                              _vm._l(
-                                this.getListIndustries,
-                                function (industry) {
-                                  return [
-                                    _c(
-                                      "vs-option",
-                                      {
-                                        attrs: {
-                                          label: industry.name,
-                                          value: industry.id,
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t\t" +
-                                            _vm._s(industry.name) +
-                                            "\n\t\t\t\t\t\t\t\t\t"
-                                        ),
-                                      ]
-                                    ),
-                                  ]
-                                }
-                              ),
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "vs-select",
-                            {
-                              staticClass: "w-full",
-                              attrs: {
-                                filter: "",
-                                "collapse-chips": "",
-                                multiple: "",
-                                placeholder: "Название проф.области",
-                                label: "Название проф.области",
-                              },
-                              model: {
-                                value: _vm.resultsFilters.workArea,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.resultsFilters, "workArea", $$v)
-                                },
-                                expression: "resultsFilters.workArea",
-                              },
-                            },
-                            [
-                              _vm._l(this.listWorkAreas, function (workArea) {
-                                return [
-                                  _c(
-                                    "vs-option",
-                                    {
-                                      key: workArea.id,
-                                      attrs: {
-                                        label: workArea.name,
-                                        value: workArea.id,
-                                      },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\t\t\t" +
-                                          _vm._s(workArea.name) +
-                                          "\n\t\t\t\t\t\t\t\t\t"
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              }),
-                            ],
-                            2
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "row grid grid-cols-2 gap-3 pt-8 w-full",
-                        },
-                        [
-                          _c(
-                            "vs-select",
-                            {
-                              staticClass: "w-full",
-                              attrs: {
-                                placeholder: "Ваша техническая подготовка",
-                                multiple: "",
-                                filter: "",
-                                label: "Техническая подготовка",
-                              },
-                              model: {
-                                value: _vm.resultsFilters.techPrep,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.resultsFilters, "techPrep", $$v)
-                                },
-                                expression: "resultsFilters.techPrep",
-                              },
-                            },
-                            [
-                              _vm._l(this.getListTechPrep, function (techPrep) {
-                                return [
-                                  _c(
-                                    "vs-option",
-                                    {
-                                      key: techPrep.id,
-                                      attrs: {
-                                        label: techPrep.name,
-                                        value: techPrep.id,
-                                      },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\t\t\t" +
-                                          _vm._s(techPrep.name) +
-                                          "\n\t\t\t\t\t\t\t\t\t"
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              }),
-                            ],
-                            2
-                          ),
-                        ],
-                        1
-                      ),
-                    ]),
-                  ]
-                ),
+                _vm._m(1),
               ]),
               _vm._v(" "),
-              _c("main", [_vm._v("\n\t\t\t\t1213\n\t\t\t")]),
+              _c("main", { staticClass: "pt-2" }, [_c("manager-answers")], 1),
             ]
           )
         : _vm._e(),
@@ -17230,6 +17146,26 @@ var render = function () {
   )
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "header",
+      { staticClass: "flex items-center text-base font-medium my-2" },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "p-2 px-3 rounded-lg flex items-center justify-center bg-yellow-500 mr-3\n                shadow-lg shadow-yellow-500/50",
+          },
+          [_c("i", { staticClass: "bx bxs-pointer text-white text-sm" })]
+        ),
+        _vm._v("\n\t\t\t\tТест первого клика\n\t\t\t"),
+      ]
+    )
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -17552,8 +17488,51 @@ var render = function () {
               _vm._v(_vm._s(this.name)),
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-sm text-slate-500" }, [
-              _vm._v(_vm._s(_vm.formattingNumber(this.count_resp))),
+            _c("div", { staticClass: "flex space-x-2 items-center mt-2" }, [
+              _c(
+                "div",
+                { staticClass: "data__count-resp flex space-x-1 items-center" },
+                [
+                  _c("i", { staticClass: "bx bx-group text-slate-500" }),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm text-slate-500" }, [
+                    _vm._v(_vm._s(_vm.formattingNumber(this.count_resp))),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "data__cost flex space-x-1 items-center" },
+                [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "16",
+                        height: "16",
+                        viewBox: "0 0 37 34",
+                        fill: "none",
+                        xmlns: "http://www.w3.org/2000/svg",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          "clip-rule": "evenodd",
+                          d: "M12.1724 0.5L14.1682 4.01778L11.0875 4.00375L11.127 4.07326L9.63764 6.72577L7.64188 3.20799L6.1135 5.93001L8.10926 9.44779L6.58089 12.1698L4.58513 8.65203L0 16.8181L9.42442 33.4298L18.6663 33.4719L16.6706 29.9542L19.7512 29.9682L21.747 33.486L24.8276 33.5L22.8318 29.9822L25.9125 29.9963L25.873 29.9267L27.3624 27.2742L29.3581 30.792L30.8865 28.07L28.8907 24.5522L30.4191 21.8302L32.4149 25.348L37 17.1819L27.5756 0.570157L18.3337 0.528063L20.3294 4.04584L17.2488 4.03181L15.2531 0.514031L12.1724 0.5ZM17.2488 4.03181L19.2446 7.54959L23.8655 7.57064L29.1875 16.9514L26.895 21.0344L28.8907 24.5522L27.3624 27.2742L25.3666 23.7564L23.8384 26.4781L20.8361 26.4644L22.8318 29.9822L19.7512 29.9682L17.7554 26.4504L13.1345 26.4294L7.81246 17.0486L10.105 12.9656L8.10926 9.44779L9.63764 6.72577L11.6334 10.2436L13.1616 7.52189L16.1639 7.53556L14.1682 4.01778L17.2488 4.03181Z",
+                          fill: "#1ac4b6",
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm font-bold text-teal-500" }, [
+                    _vm._v(_vm._s(_vm.formattingNumber(this.cost))),
+                  ]),
+                ]
+              ),
             ]),
           ]),
         ]
@@ -17839,6 +17818,31 @@ var render = function () {
       ]
     ),
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=template&id=ee0a5a96&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue?vue&type=template&id=ee0a5a96&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("h4", [_vm._v("hoba")])
 }
 var staticRenderFns = []
 render._withStripped = true

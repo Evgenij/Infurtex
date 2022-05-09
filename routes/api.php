@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,7 @@ Route::middleware('auth:sanctum')->group(function (){
 		return $request->user();
 	});
 	Route::post('/logout', [App\Http\Controllers\Authentication\AuthController::class, 'logout']);
-
+	Route::resource('/test', TestController::class);
 });
 
 Route::prefix('moderator')->group(function () {
