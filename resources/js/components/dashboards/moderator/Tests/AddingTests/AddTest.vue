@@ -50,6 +50,7 @@
                 </div>
                 <section-test-type v-else :type-test="testType"
                                    @reset-type-test="resetTypeTest"
+								   @changeInstruction="changeInstruction"
                                    @next-step="activate(2)"></section-test-type>
             </div>
             <hr>
@@ -140,7 +141,7 @@
 			</div>
 			<hr>
 			<div class="navigation-buttons flex items-center justify-center">
-				<vs-button class="w-max" primary @click="activate(3)">
+				<vs-button class="w-max" primary @click="createTest">
 					<i class="bx bx-rocket text-lg left"></i>
 					Запустить тест
 				</vs-button>
@@ -345,6 +346,8 @@
 	import listIndustries from "../../../../../mocks/usersCriteries/industries"
 	import listTechPrep from "../../../../../mocks/usersCriteries/techPrep"
 	import ManagerAnswers from "../ManagerAnswers";
+	import store from "../../../../../store/store";
+	import router from "../../../../../router";
 
     export default {
         name: "AddTest",
@@ -429,6 +432,16 @@
 			// }
         }),
         methods: {
+			createTest(){
+				store.dispatch('createTest', {
+					name: this.nameTest,
+				}).then(({data})=>{
+					router.push({
+						name: 'ModeratorTests',
+						params: {id: data.data.id}
+					})
+				})
+			},
             activate(index) {
                 this.activeTab = index;
             },
@@ -491,6 +504,9 @@
 			},
 			getPercentDone(){
             	return (Math.ceil((this.respondentsAnswers.length / this.coverageRespondents) * 100)) + '%'
+			},
+			changeInstruction(text){
+				this.testInstruction = text
 			}
         },
 		computed: {

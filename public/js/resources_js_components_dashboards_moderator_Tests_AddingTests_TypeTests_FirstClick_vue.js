@@ -617,6 +617,11 @@ __webpack_require__.r(__webpack_exports__);
         return el.id !== idRemovingQuestion;
       }); //console.log(this.questions)
     }
+  },
+  watch: {
+    textInstruction: function textInstruction() {
+      this.$parent.$emit('changeInstruction', this.textInstruction);
+    }
   }
 });
 

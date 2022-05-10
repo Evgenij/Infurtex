@@ -12,10 +12,29 @@ export default new Vuex.Store({
 			//filledData: false,
 			//role: role.userRole.Moderator,
 			token: sessionStorage.getItem('TOKEN'),
-		}
+		},
+		tests: []
 	},
 	getters:{},
 	actions:{
+		createTest({commit}, test){
+			let response;
+			if (test.id) {
+				response = axiosClient.put(`/test/${test.id}`, test)
+					.then((res)=>{
+						commit("updateTest", res.data)
+						return res;
+					})
+			} else {
+				response = axiosClient.post("/test", test)
+					.then((res)=>{
+						commit("createTest", res.data)
+						return res;
+					});
+			}
+
+			return  response;
+		},
 		register({commit}, userData){
 			console.log(userData)
 			if (userData.role === role.userRole.Moderator) {
@@ -49,6 +68,17 @@ export default new Vuex.Store({
 		},
 	},
 	mutations:{
+		createTest(state, test){
+			state.tests = [...state.tests, test.data];
+		},
+		updateTest(state, test){
+			state.tests = state.tests.map((t)=>{
+				if (t.id == test.data.id) {
+					return test.data;
+				}
+				return t;
+			})
+		},
 		logout: (state) => {
 			state.user.token = null;
 			state.user.data = {};

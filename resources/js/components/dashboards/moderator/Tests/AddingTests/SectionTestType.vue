@@ -32,7 +32,7 @@ export default {
         },
         next(){
             this.$emit('next-step')
-        }
+        },
     },
     computed: {
         setTypeTest(){

@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TestResource;
 use App\Models\Test;
 use App\Http\Requests\StoreTestRequest;
 use App\Http\Requests\UpdateTestRequest;
 use Illuminate\Http\Request;
-use App\Http\Resources\TestResource;
 
 class TestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+	 */
     public function index(Request $request)
     {
         $user = $request->user();
@@ -34,12 +35,13 @@ class TestController extends Controller
         return new TestResource($result);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Test  $test
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param \App\Models\Test $test
+	 * @param Request $request
+	 * @return \Illuminate\Http\Response
+	 */
     public function show(Test $test, Request $request)
     {
     	$user = $request->user();
@@ -61,14 +63,16 @@ class TestController extends Controller
     public function update(UpdateTestRequest $request, Test $test)
     {
         $test->update($request->validated());
+        return new TestResource($test);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Test  $test
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param \App\Models\Test $test
+	 * @param Request $request
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+	 */
     public function destroy(Test $test, Request $request)
     {
 		$user = $request->user();

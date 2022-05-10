@@ -51,7 +51,12 @@ export default {
             this.questions = this.questions.filter(el => el.id !== idRemovingQuestion)
             //console.log(this.questions)
         }
-    }
+    },
+	watch: {
+		textInstruction(){
+			this.$parent.$emit('changeInstruction', this.textInstruction)
+		}
+	}
 }
 </script>
 
