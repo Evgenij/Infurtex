@@ -36,6 +36,7 @@ export default {
     },
     computed: {
         setTypeTest(){
+			console.log(this.typeTest)
             let nameTypeTestComponent = ''
             if(this.typeTest === type.typeTest.FirstClick) {
                 nameTypeTestComponent = 'FirstClick'

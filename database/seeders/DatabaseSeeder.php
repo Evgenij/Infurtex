@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Moderator;
+use App\Models\Project;
+use App\Models\Respondent;
+use App\Models\Test;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,7 +17,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Moderator::factory(10)->create();
-		\App\Models\Respondent::factory(10)->create();
+    	Project::factory(5)->create();
+        Moderator::factory(10)->create();
+		Respondent::factory(10)->create();
+		Test::factory(50)->create();
     }
 }

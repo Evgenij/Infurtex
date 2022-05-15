@@ -14,9 +14,10 @@
                 <vs-option label="Все проекты" value="all">
                     Все проекты
                 </vs-option>
-                <template v-for="project in tests" v-if="project.project_name != '' && project.project_name != 'Название проекта'">
-                    <vs-option :label="project.project_name" :value="project.project_name">
-                        {{project.project_name}}
+                <template v-for="test in tests"
+						  v-if="test.project">
+                    <vs-option :label="test.project.name" :value="test.project.name">
+                        {{test.project.name}}
                     </vs-option>
                 </template>
             </vs-select>
@@ -65,14 +66,14 @@
                     name="staggered-fade">
                     <block-test v-if="loadingTests" v-for="test in testsList" :key="test.id"
                                 :id="test.id"
-                                :name="test.name" :status-test="test.status_test"
+                                :name="test.name" :status-test="test.status"
                                 :respondents="test.respondents" :type="test.type"
-                                :project-name="test.project_name"
-                                :preview="test.preview">
+								:expire_date="test.expire_date"
+                                :project-name="test.project.name">
                     </block-test>
                 </transition-group>
             </div>
-            <div class="empty-tests text-center text-gray-500 h-full py-44" v-else>
+            <div v-if="this.testsList.length === 0 && loadingTests===true" class="empty-tests text-center text-gray-500 h-full py-44">
                 Тестов не найдено... Попробуйте изменить критерий поиска или
                 <a href="#" class="link link-blue size-16">создать новый тест</a>
             </div>
@@ -81,7 +82,7 @@
 </template>
 
 <script>
-    import BlockTest from "./Test";
+    import BlockTest from "./BlockTest";
 
     export default {
         name: "list-tests",
@@ -141,11 +142,14 @@
             },
             filterByProject(array) {
                 let query = this.filterProjectTest
+				console.log(query)
                 if (query === "all"){
                     return array
                 } else {
                     return array.filter(function (item) {
-                        return item.project_name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+						if(item.project.name){
+							return item.project.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+						}
                     })
                 }
             },
@@ -155,7 +159,9 @@
                     return array
                 }else {
                     return array.filter(function(item) {
-                        return item.status_test.toString().toLowerCase().indexOf(query.toString().toLowerCase()) !== -1
+						console.log(item.status
+						)
+                        return item.status.toString().toLowerCase().indexOf(query.toString().toLowerCase()) !== -1
                     })}
             },
             filterTests(){

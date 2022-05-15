@@ -30,7 +30,7 @@
             <vs-tooltip bottom shadow border-thick primary>
                 <div class="coin-block border-r-2 border-slate-200 mr-3 pr-3 flex items-center justify-end cursor-help">
                     <div class="wrapp flex flex-col items-end">
-                        <div class="coin-block__value text-slate-900 font-semibold leading-2">35 563</div>
+                        <div class="coin-block__value text-slate-900 font-semibold leading-2">{{userData.coins}}</div>
                         <div class="text-slate-500 text-sm leading-4">инфьюртов</div>
                     </div>
                     <svg class="ml-2" width="37" height="34" viewBox="0 0 37 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,10 +54,10 @@
                      @click="activeUserMenu=!activeUserMenu">
                     <vs-avatar primary>
                         <template #text>
-                            Евгений
+							{{userData.name}}
                         </template>
                     </vs-avatar>
-                    <span class="ml-4 text-sm font-semibold">{{username}}</span>
+                    <span class="ml-4 text-sm font-semibold">{{userData.name}}</span>
                     <i class="bx text-teal-600 text-lg ml-2"
                        :class="{
                             'bx-chevron-down': activeUserMenu === false,
@@ -88,19 +88,21 @@
     import BlockNotification from "./BlockNotification";
 	import store from "../../store/store";
 	import router from "../../router";
+	import {mapGetters} from 'vuex'
 
     export default {
         name: "app-header",
         components: {BlockNotification},
         data:() => ({
             activeUserMenu: false,
-			username: store.state.user.data.name
+			userData: {}
         }),
         props: {
             userMenu: Array,
             links: Array
         },
 		methods: {
+        	...mapGetters(['getUsersData']),
 			logout() {
 				this.activeUserMenu = false
 				store.dispatch("logout")
@@ -109,7 +111,14 @@
 							name: "login",
 						});
 					});
+			},
+			setUserData(){
+				this.userData = this.getUsersData()
 			}
+		},
+		mounted() {
+        	//this.setUserData()
+			this.userData = this.getUsersData()
 		}
 	}
 </script>

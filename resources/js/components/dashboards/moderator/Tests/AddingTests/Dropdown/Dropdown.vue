@@ -1,7 +1,7 @@
 <template>
     <div class="dropdown w-full flex items-center">
         <div class="relative w-full">
-            <vs-input ref="input" v-model="value" primary placeholder="проект" @focus="switchListProjects">
+            <vs-input ref="input" v-model="name" primary placeholder="проект" @focus="switchListProjects">
                 <template #icon>
                     <i class='bx bx-folder'></i>
                 </template>
@@ -10,7 +10,7 @@
                  class="absolute z-10 project-list flex flex-col space-y-1 mt-1 p-1 w-full border-2 border-slate-100 top-full bg-white rounded-lg"
                  @mouseleave="switchListProjects">
                 <dropdown-item v-for="project in filteredItems"
-                               :value="project.value" :id="project.id" :key="project.id"
+                               :name="project.name" :id="project.id" :key="project.id"
                                 @set-data="setDataDropdown"></dropdown-item>
             </div>
         </div>
@@ -30,7 +30,7 @@
         name: "Dropdown",
         components: {DropdownItem},
         data: ()=>({
-			value: '',
+			name: '',
             id: 0,
             filteredItems: [],
             searchedItems: true,
@@ -48,7 +48,7 @@
         },
         methods: {
             resetProject(){
-                this.value = ''
+                this.name = ''
                 this.id = 0
             },
             addItem(){
@@ -62,14 +62,16 @@
                 this.filteredItems = this.$props.listItems
                 this.openListItems = !this.openListItems
             },
-            filterProjects(value){
-                this.filteredItems = this.$props.listItems.filter(item => item.value.toLowerCase().includes(value.toLowerCase()))
+            filterProjects(name){
+				console.log(name)
+                this.filteredItems = this.$props.listItems.filter(item =>
+					item.name.toLowerCase().includes(name.toLowerCase()))
                 //console.log(this.filteredItems)
                 if (this.filteredItems.length >= 1){
                     this.searchedItems = true
                 } else {
                     this.filteredItems = [{
-                        value: 'Поиск не дал результатов', id: 0
+                        name: 'Поиск не дал результатов', id: 0
                     }]
                     this.searchedItems = false
                 }
@@ -78,31 +80,31 @@
             },
             setDataDropdown(data){
                 this.id = data.id
-                this.value = data.value
+                this.name = data.name
                 this.switchListProjects()
 				this.sendDataProject({
 					id: data.id,
-					value: data.value
+					name: data.name
 				})
             },
 			sendDataProject(){
 				this.$emit('changeProject', {
 					id: this.id,
-					value: this.value
+					name: this.name
 				})
 			}
         },
         watch: {
-            value(val) {
+            name(val) {
                 this.filterProjects(val)
             }
         },
-        computed: {
-            setData(){
-                this.id = this.$props.data.id
-                this.value = this.$props.data.value
-            }
-        }
+        // computed: {
+        //     setData(){
+        //         this.id = this.$props.data.id
+        //         this.name = ''
+        //     }
+        // }
     }
 </script>
 

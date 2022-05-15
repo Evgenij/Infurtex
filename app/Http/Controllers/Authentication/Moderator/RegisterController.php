@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Authentication\Moderator;
 use App\Http\Controllers\Controller;
 use App\Models\Moderator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use function bcrypt;
 use function response;
@@ -24,8 +23,7 @@ class RegisterController extends Controller
 			],
 			'password_confirmation' => [
 				'required',
-				'same:password',
-				Password::min(8)->mixedCase()->numbers()->symbols()
+				'same:password'
 			],
 			'role'=>'required|string'
 		]);

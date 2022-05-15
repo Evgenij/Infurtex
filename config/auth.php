@@ -38,8 +38,17 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'respondents',
         ],
+
+		'moderator' => [
+			'driver' => 'session',
+			'provider' => 'moderators',
+		],
+		'respondent' => [
+			'driver' => 'session',
+			'provider' => 'respondents',
+		],
     ],
 
     /*
@@ -60,10 +69,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'moderators' => [
             'driver' => 'eloquent',
             'model' => App\Models\Moderator::class,
         ],
+		'respondents' => [
+			'driver' => 'eloquent',
+			'model' => App\Models\Respondent::class,
+		],
 
         // 'users' => [
         //     'driver' => 'database',

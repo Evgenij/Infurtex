@@ -1,38 +1,54 @@
 <template>
     <div class="block-test relative z-0 flex rounded-lg bg-white mb-4 transform hover:-translate-y-1 cursor-pointer">
-        <div class="preview-wrapper flex justify-center items-center rounded-lg overflow-hidden relative">
-            <vs-tooltip not-arrow right>
-                <div class="type-test px-2 p-1 absolute top-1.5 left-1.5 bg-white rounded-lg">
-                    <i class="bx text-base"
-                       :class="{
-                    'bxs-directions text-green-600': type === 1,
-                    'bxs-stopwatch text-slate-600': type === 2,
-                    'bxs-pointer text-yellow-600': type === 3,
-                    'bxs-show text-teal-600': type === 4,
-                    'bxs-heart text-red-600': type === 5,
+        <div class="type-image flex justify-center items-center rounded-lg overflow-hidden relative"
+		:class="{
+        	'bg-green-500': type === 1,
+			'bg-slate-400': type === 2,
+			'bg-yellow-500': type === 3,
+			'bg-teal-500': type === 4,
+			'bg-red-500': type === 5,
+		}">
+
+			<i class="bx text-base text-white text-3xl"
+			   :class="{
+                    'bxs-directions': type === 1,
+                    'bxs-stopwatch': type === 2,
+                    'bxs-pointer': type === 3,
+                    'bxs-show': type === 4,
+                    'bxs-heart': type === 5,
                 }"></i>
-                </div>
-                <template v-if="type === 1" #tooltip>
-                    <p class="text-sm flex items-center">Тест навигации</p>
-                </template>
-                <template v-else-if="type === 2" #tooltip>
-                    <p class="text-sm flex items-center">Тест 5-ти секунд</p>
-                </template>
-                <template v-else-if="type === 3" #tooltip>
-                    <p class="text-sm flex items-center">Тест 1-го нажатия</p>
-                </template>
-                <template v-else-if="type === 4" #tooltip>
-                    <p class="text-sm flex items-center">Тест общего впечатления</p>
-                </template>
-                <template v-else-if="type === 5" #tooltip>
-                    <p class="text-sm flex items-center">Тест предпочтения</p>
-                </template>
-            </vs-tooltip>
-            <img :src="preview" :alt="preview" class="img-preview">
-        </div>
+		</div>
+<!--        </div>-->
+<!--		<vs-tooltip not-arrow right>-->
+<!--			<div class="type-test px-2 p-1 absolute top-1.5 left-1.5 bg-white rounded-lg">-->
+<!--				<i class="bx text-base"-->
+<!--				   :class="{-->
+<!--                    'bxs-directions text-green-500': type === 1,-->
+<!--                    'bxs-stopwatch text-slate-500': type === 2,-->
+<!--                    'bxs-pointer text-yellow-500': type === 3,-->
+<!--                    'bxs-show text-teal-500': type === 4,-->
+<!--                    'bxs-heart text-red-500': type === 5,-->
+<!--                }"></i>-->
+<!--			</div>-->
+<!--			<template v-if="type === 1" #tooltip>-->
+<!--				<p class="text-sm flex items-center">Тест навигации</p>-->
+<!--			</template>-->
+<!--			<template v-else-if="type === 2" #tooltip>-->
+<!--				<p class="text-sm flex items-center">Тест 5-ти секунд</p>-->
+<!--			</template>-->
+<!--			<template v-else-if="type === 3" #tooltip>-->
+<!--				<p class="text-sm flex items-center">Тест 1-го нажатия</p>-->
+<!--			</template>-->
+<!--			<template v-else-if="type === 4" #tooltip>-->
+<!--				<p class="text-sm flex items-center">Тест общего впечатления</p>-->
+<!--			</template>-->
+<!--			<template v-else-if="type === 5" #tooltip>-->
+<!--				<p class="text-sm flex items-center">Тест предпочтения</p>-->
+<!--			</template>-->
+<!--		</vs-tooltip>-->
         <div class="content flex justify-between items-center p-4 px-5">
             <div class="content__title flex flex-col w-full">
-                <div class="name-wrapp flex items-center mb-4">
+                <div class="name-wrapp flex items-center">
                     <input type="text" name="test-name" id="test-name" v-model="name"
                            class="test-name text-base font-medium w-full mr-2" disabled
                            ref="inputName"
@@ -54,31 +70,39 @@
                         </vs-button>
                     </div>
                 </div>
-                <div class="test-project flex items-center p-2 py-1 w-max rounded-md bg-slate-100 text-slate-500">
+                <div v-if="projectName" class="test-project flex items-center mt-4 p-2 py-1 w-max rounded-md bg-slate-100 text-slate-500">
                     <i class="bx bx-bookmark test-project__icon mr-1 text-sm"></i>
-                    <div class="test-project__name text-xs font-medium">{{this.project_name}}</div>
+                    <div class="test-project__name text-xs font-medium">{{this.projectName}}</div>
                 </div>
             </div>
-            <div class="content__statistic statistic flex flex-col justify-center items-center w-1/3">
+            <div class="content__statistic statistic flex flex-col justify-center items-center w-1/4"
+				 :class="{hidden: editingName}">
                 <div class="statistic__wrapp flex flex-col">
                     <p class="text-sm text-black font-semibold">{{formattingNumber(respondents)}}</p>
                     <span class="text-xs text-slate-400">прошло тест</span>
                 </div>
             </div>
+			<div class="content__statistic statistic flex flex-col justify-center items-center w-1/4"
+				 :class="{hidden: editingName}">
+				<div class="statistic__wrapp flex flex-col">
+					<p class="text-sm text-black font-semibold">{{expire_date}}</p>
+					<span class="text-xs text-slate-400">дата окончания</span>
+				</div>
+			</div>
             <div class="content__statistic info flex justify-end items-center w-1/2">
                 <div class="info__status mr-3 font-medium text-sm p-2 px-3 pr-4 rounded-lg flex items-center"
                      :class="{
-                        'text-indigo-600': this.status.code === 0,
+                        'text-indigo-500': status.code === 0,
                         'bg-indigo-50': status.code === 0,
-                        'text-teal-600': status.code === 1,
+                        'text-teal-500': status.code === 1,
                         'bg-teal-50': status.code === 1,
-                        'text-yellow-600': status.code === 2,
-                        'bg-yellow-50': status.code === 2,
-                        'text-green-600': status.code === 3,
+                        'text-orange-500': status.code === 2,
+                        'bg-orange-50': status.code === 2,
+                        'text-green-500': status.code === 3,
                         'bg-green-50': status.code === 3,
-                        'text-slate-600': status.code === 4,
+                        'text-slate-500': status.code === 4,
                         'bg-slate-100': status.code === 4,
-                        'text-purple-600': status.code === 5,
+                        'text-purple-500': status.code === 5,
                         'bg-purple-50': status.code === 5,
                     }">
                     <i v-if="status.code === 0" class="bx bx-git-branch mr-1 text-lg"></i>
@@ -124,7 +148,7 @@
                             </div>
                             <hr class="my-1">
                             <div class="content-tooltip__item text-red-400 cursor-pointer flex items-center p-2
-                            hover:bg-red-100 hover:text-red-600 rounded-lg w-full"
+                            hover:bg-red-100 hover:text-red-500 rounded-lg w-full"
                                      @click="modalDeleteTeam = !modalDeleteTeam"
                                     @mouseup="menuActive=!menuActive">
                                     <i class="bx bx-trash text-lg mr-1"></i> Удалить
@@ -148,7 +172,7 @@
                     <vs-button @click="activeTooltipDelete=false" @mouseup="modalDeleteTeam = !modalDeleteTeam" flat dark block>
                         Отменить
                     </vs-button>
-                    <vs-button @click="activeTooltipDelete=false" @mouseup="modalDeleteTeam = !modalDeleteTeam" danger block>
+                    <vs-button @click="deleteTest" danger block>
                         Удалить
                     </vs-button>
                 </footer>
@@ -158,7 +182,10 @@
 </template>
 
 <script>
-    export default {
+    import store from "../../../../store/store";
+	import router from "../../../../router";
+
+	export default {
         name: "block-test",
         data: () => {
             return {
@@ -200,16 +227,15 @@
             respondents: {
                 type: Number,
             },
+			expire_date: {
+            	type: String
+			},
             type: {
                 type: Number,
             },
             projectName: {
                 type: String,
             },
-            preview: {
-                type: String,
-                default: '/storage/images/mocks/mock-preview.png'
-            }
         },
         methods: {
             showTooltipMenu() {
@@ -234,7 +260,15 @@
             },
             toArchive() {
                 this.status.code = 5
-            }
+            },
+			deleteTest(){
+				console.log('!!!')
+				this.modalDeleteTeam = !this.modalDeleteTeam
+				store.dispatch('deleteTest',this.id)
+					.then(({data})=>{
+						console.log('success delete!', data)
+					})
+			}
         },
         mounted: function () {
             if (this.statusTest  ===  0) {
@@ -257,7 +291,7 @@
                 this.status.name = "Архивирован"
             }
 
-            if (this.projectName  ===  "") {
+            if (this.projectName  ===  "" || this.projectName == null) {
                 this.project_name = "Без проекта"
             } else {
                 this.project_name = this.projectName
@@ -326,14 +360,8 @@
         }
     }
 
-    .preview-wrapper {
-        width: 110px;
-
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
+    .type-image {
+        width: 90px;
     }
 
     .tooltip-menu {

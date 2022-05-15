@@ -7,6 +7,8 @@ use App\Models\Test;
 use App\Http\Requests\StoreTestRequest;
 use App\Http\Requests\UpdateTestRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
@@ -19,14 +21,14 @@ class TestController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        return TestResource::collection(Test::where('id_moder', $user->id)->paginate());
+        return TestResource::collection(Test::where('id_moder', $user->id)->get());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreTestRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return TestResource
      */
     public function store(StoreTestRequest $request)
     {
@@ -40,7 +42,7 @@ class TestController extends Controller
 	 *
 	 * @param \App\Models\Test $test
 	 * @param Request $request
-	 * @return \Illuminate\Http\Response
+	 * @return TestResource
 	 */
     public function show(Test $test, Request $request)
     {
@@ -58,7 +60,7 @@ class TestController extends Controller
      *
      * @param  \App\Http\Requests\UpdateTestRequest  $request
      * @param  \App\Models\Test  $test
-     * @return \Illuminate\Http\Response
+     * @return TestResource
      */
     public function update(UpdateTestRequest $request, Test $test)
     {
@@ -71,7 +73,7 @@ class TestController extends Controller
 	 *
 	 * @param \App\Models\Test $test
 	 * @param Request $request
-	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
 	 */
     public function destroy(Test $test, Request $request)
     {

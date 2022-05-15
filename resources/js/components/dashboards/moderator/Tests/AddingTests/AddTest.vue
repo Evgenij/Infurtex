@@ -33,22 +33,33 @@
         <div class="tabs-content tab pt-5 flex flex-col space-y-8" v-if="activeTab === 1">
             <div class="tab-data grid grid-cols-2 gap-3 mt-2">
                 <h2 class="col-span-2 font-medium text-base">Основные данные</h2>
-                <div class="cell flex items-center">
-                    <vs-input v-model="nameTest" class="w-full" primary placeholder="название теста">
-                        <template #icon>
-                            <i class='bx bx-rename'></i>
-                        </template>
-                    </vs-input>
-                </div>
-                <div class="cell flex items-center">
-                    <dropdown :listItems="listProjects" @add-item="addProject" :data="dataProject" @changeProject="changeProject"></dropdown>
-                </div>
+				<div class="data-test col-span-2 grid grid-cols-3 gap-3">
+					<div class="cell flex items-center">
+						<vs-input v-model="dataTest.name" class="w-full" primary placeholder="название теста">
+							<template #icon>
+								<i class='bx bx-rename'></i>
+							</template>
+						</vs-input>
+					</div>
+					<div class="cell flex items-center">
+						<dropdown :listItems="getProjects" @add-item="addProject" :data="dataTest.project" @changeProject="changeProject"></dropdown>
+					</div>
+					<div class="cell flex items-center">
+						<vs-input type="date" v-model="dataTest.date" class="w-full" primary placeholder="дата окончания теста">
+							<template #icon>
+								<i class='bx bx-calendar'></i>
+							</template>
+						</vs-input>
+					</div>
+				</div>
                 <hr class="col-span-2 my-3 mt-4">
-                <div v-if="testType === 0" class="list-type-test col-span-2">
+                <div v-if="dataTest.type === 0" class="list-type-test col-span-2">
                     <h2 class="font-medium text-base mb-3">Вид теста</h2>
-                    <list-test-type @add-section="addSectionTest"></list-test-type>
+                    <list-test-type
+						@setTestType="setTestType"></list-test-type>
                 </div>
-                <section-test-type v-else :type-test="testType"
+                <section-test-type v-else
+								   :type-test="dataTest.type"
                                    @reset-type-test="resetTypeTest"
 								   @changeInstruction="changeInstruction"
                                    @next-step="activate(2)"></section-test-type>
@@ -348,6 +359,7 @@
 	import ManagerAnswers from "../ManagerAnswers";
 	import store from "../../../../../store/store";
 	import router from "../../../../../router";
+	import {mapActions, mapGetters, mapMutations} from 'vuex'
 
     export default {
         name: "AddTest",
@@ -359,13 +371,22 @@
 			ManagerAnswers
         },
         data: ()=>({
-            activeTab: 3,
+            activeTab: 1,
             tabs: [
                 "Построение",
                 "Рекрутинг",
                 "Результаты",
             ],
-            nameTest: '',
+			dataTest: {
+            	type: 0,
+            	name: '',
+				project: {
+            		id:null,
+					name:null
+				},
+				date: '',
+				instruction: null,
+			},
             listProjects: [
                 { value: 'Дизайн приложений', id: 1 },
                 { value: 'Упаковки', id: 2 },
@@ -374,9 +395,6 @@
                 { value: '57', id: 5 },
                 { value: '45646', id: 6 },
             ],
-            dataProject: {id:null,value:null},
-            testType: 0,
-			testInstruction: null,
 			testFiles: [],
 			testLink: 'https://app.usabilityhub.com/tests/2a303ea9824c/recruit',
 			teams: [
@@ -432,9 +450,15 @@
 			// }
         }),
         methods: {
+        	...mapActions(['fetchProjects', 'createProject']),
+			//...mapMutations(['createProject']),
 			createTest(){
 				store.dispatch('createTest', {
-					name: this.nameTest,
+					name: this.dataTest.name,
+					type: this.dataTest.type,
+					instruction: this.dataTest.instruction,
+					expire_date: this.dataTest.date,
+					status: 0,
 				}).then(({data})=>{
 					router.push({
 						name: 'ModeratorTests',
@@ -446,31 +470,40 @@
                 this.activeTab = index;
             },
             addProject(data) {
-                let nameNewProject = data.input.value
-                let idNewProject = data.listProjects.length+1
-                this.listProjects.push({
-                    value: nameNewProject,
-                    id:  idNewProject
-                })
-				this.setDataProject(
-					{
-						value: nameNewProject,
-						id: idNewProject
-					}
-				)
+                // let nameNewProject = data.input.value
+                // let idNewProject = data.listProjects.length+1
+                // this.listProjects.push({
+                //     name: nameNewProject,
+                //     id:  idNewProject
+                // })
+				console.log(data.input.value)
+				this.createProject({
+					name: data.input.value
+				})
+
+
+				// this.setDataProject(
+				// 	{
+				// 		name: nameNewProject,
+				// 		id: idNewProject
+				// 	}
+				// )
             },
 			changeProject(data){
 				this.setDataProject(data)
 			},
 			setDataProject(data){
-				this.dataProject.value = data.value
-				this.dataProject.id = data.id
+				this.dataTest.project.name = data.name
+				this.dataTest.project.id = data.id
 			},
             addSectionTest(id){
                 console.log('Test type: ', this.testType = id)
             },
+			setTestType(id){
+				this.dataTest.type = id
+			},
             resetTypeTest(){
-                this.testType = 0
+                this.dataTest.type = 0
                 this.activate(1)
             },
 			copyLinkTest(){
@@ -506,10 +539,14 @@
             	return (Math.ceil((this.respondentsAnswers.length / this.coverageRespondents) * 100)) + '%'
 			},
 			changeInstruction(text){
-				this.testInstruction = text
+				this.dataTest.instruction = text
 			}
         },
+		mounted() {
+        	this.fetchProjects()
+		},
 		computed: {
+        	...mapGetters(['getProjects']),
 			getListCountries() {
 				return listCountries
 			},
@@ -530,9 +567,6 @@
 			industry(){
 				this.getWorkAreas()
 			},
-			resultsFilters(){
-				console.log('!!!')
-			}
 		}
     }
 </script>

@@ -3,7 +3,7 @@
         <type-test-block v-for="typeTestBlock in testTypes"
                          :id="typeTestBlock.id" :name="typeTestBlock.name"
                          :description="typeTestBlock.description" :icon="typeTestBlock.icon"
-                         :color="typeTestBlock.color" @add-section="addSection" :key="typeTestBlock.id"></type-test-block>
+                         :color="typeTestBlock.color" :key="typeTestBlock.id"></type-test-block>
     </section>
 </template>
 
@@ -55,11 +55,8 @@ export default {
             },
         ],
     }),
-    methods: {
-        addSection(id){
-            this.$emit('add-section', id)
-        }
-    }
+	methods: {
+	}
 }
 </script>
 

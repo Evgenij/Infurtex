@@ -16,12 +16,12 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(App\Models\Moderator::class, 'id_moder');
-            $table->foreignIdFor(App\Models\Project::class, 'id_project');
+            $table->foreignIdFor(App\Models\Project::class, 'id_project')->nullable()->default(null);
 			$table->integer('type');
 			$table->string('name', 1000);
 			$table->string('instruction', 1000);
 			$table->date('expire_date')->nullable();
-			$table->boolean('status');
+			$table->integer('status')->default(0);
 			$table->string('slug', 1000);
             $table->timestamps();
         });

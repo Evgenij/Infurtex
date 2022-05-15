@@ -3,9 +3,14 @@
 </template>
 
 <script>
-    export default {
+    import store from "../../store/store";
+
+	export default {
         name: "DashboardLayout",
-    }
+		mounted() {
+			store.dispatch("getData")
+		}
+	}
 </script>
 
 

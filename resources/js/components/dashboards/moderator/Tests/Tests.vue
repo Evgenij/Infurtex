@@ -1,10 +1,11 @@
 <template>
-    <list-tests :tests="this.tests"></list-tests>
+    <list-tests :tests="getTests"></list-tests>
 </template>
 
 <script>
     import ListTests from "./ListTests";
     import tests from "../../../../mocks/tests";
+    import {mapGetters, mapActions} from 'vuex'
 
     export default {
         name: "moderator-tests",
@@ -22,7 +23,12 @@
             ],
             tests: tests
         }),
-    }
+		computed: mapGetters(['getTests']),
+		methods: mapActions(['fetchTests']),
+		mounted() {
+			this.fetchTests()
+		}
+	}
 </script>
 
 <style lang="scss">

@@ -118,22 +118,25 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    console.log(store.state.user.token)
-    if(!store.state.user.token && to.meta.requiresAuth) {
-        console.log('token empty')
+
+	let userToken = store.state.user.token
+
+    if(!userToken && to.meta.requiresAuth) {
+        //console.log('token empty')
         next({name: 'auth'})
-    } else if (store.state.user.token &&
-        (to.name === 'reg-moderator' ||
+    } else if (userToken && (to.name === 'reg-moderator' ||
             to.name === 'reg-respondent' ||
             to.name === 'rec-password' ||
             to.name === 'login' ||
             to.name === 'dashboard')){
-        console.log("enter to route as: ", store.state.user)
+
+        //console.log("enter to route as: ", store.state.user.data.role)
+
         if(store.state.user.data.role === userRole.userRole.Moderator){
-            console.log("enter to moderator")
+            //console.log("enter to moderator")
             next({name: 'moderator'})
         } else if (store.state.user.data.role === userRole.userRole.Respondent) {
-            console.log("enter to respondent")
+            //console.log("enter to respondent")
             next({name: 'respondent'})
         } else {
 			next()

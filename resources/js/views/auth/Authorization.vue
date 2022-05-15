@@ -12,8 +12,6 @@
                 </defs>
             </svg>
         </div>
-        <div class="background-lines absolute h-full">
-        </div>
         <div class="section__buttons flex items-center justify-end">
             <div class="section__panel auth buttons-panel flex flex-col justify-between">
                 <div class="buttons-panel__header header flex justify-center flex-col w-full">
@@ -38,7 +36,7 @@
                     </div>
                 </div>
             </div>
-
+			<div class="background-lines absolute h-full"></div>
         </div>
         <div class="section__form auth flex items-center flex-grow">
             <div class="section__panel block-form flex flex-col justify-center items-center">
@@ -131,4 +129,7 @@ import {ref} from 'vue'
 </script>
 
 <style lang="scss">
+	.background-lines{
+		z-index: -100;
+	}
 </style>

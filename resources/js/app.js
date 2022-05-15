@@ -37,10 +37,7 @@ import 'vuesax/dist/vuesax.css' //Vuesax styles
 Vue.use(
     Vuesax, {
         colors: {
-            //primary: '#3a75c4',
             primary: '#1ac4b6',
-            //primary: '#18C3D4',
-            //'#1164B4'
             success:'rgb(62,190,119)',
             danger:'rgb(255,65,65)',
             warning:'rgb(255, 130, 0)',
@@ -56,7 +53,10 @@ Vue.mixin({
         },
         getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
-        }
+        },
+		formattingDate(date){
+
+		}
     }
 })
 

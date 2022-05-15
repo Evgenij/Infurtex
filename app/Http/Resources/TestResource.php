@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Moderator;
+use App\Models\Project;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TestResource extends JsonResource
@@ -17,12 +19,15 @@ class TestResource extends JsonResource
 //        return parent::toArray($request);
 		return [
 			'id' => $this->id,
+			'id_moder' => $this->id_moder,
+			'project' => Project::find($this->id_project),
 			'type' => $this->type,
 			'name' => $this->name,
 			'instruction' => $this->instruction,
 			'expire_date' => $this->expire_date,
-			'status' => $this->status !== 'draft',
+			'status' => $this->status,
 			'slug' => $this->slug,
+			'respondents' => 12466,
 			'questions' => []
 		];
     }

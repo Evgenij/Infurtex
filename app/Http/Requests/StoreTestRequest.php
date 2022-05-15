@@ -30,17 +30,13 @@ class StoreTestRequest extends FormRequest
      */
     public function rules()
     {
-//        return [
-//            'id_moder' => 'exists:moderators,id',
-//			'type' => 'required|numeric',
-//			'name' => 'required|string|max:1000',
-//			'instruction' => 'required|string|max:1000',
-//			'expire_date' => 'nullable|date|after:tomorrow',
-//			'status' => 'required|boolean',
-//        ];
-
-		return [
+        return [
+            'id_moder' => 'exists:moderators,id',
+			'type' => 'required|numeric',
 			'name' => 'required|string|max:1000',
-		];
+			'instruction' => 'required|string|max:1000',
+			'expire_date' => 'nullable|date|after:tomorrow',
+			'status' => 'required|boolean',
+        ];
     }
 }

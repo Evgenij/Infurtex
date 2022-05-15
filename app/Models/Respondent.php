@@ -11,6 +11,8 @@ class Respondent extends Authenticatable
 {
 	use HasApiTokens, HasFactory, Notifiable;
 
+	protected $guard = 'respondent';
+
 	/**
 	 * The attributes that are mass assignable.
 	 *

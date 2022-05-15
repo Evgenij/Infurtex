@@ -1,7 +1,7 @@
 <template>
     <div class="project-list__item text-sm p-2 px-3 hover:bg-gray-100 cursor-pointer rounded-lg"
          @click="setData">
-        {{value}}
+        {{name}}
     </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
     name: "DropdownItem",
     props: {
-        value: {
+        name: {
             type: String,
             required: true
         },
@@ -22,7 +22,7 @@ export default {
         setData(){
             this.$emit('set-data', {
                 id: this.id,
-                value: this.value
+                name: this.name
             })
         }
     }

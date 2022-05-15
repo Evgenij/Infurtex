@@ -1,7 +1,7 @@
 <template>
     <div class="type-test-block p-3 border-2 bg-white border-slate-100 rounded-lg flex items-start space-x-4
                     hover:border-slate-200 cursor-pointer transform hover:-translate-y-1"
-        @click="createTypeSection">
+        @click="setTestType">
         <div class="type-test-block__icon p-3 rounded-lg flex items-center justify-center"
              :class="[color]">
             <i class="bx text-white" :class="[icon]"></i>
@@ -44,8 +44,8 @@ export default {
         },
     },
     methods: {
-        createTypeSection() {
-            this.$emit('add-section', this.id)
+		setTestType() {
+            this.$parent.$emit('setTestType', this.id)
         }
     }
 }

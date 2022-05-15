@@ -5,8 +5,7 @@ export default [
         status_test: 1,
         respondents: 43555,
         type: 1,
-        project_name: "79786",
-        preview: "https://www.sycamoreprint.co.nz/wp-content/uploads/2019/01/Offset-Printing.jpg"
+        project_name: null,
     },
     {
         id: 2,
@@ -15,7 +14,6 @@ export default [
         respondents: 93640,
         type: 3,
         project_name: "Juzer",
-        preview: "https://static.lyvi.ru/img/kf/H8864dab071cf4e1488b86bb4227c1571C/3.jpg"
     },
     {
         id: 3,
@@ -24,7 +22,6 @@ export default [
         respondents: 995636,
         type: 1,
         project_name: "443677",
-        preview: "https://sun9-39.userapi.com/c638319/v638319350/504c4/ZUtGj0ONIcA.jpg"
     },
     {
         id: 4,
@@ -33,7 +30,6 @@ export default [
         respondents: 486532,
         type: 2,
         project_name: "6545",
-        preview: "https://images.pexels.com/photos/8937442/pexels-photo-8937442.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
     },
     {
         id: 5,
@@ -41,8 +37,7 @@ export default [
         status_test: 4,
         respondents: 122463,
         type: 4,
-        project_name: "Koifar",
-        preview: "https://dobrenok.com/wp-content/uploads/2021/07/grata_adv_alfabank_b.jpg"
+        project_name: null,
     },
     {
         id: 6,
@@ -51,7 +46,6 @@ export default [
         respondents: 334,
         type: 2,
         project_name: "Название проекта",
-        preview: "storage/images/mocks/mock-preview.png"
     },
     {
         id: 7,
@@ -60,7 +54,6 @@ export default [
         respondents: 643452,
         type: 5,
         project_name: "Kilor",
-        preview: "storage/images/mocks/mock-preview.png"
     },
     {
         id: 8,
@@ -69,7 +62,6 @@ export default [
         respondents: 566747,
         type: 1,
         project_name: "Название проекта",
-        preview: "storage/images/mocks/mock-preview.png"
     },
     {
         id: 9,
@@ -78,7 +70,6 @@ export default [
         respondents: 468488,
         type: 4,
         project_name: "Название проекта",
-        preview: "storage/images/mocks/mock-preview.png"
     },
     {
         id: 10,
@@ -87,6 +78,5 @@ export default [
         respondents: 342388,
         type: 3,
         project_name: "4568",
-        preview: "storage/images/mocks/mock-preview.png"
     },
 ]

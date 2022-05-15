@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,9 @@ Route::prefix('respondent')->group(function () {
 
 Route::post('/login', [App\Http\Controllers\Authentication\AuthController::class, 'login']);
 
+Route::get('/projects', [ProjectController::class, 'getAll']);
+Route::post('/projects/add', [ProjectController::class, 'addProject']);
 //Route::post('/register', [RegisterController::class, 'register']);
 //Route::post('/login', [RegisterController::class, 'login']);
 
+Route::get('/get-user-data/{role}/{id}', [\App\Http\Controllers\UserController::class, 'getData']);
