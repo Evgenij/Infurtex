@@ -75,7 +75,7 @@
                     <div class="test-project__name text-xs font-medium">{{this.projectName}}</div>
                 </div>
             </div>
-            <div class="content__statistic statistic flex flex-col justify-center items-center w-1/4"
+            <div class="content__statistic statistic flex flex-col justify-center items-center w-1/4 ml-3"
 				 :class="{hidden: editingName}">
                 <div class="statistic__wrapp flex flex-col">
                     <p class="text-sm text-black font-semibold">{{formattingNumber(respondents)}}</p>
@@ -85,7 +85,7 @@
 			<div class="content__statistic statistic flex flex-col justify-center items-center w-1/4"
 				 :class="{hidden: editingName}">
 				<div class="statistic__wrapp flex flex-col">
-					<p class="text-sm text-black font-semibold">{{expire_date}}</p>
+					<p class="text-sm text-black font-semibold">{{formattingDate(expire_date)}}</p>
 					<span class="text-xs text-slate-400">дата окончания</span>
 				</div>
 			</div>

@@ -15,13 +15,15 @@
         <div class="links flex space-x-2">
             <template v-for="menuItem in links">
                 <router-link :to="menuItem.to"
-                             class="px-3 py-2 rounded-md bg-gray-100 font-medium text-base"
+                             class="px-3 text-sm py-2 rounded-md bg-gray-100 flex items-center font-medium"
                              active-class="bg-teal-500 text-white hover:bg-teal-500 hover:text-white"
                              :class="[
                                  $router.name === menuItem.to.name
                                  ? ''
                                  : 'text-gray-500 hover:bg-gray-200 hover:text-gray-700']"
                              :key="menuItem.name">
+					<i class="bx mr-1"
+						:class="menuItem.icon"></i>
                     {{menuItem.name}}
                 </router-link>
             </template>

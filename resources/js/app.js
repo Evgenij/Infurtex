@@ -55,7 +55,10 @@ Vue.mixin({
             return Math.floor(Math.random() * (max - min)) + min;
         },
 		formattingDate(date){
-
+        	if(date){
+				return date.split("-").reverse().join(".")
+			}
+			return 'не установлено'
 		}
     }
 })

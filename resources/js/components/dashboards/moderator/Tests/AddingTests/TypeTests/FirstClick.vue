@@ -10,7 +10,7 @@
         <div class="first-click-block__instruction">
             <h2 class="font-medium text-base">Инструкция</h2>
             <vs-input primary
-                      v-model="textInstruction"
+                      v-model="dataTest.instruction"
                       placeholder="Что нужно сделать в тесте ..."
                       class="w-full mt-2">
             </vs-input>
@@ -21,8 +21,8 @@
         </div>
         <div class="first-click-block__questions">
             <h2 class="font-medium text-base mb-2">Вопросы</h2>
-            <section-questions :questions="questions"
-                               @add-question-block="addQuestionBlock"
+            <section-questions :questions="dataTest.questions"
+							   @add-question-block="addQuestionBlock"
                                @remove-question-block="removeQuestionBlock">
             </section-questions>
         </div>
@@ -39,16 +39,18 @@ export default {
     components: {FileLoader, SectionQuestions},
     data: ()=>({
         textInstruction: '',
-        questions: [],
         typeFL: typeFileLoader.typeFileLoader
     }),
+	props: {
+    	dataTest: Object
+	},
     methods: {
         addQuestionBlock(newQuestion){
-            this.questions.push(newQuestion)
+            this.dataTest.questions.push(newQuestion)
         },
         removeQuestionBlock(idRemovingQuestion){
             //console.log(idRemovingQuestion)
-            this.questions = this.questions.filter(el => el.id !== idRemovingQuestion)
+			this.dataTest.questions = this.dataTest.questions.filter(el => el.id !== idRemovingQuestion)
             //console.log(this.questions)
         }
     },

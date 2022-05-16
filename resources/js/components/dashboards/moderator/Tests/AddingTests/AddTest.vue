@@ -59,7 +59,7 @@
 						@setTestType="setTestType"></list-test-type>
                 </div>
                 <section-test-type v-else
-								   :type-test="dataTest.type"
+								   :data-test="dataTest"
                                    @reset-type-test="resetTypeTest"
 								   @changeInstruction="changeInstruction"
                                    @next-step="activate(2)"></section-test-type>
@@ -378,14 +378,15 @@
                 "Результаты",
             ],
 			dataTest: {
-            	type: 0,
-            	name: '',
+            	type: 2,
+            	name: '24324',
 				project: {
-            		id:null,
-					name:null
+            		id: 1,
+					name: ''
 				},
-				date: '',
-				instruction: null,
+				date: '2022-05-17',
+				instruction: 'null',
+				questions: []
 			},
             listProjects: [
                 { value: 'Дизайн приложений', id: 1 },
@@ -451,18 +452,16 @@
         }),
         methods: {
         	...mapActions(['fetchProjects', 'createProject']),
-			//...mapMutations(['createProject']),
 			createTest(){
 				store.dispatch('createTest', {
-					name: this.dataTest.name,
+					id_project: this.dataTest.project.id,
 					type: this.dataTest.type,
+					name: this.dataTest.name,
 					instruction: this.dataTest.instruction,
 					expire_date: this.dataTest.date,
-					status: 0,
 				}).then(({data})=>{
 					router.push({
-						name: 'ModeratorTests',
-						params: {id: data.data.id}
+						name: 'ModeratorTests'
 					})
 				})
 			},
@@ -470,24 +469,9 @@
                 this.activeTab = index;
             },
             addProject(data) {
-                // let nameNewProject = data.input.value
-                // let idNewProject = data.listProjects.length+1
-                // this.listProjects.push({
-                //     name: nameNewProject,
-                //     id:  idNewProject
-                // })
-				console.log(data.input.value)
 				this.createProject({
 					name: data.input.value
 				})
-
-
-				// this.setDataProject(
-				// 	{
-				// 		name: nameNewProject,
-				// 		id: idNewProject
-				// 	}
-				// )
             },
 			changeProject(data){
 				this.setDataProject(data)
@@ -506,6 +490,9 @@
                 this.dataTest.type = 0
                 this.activate(1)
             },
+			// addQuestionBlock(newQuestion){
+			//     this.dataTest.questions.push(newQuestion)
+			// },
 			copyLinkTest(){
             	let link = this.$refs.linkTest.value
 				if (link) {

@@ -55,7 +55,7 @@
                 </vs-button>
             </router-link>
         </div>
-        <div ref="content" class="list-tests relative h-full"
+        <div ref="content" class="list-tests relative h-full pb-10"
              :class="{'content-is-loading': !loadingTests}">
             <div v-if="this.testsList.length > 0">
                 <transition-group
@@ -69,7 +69,7 @@
                                 :name="test.name" :status-test="test.status"
                                 :respondents="test.respondents" :type="test.type"
 								:expire_date="test.expire_date"
-                                :project-name="test.project.name">
+                                :project-name="test.project ? test.project.name : null">
                     </block-test>
                 </transition-group>
             </div>
@@ -147,7 +147,7 @@
                     return array
                 } else {
                     return array.filter(function (item) {
-						if(item.project.name){
+						if(item.project){
 							return item.project.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
 						}
                     })

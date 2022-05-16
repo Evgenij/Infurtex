@@ -9,22 +9,27 @@ use Spatie\Sluggable\SlugOptions;
 
 class Test extends Model
 {
-    use HasFactory, HasSlug;
+	use HasFactory, HasSlug;
 
-    protected $fillable = [
-    	'id_moder',
+	protected $fillable = [
+		'id_moder',
+		'id_project',
 		'type',
 		'name',
 		'instruction',
 		'expire_date',
-		'status',
 		'slug'
 	];
 
-    public function getSlugOptions() : SlugOptions
+	public function getSlugOptions(): SlugOptions
 	{
 		return SlugOptions::create()
 			->generateSlugsFrom('name')
 			->saveSlugsTo('slug');
+	}
+
+	public function questions()
+	{
+		return $this->hasMany(Question::class);
 	}
 }

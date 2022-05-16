@@ -14,8 +14,8 @@
         components: {AppHeader},
         data: ()=>({
             links: [
-                { name: 'Тесты', to: {name: 'ModeratorTests'}},
-                { name: 'Команды', to: {name: 'ModeratorTeams'}}
+                { name: 'Тесты', icon: 'bx-spreadsheet', to: {name: 'ModeratorTests'}},
+                { name: 'Команды', icon: 'bx-group', to: {name: 'ModeratorTeams'}}
             ],
             menuLinks: [
                 {

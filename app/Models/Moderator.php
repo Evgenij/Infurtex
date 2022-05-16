@@ -11,7 +11,7 @@ class Moderator extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-	protected $guard = 'moderator';
+	//protected $guard = 'moderator';
 
     /**
      * The attributes that are mass assignable.

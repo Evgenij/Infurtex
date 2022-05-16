@@ -63,7 +63,6 @@
                 this.openListItems = !this.openListItems
             },
             filterProjects(name){
-				console.log(name)
                 this.filteredItems = this.$props.listItems.filter(item =>
 					item.name.toLowerCase().includes(name.toLowerCase()))
                 //console.log(this.filteredItems)

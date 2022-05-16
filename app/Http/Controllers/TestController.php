@@ -32,7 +32,7 @@ class TestController extends Controller
      */
     public function store(StoreTestRequest $request)
     {
-        $result = Test::create($request->validated());
+        $result = Test::create($request->all());
 
         return new TestResource($result);
     }

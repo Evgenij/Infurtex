@@ -7,6 +7,7 @@ export default {
 	actions:{
 		createTest({commit}, test){
 			let response;
+
 			if (test.id) {
 				response = axiosClient.put(`/test/${test.id}`, test)
 					.then((res)=>{
@@ -14,6 +15,7 @@ export default {
 						return res;
 					})
 			} else {
+				console.log('data test - ', test)
 				response = axiosClient.post("/test", test)
 					.then((res)=>{
 						commit("createTest", res.data)
@@ -26,6 +28,7 @@ export default {
 		fetchTests({commit}){
 			return axiosClient.get(`/test`)
 				.then((res)=>{
+					console.log('data tests - ', res.data.data)
 					commit("updateTests", res.data.data)
 				})
 		},

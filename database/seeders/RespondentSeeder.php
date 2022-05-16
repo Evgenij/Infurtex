@@ -10,7 +10,7 @@ use App\Models\Respondent;
 use App\Models\Test;
 use Illuminate\Database\Seeder;
 
-class ProjectSeeder extends Seeder
+class RespondentSeeder extends Seeder
 {
 	/**
 	 * Seed the application's database.
@@ -19,6 +19,6 @@ class ProjectSeeder extends Seeder
 	 */
 	public function run()
 	{
-		Project::factory(10)->create();
+		Respondent::factory(10)->create();
 	}
 }

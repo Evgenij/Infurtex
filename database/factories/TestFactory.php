@@ -16,8 +16,8 @@ class TestFactory extends Factory
 		$name = $this->faker->text(100);
 
 		return [
-			'id_moder' => $this->faker->numberBetween(1,10),
-			'id_project' => $this->faker->numberBetween(1,5),
+			'moderator_id' => $this->faker->numberBetween(1,10),
+			'project_id' => $this->faker->numberBetween(1,5),
 			'type' => $this->faker->numberBetween(1,5),
 			'name' => $name,
 			'instruction' => $this->faker->realText(100),

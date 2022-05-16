@@ -603,17 +603,19 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       textInstruction: '',
-      questions: [],
       typeFL: _enums__WEBPACK_IMPORTED_MODULE_2__["default"].typeFileLoader
     };
   },
+  props: {
+    dataTest: Object
+  },
   methods: {
     addQuestionBlock: function addQuestionBlock(newQuestion) {
-      this.questions.push(newQuestion);
+      this.dataTest.questions.push(newQuestion);
     },
     removeQuestionBlock: function removeQuestionBlock(idRemovingQuestion) {
       //console.log(idRemovingQuestion)
-      this.questions = this.questions.filter(function (el) {
+      this.dataTest.questions = this.dataTest.questions.filter(function (el) {
         return el.id !== idRemovingQuestion;
       }); //console.log(this.questions)
     }
@@ -1840,11 +1842,11 @@ var render = function () {
               placeholder: "Что нужно сделать в тесте ...",
             },
             model: {
-              value: _vm.textInstruction,
+              value: _vm.dataTest.instruction,
               callback: function ($$v) {
-                _vm.textInstruction = $$v
+                _vm.$set(_vm.dataTest, "instruction", $$v)
               },
-              expression: "textInstruction",
+              expression: "dataTest.instruction",
             },
           }),
         ],
@@ -1873,7 +1875,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("section-questions", {
-            attrs: { questions: _vm.questions },
+            attrs: { questions: _vm.dataTest.questions },
             on: {
               "add-question-block": _vm.addQuestionBlock,
               "remove-question-block": _vm.removeQuestionBlock,
@@ -1901,11 +1903,11 @@ var staticRenderFns = [
           "div",
           {
             staticClass:
-              "p-2 px-3 rounded-lg flex items-center justify-center bg-yellow-500 mr-3\n            shadow-lg shadow-yellow-500/50",
+              "p-2 px-3 rounded-lg flex items-center justify-center bg-yellow-500 mr-3\n                shadow-lg shadow-yellow-500/50",
           },
           [_c("i", { staticClass: "bx bxs-pointer text-white text-sm" })]
         ),
-        _vm._v("\n        Тест первого клика\n    "),
+        _vm._v("\n            Тест первого клика\n        "),
       ]
     )
   },

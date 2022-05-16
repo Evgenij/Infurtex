@@ -32,11 +32,11 @@ class StoreTestRequest extends FormRequest
     {
         return [
             'id_moder' => 'exists:moderators,id',
+			'id_project '=> 'nullable|numeric',
 			'type' => 'required|numeric',
 			'name' => 'required|string|max:1000',
 			'instruction' => 'required|string|max:1000',
 			'expire_date' => 'nullable|date|after:tomorrow',
-			'status' => 'required|boolean',
         ];
     }
 }

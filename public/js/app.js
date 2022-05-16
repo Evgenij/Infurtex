@@ -2321,6 +2321,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2533,11 +2535,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       links: [{
         name: 'Тесты',
+        icon: 'bx-spreadsheet',
         to: {
           name: 'ModeratorTests'
         }
       }, {
         name: 'Команды',
+        icon: 'bx-group',
         to: {
           name: 'ModeratorTeams'
         }
@@ -4228,14 +4232,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       activeTab: 1,
       tabs: ["Построение", "Рекрутинг", "Результаты"],
       dataTest: {
-        type: 0,
-        name: '',
+        type: 2,
+        name: '24324',
         project: {
-          id: null,
-          name: null
+          id: 1,
+          name: ''
         },
-        date: '',
-        instruction: null
+        date: '2022-05-17',
+        instruction: 'null',
+        questions: []
       },
       listProjects: [{
         value: 'Дизайн приложений',
@@ -4302,21 +4307,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_12__.mapActions)(['fetchProjects', 'createProject'])), {}, {
-    //...mapMutations(['createProject']),
     createTest: function createTest() {
       _store_store__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch('createTest', {
-        name: this.dataTest.name,
+        id_project: this.dataTest.project.id,
         type: this.dataTest.type,
+        name: this.dataTest.name,
         instruction: this.dataTest.instruction,
-        expire_date: this.dataTest.date,
-        status: 0
+        expire_date: this.dataTest.date
       }).then(function (_ref) {
         var data = _ref.data;
         _router__WEBPACK_IMPORTED_MODULE_11__["default"].push({
-          name: 'ModeratorTests',
-          params: {
-            id: data.data.id
-          }
+          name: 'ModeratorTests'
         });
       });
     },
@@ -4324,21 +4325,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.activeTab = index;
     },
     addProject: function addProject(data) {
-      // let nameNewProject = data.input.value
-      // let idNewProject = data.listProjects.length+1
-      // this.listProjects.push({
-      //     name: nameNewProject,
-      //     id:  idNewProject
-      // })
-      console.log(data.input.value);
       this.createProject({
         name: data.input.value
-      }); // this.setDataProject(
-      // 	{
-      // 		name: nameNewProject,
-      // 		id: idNewProject
-      // 	}
-      // )
+      });
     },
     changeProject: function changeProject(data) {
       this.setDataProject(data);
@@ -4357,6 +4346,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.dataTest.type = 0;
       this.activate(1);
     },
+    // addQuestionBlock(newQuestion){
+    //     this.dataTest.questions.push(newQuestion)
+    // },
     copyLinkTest: function copyLinkTest() {
       var _this = this;
 
@@ -4510,7 +4502,6 @@ __webpack_require__.r(__webpack_exports__);
       this.openListItems = !this.openListItems;
     },
     filterProjects: function filterProjects(name) {
-      console.log(name);
       this.filteredItems = this.$props.listItems.filter(function (item) {
         return item.name.toLowerCase().includes(name.toLowerCase());
       }); //console.log(this.filteredItems)
@@ -4705,8 +4696,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    typeTest: {
-      type: Number
+    dataTest: {
+      type: Object
     }
   },
   methods: {
@@ -4715,22 +4706,24 @@ __webpack_require__.r(__webpack_exports__);
     },
     next: function next() {
       this.$emit('next-step');
+    },
+    addQuestionBlock: function addQuestionBlock(newQuestion) {
+      this.$parent.$emit('add-question-block', newQuestion);
     }
   },
   computed: {
     setTypeTest: function setTypeTest() {
-      console.log(this.typeTest);
       var nameTypeTestComponent = '';
 
-      if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.FirstClick) {
+      if (this.dataTest.type === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.FirstClick) {
         nameTypeTestComponent = 'FirstClick';
-      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.OverallImpression) {
+      } else if (this.dataTest.type === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.OverallImpression) {
         nameTypeTestComponent = 'OverallImpression';
-      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Like) {
+      } else if (this.dataTest.type === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Like) {
         nameTypeTestComponent = 'Like';
-      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Navigation) {
+      } else if (this.dataTest.type === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.Navigation) {
         nameTypeTestComponent = 'Navigation';
-      } else if (this.typeTest === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.FiveSeconds) {
+      } else if (this.dataTest.type === _enums__WEBPACK_IMPORTED_MODULE_0__["default"].typeTest.FiveSeconds) {
         nameTypeTestComponent = 'FiveSeconds';
       }
 
@@ -5386,7 +5379,7 @@ __webpack_require__.r(__webpack_exports__);
         return array;
       } else {
         return array.filter(function (item) {
-          if (item.project.name) {
+          if (item.project) {
             return item.project.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
           }
         });
@@ -7148,7 +7141,13 @@ Vue.mixin({
     getRandomInt: function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     },
-    formattingDate: function formattingDate(date) {}
+    formattingDate: function formattingDate(date) {
+      if (date) {
+        return date.split("-").reverse().join(".");
+      }
+
+      return 'не установлено';
+    }
   }
 });
 var app = new Vue({
@@ -10074,6 +10073,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           return res;
         });
       } else {
+        console.log('data test - ', test);
         response = _axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/test", test).then(function (res) {
           commit("createTest", res.data);
           return res;
@@ -10085,6 +10085,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     fetchTests: function fetchTests(_ref2) {
       var commit = _ref2.commit;
       return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("/test").then(function (res) {
+        console.log('data tests - ', res.data.data);
         commit("updateTests", res.data.data);
       });
     },
@@ -15013,7 +15014,7 @@ var render = function () {
                 {
                   key: menuItem.name,
                   staticClass:
-                    "px-3 py-2 rounded-md bg-gray-100 font-medium text-base",
+                    "px-3 text-sm py-2 rounded-md bg-gray-100 flex items-center font-medium",
                   class: [
                     _vm.$router.name === menuItem.to.name
                       ? ""
@@ -15026,6 +15027,7 @@ var render = function () {
                   },
                 },
                 [
+                  _c("i", { staticClass: "bx mr-1", class: menuItem.icon }),
                   _vm._v(
                     "\n                    " +
                       _vm._s(menuItem.name) +
@@ -17041,7 +17043,7 @@ var render = function () {
                         1
                       )
                     : _c("section-test-type", {
-                        attrs: { "type-test": _vm.dataTest.type },
+                        attrs: { "data-test": _vm.dataTest },
                         on: {
                           "reset-type-test": _vm.resetTypeTest,
                           changeInstruction: _vm.changeInstruction,
@@ -17837,7 +17839,11 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _c(_vm.setTypeTest, { tag: "component" }),
+      _c(_vm.setTypeTest, {
+        tag: "component",
+        attrs: { dataTest: _vm.dataTest },
+        on: { "add-question-block": _vm.addQuestionBlock },
+      }),
     ],
     1
   )
@@ -18166,7 +18172,7 @@ var render = function () {
             "div",
             {
               staticClass:
-                "content__statistic statistic flex flex-col justify-center items-center w-1/4",
+                "content__statistic statistic flex flex-col justify-center items-center w-1/4 ml-3",
               class: { hidden: _vm.editingName },
             },
             [
@@ -18192,7 +18198,7 @@ var render = function () {
             [
               _c("div", { staticClass: "statistic__wrapp flex flex-col" }, [
                 _c("p", { staticClass: "text-sm text-black font-semibold" }, [
-                  _vm._v(_vm._s(_vm.expire_date)),
+                  _vm._v(_vm._s(_vm.formattingDate(_vm.expire_date))),
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "text-xs text-slate-400" }, [
@@ -18683,7 +18689,7 @@ var render = function () {
       "div",
       {
         ref: "content",
-        staticClass: "list-tests relative h-full",
+        staticClass: "list-tests relative h-full pb-10",
         class: { "content-is-loading": !_vm.loadingTests },
       },
       [
@@ -18712,7 +18718,9 @@ var render = function () {
                             respondents: test.respondents,
                             type: test.type,
                             expire_date: test.expire_date,
-                            "project-name": test.project.name,
+                            "project-name": test.project
+                              ? test.project.name
+                              : null,
                           },
                         })
                       : _vm._e()
