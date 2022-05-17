@@ -32,7 +32,7 @@
             <vs-tooltip bottom shadow border-thick primary>
                 <div class="coin-block border-r-2 border-slate-200 mr-3 pr-3 flex items-center justify-end cursor-help">
                     <div class="wrapp flex flex-col items-end">
-                        <div class="coin-block__value text-slate-900 font-semibold leading-2">{{userData.coins}}</div>
+                        <div class="coin-block__value text-slate-900 font-semibold leading-2">{{getUsersData().coins}}</div>
                         <div class="text-slate-500 text-sm leading-4">инфьюртов</div>
                     </div>
                     <svg class="ml-2" width="37" height="34" viewBox="0 0 37 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,10 +56,10 @@
                      @click="activeUserMenu=!activeUserMenu">
                     <vs-avatar primary>
                         <template #text>
-							{{userData.name}}
+							{{getUsersData().name}}
                         </template>
                     </vs-avatar>
-                    <span class="ml-4 text-sm font-semibold">{{userData.name}}</span>
+                    <span class="ml-4 text-sm font-semibold">{{getUsersData().name}}</span>
                     <i class="bx text-teal-600 text-lg ml-2"
                        :class="{
                             'bx-chevron-down': activeUserMenu === false,
@@ -114,14 +114,7 @@
 						});
 					});
 			},
-			setUserData(){
-				this.userData = this.getUsersData()
-			}
 		},
-		mounted() {
-        	//this.setUserData()
-			this.userData = this.getUsersData()
-		}
 	}
 </script>
 

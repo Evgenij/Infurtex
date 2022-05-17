@@ -4,6 +4,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\TestsAccessController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,10 @@ Route::group(['namespace'=>'Question'], function (){
 Route::group(['namespace'=>'Answer'], function (){
 	Route::get('/answers', [AnswerController::class, 'index']);
 	Route::post('/answer', [AnswerController::class, 'store']);
+});
+
+Route::group(['namespace'=>'Recruiting'], function (){
+	Route::post('/general', [TestsAccessController::class, 'generalRecruiting']);
 });
 
 

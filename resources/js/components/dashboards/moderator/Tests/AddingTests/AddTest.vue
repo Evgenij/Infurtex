@@ -76,8 +76,8 @@
 			<div class="tab-data flex flex-col space-y-2 mt-2">
 				<h2 class="col-span-2 font-medium text-base">Способ рекрутинга</h2>
 				<div class="type-recruiting">
-					<input id="radio-ganeral" type="radio" name="type-recruiting" class="hidden" checked>
-					<label for="radio-ganeral"
+					<input id="general" type="radio" name="type-recruiting" class="hidden" checked>
+					<label for="general"
 						   class="rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer">
 						<div class="radio-circle border-2 rounded-full relative"></div>
 						<div class="data">
@@ -98,8 +98,8 @@
 					</label>
 				</div>
 				<div class="type-recruiting">
-					<input id="radio-link" type="radio" name="type-recruiting" class="hidden" checked>
-					<label for="radio-link"
+					<input id="link" type="radio" name="type-recruiting" class="hidden">
+					<label for="link"
 						   class="rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer">
 						<div class="radio-circle border-2 rounded-full relative"></div>
 						<div class="data">
@@ -128,8 +128,8 @@
 					</label>
 				</div>
 				<div class="type-recruiting">
-					<input id="radio-team" type="radio" name="type-recruiting" class="hidden" checked>
-					<label for="radio-team"
+					<input id="team" type="radio" name="type-recruiting" class="hidden">
+					<label for="team"
 						   class="rounded-lg border-2 border-slate-100 w-full p-4 flex items-center space-x-4 cursor-pointer">
 						<div class="radio-circle border-2 rounded-full relative w-full"></div>
 						<div class="data">
@@ -460,34 +460,46 @@
         methods: {
         	...mapActions(['fetchProjects', 'createProject']),
 			createTest(){
-				store.dispatch('createTest', {
-					project_id: this.dataTest.project.id,
-					type: this.dataTest.type,
-					name: this.dataTest.name,
-					instruction: this.dataTest.instruction,
-					expire_date: this.dataTest.date
-				}).then(({data})=>{
-					this.dataTest.questions.forEach(function (question) {
-						store.dispatch('createQuestion', {
-							test_id: data.data.id,
-							text: question.text,
-							type: question.type
-						})
-							.then(({data})=>{
-								question.answers.forEach(function (answer) {
-									store.dispatch('createAnswer', {
-										question_id: data.data.id,
-										text: answer.value,
-									}).then(({data})=>{
-										console.log(data)
-									})
-								})
-							})
-						})
+				let typeMailingTest = $('input[name="type-recruiting"]:checked').attr('id')
+
+				if (typeMailingTest === 'general') {
+					store.dispatch('recruitingForTests', {
+							test_id: 2,
+						}).then(({data})=>{
+						console.log(data)
 					})
-					// router.push({
-					// 	name: 'ModeratorTests'
-					// })
+
+				}
+
+				// store.dispatch('createTest', {
+				// 	project_id: this.dataTest.project.id,
+				// 	type: this.dataTest.type,
+				// 	name: this.dataTest.name,
+				// 	instruction: this.dataTest.instruction,
+				// 	expire_date: this.dataTest.date
+				// })
+				// 	.then(({data})=>{
+				// 		this.dataTest.questions.forEach(function (question) {
+				// 		store.dispatch('createQuestion', {
+				// 			test_id: data.data.id,
+				// 			text: question.text,
+				// 			type: question.type
+				// 		})
+				// 			.then(({data})=>{
+				// 				question.answers.forEach(function (answer) {
+				// 					store.dispatch('createAnswer', {
+				// 						question_id: data.data.id,
+				// 						text: answer.value,
+				// 					}).then(({data})=>{
+				// 						console.log(data)
+				// 					})
+				// 				})
+				// 			})
+				// 		})
+				// 	})
+				// 	router.push({
+				// 		name: 'ModeratorTests'
+				// 	})
 			},
             activate(index) {
                 this.activeTab = index;

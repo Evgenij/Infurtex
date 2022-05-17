@@ -41,6 +41,12 @@ export default {
 					dispatch("fetchTests")
 					return res
 				})
+		},
+		recruitingForTests({commit}, id) {
+			return axiosClient.post('/general', id)
+				.then((res)=>{
+					return res
+				})
 		}
 	},
 	mutations: {
