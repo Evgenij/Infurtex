@@ -378,15 +378,22 @@
                 "Результаты",
             ],
 			dataTest: {
-            	type: 2,
+            	type: 3,
             	name: '24324',
 				project: {
             		id: 1,
 					name: ''
 				},
-				date: '2022-05-17',
+				date: '2022-05-27',
 				instruction: 'null',
-				questions: []
+				questions: [
+					// {
+					// 	id: this.questions.length+1,
+					// 	type: 1,
+					// 	text: '',
+					// 	answers: []
+					// }
+				]
 			},
             listProjects: [
                 { value: 'Дизайн приложений', id: 1 },
@@ -454,16 +461,33 @@
         	...mapActions(['fetchProjects', 'createProject']),
 			createTest(){
 				store.dispatch('createTest', {
-					id_project: this.dataTest.project.id,
+					project_id: this.dataTest.project.id,
 					type: this.dataTest.type,
 					name: this.dataTest.name,
 					instruction: this.dataTest.instruction,
-					expire_date: this.dataTest.date,
+					expire_date: this.dataTest.date
 				}).then(({data})=>{
-					router.push({
-						name: 'ModeratorTests'
+					this.dataTest.questions.forEach(function (question) {
+						store.dispatch('createQuestion', {
+							test_id: data.data.id,
+							text: question.text,
+							type: question.type
+						})
+							.then(({data})=>{
+								question.answers.forEach(function (answer) {
+									store.dispatch('createAnswer', {
+										question_id: data.data.id,
+										text: answer.value,
+									}).then(({data})=>{
+										console.log(data)
+									})
+								})
+							})
+						})
 					})
-				})
+					// router.push({
+					// 	name: 'ModeratorTests'
+					// })
 			},
             activate(index) {
                 this.activeTab = index;
@@ -623,13 +647,15 @@
 	.type-recruiting input[type=radio]:checked + label .radio-circle:before {
 		background: $primary;
 		//border-color: $primary;
-		box-shadow: 0 0 10px 1px $primary;
+		box-shadow: 0 0 16px 1px $primary;
 	}
 
+	/*
 	.type-recruiting input[type=radio]:checked + label {
 		transform: translateY(-5px);
 		box-shadow: 0 18px 20px 0 #393f4e29;
 	}
+	*/
 
 
 </style>

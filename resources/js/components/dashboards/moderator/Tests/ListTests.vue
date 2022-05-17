@@ -14,7 +14,7 @@
                 <vs-option label="Все проекты" value="all">
                     Все проекты
                 </vs-option>
-                <template v-for="test in tests"
+                <template v-for="test in listTests"
 						  v-if="test.project">
                     <vs-option :label="test.project.name" :value="test.project.name">
                         {{test.project.name}}
@@ -57,14 +57,14 @@
         </div>
         <div ref="content" class="list-tests relative h-full pb-10"
              :class="{'content-is-loading': !loadingTests}">
-            <div v-if="this.testsList.length > 0">
+            <div v-if="this.listTests.length > 0">
                 <transition-group
                     v-bind:css="false"
                     v-on:before-enter="beforeEnter"
                     v-on:enter="enter"
                     v-on:leave="leave"
                     name="staggered-fade">
-                    <block-test v-if="loadingTests" v-for="test in testsList" :key="test.id"
+                    <block-test v-if="loadingTests" v-for="test in getTestsFilter" :key="test.id"
                                 :id="test.id"
                                 :name="test.name" :status-test="test.status"
                                 :respondents="test.respondents" :type="test.type"
@@ -73,7 +73,7 @@
                     </block-test>
                 </transition-group>
             </div>
-            <div v-if="this.testsList.length === 0 && loadingTests===true" class="empty-tests text-center text-gray-500 h-full py-44">
+            <div v-if="this.listTests.length === 0 && loadingTests===true" class="empty-tests text-center text-gray-500 h-full py-44">
                 Тестов не найдено... Попробуйте изменить критерий поиска или
                 <a href="#" class="link link-blue size-16">создать новый тест</a>
             </div>
@@ -83,6 +83,8 @@
 
 <script>
     import BlockTest from "./BlockTest";
+	import {mapGetters, mapActions, mapMutations} from 'vuex'
+	import store from "../../../../store/store";
 
     export default {
         name: "list-tests",
@@ -95,10 +97,10 @@
             loadingTests: false,
         }),
         props: {
-            tests: {
-                type: Array,
-                required: true
-            }
+            // tests: {
+            //     type: Array,
+            //     required: true
+            // }
         },
         methods: {
             openLoading() {
@@ -107,15 +109,13 @@
                     color: 'primary',
                     type: 'circles'
                 })
-                setTimeout(() => {
-                    loading.close()
-                    this.loadingTests = true
-                }, 1000)
+				loading.close()
+				this.loadingTests = true
             },
-            beforeEnter: function (el) {
+            beforeEnter(el) {
                 el.style.opacity = 0
             },
-            enter: function (el, done) {
+            enter(el, done) {
                 let delay = 0
                 setTimeout(function () {
                     Velocity(
@@ -125,7 +125,7 @@
                     )
                 }, delay)
             },
-            leave: function (el, done) {
+            leave(el, done) {
                 let delay = 0
                 setTimeout(function () {
                     Velocity(
@@ -135,49 +135,73 @@
                     )
                 }, delay)
             },
-            filterByName(query) {
-                return this.tests.filter(function(item) {
-                    return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
-                })
-            },
-            filterByProject(array) {
-                let query = this.filterProjectTest
-				console.log(query)
-                if (query === "all"){
-                    return array
-                } else {
-                    return array.filter(function (item) {
-						if(item.project){
-							return item.project.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
-						}
-                    })
-                }
-            },
-            filterByStatus(array) {
-                let query = this.filterStatusTest
-                if (query === "all"){
-                    return array
-                }else {
-                    return array.filter(function(item) {
-						console.log(item.status
-						)
-                        return item.status.toString().toLowerCase().indexOf(query.toString().toLowerCase()) !== -1
-                    })}
-            },
-            filterTests(){
-                return this.filterByStatus(
-                    this.filterByProject(
-                        this.filterByName(this.searchTest)
-                    ))
-            },
+            // filterByName(list ,query) {
+			// 	//console.log(list)
+            //     return this.list.filter(function(item) {
+            //         return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+            //     })
+            // },
+            // filterByProject(array) {
+            //     let query = this.filterProjectTest
+			// 	//console.log(query)
+            //     if (query === "all"){
+            //         return array
+            //     } else {
+            //         return array.filter(function (item) {
+			// 			if(item.project){
+			// 				return item.project.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+			// 			}
+            //         })
+            //     }
+            // },
+            // filterByStatus(array) {
+            //     let query = this.filterStatusTest
+            //     if (query === "all"){
+            //         return array
+            //     }else {
+            //         return array.filter(function(item) {
+			// 			//console.log(item.status)
+            //             return item.status.toString().toLowerCase().indexOf(query.toString().toLowerCase()) !== -1
+            //         })}
+            // },
+            // filterTests(tests){
+            //     return this.filterByStatus(
+			// 			this.filterByProject(
+			// 			 this.filterByName(tests ,this.searchTest)))
+            // },
+			...mapActions(['fetchTests']),
+			...mapMutations(['changeFilterName', 'changeFilterProject', 'changeFilterStatus'])
         },
         mounted: function () {
-            this.openLoading();
+			const loading = this.$vs.loading({
+				target: this.$refs.content,
+				color: 'primary',
+				type: 'circles'
+			})
+			this.fetchTests()
+				.then(({data})=>{
+					this.listTests = data.data
+					this.loadingTests = true
+					loading.close()
+				});
+            //this.openLoading();
         },
+		watch: {
+			searchTest(val) {
+				this.changeFilterName(val)
+			},
+			filterProjectTest(val) {
+				this.changeFilterProject(val)
+			},
+			filterStatusTest(val) {
+				this.changeFilterStatus(val)
+			}
+		},
         computed:{
-            testsList(){
-                return this.filterTests();
-            }
+			...mapGetters(['getTestsFilter']),
+            // filteredTestsList(){
+            //     return this.filterTests(this.getTests());
+            // }
         }
     }
 </script>

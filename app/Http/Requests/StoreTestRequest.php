@@ -19,7 +19,7 @@ class StoreTestRequest extends FormRequest
     protected function prepareForValidation()
 	{
 		$this->merge([
-			'id_moder' => $this->user()->id
+			'moderator_id' => $this->user()->id
 		]);
 	}
 
@@ -32,7 +32,7 @@ class StoreTestRequest extends FormRequest
     {
         return [
             'id_moder' => 'exists:moderators,id',
-			'id_project '=> 'nullable|numeric',
+			'id_project' => 'nullable|numeric',
 			'type' => 'required|numeric',
 			'name' => 'required|string|max:1000',
 			'instruction' => 'required|string|max:1000',

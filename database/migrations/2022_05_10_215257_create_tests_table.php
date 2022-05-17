@@ -17,8 +17,8 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Moderator::class, 'moderator_id');
-            $table->foreignIdFor( Respondent::class, 'project_id')->nullable()->default(null);
+            $table->unsignedBigInteger( 'moderator_id');
+            $table->unsignedBigInteger(  'project_id')->nullable()->default(null);
 			$table->integer('type');
 			$table->string('name', 1000);
 			$table->string('instruction', 1000);
@@ -26,6 +26,9 @@ class CreateTestsTable extends Migration
 			$table->integer('status')->default(0);
 			$table->string('slug', 1000);
             $table->timestamps();
+
+			$table->foreign('moderator_id')->references('id')->on('moderators')->cascadeOnDelete()->cascadeOnUpdate();
+			$table->foreign('project_id')->references('id')->on('projects')->cascadeOnUpdate();
         });
     }
 

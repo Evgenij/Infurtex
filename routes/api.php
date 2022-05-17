@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,9 +36,35 @@ Route::prefix('respondent')->group(function () {
 
 Route::post('/login', [App\Http\Controllers\Authentication\AuthController::class, 'login']);
 
-Route::get('/projects', [ProjectController::class, 'getAll']);
-Route::post('/projects/add', [ProjectController::class, 'addProject']);
-//Route::post('/register', [RegisterController::class, 'register']);
-//Route::post('/login', [RegisterController::class, 'login']);
+
+Route::group(['namespace'=>'Project'], function (){
+	Route::get('/projects', [ProjectController::class, 'index']);
+	Route::post('/projects', [ProjectController::class, 'store']);
+});
+
+Route::group(['namespace'=>'Question'], function (){
+	Route::get('/questions', [QuestionController::class, 'index']);
+	Route::post('/question', [QuestionController::class, 'store']);
+});
+
+Route::group(['namespace'=>'Answer'], function (){
+	Route::get('/answers', [AnswerController::class, 'index']);
+	Route::post('/answer', [AnswerController::class, 'store']);
+});
+
+
 
 Route::get('/get-user-data/{role}/{id}', [\App\Http\Controllers\UserController::class, 'getData']);
+
+
+
+
+
+
+
+
+
+
+
+//Route::post('/register', [RegisterController::class, 'register']);
+//Route::post('/login', [RegisterController::class, 'login']);

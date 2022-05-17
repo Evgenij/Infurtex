@@ -2,40 +2,44 @@ import axiosClient from "../../axios";
 
 export default {
 	state: {
-		tests: []
+		tests: [],
+		filteredTests: [],
+		filters: {
+			name: '',
+			project: 'all',
+			status: 'all',
+		}
 	},
 	actions:{
 		createTest({commit}, test){
-			let response;
-
 			if (test.id) {
-				response = axiosClient.put(`/test/${test.id}`, test)
+				return axiosClient.put(`/test/${test.id}`, test)
 					.then((res)=>{
 						commit("updateTest", res.data)
 						return res;
 					})
 			} else {
-				console.log('data test - ', test)
-				response = axiosClient.post("/test", test)
+				return axiosClient.post("/test", test)
 					.then((res)=>{
+						//console.log(res.data)
 						commit("createTest", res.data)
 						return res;
 					});
 			}
-
-			return response;
 		},
 		fetchTests({commit}){
 			return axiosClient.get(`/test`)
 				.then((res)=>{
-					console.log('data tests - ', res.data.data)
+					//console.log('data tests - ', res.data.data)
 					commit("updateTests", res.data.data)
+					return res
 				})
 		},
 		deleteTest({dispatch}, testId){
 			return axiosClient.delete(`/test/${testId}`)
 				.then((res)=>{
 					dispatch("fetchTests")
+					return res
 				})
 		}
 	},
@@ -46,10 +50,44 @@ export default {
 		updateTests(state, tests){
 			state.tests = tests
 		},
+		changeFilterName(state, value){
+			state.filters.name = value
+		},
+		changeFilterProject(state, value){
+			state.filters.project = value
+		},
+		changeFilterStatus(state, value){
+			state.filters.status = value
+		}
 	},
 	getters: {
-		getTests(state){
-			return state.tests
+		getTestsFilter(state){
+			const { tests, filters } = state;
+
+			let listTests = [...tests]
+
+			listTests = tests.filter(function(item) {
+				return item.name.toLowerCase().indexOf(filters.name.toLowerCase()) !== -1
+			})
+
+			if(filters.project !== "all") {
+				listTests = listTests.filter(function (item) {
+					if(item.project){
+						return item.project.name.toLowerCase().indexOf(filters.project.toLowerCase()) !== -1
+					}
+				})
+			}
+			if(filters.status !== "all") {
+				listTests = listTests.filter(function(item) {
+					return item.status.toString().toLowerCase().indexOf(filters.status.toString().toLowerCase()) !== -1
+				})
+			}
+
+
+
+			state.filteredTests = listTests
+
+			return state.filteredTests
 		}
 	}
 }

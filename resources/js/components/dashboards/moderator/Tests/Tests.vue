@@ -1,5 +1,5 @@
 <template>
-    <list-tests :tests="getTests"></list-tests>
+    <list-tests></list-tests>
 </template>
 
 <script>
@@ -23,11 +23,11 @@
             ],
             tests: tests
         }),
-		computed: mapGetters(['getTests']),
-		methods: mapActions(['fetchTests']),
-		mounted() {
-			this.fetchTests()
-		}
+		// computed: mapGetters(['getTests']),
+		// methods: mapActions(['fetchTests']),
+		// mounted() {
+		// 	this.fetchTests()
+		// }
 	}
 </script>
 

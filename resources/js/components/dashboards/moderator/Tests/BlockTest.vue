@@ -266,7 +266,7 @@
 				this.modalDeleteTeam = !this.modalDeleteTeam
 				store.dispatch('deleteTest',this.id)
 					.then(({data})=>{
-						console.log('success delete!', data)
+						console.log('success delete test!', data)
 					})
 			}
         },

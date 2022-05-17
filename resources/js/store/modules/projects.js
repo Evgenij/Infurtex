@@ -12,7 +12,7 @@ export default {
 				})
 		},
 		createProject({commit}, newProject) {
-			return axiosClient.post('/projects/add', newProject)
+			return axiosClient.post('/projects', newProject)
 				.then(res=>{
 					commit('addProject', res.data)
 				})

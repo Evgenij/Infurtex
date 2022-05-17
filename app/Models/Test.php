@@ -12,8 +12,8 @@ class Test extends Model
 	use HasFactory, HasSlug;
 
 	protected $fillable = [
-		'id_moder',
-		'id_project',
+		'moderator_id',
+		'project_id',
 		'type',
 		'name',
 		'instruction',
@@ -26,6 +26,11 @@ class Test extends Model
 		return SlugOptions::create()
 			->generateSlugsFrom('name')
 			->saveSlugsTo('slug');
+	}
+
+	public function owner()
+	{
+		return $this->belongsTo(Moderator::class);
 	}
 
 	public function questions()

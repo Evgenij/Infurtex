@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Moderator;
 use App\Models\Project;
+use App\Models\Question;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TestResource extends JsonResource
@@ -20,8 +21,8 @@ class TestResource extends JsonResource
 //        return parent::toArray($request);
 		return [
 			'id' => $this->id,
-			'id_moder' => $this->id_moder,
-			'project' => $this->id_project !== null ? Project::find($this->id_project) : null,
+			'moderator' => $this->moderator_id,
+			'project' => $this->project_id !== null ? Project::find($this->project_id) : null,
 			'type' => $this->type,
 			'name' => $this->name,
 			'instruction' => $this->instruction,
@@ -29,7 +30,7 @@ class TestResource extends JsonResource
 			'status' => $this->status,
 			'slug' => $this->slug,
 			'respondents' => random_int(0,5000),
-			'questions' => []
+			'questions' => Question::all()->where('test_id', $this->id)
 		];
     }
 }

@@ -16,10 +16,12 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Test::class, 'test_id');
+            $table->unsignedBigInteger( 'test_id');
             $table->integer('type');
             $table->string('text', 255);
             $table->timestamps();
+
+			$table->foreign('test_id')->references('id')->on('tests')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </template>
-            <div class="con-content data-team flex flex-col px-2">
+            <div class="con-content data-team flex flex-col px-2 mt-3">
                 <div class="data-team__criteria mb-2" v-for="item in dataTeam.tags" :key="item.name" v-if="item.label !== ''">
                     <p class="data-team__label text-sm mb-2 font-medium">{{item.name}}</p>
                     <div class="data-team__list-criteria flex flex-wrap">

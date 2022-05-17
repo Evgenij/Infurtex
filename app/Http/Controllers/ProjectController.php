@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function getAll (){
+    public function index (){
     	return Project::all('id', 'name');
 	}
 
-	public function addProject(Request $request) {
+	public function store(Request $request) {
 		$data = $request->validate([
 			'name' => 'required|string'
 		]);

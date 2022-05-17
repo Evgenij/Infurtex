@@ -4232,15 +4232,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       activeTab: 1,
       tabs: ["Построение", "Рекрутинг", "Результаты"],
       dataTest: {
-        type: 2,
+        type: 3,
         name: '24324',
         project: {
           id: 1,
           name: ''
         },
-        date: '2022-05-17',
+        date: '2022-05-27',
         instruction: 'null',
-        questions: []
+        questions: [// {
+          // 	id: this.questions.length+1,
+          // 	type: 1,
+          // 	text: '',
+          // 	answers: []
+          // }
+        ]
       },
       listProjects: [{
         value: 'Дизайн приложений',
@@ -4308,18 +4314,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_12__.mapActions)(['fetchProjects', 'createProject'])), {}, {
     createTest: function createTest() {
+      var _this = this;
+
       _store_store__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch('createTest', {
-        id_project: this.dataTest.project.id,
+        project_id: this.dataTest.project.id,
         type: this.dataTest.type,
         name: this.dataTest.name,
         instruction: this.dataTest.instruction,
         expire_date: this.dataTest.date
       }).then(function (_ref) {
         var data = _ref.data;
-        _router__WEBPACK_IMPORTED_MODULE_11__["default"].push({
-          name: 'ModeratorTests'
+
+        _this.dataTest.questions.forEach(function (question) {
+          _store_store__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch('createQuestion', {
+            test_id: data.data.id,
+            text: question.text,
+            type: question.type
+          }).then(function (_ref2) {
+            var data = _ref2.data;
+            question.answers.forEach(function (answer) {
+              _store_store__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch('createAnswer', {
+                question_id: data.data.id,
+                text: answer.value
+              }).then(function (_ref3) {
+                var data = _ref3.data;
+                console.log(data);
+              });
+            });
+          });
         });
-      });
+      }); // router.push({
+      // 	name: 'ModeratorTests'
+      // })
     },
     activate: function activate(index) {
       this.activeTab = index;
@@ -4350,13 +4376,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //     this.dataTest.questions.push(newQuestion)
     // },
     copyLinkTest: function copyLinkTest() {
-      var _this = this;
+      var _this2 = this;
 
       var link = this.$refs.linkTest.value;
 
       if (link) {
         navigator.clipboard.writeText(link).then(function () {
-          _this.openNotification('top-center', 'success', "<i class='bx bx-check'></i>");
+          _this2.openNotification('top-center', 'success', "<i class='bx bx-check'></i>");
         })["catch"](function (err) {
           console.log('Something went wrong', err);
         });
@@ -4378,12 +4404,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.stateFilter = !this.stateFilter;
     },
     getWorkAreas: function getWorkAreas() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.listWorkAreas.length = 0;
       this.resultsFilters.workArea.length = 0;
       this.listWorkAreas = _mocks_usersCriteries_industries__WEBPACK_IMPORTED_MODULE_7__["default"].find(function (item) {
-        return item.id === _this2.industry;
+        return item.id === _this3.industry;
       }).workAreas;
     },
     getPercentDone: function getPercentDone() {
@@ -5143,7 +5169,7 @@ __webpack_require__.r(__webpack_exports__);
       this.modalDeleteTeam = !this.modalDeleteTeam;
       _store_store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('deleteTest', this.id).then(function (_ref) {
         var data = _ref.data;
-        console.log('success delete!', data);
+        console.log('success delete test!', data);
       });
     }
   },
@@ -5223,6 +5249,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _BlockTest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BlockTest */ "./resources/js/components/dashboards/moderator/Tests/BlockTest.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../store/store */ "./resources/js/store/store.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5306,6 +5340,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "list-tests",
@@ -5321,25 +5357,20 @@ __webpack_require__.r(__webpack_exports__);
       loadingTests: false
     };
   },
-  props: {
-    tests: {
-      type: Array,
-      required: true
-    }
+  props: {// tests: {
+    //     type: Array,
+    //     required: true
+    // }
   },
-  methods: {
+  methods: _objectSpread(_objectSpread({
     openLoading: function openLoading() {
-      var _this = this;
-
       var loading = this.$vs.loading({
         target: this.$refs.content,
         color: 'primary',
         type: 'circles'
       });
-      setTimeout(function () {
-        loading.close();
-        _this.loadingTests = true;
-      }, 1000);
+      loading.close();
+      this.loadingTests = true;
     },
     beforeEnter: function beforeEnter(el) {
       el.style.opacity = 0;
@@ -5365,50 +5396,35 @@ __webpack_require__.r(__webpack_exports__);
           complete: done
         });
       }, delay);
-    },
-    filterByName: function filterByName(query) {
-      return this.tests.filter(function (item) {
-        return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-      });
-    },
-    filterByProject: function filterByProject(array) {
-      var query = this.filterProjectTest;
-      console.log(query);
-
-      if (query === "all") {
-        return array;
-      } else {
-        return array.filter(function (item) {
-          if (item.project) {
-            return item.project.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-          }
-        });
-      }
-    },
-    filterByStatus: function filterByStatus(array) {
-      var query = this.filterStatusTest;
-
-      if (query === "all") {
-        return array;
-      } else {
-        return array.filter(function (item) {
-          console.log(item.status);
-          return item.status.toString().toLowerCase().indexOf(query.toString().toLowerCase()) !== -1;
-        });
-      }
-    },
-    filterTests: function filterTests() {
-      return this.filterByStatus(this.filterByProject(this.filterByName(this.searchTest)));
     }
-  },
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)(['fetchTests'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)(['changeFilterName', 'changeFilterProject', 'changeFilterStatus'])),
   mounted: function mounted() {
-    this.openLoading();
+    var _this = this;
+
+    var loading = this.$vs.loading({
+      target: this.$refs.content,
+      color: 'primary',
+      type: 'circles'
+    });
+    this.fetchTests().then(function (_ref) {
+      var data = _ref.data;
+      _this.listTests = data.data;
+      _this.loadingTests = true;
+      loading.close();
+    }); //this.openLoading();
   },
-  computed: {
-    testsList: function testsList() {
-      return this.filterTests();
+  watch: {
+    searchTest: function searchTest(val) {
+      this.changeFilterName(val);
+    },
+    filterProjectTest: function filterProjectTest(val) {
+      this.changeFilterProject(val);
+    },
+    filterStatusTest: function filterStatusTest(val) {
+      this.changeFilterStatus(val);
     }
-  }
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getTestsFilter']))
 });
 
 /***/ }),
@@ -5447,7 +5463,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ListTests__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListTests */ "./resources/js/components/dashboards/moderator/Tests/ListTests.vue");
 /* harmony import */ var _mocks_tests__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../mocks/tests */ "./resources/js/mocks/tests.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -5469,12 +5484,12 @@ __webpack_require__.r(__webpack_exports__);
       }],
       tests: _mocks_tests__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
-  },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getTests']),
-  methods: (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)(['fetchTests']),
-  mounted: function mounted() {
-    this.fetchTests();
-  }
+  } // computed: mapGetters(['getTests']),
+  // methods: mapActions(['fetchTests']),
+  // mounted() {
+  // 	this.fetchTests()
+  // }
+
 });
 
 /***/ }),
@@ -9985,6 +10000,75 @@ router.beforeEach(function (to, from, next) {
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/answers.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/answers.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../axios */ "./resources/js/axios.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: {
+    answers: []
+  },
+  actions: {
+    createAnswer: function createAnswer(_ref, answer) {
+      var commit = _ref.commit;
+      return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/answer", answer).then(function (res) {
+        console.log(res.data); //commit("createQuestion", res.data)
+
+        return res;
+      }); //console.log('createQuestion')
+    } // fetchQuestions({commit}){
+    // 	return axiosClient.get(`/test`)
+    // 		.then((res)=>{
+    // 			console.log('data tests - ', res.data.data)
+    // 			commit("updateTests", res.data.data)
+    // 		})
+    // },
+    // deleteQuestion({dispatch}, testId){
+    // 	return axiosClient.delete(`/test/${testId}`)
+    // 		.then((res)=>{
+    // 			dispatch("fetchTests")
+    // 		})
+    // }
+
+  },
+  mutations: {
+    createAnswer: function createAnswer(state, answer) {
+      state.answers = [].concat(_toConsumableArray(state.answers), [answer.data]);
+    },
+    updateAnswers: function updateAnswers(state, answers) {
+      state.answers = answers;
+    }
+  },
+  getters: {
+    getAnswers: function getAnswers(state) {
+      return state.answers;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/projects.js":
 /*!************************************************!*\
   !*** ./resources/js/store/modules/projects.js ***!
@@ -10011,7 +10095,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     createProject: function createProject(_ref2, newProject) {
       var commit = _ref2.commit;
-      return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/projects/add', newProject).then(function (res) {
+      return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/projects', newProject).then(function (res) {
         commit('addProject', res.data);
       });
     }
@@ -10027,6 +10111,75 @@ __webpack_require__.r(__webpack_exports__);
   getters: {
     getProjects: function getProjects(state) {
       return state.projects;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/questions.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/modules/questions.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../axios */ "./resources/js/axios.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: {
+    questions: []
+  },
+  actions: {
+    createQuestion: function createQuestion(_ref, question) {
+      var commit = _ref.commit;
+      return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/question", question).then(function (res) {
+        //console.log(res.data)
+        commit("createQuestion", res.data);
+        return res;
+      }); //console.log('createQuestion')
+    } // fetchQuestions({commit}){
+    // 	return axiosClient.get(`/test`)
+    // 		.then((res)=>{
+    // 			console.log('data tests - ', res.data.data)
+    // 			commit("updateTests", res.data.data)
+    // 		})
+    // },
+    // deleteQuestion({dispatch}, testId){
+    // 	return axiosClient.delete(`/test/${testId}`)
+    // 		.then((res)=>{
+    // 			dispatch("fetchTests")
+    // 		})
+    // }
+
+  },
+  mutations: {
+    createQuestion: function createQuestion(state, question) {
+      state.questions = [].concat(_toConsumableArray(state.questions), [question.data]);
+    },
+    updateQuestions: function updateQuestions(state, questions) {
+      state.questions = questions;
+    }
+  },
+  getters: {
+    getQuestions: function getQuestions(state) {
+      return state.questions;
     }
   }
 });
@@ -10060,39 +10213,44 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
-    tests: []
+    tests: [],
+    filteredTests: [],
+    filters: {
+      name: '',
+      project: 'all',
+      status: 'all'
+    }
   },
   actions: {
     createTest: function createTest(_ref, test) {
       var commit = _ref.commit;
-      var response;
 
       if (test.id) {
-        response = _axios__WEBPACK_IMPORTED_MODULE_0__["default"].put("/test/".concat(test.id), test).then(function (res) {
+        return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].put("/test/".concat(test.id), test).then(function (res) {
           commit("updateTest", res.data);
           return res;
         });
       } else {
-        console.log('data test - ', test);
-        response = _axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/test", test).then(function (res) {
+        return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/test", test).then(function (res) {
+          //console.log(res.data)
           commit("createTest", res.data);
           return res;
         });
       }
-
-      return response;
     },
     fetchTests: function fetchTests(_ref2) {
       var commit = _ref2.commit;
       return _axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("/test").then(function (res) {
-        console.log('data tests - ', res.data.data);
+        //console.log('data tests - ', res.data.data)
         commit("updateTests", res.data.data);
+        return res;
       });
     },
     deleteTest: function deleteTest(_ref3, testId) {
       var dispatch = _ref3.dispatch;
       return _axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/test/".concat(testId)).then(function (res) {
         dispatch("fetchTests");
+        return res;
       });
     }
   },
@@ -10102,11 +10260,44 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     updateTests: function updateTests(state, tests) {
       state.tests = tests;
+    },
+    changeFilterName: function changeFilterName(state, value) {
+      state.filters.name = value;
+    },
+    changeFilterProject: function changeFilterProject(state, value) {
+      state.filters.project = value;
+    },
+    changeFilterStatus: function changeFilterStatus(state, value) {
+      state.filters.status = value;
     }
   },
   getters: {
-    getTests: function getTests(state) {
-      return state.tests;
+    getTestsFilter: function getTestsFilter(state) {
+      var tests = state.tests,
+          filters = state.filters;
+
+      var listTests = _toConsumableArray(tests);
+
+      listTests = tests.filter(function (item) {
+        return item.name.toLowerCase().indexOf(filters.name.toLowerCase()) !== -1;
+      });
+
+      if (filters.project !== "all") {
+        listTests = listTests.filter(function (item) {
+          if (item.project) {
+            return item.project.name.toLowerCase().indexOf(filters.project.toLowerCase()) !== -1;
+          }
+        });
+      }
+
+      if (filters.status !== "all") {
+        listTests = listTests.filter(function (item) {
+          return item.status.toString().toLowerCase().indexOf(filters.status.toString().toLowerCase()) !== -1;
+        });
+      }
+
+      state.filteredTests = listTests;
+      return state.filteredTests;
     }
   }
 });
@@ -10224,18 +10415,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/user */ "./resources/js/store/modules/user.js");
 /* harmony import */ var _modules_projects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/projects */ "./resources/js/store/modules/projects.js");
 /* harmony import */ var _modules_tests__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/tests */ "./resources/js/store/modules/tests.js");
+/* harmony import */ var _modules_questions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/questions */ "./resources/js/store/modules/questions.js");
+/* harmony import */ var _modules_answers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/answers */ "./resources/js/store/modules/answers.js");
 
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_4__["default"]);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_4__["default"].Store({
+
+
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_6__["default"]);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_6__["default"].Store({
   state: {},
   getters: {},
   actions: {},
@@ -10243,7 +10438,9 @@ vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_4_
   modules: {
     user: _modules_user__WEBPACK_IMPORTED_MODULE_0__["default"],
     projects: _modules_projects__WEBPACK_IMPORTED_MODULE_1__["default"],
-    tests: _modules_tests__WEBPACK_IMPORTED_MODULE_2__["default"]
+    tests: _modules_tests__WEBPACK_IMPORTED_MODULE_2__["default"],
+    questions: _modules_questions__WEBPACK_IMPORTED_MODULE_3__["default"],
+    answers: _modules_answers__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 }));
 
@@ -10504,7 +10701,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".info-test[data-v-c8c16372] {\n  left: -42px;\n  top: 0;\n  height: 100%;\n}\n.info-test__panel[data-v-c8c16372] {\n  top: 20%;\n  background: #1ac4b6;\n  border-radius: 10px 0 0 10px;\n}\n.tabs[data-v-c8c16372] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.tabs-trigger[data-v-c8c16372] {\n  background: #EEEFEF;\n  transition: 0.3s;\n  color: #919B9F;\n}\n.tabs-trigger .step-block[data-v-c8c16372] {\n  background: #E2E4E6;\n  color: #919B9F;\n}\n.tabs-trigger--active[data-v-c8c16372] {\n  background: linear-gradient(50.84deg, #339FE3 0%, #4FD5B8 100%);\n  color: white;\n}\n.tabs-trigger--active .step-block[data-v-c8c16372] {\n  background: white;\n  color: #1ac4b6;\n}\n.type-recruiting .data[data-v-c8c16372] {\n  width: 95%;\n}\n.type-recruiting .radio-circle[data-v-c8c16372] {\n  width: 20px;\n  height: 20px;\n}\n.type-recruiting .radio-circle[data-v-c8c16372]:before {\n  content: \"\";\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  background: white;\n  left: 3px;\n  top: 3px;\n  border-radius: 999px;\n}\n\n/* Checked */\n.type-recruiting input[type=radio]:checked + label .radio-circle[data-v-c8c16372]:before {\n  background: #1ac4b6;\n  box-shadow: 0 0 10px 1px #1ac4b6;\n}\n.type-recruiting input[type=radio]:checked + label[data-v-c8c16372] {\n  transform: translateY(-5px);\n  box-shadow: 0 18px 20px 0 #393f4e29;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".info-test[data-v-c8c16372] {\n  left: -42px;\n  top: 0;\n  height: 100%;\n}\n.info-test__panel[data-v-c8c16372] {\n  top: 20%;\n  background: #1ac4b6;\n  border-radius: 10px 0 0 10px;\n}\n.tabs[data-v-c8c16372] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.tabs-trigger[data-v-c8c16372] {\n  background: #EEEFEF;\n  transition: 0.3s;\n  color: #919B9F;\n}\n.tabs-trigger .step-block[data-v-c8c16372] {\n  background: #E2E4E6;\n  color: #919B9F;\n}\n.tabs-trigger--active[data-v-c8c16372] {\n  background: linear-gradient(50.84deg, #339FE3 0%, #4FD5B8 100%);\n  color: white;\n}\n.tabs-trigger--active .step-block[data-v-c8c16372] {\n  background: white;\n  color: #1ac4b6;\n}\n.type-recruiting .data[data-v-c8c16372] {\n  width: 95%;\n}\n.type-recruiting .radio-circle[data-v-c8c16372] {\n  width: 20px;\n  height: 20px;\n}\n.type-recruiting .radio-circle[data-v-c8c16372]:before {\n  content: \"\";\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  background: white;\n  left: 3px;\n  top: 3px;\n  border-radius: 999px;\n}\n\n/* Checked */\n.type-recruiting input[type=radio]:checked + label .radio-circle[data-v-c8c16372]:before {\n  background: #1ac4b6;\n  box-shadow: 0 0 16px 1px #1ac4b6;\n}\n\n/*\n.type-recruiting input[type=radio]:checked + label {\n\ttransform: translateY(-5px);\n\tbox-shadow: 0 18px 20px 0 #393f4e29;\n}\n*/", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16705,7 +16902,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "con-content data-team flex flex-col px-2" },
+            { staticClass: "con-content data-team flex flex-col px-2 mt-3" },
             [
               _vm._l(_vm.dataTeam.tags, function (item) {
                 return item.label !== ""
@@ -18597,7 +18794,7 @@ var render = function () {
               _vm._v("\n                    Все проекты\n                "),
             ]),
             _vm._v(" "),
-            _vm._l(_vm.tests, function (test) {
+            _vm._l(_vm.listTests, function (test) {
               return test.project
                 ? [
                     _c(
@@ -18693,7 +18890,7 @@ var render = function () {
         class: { "content-is-loading": !_vm.loadingTests },
       },
       [
-        this.testsList.length > 0
+        this.listTests.length > 0
           ? _c(
               "div",
               [
@@ -18707,7 +18904,7 @@ var render = function () {
                       leave: _vm.leave,
                     },
                   },
-                  _vm._l(_vm.testsList, function (test) {
+                  _vm._l(_vm.getTestsFilter, function (test) {
                     return _vm.loadingTests
                       ? _c("block-test", {
                           key: test.id,
@@ -18732,7 +18929,7 @@ var render = function () {
             )
           : _vm._e(),
         _vm._v(" "),
-        this.testsList.length === 0 && _vm.loadingTests === true
+        this.listTests.length === 0 && _vm.loadingTests === true
           ? _c(
               "div",
               {
@@ -18806,7 +19003,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("list-tests", { attrs: { tests: _vm.getTests } })
+  return _c("list-tests")
 }
 var staticRenderFns = []
 render._withStripped = true

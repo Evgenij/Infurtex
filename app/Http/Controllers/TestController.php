@@ -21,7 +21,7 @@ class TestController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        return TestResource::collection(Test::where('id_moder', $user->id)->get());
+        return TestResource::collection(Test::where('moderator_id', $user->id)->get());
     }
 
     /**
@@ -48,7 +48,7 @@ class TestController extends Controller
     {
     	$user = $request->user();
 
-    	if ($user->id !== $test->id_moder) {
+    	if ($user->id !== $test->moderator_id) {
 			return abort(403, 'Несанкционированное действие.');
 		}
 
@@ -78,7 +78,7 @@ class TestController extends Controller
     public function destroy(Test $test, Request $request)
     {
 		$user = $request->user();
-		if($user->id !== $test->id_moder) {
+		if($user->id !== $test->moderator_id) {
 			return abort(403, 'Несанкционированное действие.');
 		}
 
