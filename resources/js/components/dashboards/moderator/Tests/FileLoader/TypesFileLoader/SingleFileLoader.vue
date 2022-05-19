@@ -64,7 +64,7 @@
         <label ref="label-file" :for="'file-'+id">
         </label>
         <input accept=".jpg,.jpeg,.png" type="file" class="absolute hidden" :id="'file-'+id" ref="file"
-               @change="handleFileUpload()"/>
+               @change="onImageChoose()"/>
     </div>
 </template>
 
@@ -88,7 +88,6 @@ export default {
         },
         areas:{
             type: Array,
-            required: true,
             default: ()=>{
                 return []
             }
@@ -119,19 +118,25 @@ export default {
                     console.log('FAILURE!!');
                 });
         },
-        handleFileUpload(){
+        onImageChoose(){
             this.file = this.$refs.file.files[0];
             let reader  = new FileReader();
-            reader.addEventListener("load", function () {
-                this.showPreview = true;
-                this.imagePreview = reader.result;
-                this.imageFile = reader.result;
-            }.bind(this), false);
-            if( this.file ){
-                if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
-                    reader.readAsDataURL( this.file );
-                }
-            }
+            reader.onload = ()=>{
+				this.showPreview = true;
+				this.imagePreview = reader.result;
+				this.imageFile = reader.result;
+			}
+            reader.readAsDataURL(this.file)
+            // reader.addEventListener("load", function () {
+            //     this.showPreview = true;
+            //     this.imagePreview = reader.result;
+            //     this.imageFile = reader.result;
+            // }.bind(this), false);
+            // if( this.file ){
+            //     if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
+            //         reader.readAsDataURL( this.file );
+            //     }
+            // }
         },
         browseFile(){
             this.$refs["label-file"].click()

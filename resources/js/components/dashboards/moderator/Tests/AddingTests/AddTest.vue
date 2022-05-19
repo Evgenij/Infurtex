@@ -462,14 +462,10 @@
 			createTest(){
 				let typeMailingTest = $('input[name="type-recruiting"]:checked').attr('id')
 
-				if (typeMailingTest === 'general') {
-					store.dispatch('recruitingForTests', {
-							test_id: 2,
-						}).then(({data})=>{
-						console.log(data)
-					})
-
-				}
+				store.dispatch('createImage', {
+					test_id: data.data.id,
+					path: this.path
+				})
 
 				// store.dispatch('createTest', {
 				// 	project_id: this.dataTest.project.id,
@@ -479,6 +475,14 @@
 				// 	expire_date: this.dataTest.date
 				// })
 				// 	.then(({data})=>{
+				// 		if (typeMailingTest === 'general') {
+				// 			store.dispatch('recruitingForTests', {
+				// 				test_id: data.data.id,
+				// 			}).then(({data})=>{
+				// 				console.log(data)
+				// 			})
+				// 		}
+				//
 				// 		this.dataTest.questions.forEach(function (question) {
 				// 		store.dispatch('createQuestion', {
 				// 			test_id: data.data.id,

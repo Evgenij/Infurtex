@@ -31,7 +31,7 @@
                                     v-model="area.screen.id"
                                     label="Экран"
                                     class="w-full">
-                                    <template v-for="screen in screens">
+                                    <template v-for="screen in areasList">
                                         <vs-option :label="screen.name" :value="screen.id">
                                             {{screen.name}}
                                         </vs-option>
@@ -77,7 +77,7 @@ export default {
             type: Object,
             required: true
         },
-        screens: {
+		areasList: {
             type: Array
         }
     },

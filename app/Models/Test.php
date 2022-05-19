@@ -37,4 +37,9 @@ class Test extends Model
 	{
 		return $this->hasMany(Question::class);
 	}
+
+	public function images()
+	{
+		return $this->hasMany(ImageTest::class);
+	}
 }

@@ -8,7 +8,7 @@
         <div class="button flex justify-end">
             <span class="text-sm text-red-400 hover:text-red-600 cursor-pointer" @click="remove">удалить экран</span>
         </div>
-        <areas-manager :active="activeAreasManager" :data="data" :screens="screensList" @closing="closing"></areas-manager>
+        <areas-manager :active="activeAreasManager" :data="data" :areas="areasList" @closing="closing"></areas-manager>
     </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
             type: String,
             required: true
         },
-        screensList: {
+		areasList: {
             type: Array
         }
     },

@@ -4308,15 +4308,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_12__.mapActions)(['fetchProjects', 'createProject'])), {}, {
     createTest: function createTest() {
       var typeMailingTest = $('input[name="type-recruiting"]:checked').attr('id');
-
-      if (typeMailingTest === 'general') {
-        _store_store__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch('recruitingForTests', {
-          test_id: 2
-        }).then(function (_ref) {
-          var data = _ref.data;
-          console.log(data);
-        });
-      } // store.dispatch('createTest', {
+      _store_store__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch('createImage', {
+        test_id: data.data.id,
+        path: this.path
+      }); // store.dispatch('createTest', {
       // 	project_id: this.dataTest.project.id,
       // 	type: this.dataTest.type,
       // 	name: this.dataTest.name,
@@ -4324,6 +4319,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // 	expire_date: this.dataTest.date
       // })
       // 	.then(({data})=>{
+      // 		if (typeMailingTest === 'general') {
+      // 			store.dispatch('recruitingForTests', {
+      // 				test_id: data.data.id,
+      // 			}).then(({data})=>{
+      // 				console.log(data)
+      // 			})
+      // 		}
+      //
       // 		this.dataTest.questions.forEach(function (question) {
       // 		store.dispatch('createQuestion', {
       // 			test_id: data.data.id,
@@ -4345,7 +4348,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // 	router.push({
       // 		name: 'ModeratorTests'
       // 	})
-
     },
     activate: function activate(index) {
       this.activeTab = index;
@@ -5411,6 +5413,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.listTests = data.data;
       _this.loadingTests = true;
       loading.close();
+    })["catch"](function (error) {
+      console.log(error);
     }); //this.openLoading();
   },
   watch: {
@@ -7193,7 +7197,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var axiosClient = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "http://localhost:8000/api"
+  baseURL: "http://localhost:8000/api",
+  timeout: 10000
 });
 axiosClient.interceptors.request.use(function (config) {
   config.headers.Authorization = "Bearer ".concat(_store_store__WEBPACK_IMPORTED_MODULE_1__["default"].state.user.token);

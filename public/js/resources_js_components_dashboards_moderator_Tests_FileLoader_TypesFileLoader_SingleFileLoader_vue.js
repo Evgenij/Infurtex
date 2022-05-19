@@ -100,7 +100,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     areas: {
       type: Array,
-      required: true,
       "default": function _default() {
         return [];
       }
@@ -127,20 +126,28 @@ __webpack_require__.r(__webpack_exports__);
         console.log('FAILURE!!');
       });
     },
-    handleFileUpload: function handleFileUpload() {
+    onImageChoose: function onImageChoose() {
+      var _this = this;
+
       this.file = this.$refs.file.files[0];
       var reader = new FileReader();
-      reader.addEventListener("load", function () {
-        this.showPreview = true;
-        this.imagePreview = reader.result;
-        this.imageFile = reader.result;
-      }.bind(this), false);
 
-      if (this.file) {
-        if (/\.(jpe?g|png|gif)$/i.test(this.file.name)) {
-          reader.readAsDataURL(this.file);
-        }
-      }
+      reader.onload = function () {
+        _this.showPreview = true;
+        _this.imagePreview = reader.result;
+        _this.imageFile = reader.result;
+      };
+
+      reader.readAsDataURL(this.file); // reader.addEventListener("load", function () {
+      //     this.showPreview = true;
+      //     this.imagePreview = reader.result;
+      //     this.imageFile = reader.result;
+      // }.bind(this), false);
+      // if( this.file ){
+      //     if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
+      //         reader.readAsDataURL( this.file );
+      //     }
+      // }
     },
     browseFile: function browseFile() {
       this.$refs["label-file"].click();
@@ -530,7 +537,7 @@ var render = function () {
         },
         on: {
           change: function ($event) {
-            return _vm.handleFileUpload()
+            return _vm.onImageChoose()
           },
         },
       }),

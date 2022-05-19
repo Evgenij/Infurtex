@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       required: true
     },
-    screens: {
+    areasList: {
       type: Array
     }
   },
@@ -2416,7 +2416,7 @@ var render = function () {
                                   },
                                 },
                                 [
-                                  _vm._l(_vm.screens, function (screen) {
+                                  _vm._l(_vm.areasList, function (screen) {
                                     return [
                                       _c(
                                         "vs-option",

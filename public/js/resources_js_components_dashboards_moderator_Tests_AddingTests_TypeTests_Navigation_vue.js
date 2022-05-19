@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       required: true
     },
-    screens: {
+    areasList: {
       type: Array
     }
   },
@@ -839,7 +839,7 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     },
-    screensList: {
+    areasList: {
       type: Array
     }
   },
@@ -1664,7 +1664,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     areas: {
       type: Array,
-      required: true,
       "default": function _default() {
         return [];
       }
@@ -1691,20 +1690,28 @@ __webpack_require__.r(__webpack_exports__);
         console.log('FAILURE!!');
       });
     },
-    handleFileUpload: function handleFileUpload() {
+    onImageChoose: function onImageChoose() {
+      var _this = this;
+
       this.file = this.$refs.file.files[0];
       var reader = new FileReader();
-      reader.addEventListener("load", function () {
-        this.showPreview = true;
-        this.imagePreview = reader.result;
-        this.imageFile = reader.result;
-      }.bind(this), false);
 
-      if (this.file) {
-        if (/\.(jpe?g|png|gif)$/i.test(this.file.name)) {
-          reader.readAsDataURL(this.file);
-        }
-      }
+      reader.onload = function () {
+        _this.showPreview = true;
+        _this.imagePreview = reader.result;
+        _this.imageFile = reader.result;
+      };
+
+      reader.readAsDataURL(this.file); // reader.addEventListener("load", function () {
+      //     this.showPreview = true;
+      //     this.imagePreview = reader.result;
+      //     this.imageFile = reader.result;
+      // }.bind(this), false);
+      // if( this.file ){
+      //     if ( /\.(jpe?g|png|gif)$/i.test( this.file.name ) ) {
+      //         reader.readAsDataURL( this.file );
+      //     }
+      // }
     },
     browseFile: function browseFile() {
       this.$refs["label-file"].click();
@@ -3780,7 +3787,7 @@ var render = function () {
                                   },
                                 },
                                 [
-                                  _vm._l(_vm.screens, function (screen) {
+                                  _vm._l(_vm.areasList, function (screen) {
                                     return [
                                       _c(
                                         "vs-option",
@@ -4207,7 +4214,7 @@ var render = function () {
         attrs: {
           active: _vm.activeAreasManager,
           data: _vm.data,
-          screens: _vm.screensList,
+          areas: _vm.areasList,
         },
         on: { closing: _vm.closing },
       }),
@@ -5147,7 +5154,7 @@ var render = function () {
         },
         on: {
           change: function ($event) {
-            return _vm.handleFileUpload()
+            return _vm.onImageChoose()
           },
         },
       }),

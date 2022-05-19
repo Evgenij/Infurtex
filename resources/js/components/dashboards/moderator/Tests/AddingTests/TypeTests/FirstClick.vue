@@ -17,7 +17,8 @@
         </div>
         <div class="first-click-block__files">
             <h2 class="font-medium text-base mb-2">Дизайн</h2>
-            <file-loader :typeFileLoader="typeFL.Single"></file-loader>
+			<single-file-loader></single-file-loader>
+<!--            <file-loader :typeFileLoader="typeFL.Single"></file-loader>-->
         </div>
         <div class="first-click-block__questions">
             <h2 class="font-medium text-base mb-2">Вопросы</h2>
@@ -33,10 +34,11 @@
 import SectionQuestions from "../Questions/SectionQuestions";
 import FileLoader from "../../FileLoader/FileLoader";
 import typeFileLoader from "../../../../../../enums"
+import SingleFileLoader from "../../FileLoader/TypesFileLoader/SingleFileLoader";
 
 export default {
     name: "FirstClick",
-    components: {FileLoader, SectionQuestions},
+    components: {SingleFileLoader, FileLoader, SectionQuestions},
     data: ()=>({
         textInstruction: '',
         typeFL: typeFileLoader.typeFileLoader

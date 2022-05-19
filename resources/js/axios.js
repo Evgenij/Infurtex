@@ -3,7 +3,8 @@ import store from "./store/store"
 import router from "./router";
 
 const axiosClient = axios.create({
-	baseURL: `http://localhost:8000/api`
+	baseURL: `http://localhost:8000/api`,
+	timeout: 10000
 })
 
 axiosClient.interceptors.request.use(config => {

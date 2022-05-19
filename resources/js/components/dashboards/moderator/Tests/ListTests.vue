@@ -183,6 +183,8 @@
 					this.listTests = data.data
 					this.loadingTests = true
 					loading.close()
+				}).catch(function (error) {
+					console.log(error);
 				});
             //this.openLoading();
         },

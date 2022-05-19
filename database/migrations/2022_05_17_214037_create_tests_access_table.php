@@ -17,6 +17,7 @@ class CreateTestsAccessTable extends Migration
         	$table->id();
 			$table->unsignedBigInteger('respondent_id');
             $table->unsignedBigInteger('test_id');
+			$table->boolean('viewed')->default(false);
             $table->timestamps();
 
 			$table->foreign('test_id')->references('id')->on('tests')->cascadeOnDelete()->cascadeOnUpdate();
