@@ -20,8 +20,10 @@ class CreateTestsAccessTable extends Migration
 			$table->boolean('viewed')->default(false);
             $table->timestamps();
 
-			$table->foreign('test_id')->references('id')->on('tests')->cascadeOnDelete()->cascadeOnUpdate();
-			$table->foreign('respondent_id')->references('id')->on('respondents')->cascadeOnDelete()->cascadeOnUpdate();
+			$table->foreign('test_id')->references('id')
+				->on('tests')->cascadeOnDelete()->cascadeOnUpdate();
+			$table->foreign('respondent_id')->references('id')
+				->on('respondents')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

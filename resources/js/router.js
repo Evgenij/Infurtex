@@ -22,6 +22,8 @@ import RespondentTests from "./components/dashboards/respondent/Tests/Tests";
 import RespondentData from "./components/dashboards/respondent/AdditionalData";
 
 import userRole from "./enums";
+import TestLayout from "./components/layouts/TestLayout";
+import PassingTest from "./components/dashboards/respondent/passing_test/PassingTest";
 
 Vue.use(VueRouter)
 
@@ -106,6 +108,19 @@ const routes = [
             },
         ]
     },
+	{
+		path: "/test",
+		name: "test",
+		component: TestLayout,
+		children: [
+			{
+				path: '/test/:id',
+				name: 'PassingTest',
+				props: true,
+				component: PassingTest
+			}
+		]
+	},
     {
         path: "/page-not-found",
         alias: '*',

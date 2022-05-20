@@ -19,7 +19,8 @@ class CreateScreensTable extends Migration
             $table->string('name');
             $table->timestamps();
 
-            $table->foreign('test_id')->references('id')->on('tests')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('test_id')->references('id')
+				->on('tests')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

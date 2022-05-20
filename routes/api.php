@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
-use App\Http\Controllers\ImageTestController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
@@ -55,8 +55,8 @@ Route::group(['namespace'=>'Answer'], function (){
 });
 
 Route::group(['namespace'=>'Image'], function (){
-	Route::get('/images', [ImageTestController::class, 'index']);
-	Route::post('/image', [ImageTestController::class, 'store']);
+	Route::get('/images', [ImageController::class, 'index']);
+	Route::post('/image', [ImageController::class, 'store']);
 });
 
 Route::group(['namespace'=>'Recruiting'], function (){

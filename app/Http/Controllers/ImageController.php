@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ImageTestController extends Controller
+class ImageController extends Controller
 {
     public function store(Request $request)
 	{

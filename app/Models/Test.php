@@ -40,6 +40,6 @@ class Test extends Model
 
 	public function images()
 	{
-		return $this->hasMany(ImageTest::class);
+		return $this->hasMany(Image::class);
 	}
 }

@@ -27,8 +27,10 @@ class CreateTestsTable extends Migration
 			$table->string('slug', 1000);
             $table->timestamps();
 
-			$table->foreign('moderator_id')->references('id')->on('moderators')->cascadeOnDelete()->cascadeOnUpdate();
-			$table->foreign('project_id')->references('id')->on('projects')->cascadeOnUpdate();
+			$table->foreign('moderator_id')->references('id')
+				->on('moderators')->cascadeOnDelete()->cascadeOnUpdate();
+			$table->foreign('project_id')->references('id')
+				->on('projects')->cascadeOnUpdate();
         });
     }
 

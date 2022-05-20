@@ -25,7 +25,8 @@ class CreateTargetAreasTable extends Migration
             $table->integer('width');
             $table->timestamps();
 
-            $table->foreign('screen_id')->references('id')->on('screens')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('screen_id')->references('id')
+				->on('screens')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

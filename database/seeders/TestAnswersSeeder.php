@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\ImageTest;
 use Illuminate\Database\Seeder;
 
-class ImageTestSeeder extends Seeder
+class TestAnswersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +13,6 @@ class ImageTestSeeder extends Seeder
      */
     public function run()
     {
-        ImageTest::factory(50)->create();
+        //
     }
 }
