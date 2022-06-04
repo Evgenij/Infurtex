@@ -7,16 +7,6 @@
 				alt="Original Image"
 				v-if="url"
 			>
-<!--			<div-->
-<!--				class="select-areas&#45;&#45;overlay"-->
-<!--				:style="{-->
-<!--					opacity: opacityOverlay,-->
-<!--					position: 'absolute',-->
-<!--					width: originImgSize.w+'px',-->
-<!--					height:  originImgSize.h+'px',-->
-<!--					display: 'block'-->
-<!--				}">-->
-<!--			</div>-->
 
 			<div :style="{
 					'background-color': 'rgb(0,0,0)',

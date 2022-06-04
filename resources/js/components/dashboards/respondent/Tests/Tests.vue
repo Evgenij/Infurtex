@@ -1,6 +1,6 @@
 <template>
-    <main :class="{'bg-white opacity-25': !$store.state.user.filledData}" class="relative work-area content pt-5">
-        <div v-if="!$store.state.user.filledData" class="absolute z-10 lock h-full w-full flex items-center justify-center">
+    <main :class="{'bg-white opacity-25': true}" class="relative work-area content pt-5">
+        <div v-if="true" class="absolute z-10 lock h-full w-full flex items-center justify-center">
             <div class="circle rounded-full p-10 bg-slate-500">
                 <i class="bx bx-lock text-5xl text-white"></i>
             </div>

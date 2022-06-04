@@ -3842,8 +3842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mocks_usersCriteries_techPrep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../../mocks/usersCriteries/techPrep */ "./resources/js/mocks/usersCriteries/techPrep.js");
 /* harmony import */ var _ManagerAnswers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ManagerAnswers */ "./resources/js/components/dashboards/moderator/Tests/ManagerAnswers.vue");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../../store/store */ "./resources/js/store/store.js");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../../router */ "./resources/js/router.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -4057,148 +4056,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 
@@ -4241,25 +4098,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           // }
         ]
       },
-      listProjects: [{
-        value: 'Дизайн приложений',
-        id: 1
-      }, {
-        value: 'Упаковки',
-        id: 2
-      }, {
-        value: '123',
-        id: 3
-      }, {
-        value: '435',
-        id: 4
-      }, {
-        value: '57',
-        id: 5
-      }, {
-        value: '45646',
-        id: 6
-      }],
       testFiles: [],
       testLink: 'https://app.usabilityhub.com/tests/2a303ea9824c/recruit',
       teams: [{
@@ -4292,62 +4130,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           techPrep: 3
         },
         answers: [{}]
-      }] // industry: '',
-      // listWorkAreas: [],
-      // resultsFilters: {
-      // 	country: [],
-      // 	gender: [],
-      // 	educations: [],
-      // 	statusEmp: [],
-      // 	workArea: [],
-      // 	techPrep: []
-      // }
-
+      }]
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_12__.mapActions)(['fetchProjects', 'createProject'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapActions)(['fetchProjects', 'createProject'])), {}, {
     createTest: function createTest() {
       var typeMailingTest = $('input[name="type-recruiting"]:checked').attr('id');
       _store_store__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch('createImage', {
         test_id: data.data.id,
         path: this.path
-      }); // store.dispatch('createTest', {
-      // 	project_id: this.dataTest.project.id,
-      // 	type: this.dataTest.type,
-      // 	name: this.dataTest.name,
-      // 	instruction: this.dataTest.instruction,
-      // 	expire_date: this.dataTest.date
-      // })
-      // 	.then(({data})=>{
-      // 		if (typeMailingTest === 'general') {
-      // 			store.dispatch('recruitingForTests', {
-      // 				test_id: data.data.id,
-      // 			}).then(({data})=>{
-      // 				console.log(data)
-      // 			})
-      // 		}
-      //
-      // 		this.dataTest.questions.forEach(function (question) {
-      // 		store.dispatch('createQuestion', {
-      // 			test_id: data.data.id,
-      // 			text: question.text,
-      // 			type: question.type
-      // 		})
-      // 			.then(({data})=>{
-      // 				question.answers.forEach(function (answer) {
-      // 					store.dispatch('createAnswer', {
-      // 						question_id: data.data.id,
-      // 						text: answer.value,
-      // 					}).then(({data})=>{
-      // 						console.log(data)
-      // 					})
-      // 				})
-      // 			})
-      // 		})
-      // 	})
-      // 	router.push({
-      // 		name: 'ModeratorTests'
-      // 	})
+      });
     },
     activate: function activate(index) {
       this.activeTab = index;
@@ -4374,9 +4166,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.dataTest.type = 0;
       this.activate(1);
     },
-    // addQuestionBlock(newQuestion){
-    //     this.dataTest.questions.push(newQuestion)
-    // },
     copyLinkTest: function copyLinkTest() {
       var _this = this;
 
@@ -4424,7 +4213,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.fetchProjects();
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_12__.mapGetters)(['getProjects'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)(['getProjects'])), {}, {
     getListCountries: function getListCountries() {
       return _mocks_countries__WEBPACK_IMPORTED_MODULE_4__["default"];
     },
@@ -7033,7 +6822,7 @@ __webpack_require__.r(__webpack_exports__);
         password: 'evg12345678UP*',
         password_confirmation: 'evg12345678UP*',
         role: _enums__WEBPACK_IMPORTED_MODULE_1__["default"].userRole.Respondent,
-        filledData: false
+        filledData: true
       },
       hasVisiblePasswordConfirmed: false,
       hasVisiblePassword: false
@@ -10523,15 +10312,10 @@ vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_6_
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "formattingNumber": () => (/* binding */ formattingNumber),
 /* harmony export */   "getCountUniqueData": () => (/* binding */ getCountUniqueData),
-/* harmony export */   "getListObjects": () => (/* binding */ getListObjects),
-/* harmony export */   "getNameIndustryById": () => (/* binding */ getNameIndustryById)
+/* harmony export */   "getListObjects": () => (/* binding */ getListObjects)
 /* harmony export */ });
-function formattingNumber(x, delimiter) {
-  return x.currentNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delimiter || " ");
-} // формирует JSON объект с кол-вом записей по ключу и ключи явл.уникальными
-
+// формирует JSON объект с кол-вом записей по ключу и ключи явл.уникальными
 function getCountUniqueData(listObjects, key) {
   return JSON.parse(JSON.stringify(listObjects.reduce(function (acc, el) {
     acc[el[key]] = (acc[el[key]] || 0) + 1;
@@ -10551,11 +10335,6 @@ function getListObjects(json, key) {
   }
 
   return resultObjectList;
-}
-function getNameIndustryById(object, listIndustries) {// console.log(listIndustries.filter(function(industry) {
-  //     //console.log(Number(industry.name))
-  //     return Number(industry.name) === Number(object.id)
-  // }))
 }
 
 /***/ }),
@@ -10841,7 +10620,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".block-test[data-v-04fd80a2] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.block-test[data-v-04fd80a2]:hover {\n  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);\n  z-index: 1000;\n}\ninput.test-name[data-v-04fd80a2]:not(disabled) {\n  border: 2px solid rgba(0, 0, 0, 0.1);\n  border-radius: 8px;\n  padding: 7px 10px;\n}\ninput.test-name[data-v-04fd80a2]:disabled {\n  border: none;\n  padding: 0px 2px;\n  opacity: 1;\n  background-color: transparent;\n}\n.type-image[data-v-04fd80a2] {\n  width: 90px;\n}\n.tooltip-menu[data-v-04fd80a2] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n  z-index: 1000;\n  border-width: 1px;\n  top: 125%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".block-test[data-v-04fd80a2] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n}\n.block-test[data-v-04fd80a2]:hover {\n  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);\n  z-index: 1000;\n}\n.block-test .icon-test-type[data-v-04fd80a2] {\n  font-size: 24px;\n}\ninput.test-name[data-v-04fd80a2]:not(disabled) {\n  border: 2px solid rgba(0, 0, 0, 0.1);\n  border-radius: 8px;\n  padding: 7px 10px;\n}\ninput.test-name[data-v-04fd80a2]:disabled {\n  border: none;\n  padding: 0px 2px;\n  opacity: 1;\n  background-color: transparent;\n}\n.type-image[data-v-04fd80a2] {\n  width: 90px;\n}\n.tooltip-menu[data-v-04fd80a2] {\n  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);\n  z-index: 1000;\n  border-width: 1px;\n  top: 125%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -29349,7 +29128,7 @@ var render = function () {
         },
         [
           _c("i", {
-            staticClass: "bx text-base text-white text-3xl",
+            staticClass: "icon-test-type bx text-base text-white",
             class: {
               "bxs-directions": _vm.type === 1,
               "bxs-stopwatch": _vm.type === 2,
@@ -30695,7 +30474,7 @@ var render = function () {
         attrs: { "user-menu": _vm.menuLinks, links: _vm.links },
       }),
       _vm._v(" "),
-      !_vm.$store.state.user.filledData && _vm.$route.name === "RespondentTests"
+       true && _vm.$route.name === "RespondentTests"
         ? _c(
             "section",
             { staticClass: "message content pt-5" },
@@ -30897,52 +30676,8 @@ var render = function () {
       1
     ),
     _vm._v(" "),
-    _vm.$store.state.user.filledData
-      ? _c("div", { staticClass: "list-tests" }, [
-          _vm.filteredTests.length !== 0
-            ? _c(
-                "div",
-                { staticClass: "list-tests" },
-                [
-                  _c(
-                    "transition-group",
-                    {
-                      attrs: { css: false, name: "staggered-fade" },
-                      on: {
-                        "before-enter": _vm.beforeEnter,
-                        enter: _vm.enter,
-                        leave: _vm.leave,
-                      },
-                    },
-                    _vm._l(_vm.filteredTests, function (test, index) {
-                      return _c("test", {
-                        key: test.id,
-                        attrs: {
-                          name: test.name,
-                          type: test.type,
-                          time: test.time,
-                          cost: test.cost,
-                          "owner-name": test.nameOwner,
-                          "owner-type": test.typeOwner,
-                          date: test.date,
-                          category: test.category,
-                        },
-                      })
-                    }),
-                    1
-                  ),
-                ],
-                1
-              )
-            : _c(
-                "div",
-                {
-                  staticClass:
-                    "empty-tests text-center text-gray-500 h-full py-44",
-                },
-                [_vm._v("\n            Тестов не найдено...\n        ")]
-              ),
-        ])
+     false
+      ? 0
       : _c("div", { staticClass: "skeleton-list-tests" }, [
           _c("div", { staticClass: "bg-slate-200 rounded-lg mb-3 p-6" }),
           _vm._v(" "),
@@ -31301,10 +31036,10 @@ var render = function () {
     "main",
     {
       staticClass: "relative work-area content pt-5",
-      class: { "bg-white opacity-25": !_vm.$store.state.user.filledData },
+      class: { "bg-white opacity-25": true },
     },
     [
-      !_vm.$store.state.user.filledData
+       true
         ? _c(
             "div",
             {
@@ -31313,7 +31048,7 @@ var render = function () {
             },
             [_vm._m(0)]
           )
-        : _vm._e(),
+        : 0,
       _vm._v(" "),
       _c(
         "aside",

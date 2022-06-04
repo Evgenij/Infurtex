@@ -34,7 +34,7 @@
                 </template>
             </vs-select>
         </div>
-        <div v-if="$store.state.user.filledData" class="list-tests">
+        <div v-if="false" class="list-tests">
             <div v-if="filteredTests.length !== 0" class="list-tests">
                 <transition-group
                     v-bind:css="false"

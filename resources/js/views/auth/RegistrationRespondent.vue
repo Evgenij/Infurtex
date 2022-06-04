@@ -133,7 +133,7 @@
 				password: 'evg12345678UP*',
 				password_confirmation: 'evg12345678UP*',
 				role: role.userRole.Respondent,
-				filledData: false
+				filledData: true
 			},
 			hasVisiblePasswordConfirmed: false,
             hasVisiblePassword: false

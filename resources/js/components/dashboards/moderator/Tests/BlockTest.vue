@@ -9,7 +9,7 @@
 			'bg-red-500': type === 5,
 		}">
 
-			<i class="bx text-base text-white text-3xl"
+			<i class="icon-test-type bx text-base text-white"
 			   :class="{
                     'bxs-directions': type === 1,
                     'bxs-stopwatch': type === 2,
@@ -343,6 +343,10 @@
             @include big-shadow;
             z-index: 1000;
         }
+
+		& .icon-test-type {
+			font-size: 24px;
+		}
     }
 
     input.test-name {

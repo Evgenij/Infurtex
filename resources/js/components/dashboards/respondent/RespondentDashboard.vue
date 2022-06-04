@@ -1,7 +1,7 @@
 <template>
     <div class="root relative">
         <app-header :user-menu="menuLinks" :links="links"></app-header>
-        <section v-if="!$store.state.user.filledData && $route.name === 'RespondentTests'" class="message content pt-5">
+        <section v-if="true && $route.name === 'RespondentTests'" class="message content pt-5">
             <vs-alert danger>
                 <template #icon>
                     <i class='bx bxs-message-alt-error'></i>

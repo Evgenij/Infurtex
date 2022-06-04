@@ -195,150 +195,9 @@
 							<i class='bx bx-export mr-1'></i>
 							Экспортировать как .pdf
 						</div>
-<!--						<div class="button flex items-center bg-emerald-500 hover:bg-emerald-600 cursor-pointer p-1 px-2-->
-<!--						rounded text-sm text-white font-medium">-->
-<!--							<i class='bx bx-download mr-1'></i>-->
-<!--							Excel-->
-<!--						</div>-->
 					</div>
 				</div>
 			</section>
-<!--            <section class="filter-section py-3">-->
-<!--				<div class="filter-section__button cursor-pointer flex justify-between" @click="switchStateFilter">-->
-<!--					<div class="filter-section__title flex items-center">-->
-<!--						<i class='bx bx-slider-alt text-slate-400 text-xl mr-2'></i>-->
-<!--						<span class="font-medium">-->
-<!--							Фильтр данных респондентов-->
-<!--						</span>-->
-<!--						<i class='bx ml-1' :class="[-->
-<!--							this.stateFilter ? 'bx-chevron-up' : 'bx-chevron-down'-->
-<!--						]"></i>-->
-<!--					</div>-->
-<!--					<div class="count-respondents flex items-center text-sm">-->
-<!--						<span class="text-slate-500 mr-1">Выборка:</span>-->
-<!--						<p class="font-bold">{{formattingNumber(20394)}}</p>-->
-<!--						<span class="text-slate-500 ml-1">респондентов</span>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--				<div class="filter-section__data rounded-lg border-2 border-slate-100-->
-<!--						overflow-hidden transition p-3 mt-3 " :class="[-->
-<!--					this.stateFilter ? '' : 'hidden'-->
-<!--				]">-->
-<!--					<div class="column flex flex-col w-full">-->
-<!--						<div class="row grid grid-cols-2 gap-3 pt-6 w-full">-->
-<!--							<vs-select-->
-<!--								filter-->
-<!--								collapse-chips-->
-<!--								multiple-->
-<!--								placeholder="Название страны"-->
-<!--								v-model="resultsFilters.country"-->
-<!--								label="Страна"-->
-<!--								class="w-full"-->
-<!--							>-->
-<!--								<template v-for="(country, index) in this.getListCountries">-->
-<!--									<vs-option :label="country.name_ru" :value="index+1">-->
-<!--										{{country.name_ru}} <span class="text-slate-400">&nbsp;{{country.iso_code2}}&nbsp;</span>-->
-<!--									</vs-option>-->
-<!--								</template>-->
-<!--							</vs-select>-->
-<!--							<vs-select-->
-<!--								filter-->
-<!--								multiple-->
-<!--								collapse-chips-->
-<!--								v-model="resultsFilters.gender"-->
-<!--								placeholder="Пол респондентов"-->
-<!--								label="Пол"-->
-<!--								class="w-full"-->
-<!--							>-->
-<!--								<vs-option label="Мужской" value="male">-->
-<!--									Мужской-->
-<!--								</vs-option>-->
-<!--								<vs-option label="Женский" value="female">-->
-<!--									Женский-->
-<!--								</vs-option>-->
-<!--							</vs-select>-->
-<!--						</div>-->
-<!--						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">-->
-<!--							<vs-select-->
-<!--								filter-->
-<!--								multiple-->
-<!--								collapse-chips-->
-<!--								placeholder="Ваше образование"-->
-<!--								v-model="resultsFilters.educations"-->
-<!--								label="Образование"-->
-<!--								class="w-full"-->
-<!--							>-->
-<!--								<template v-for="education in this.getListEducations">-->
-<!--									<vs-option :label="education.name" :value="education.id">-->
-<!--										{{education.name}}-->
-<!--									</vs-option>-->
-<!--								</template>-->
-<!--							</vs-select>-->
-<!--							<vs-select-->
-<!--								filter-->
-<!--								multiple-->
-<!--								collapse-chips-->
-<!--								placeholder="Трудоустройство"-->
-<!--								v-model="resultsFilters.statusEmp"-->
-<!--								label="Статус трудоустройства"-->
-<!--								class="w-full"-->
-<!--							>-->
-<!--								<template v-for="statusEmp in this.getListStatusEmp">-->
-<!--									<vs-option :label="statusEmp.name" :value="statusEmp.id">-->
-<!--										{{statusEmp.name}}-->
-<!--									</vs-option>-->
-<!--								</template>-->
-<!--							</vs-select>-->
-<!--						</div>-->
-<!--						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">-->
-<!--							<vs-select-->
-<!--								filter-->
-<!--								placeholder="Название индустрии"-->
-<!--								v-model="industry"-->
-<!--								label="Индустрия"-->
-<!--								class="w-full"-->
-<!--							>-->
-<!--								<template v-for="industry in this.getListIndustries">-->
-<!--									<vs-option :label="industry.name" :value="industry.id">-->
-<!--										{{industry.name}}-->
-<!--									</vs-option>-->
-<!--								</template>-->
-<!--							</vs-select>-->
-<!--							<vs-select-->
-<!--								filter-->
-<!--								collapse-chips-->
-<!--								multiple-->
-<!--								placeholder="Название проф.области"-->
-<!--								v-model="resultsFilters.workArea"-->
-<!--								label="Название проф.области"-->
-<!--								class="w-full"-->
-<!--							>-->
-<!--								<template v-for="workArea in this.listWorkAreas">-->
-<!--									<vs-option :label="workArea.name" :value="workArea.id" :key="workArea.id">-->
-<!--										{{workArea.name}}-->
-<!--									</vs-option>-->
-<!--								</template>-->
-<!--							</vs-select>-->
-<!--						</div>-->
-<!--						<div class="row grid grid-cols-2 gap-3 pt-8 w-full">-->
-<!--							<vs-select-->
-<!--								placeholder="Ваша техническая подготовка"-->
-<!--								multiple-->
-<!--								filter-->
-<!--								v-model="resultsFilters.techPrep"-->
-<!--								label="Техническая подготовка"-->
-<!--								class="w-full"-->
-<!--							>-->
-<!--								<template v-for="techPrep in this.getListTechPrep">-->
-<!--									<vs-option :label="techPrep.name" :value="techPrep.id" :key="techPrep.id">-->
-<!--										{{techPrep.name}}-->
-<!--									</vs-option>-->
-<!--								</template>-->
-<!--							</vs-select>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</section>-->
 			<main class="pt-2">
 				<manager-answers></manager-answers>
 			</main>
@@ -358,7 +217,6 @@
 	import listTechPrep from "../../../../../mocks/usersCriteries/techPrep"
 	import ManagerAnswers from "../ManagerAnswers";
 	import store from "../../../../../store/store";
-	import router from "../../../../../router";
 	import {mapActions, mapGetters, mapMutations} from 'vuex'
 
     export default {
@@ -395,14 +253,6 @@
 					// }
 				]
 			},
-            listProjects: [
-                { value: 'Дизайн приложений', id: 1 },
-                { value: 'Упаковки', id: 2 },
-                { value: '123', id: 3 },
-                { value: '435', id: 4 },
-                { value: '57', id: 5 },
-                { value: '45646', id: 6 },
-            ],
 			testFiles: [],
 			testLink: 'https://app.usabilityhub.com/tests/2a303ea9824c/recruit',
 			teams: [
@@ -446,16 +296,6 @@
 					]
 				},
 			],
-			// industry: '',
-			// listWorkAreas: [],
-			// resultsFilters: {
-            // 	country: [],
-			// 	gender: [],
-			// 	educations: [],
-			// 	statusEmp: [],
-			// 	workArea: [],
-			// 	techPrep: []
-			// }
         }),
         methods: {
         	...mapActions(['fetchProjects', 'createProject']),
@@ -466,44 +306,6 @@
 					test_id: data.data.id,
 					path: this.path
 				})
-
-				// store.dispatch('createTest', {
-				// 	project_id: this.dataTest.project.id,
-				// 	type: this.dataTest.type,
-				// 	name: this.dataTest.name,
-				// 	instruction: this.dataTest.instruction,
-				// 	expire_date: this.dataTest.date
-				// })
-				// 	.then(({data})=>{
-				// 		if (typeMailingTest === 'general') {
-				// 			store.dispatch('recruitingForTests', {
-				// 				test_id: data.data.id,
-				// 			}).then(({data})=>{
-				// 				console.log(data)
-				// 			})
-				// 		}
-				//
-				// 		this.dataTest.questions.forEach(function (question) {
-				// 		store.dispatch('createQuestion', {
-				// 			test_id: data.data.id,
-				// 			text: question.text,
-				// 			type: question.type
-				// 		})
-				// 			.then(({data})=>{
-				// 				question.answers.forEach(function (answer) {
-				// 					store.dispatch('createAnswer', {
-				// 						question_id: data.data.id,
-				// 						text: answer.value,
-				// 					}).then(({data})=>{
-				// 						console.log(data)
-				// 					})
-				// 				})
-				// 			})
-				// 		})
-				// 	})
-				// 	router.push({
-				// 		name: 'ModeratorTests'
-				// 	})
 			},
             activate(index) {
                 this.activeTab = index;
@@ -530,9 +332,6 @@
                 this.dataTest.type = 0
                 this.activate(1)
             },
-			// addQuestionBlock(newQuestion){
-			//     this.dataTest.questions.push(newQuestion)
-			// },
 			copyLinkTest(){
             	let link = this.$refs.linkTest.value
 				if (link) {
